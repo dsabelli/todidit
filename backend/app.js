@@ -7,7 +7,7 @@ require("express-async-errors");
 
 // const blogsRouter = require("./controllers/blogs");
 const registerRouter = require("./controllers/register");
-// const loginRouter = require("./controllers/login");
+const loginRouter = require("./controllers/login");
 // const testingRouter = require("./controllers/testing");
 // const { errorHandler, userExtractor } = require("./utils/middleware");
 const logger = require("./utils/logger");
@@ -27,7 +27,7 @@ app.use(cors());
 app.use(express.static("build"));
 app.use(express.json());
 
-// app.use("/api/login", loginRouter);
+app.use("/login", loginRouter);
 // app.use("/api/blogs", userExtractor, blogsRouter);
 app.use("/register", registerRouter);
 
