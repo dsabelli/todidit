@@ -5,11 +5,11 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("express-async-errors");
 
-// const blogsRouter = require("./controllers/blogs");
+const taskRouter = require("./controllers/task");
 const registerRouter = require("./controllers/register");
 const loginRouter = require("./controllers/login");
 // const testingRouter = require("./controllers/testing");
-// const { errorHandler, userExtractor } = require("./utils/middleware");
+const { errorHandler, userExtractor } = require("./utils/middleware");
 const logger = require("./utils/logger");
 
 logger.info("connecting to", config.MONGODB_URI);
@@ -27,15 +27,15 @@ app.use(cors());
 app.use(express.static("build"));
 app.use(express.json());
 
-app.use("/login", loginRouter);
-// app.use("/api/blogs", userExtractor, blogsRouter);
 app.use("/register", registerRouter);
+app.use("/login", loginRouter);
+app.use("/task", userExtractor, taskRouter);
 
 // if (process.env.NODE_ENV === "test") {
 //   const testingRouter = require("./controllers/testing");
 //   app.use("/api/testing", testingRouter);
 // }
 
-// app.use(errorHandler);
+app.use(errorHandler);
 
 module.exports = app;

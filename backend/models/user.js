@@ -20,10 +20,10 @@ const schema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  todos: [
+  tasks: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Todo",
+      ref: "Task",
     },
   ],
 });
@@ -38,6 +38,4 @@ schema.set("toJSON", {
   },
 });
 
-const User = mongoose.model("User", schema);
-
-module.exports = User;
+module.exports = mongoose.model("User", schema);
