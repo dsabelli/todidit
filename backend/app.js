@@ -14,14 +14,18 @@ const logger = require("./utils/logger");
 
 logger.info("connecting to", config.MONGODB_URI);
 
-mongoose
-  .connect(config.MONGODB_URI)
-  .then(() => {
+const connectDB = async () => {
+  try {
+    await mongoose.connect(config.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     logger.info("connected to MongoDB");
-  })
-  .catch((error) => {
+  } catch (error) {
     logger.error("error connection to MongoDB:", error.message);
-  });
+  }
+};
+connectDB();
 
 app.use(cors());
 app.use(express.static("build"));
