@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Login from "./components/Login";
 import Task from "./components/Task";
+import Navbar from "./components/Navbar";
 import loginService from "./services/login";
 import taskService from "./services/tasks";
 import "./App.css";
@@ -34,6 +35,7 @@ function App() {
   console.log(tasks);
   return (
     <div className="App">
+      <Navbar user={user} />
       {!user && (
         <Login
           username={username}
