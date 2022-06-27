@@ -11,6 +11,6 @@ module.exports = {
     },
     ecmaVersion: "latest",
   },
-  plugins: ["react"],
+  plugins: ["react", "jest"],
   rules: {},
 };

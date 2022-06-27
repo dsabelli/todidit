@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const User = require("../models/user");
 const Task = require("../models/task");
 
 router.get("/", async (request, response) => {
@@ -24,6 +23,14 @@ router.post("/", async (request, response) => {
   await user.save();
 
   response.status(201).json(savedTask);
+});
+
+router.get("/:id", async (request, response) => {
+  const taskToGet = await Task.findById(request.params.id);
+  if (!taskToGet) {
+    return response.status(404, { error: "task not found" }).end();
+  }
+  return response.json(taskToGet);
 });
 
 router.delete("/:id", async (request, response) => {

@@ -29,7 +29,7 @@ app.use(express.json());
 
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
-app.use("/task", userExtractor, taskRouter);
+app.use("/tasks", userExtractor, taskRouter);
 
 // if (process.env.NODE_ENV === "test") {
 //   const testingRouter = require("./controllers/testing");
