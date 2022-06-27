@@ -1,28 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Login from "./components/Login";
+import Task from "./components/Task";
 import loginService from "./services/login";
+import taskService from "./services/tasks";
 import "./App.css";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log({ username, password });
-    await loginService.login({ username, password });
+    const user = await loginService.login({ username, password });
+    taskService.setToken(user.token);
+    setUser(user);
+    setUsername("");
+    setPassword("");
   };
 
+  const taskElements = tasks.map((task) => (
+    <Task title={task.title} key={task.id} />
+  ));
+
+  useEffect(() => {
+    const getTasks = async () => {
+      const response = await taskService.getTasks();
+      setTasks(response);
+    };
+    getTasks();
+  }, []);
+  console.log(tasks);
   return (
     <div className="App">
-      <Login
-        username={username}
-        password={password}
-        onUsernameChange={setUsername}
-        onPasswordChange={setPassword}
-        onLogin={handleLogin}
-      />
+      {!user && (
+        <Login
+          username={username}
+          password={password}
+          onUsernameChange={setUsername}
+          onPasswordChange={setPassword}
+          onLogin={handleLogin}
+        />
+      )}
+      {taskElements}
     </div>
   );
 }
