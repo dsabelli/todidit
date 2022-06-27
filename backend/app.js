@@ -31,9 +31,9 @@ app.use(cors());
 app.use(express.static("build"));
 app.use(express.json());
 
-app.use("/register", registerRouter);
-app.use("/login", loginRouter);
-app.use("/tasks", userExtractor, taskRouter);
+app.use("/api/register", registerRouter);
+app.use("/api/login", loginRouter);
+app.use("/api/tasks", userExtractor, taskRouter);
 
 // if (process.env.NODE_ENV === "test") {
 //   const testingRouter = require("./controllers/testing");
