@@ -1,7 +1,6 @@
-module.exports = {
+export default {
   env: {
-    node: true,
-    commonjs: true,
+    browser: true,
     es2021: true,
     jest: true,
   },
@@ -11,6 +10,7 @@ module.exports = {
       jsx: true,
     },
     ecmaVersion: "latest",
+    sourceType: "module",
   },
   plugins: ["react", "jest"],
   rules: {},
