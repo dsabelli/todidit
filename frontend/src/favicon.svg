@@ -3,7 +3,7 @@ aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink">
   <title>Text Checked</title>
   <desc>A line styled icon from Orion Icon Library.</desc>
   <path data-name="layer2"
-  fill="none" stroke="#202020" stroke-miterlimit="10" stroke-width="4" d="M2 8h60M2 24h60M2 40h24M2 56h24"
+  fill="none" stroke="#FFF" stroke-miterlimit="10" stroke-width="4" d="M2 8h60M2 24h60M2 40h24M2 56h24"
   stroke-linejoin="round" stroke-linecap="round"></path>
   <path data-name="layer1" fill="none" stroke="#49cf52" stroke-miterlimit="10"
   stroke-width="4" d="M35 45l8 9 16-16" stroke-linejoin="round" stroke-linecap="round"></path>

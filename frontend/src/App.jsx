@@ -32,7 +32,7 @@ function App() {
     };
     getTasks();
   }, []);
-  console.log(tasks);
+
   return (
     <div className="App">
       <Navbar user={user} />
