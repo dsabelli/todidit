@@ -1,10 +1,17 @@
 import React from "react";
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user, onLogout, onNewUser, newUser }) => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <a className="btn btn-ghost normal-case text-xl">toDid</a>
+      </div>
+      <div>
+        {!user && (
+          <button onClick={() => onNewUser()} className="btn">
+            {newUser ? "Cancel" : "Get Started"}
+          </button>
+        )}
       </div>
       <div className="flex-none gap-2">
         <div className="form-control">
@@ -36,7 +43,9 @@ const Navbar = ({ user }) => {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <form onSubmit={() => onLogout()}>
+                <button type="submit">Logout</button>
+              </form>
             </li>
           </ul>
         </div>
