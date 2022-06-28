@@ -11,4 +11,12 @@ const getTasks = async () => {
   return response.data;
 };
 
-export default { getTasks, setToken };
+const createTasks = async (task) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.post(baseUrl, task, config);
+  return response.data;
+};
+
+export default { getTasks, setToken, createTasks };
