@@ -8,6 +8,7 @@ const schema = mongoose.Schema({
   description: {
     type: String,
   },
+  checked: Boolean,
   dueDate: {
     type: Date,
   },

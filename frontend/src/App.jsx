@@ -68,10 +68,12 @@ function App() {
     const newTask = await taskService.createTasks({
       title: taskTitle,
       description: taskDescription,
+      checked: false,
     });
     setTaskTitle("");
     setTaskDescription("");
     setTasks((prevTasks) => prevTasks.concat(newTask));
+    handleAddTask();
   };
 
   //button to show task form for editing task
@@ -97,6 +99,21 @@ function App() {
     );
   };
 
+  const handleUpdateCheck = async (id) => {
+    const updatedTask = tasks.filter((task) => task.id === id)[0];
+    await taskService.updateTasks({
+      ...updatedTask,
+      checked: !updatedTask.checked,
+    });
+
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, checked: !task.checked } : task
+      )
+    );
+    console.log(tasks);
+  };
+
   const handleDeleteTask = async (id) => {
     const deletedTask = tasks.filter((task) => task.id === id)[0];
     await taskService.deleteTasks(deletedTask);
@@ -106,6 +123,8 @@ function App() {
 
   const taskElements = tasks.map((task) => (
     <Task
+      checked={task.checked}
+      onCheck={handleUpdateCheck}
       onDelete={handleDeleteTask}
       onUpdate={handleEditTask}
       title={task.title}

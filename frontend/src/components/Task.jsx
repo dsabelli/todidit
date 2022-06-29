@@ -2,13 +2,30 @@ import React from "react";
 
 const Task = (props) => {
   return (
-    <div className="flex justify-between px-40">
-      <div>
-        <div>{props.title}</div>
-        <div className="text-xs mb-5">{props.description}</div>
+    <div className="flex justify-between px-40 ">
+      <div className="flex gap-3 ">
+        <div>
+          <input
+            type="checkbox"
+            className="checkbox"
+            name="checkbox"
+            id=""
+            checked={props.checked}
+            onChange={() => props.onCheck(props.id)}
+          />
+        </div>
+        <div
+          className={`flex flex-col items-start ${
+            props.checked ? "line-through" : ""
+          }`}
+        >
+          <div className="">{props.title}</div>
+          <div className="text-xs mb-5 ">{props.description}</div>
+        </div>
       </div>
-      <div className="">
+      <div className="flex gap-4">
         <button
+          className="btn"
           onClick={() => {
             props.onUpdate(props.id);
           }}
@@ -17,7 +34,9 @@ const Task = (props) => {
         </button>
 
         <button
-          className="btn btn-square"
+          className={`btn btn-square ${
+            props.checked ? "" : "btn-disabled opacity-50"
+          }`}
           onClick={() => {
             props.onDelete(props.id);
           }}
