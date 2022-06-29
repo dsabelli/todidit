@@ -30,7 +30,7 @@ const UpdateTaskForm = (props) => {
         className={props.title ? "btn" : "btn btn-disabled opacity-50"}
         type="submit"
       >
-        add
+        save
       </button>
       <button className="btn" onClick={() => props.cancel(props.id)}>
         cancel

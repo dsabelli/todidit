@@ -54,6 +54,9 @@ function App() {
   //button to show task form
   const handleAddTask = () => {
     setAddTask((prevVal) => !prevVal);
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => ({ ...task, isEditing: false }))
+    );
   };
 
   const handleCancelAddTask = (e) => {
@@ -80,9 +83,14 @@ function App() {
 
   //button to show task form for editing task
   const handleEditTask = (id) => {
+    setAddTask(false);
+    setTaskTitle(tasks.filter((task) => task.id === id)[0].title);
+    setTaskDescription(tasks.filter((task) => task.id === id)[0].description);
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
-        task.id === id ? { ...task, isEditing: !task.isEditing } : task
+        task.id === id
+          ? { ...task, isEditing: !task.isEditing }
+          : { ...task, isEditing: false }
       )
     );
   };
@@ -113,6 +121,8 @@ function App() {
           : task
       )
     );
+    setTaskTitle("");
+    setTaskDescription("");
   };
 
   const handleUpdateCheck = async (id) => {
@@ -141,7 +151,7 @@ function App() {
       <UpdateTaskForm
         key={task.id}
         id={task.id}
-        title={taskTitle || task.title}
+        title={taskTitle}
         description={taskDescription || task.description}
         onTaskUpdate={handleUpdateTask}
         onTitleChange={setTaskTitle}
