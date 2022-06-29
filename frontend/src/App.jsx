@@ -97,16 +97,22 @@ function App() {
     );
   };
 
+  const handleDeleteTask = async (id) => {
+    const deletedTask = tasks.filter((task) => task.id === id)[0];
+    await taskService.deleteTasks(deletedTask);
+
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+  };
+
   const taskElements = tasks.map((task) => (
-    <div>
-      <Task
-        onUpdate={handleEditTask}
-        title={task.title}
-        description={task.description}
-        key={task.id}
-        id={task.id}
-      />
-    </div>
+    <Task
+      onDelete={handleDeleteTask}
+      onUpdate={handleEditTask}
+      title={task.title}
+      description={task.description}
+      key={task.id}
+      id={task.id}
+    />
   ));
 
   useEffect(() => {
