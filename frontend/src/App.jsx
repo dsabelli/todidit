@@ -8,6 +8,7 @@ import registrationService from "./services/register";
 import loginService from "./services/login";
 import taskService from "./services/tasks";
 import "./App.css";
+import EditInline from "./components/EditInline";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -73,8 +74,39 @@ function App() {
     setTasks((prevTasks) => prevTasks.concat(newTask));
   };
 
+  //button to show task form for editing task
+  const handleEditTask = (id) => {
+    console.log(id);
+  };
+
+  //function to update tasks
+  const handleUpdateTask = async (id) => {
+    const updatedTask = tasks.filter((task) => task.id === id)[0];
+    await taskService.updateTasks({ ...updatedTask });
+
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              title: updatedTask.title,
+              description: updatedTask.description,
+            }
+          : task
+      )
+    );
+  };
+
   const taskElements = tasks.map((task) => (
-    <Task title={task.title} key={task.id} />
+    <div>
+      <Task
+        onUpdate={handleEditTask}
+        title={task.title}
+        description={task.description}
+        key={task.id}
+        id={task.id}
+      />
+    </div>
   ));
 
   useEffect(() => {
