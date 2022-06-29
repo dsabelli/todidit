@@ -16,7 +16,7 @@ const Login = (props) => {
             <div className="card-body">
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text">Username</span>
                 </label>
                 <input
                   type="text"
@@ -25,7 +25,7 @@ const Login = (props) => {
                   onChange={({ target }) =>
                     props.onUsernameChange(target.value)
                   }
-                  placeholder="email"
+                  placeholder="username"
                   className="input input-bordered"
                 />
               </div>

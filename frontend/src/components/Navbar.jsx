@@ -25,7 +25,9 @@ const Navbar = ({ user, onLogout, onNewUser, newUser }) => {
           <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
             {user && (
               <div className="w-10 rounded-full">
-                <img src="https://api.lorem.space/image/face?hash=33791" />
+                <img
+                  src={`https://avatars.dicebear.com/api/initials/${user.username[0]}.svg`}
+                />
               </div>
             )}
           </label>
