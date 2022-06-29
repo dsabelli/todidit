@@ -9,6 +9,7 @@ const schema = mongoose.Schema({
     type: String,
   },
   checked: Boolean,
+  isEditing: Boolean,
   dueDate: {
     type: Date,
   },

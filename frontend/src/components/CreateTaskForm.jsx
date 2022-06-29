@@ -1,5 +1,5 @@
 import React from "react";
-const TaskForm = (props) => {
+const CreateTaskForm = (props) => {
   return (
     <form onSubmit={(e) => props.onTaskCreation(e)}>
       <div>
@@ -32,11 +32,11 @@ const TaskForm = (props) => {
       >
         add
       </button>
-      <button className="btn" onClick={() => props.cancel()}>
+      <button className="btn" onClick={(e) => props.cancel(e)}>
         cancel
       </button>
     </form>
   );
 };
 
-export default TaskForm;
+export default CreateTaskForm;

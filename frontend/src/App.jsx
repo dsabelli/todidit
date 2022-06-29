@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import Register from "./components/register";
 import Login from "./components/Login";
 import Task from "./components/Task";
-import TaskForm from "./components/TaskForm";
+import CreateTaskForm from "./components/CreateTaskForm";
+import UpdateTaskForm from "./components/UpdateTaskForm";
 import Navbar from "./components/Navbar";
 import registrationService from "./services/register";
 import loginService from "./services/login";
 import taskService from "./services/tasks";
 import "./App.css";
-import EditInline from "./components/EditInline";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -56,7 +56,8 @@ function App() {
     setAddTask((prevVal) => !prevVal);
   };
 
-  const handleCancelAddTask = () => {
+  const handleCancelAddTask = (e) => {
+    e.preventDefault();
     setAddTask((prevVal) => !prevVal);
     setTaskTitle("");
     setTaskDescription("");
@@ -69,6 +70,7 @@ function App() {
       title: taskTitle,
       description: taskDescription,
       checked: false,
+      isEditing: false,
     });
     setTaskTitle("");
     setTaskDescription("");
@@ -78,13 +80,26 @@ function App() {
 
   //button to show task form for editing task
   const handleEditTask = (id) => {
-    console.log(id);
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id ? { ...task, isEditing: !task.isEditing } : task
+      )
+    );
   };
 
   //function to update tasks
-  const handleUpdateTask = async (id) => {
+  const handleUpdateTask = async (e, id) => {
+    e.preventDefault();
+    console.log(id);
     const updatedTask = tasks.filter((task) => task.id === id)[0];
-    await taskService.updateTasks({ ...updatedTask });
+    //move these into taskservice function
+    updatedTask.title = taskTitle;
+    updatedTask.description = taskDescription;
+    updatedTask.isEditing = false;
+    console.log(updatedTask);
+    await taskService.updateTasks({
+      ...updatedTask,
+    });
 
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
@@ -93,6 +108,7 @@ function App() {
               ...task,
               title: updatedTask.title,
               description: updatedTask.description,
+              isEditing: updatedTask.isEditing,
             }
           : task
       )
@@ -120,18 +136,31 @@ function App() {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
-  const taskElements = tasks.map((task) => (
-    <Task
-      checked={task.checked}
-      onCheck={handleUpdateCheck}
-      onDelete={handleDeleteTask}
-      onUpdate={handleEditTask}
-      title={task.title}
-      description={task.description}
-      key={task.id}
-      id={task.id}
-    />
-  ));
+  const taskElements = tasks.map((task) =>
+    task.isEditing ? (
+      <UpdateTaskForm
+        key={task.id}
+        id={task.id}
+        title={taskTitle || task.title}
+        description={taskDescription || task.description}
+        onTaskUpdate={handleUpdateTask}
+        onTitleChange={setTaskTitle}
+        onDescriptionChange={setTaskDescription}
+        cancel={handleEditTask}
+      />
+    ) : (
+      <Task
+        checked={task.checked}
+        onCheck={handleUpdateCheck}
+        onDelete={handleDeleteTask}
+        onUpdate={handleEditTask}
+        title={task.title}
+        description={task.description}
+        key={task.id}
+        id={task.id}
+      />
+    )
+  );
 
   useEffect(() => {
     const getTasks = async () => {
@@ -181,7 +210,7 @@ function App() {
       {taskElements}
 
       {addTask ? (
-        <TaskForm
+        <CreateTaskForm
           onTaskCreation={handleCreateTask}
           title={taskTitle}
           description={taskDescription}
