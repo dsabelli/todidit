@@ -2,7 +2,7 @@ const router = require("express").Router();
 const Task = require("../models/task");
 
 router.get("/", async (request, response) => {
-  const tasks = await Task.find({});
+  const tasks = await Task.find({ user: request.query.id });
   response.json(tasks);
 });
 

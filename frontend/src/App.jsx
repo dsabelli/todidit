@@ -111,7 +111,6 @@ function App() {
         task.id === id ? { ...task, checked: !task.checked } : task
       )
     );
-    console.log(tasks);
   };
 
   const handleDeleteTask = async (id) => {
@@ -136,11 +135,11 @@ function App() {
 
   useEffect(() => {
     const getTasks = async () => {
-      const response = await taskService.getTasks();
+      const response = await taskService.getTasks(user || "");
       setTasks(response);
     };
     getTasks();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const loggedIn = window.localStorage.getItem("loggedIn");

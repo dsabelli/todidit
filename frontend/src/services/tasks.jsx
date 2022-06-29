@@ -6,8 +6,12 @@ const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-const getTasks = async () => {
-  const response = await axios.get(baseUrl);
+const getTasks = async (user) => {
+  const config = {
+    headers: { Authorization: token },
+    params: { id: user.id },
+  };
+  const response = await axios.get(baseUrl, config);
   return response.data;
 };
 
