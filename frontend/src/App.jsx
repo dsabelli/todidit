@@ -98,13 +98,11 @@ function App() {
   //function to update tasks
   const handleUpdateTask = async (e, id) => {
     e.preventDefault();
-    console.log(id);
     const updatedTask = tasks.filter((task) => task.id === id)[0];
     //move these into taskservice function
     updatedTask.title = taskTitle;
     updatedTask.description = taskDescription;
     updatedTask.isEditing = false;
-    console.log(updatedTask);
     await taskService.updateTasks({
       ...updatedTask,
     });
