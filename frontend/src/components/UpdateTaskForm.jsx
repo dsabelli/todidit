@@ -32,7 +32,7 @@ const UpdateTaskForm = (props) => {
       >
         save
       </button>
-      <button className="btn" onClick={() => props.cancel(props.id)}>
+      <button className="btn" onClick={() => props.cancel()}>
         cancel
       </button>
     </form>

@@ -51,15 +51,15 @@ function App() {
     window.localStorage.clear();
   };
 
-  //button to show task form
-  const handleAddTask = () => {
+  //button to show create task form
+  const showCreateTaskForm = () => {
     setAddTask((prevVal) => !prevVal);
     setTasks((prevTasks) =>
       prevTasks.map((task) => ({ ...task, isEditing: false }))
     );
   };
-
-  const handleCancelAddTask = (e) => {
+  //button to hide create task form
+  const hideCreateTaskForm = (e) => {
     e.preventDefault();
     setAddTask((prevVal) => !prevVal);
     setTaskTitle("");
@@ -78,11 +78,11 @@ function App() {
     setTaskTitle("");
     setTaskDescription("");
     setTasks((prevTasks) => prevTasks.concat(newTask));
-    handleAddTask();
+    showCreateTaskForm();
   };
 
   //button to show task form for editing task
-  const handleEditTask = (id) => {
+  const showUpdateTaskForm = (id) => {
     setAddTask(false);
     setTaskTitle(tasks.filter((task) => task.id === id)[0].title);
     setTaskDescription(tasks.filter((task) => task.id === id)[0].description);
@@ -92,6 +92,14 @@ function App() {
           ? { ...task, isEditing: !task.isEditing }
           : { ...task, isEditing: false }
       )
+    );
+  };
+
+  const hideUpdateTaskForm = () => {
+    setTaskTitle("");
+    setTaskDescription("");
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => ({ ...task, isEditing: false }))
     );
   };
 
@@ -154,14 +162,14 @@ function App() {
         onTaskUpdate={handleUpdateTask}
         onTitleChange={setTaskTitle}
         onDescriptionChange={setTaskDescription}
-        cancel={handleEditTask}
+        cancel={hideUpdateTaskForm}
       />
     ) : (
       <Task
         checked={task.checked}
         onCheck={handleUpdateCheck}
         onDelete={handleDeleteTask}
-        onUpdate={handleEditTask}
+        onUpdate={showUpdateTaskForm}
         title={task.title}
         description={task.description}
         key={task.id}
@@ -224,10 +232,10 @@ function App() {
           description={taskDescription}
           onTitleChange={setTaskTitle}
           onDescriptionChange={setTaskDescription}
-          cancel={handleCancelAddTask}
+          cancel={hideCreateTaskForm}
         />
       ) : (
-        <button onClick={() => handleAddTask()} className="btn mt-10 ">
+        <button onClick={() => showCreateTaskForm()} className="btn mt-10 ">
           Add Task
         </button>
       )}
