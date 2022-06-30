@@ -5,6 +5,7 @@ const UpdateTaskForm = (props) => {
       <div>
         <label htmlFor="Title"></label>
         <input
+          autoFocus
           placeholder="e.g., style this project better"
           id="Title"
           type="text"
