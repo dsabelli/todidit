@@ -1,5 +1,5 @@
 import React from "react";
-const Login = (props) => {
+const Register = (props) => {
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -59,7 +59,7 @@ const Login = (props) => {
               </div>
               <div className="form-control mt-6">
                 <button type="submit" className="btn btn-primary">
-                  Login
+                  Register
                 </button>
               </div>
             </div>
@@ -70,4 +70,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default Register;

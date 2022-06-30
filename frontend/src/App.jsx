@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Register from "./components/register";
+import Register from "./components/Register";
 import Login from "./components/Login";
 import Task from "./components/Task";
 import CreateTaskForm from "./components/CreateTaskForm";
@@ -31,6 +31,7 @@ function App() {
     setUsername("");
     setEmail("");
     setPassword("");
+    handleNewUser();
   };
 
   const handleNewUser = () => {
