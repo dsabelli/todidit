@@ -39,7 +39,7 @@ function App() {
       setSystemMessage("System encountered an error");
       setTimeout(() => {
         setSystemMessage(null);
-      }, 5000);
+      }, 3000);
     }
   };
 
@@ -50,13 +50,20 @@ function App() {
 
   //function for handling user login
   const handleLogin = async (e) => {
-    e.preventDefault();
-    const user = await loginService.login({ username, password });
-    window.localStorage.setItem("loggedIn", JSON.stringify(user));
-    taskService.setToken(user.token);
-    setUser(user);
-    setUsername("");
-    setPassword("");
+    try {
+      e.preventDefault();
+      const user = await loginService.login({ username, password });
+      window.localStorage.setItem("loggedIn", JSON.stringify(user));
+      taskService.setToken(user.token);
+      setUser(user);
+      setUsername("");
+      setPassword("");
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
+    }
   };
 
   //review if this is secure, what about backend logout?
@@ -82,17 +89,24 @@ function App() {
 
   //function to create tasks
   const handleCreateTask = async (e) => {
-    e.preventDefault();
-    const newTask = await taskService.createTasks({
-      title: taskTitle,
-      description: taskDescription,
-      checked: false,
-      isEditing: false,
-    });
-    setTaskTitle("");
-    setTaskDescription("");
-    setTasks((prevTasks) => prevTasks.concat(newTask));
-    showCreateTaskForm();
+    try {
+      e.preventDefault();
+      const newTask = await taskService.createTasks({
+        title: taskTitle,
+        description: taskDescription,
+        checked: false,
+        isEditing: false,
+      });
+      setTaskTitle("");
+      setTaskDescription("");
+      setTasks((prevTasks) => prevTasks.concat(newTask));
+      showCreateTaskForm();
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
+    }
   };
 
   //button to show task form for editing task
@@ -120,53 +134,74 @@ function App() {
 
   //function to update tasks
   const handleUpdateTask = async (e, id) => {
-    e.preventDefault();
-    const updatedTask = tasks.filter((task) => task.id === id)[0];
-    //move these into taskservice function
-    updatedTask.title = taskTitle;
-    updatedTask.description = taskDescription;
-    updatedTask.isEditing = false;
-    await taskService.updateTasks({
-      ...updatedTask,
-    });
+    try {
+      e.preventDefault();
+      const updatedTask = tasks.filter((task) => task.id === id)[0];
+      //move these into taskservice function
+      updatedTask.title = taskTitle;
+      updatedTask.description = taskDescription;
+      updatedTask.isEditing = false;
+      await taskService.updateTasks({
+        ...updatedTask,
+      });
 
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === id
-          ? {
-              ...task,
-              title: updatedTask.title,
-              description: updatedTask.description,
-              isEditing: updatedTask.isEditing,
-            }
-          : task
-      )
-    );
-    setTaskTitle("");
-    setTaskDescription("");
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === id
+            ? {
+                ...task,
+                title: updatedTask.title,
+                description: updatedTask.description,
+                isEditing: updatedTask.isEditing,
+              }
+            : task
+        )
+      );
+      setTaskTitle("");
+      setTaskDescription("");
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
+    }
   };
 
   //function to update if a task has been completed
   const handleUpdateCheck = async (id) => {
-    const updatedTask = tasks.filter((task) => task.id === id)[0];
-    await taskService.updateTasks({
-      ...updatedTask,
-      checked: !updatedTask.checked,
-    });
+    try {
+      const updatedTask = tasks.filter((task) => task.id === id)[0];
+      await taskService.updateTasks({
+        ...updatedTask,
+        checked: !updatedTask.checked,
+      });
 
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === id ? { ...task, checked: !task.checked } : task
-      )
-    );
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === id ? { ...task, checked: !task.checked } : task
+        )
+      );
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
+    }
   };
 
   //function to handle deleting a task
   const handleDeleteTask = async (id) => {
-    const deletedTask = tasks.filter((task) => task.id === id)[0];
-    await taskService.deleteTasks(deletedTask);
+    try {
+      const deletedTask = tasks.filter((task) => task.id === id)[0];
+      await taskService.deleteTasks(deletedTask);
 
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+      setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
+    }
   };
 
   //map out tasks into Task Components and on edit switch out for Task Form
@@ -198,11 +233,18 @@ function App() {
 
   //Get a user's tasks. Look into setting a timeout and "loading" screen
   useEffect(() => {
-    const getTasks = async () => {
-      const response = await taskService.getTasks(user || "");
-      setTasks(response);
-    };
-    getTasks();
+    try {
+      const getTasks = async () => {
+        const response = await taskService.getTasks(user || "");
+        setTasks(response);
+      };
+      getTasks();
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
+    }
   }, [user]);
 
   //Checks if a user's token is stored in local storage
@@ -223,7 +265,7 @@ function App() {
         newUser={newUser}
         onNewUser={handleNewUser}
       />
-      {systemMessage}
+      <h2 className="bg-red-700 my-5"> {systemMessage}</h2>
       {newUser && (
         <Register
           username={username}
