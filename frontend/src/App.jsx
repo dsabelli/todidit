@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import registrationService from "./services/register";
 import loginService from "./services/login";
 import taskService from "./services/tasks";
+
 import "./App.css";
 
 function App() {
@@ -244,7 +245,6 @@ function App() {
         />
       )}
       {taskElements}
-
       {addTask ? (
         <CreateTaskForm
           onTaskCreation={handleCreateTask}
