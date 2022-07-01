@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import registrationService from "../services/register";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,38 +15,36 @@ const schema = yup.object().shape({
     .required(),
   email: yup.string().email().required(),
   password: yup.string().min(8).max(16).required(),
-  confirmPassword: yup.string().oneOf([yup.ref("password"), null]),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "passwords must match"),
 });
 
-const Register = ({ setSystemMessage, handleNewUser }) => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
+const Registerv = ({ setSystemMessage, handleNewUser }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: "onTouched",
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = ({ username, email, password, confirmPassword }) =>
+    handleRegistration({ username, email, password, confirmPassword });
 
-  const handleRegistration = async (e) => {
+  const handleRegistration = async ({
+    username,
+    email,
+    password,
+    confirmPassword,
+  }) => {
     try {
-      e.preventDefault();
       await registrationService.register({
         username,
         email,
         password,
         confirmPassword,
       });
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
       handleNewUser();
     } catch (error) {
       console.log(error);
@@ -64,7 +62,7 @@ const Register = ({ setSystemMessage, handleNewUser }) => {
           <h1 className="text-5xl font-bold">Register now!</h1>
         </div>
 
-        <form onSubmit={(e) => handleRegistration(e)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div className="card-body">
               <div className="form-control">
@@ -76,10 +74,11 @@ const Register = ({ setSystemMessage, handleNewUser }) => {
                   required
                   type="text"
                   name="username"
-                  onChange={({ target }) => setUsername(target.value.trim())}
+                  {...register("username")}
                   placeholder="username"
                   className="input input-bordered"
                 />
+                <p>{errors.username?.message}</p>
               </div>
               <div className="form-control">
                 <label htmlFor="email" className="label">
@@ -88,10 +87,11 @@ const Register = ({ setSystemMessage, handleNewUser }) => {
                 <input
                   type="text"
                   name="email"
-                  onChange={({ target }) => setEmail(target.value.trim())}
+                  {...register("email")}
                   placeholder="email"
                   className="input input-bordered"
                 />
+                <p>{errors.email?.message}</p>
               </div>
               <div className="form-control">
                 <label htmlFor="password" className="label">
@@ -100,10 +100,11 @@ const Register = ({ setSystemMessage, handleNewUser }) => {
                 <input
                   type="password"
                   name="password"
-                  onChange={({ target }) => setPassword(target.value.trim())}
+                  {...register("password")}
                   placeholder="password"
                   className="input input-bordered"
                 />
+                <p>{errors.password?.message}</p>
               </div>
               <div className="form-control">
                 <label htmlFor="confirmPassword" className="label">
@@ -112,12 +113,11 @@ const Register = ({ setSystemMessage, handleNewUser }) => {
                 <input
                   type="password"
                   name="confirmPassword"
-                  onChange={({ target }) =>
-                    setConfirmPassword(target.value.trim())
-                  }
+                  {...register("confirmPassword")}
                   placeholder="confirm password"
                   className="input input-bordered"
                 />
+                <p>{errors.confirmPassword?.message}</p>
               </div>
               <div className="form-control mt-6">
                 <button type="submit" className="btn btn-primary">
@@ -132,4 +132,4 @@ const Register = ({ setSystemMessage, handleNewUser }) => {
   );
 };
 
-export default Register;
+export default Registerv;

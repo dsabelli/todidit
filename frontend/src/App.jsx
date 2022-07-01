@@ -5,11 +5,12 @@ import Task from "./components/Task";
 import CreateTaskForm from "./components/CreateTaskForm";
 import UpdateTaskForm from "./components/UpdateTaskForm";
 import Navbar from "./components/Navbar";
-import registrationService from "./services/register";
+
 import loginService from "./services/login";
 import taskService from "./services/tasks";
 
 import "./App.css";
+import Registerv from "./components/Registerv";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -23,29 +24,6 @@ function App() {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [systemMessage, setSystemMessage] = useState("");
-  console.log(password);
-  const handleRegistration = async (e) => {
-    try {
-      e.preventDefault();
-      await registrationService.register({
-        username,
-        email,
-        password,
-        confirmPassword,
-      });
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      handleNewUser();
-    } catch (error) {
-      console.log(error);
-      setSystemMessage("System encountered an error");
-      setTimeout(() => {
-        setSystemMessage(null);
-      }, 3000);
-    }
-  };
 
   //look for a better solution to this
   const handleNewUser = () => {
@@ -271,15 +249,9 @@ function App() {
       />
       <h2 className="bg-red-700 my-5"> {systemMessage}</h2>
       {newUser && (
-        <Register
-          username={username}
-          email={email}
-          password={password}
-          onUsernameChange={setUsername}
-          onEmailChange={setEmail}
-          onPasswordChange={setPassword}
-          onConfirmPasswordChange={setConfirmPassword}
-          onRegister={handleRegistration}
+        <Registerv
+          handleNewUser={() => handleNewUser()}
+          setSystemMessage={() => setSystemMessage()}
         />
       )}
       {!user && (
