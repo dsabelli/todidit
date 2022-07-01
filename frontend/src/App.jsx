@@ -16,13 +16,14 @@ function App() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [user, setUser] = useState(null);
   const [newUser, setNewUser] = useState(false);
   const [addTask, setAddTask] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [systemMessage, setSystemMessage] = useState("");
-
+  console.log(password);
   const handleRegistration = async (e) => {
     try {
       e.preventDefault();
@@ -30,12 +31,15 @@ function App() {
         username,
         email,
         password,
+        confirmPassword,
       });
       setUsername("");
       setEmail("");
       setPassword("");
+      setConfirmPassword("");
       handleNewUser();
     } catch (error) {
+      console.log(error);
       setSystemMessage("System encountered an error");
       setTimeout(() => {
         setSystemMessage(null);
@@ -274,6 +278,7 @@ function App() {
           onUsernameChange={setUsername}
           onEmailChange={setEmail}
           onPasswordChange={setPassword}
+          onConfirmPasswordChange={setConfirmPassword}
           onRegister={handleRegistration}
         />
       )}
@@ -287,7 +292,7 @@ function App() {
         />
       )}
       {taskElements}
-      {addTask ? (
+      {user && addTask ? (
         <CreateTaskForm
           onTaskCreation={handleCreateTask}
           title={taskTitle}
@@ -297,9 +302,11 @@ function App() {
           cancel={hideCreateTaskForm}
         />
       ) : (
-        <button onClick={() => showCreateTaskForm()} className="btn mt-10 ">
-          Add Task
-        </button>
+        user && (
+          <button onClick={() => showCreateTaskForm()} className="btn mt-10 ">
+            Add Task
+          </button>
+        )
       )}
     </div>
   );
