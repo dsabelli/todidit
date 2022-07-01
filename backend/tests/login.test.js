@@ -26,7 +26,7 @@ describe("When a user attempts to login", () => {
       password: "hi",
     };
     await api
-      .post("/login")
+      .post("/api/login")
       .send(newUser)
       .expect(401)
       .expect("Content-Type", /application\/json/);
@@ -38,7 +38,7 @@ describe("When a user attempts to login", () => {
       password: "hi",
     };
     await api
-      .post("/login")
+      .post("/api/login")
       .send(newUser)
       .expect(401)
       .expect("Content-Type", /application\/json/);
@@ -50,7 +50,7 @@ describe("When a user attempts to login", () => {
       password: "ArnoandLily1!",
     };
     await api
-      .post("/login")
+      .post("/api/login")
       .send(user)
       .expect(200)
       .expect("Content-Type", /application\/json/);

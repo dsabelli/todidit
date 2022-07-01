@@ -27,7 +27,7 @@ describe("When a user registers", () => {
       password: "ArbyandAsh1!",
     };
     await api
-      .post("/register")
+      .post("/api/register")
       .send(newUser)
       .expect(201)
       .expect("Content-Type", /application\/json/);
@@ -40,7 +40,7 @@ describe("When a user registers", () => {
       password: "hi",
     };
     await api
-      .post("/register")
+      .post("/api/register")
       .send(newUser)
       .expect(400)
       .expect("Content-Type", /application\/json/);
@@ -53,7 +53,7 @@ describe("When a user registers", () => {
       password: "TheStrongestp@55word!",
     };
     await api
-      .post("/register")
+      .post("/api/register")
       .send(newUser)
       .expect(400)
       .expect("Content-Type", /application\/json/);
@@ -66,7 +66,7 @@ describe("When a user registers", () => {
       password: "TheStrongestp@55word!",
     };
     await api
-      .post("/register")
+      .post("/api/register")
       .send(newUser)
       .expect(400)
       .expect("Content-Type", /application\/json/);

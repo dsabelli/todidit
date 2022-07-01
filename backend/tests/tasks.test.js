@@ -21,7 +21,7 @@ describe("When a user attempts to create a task", () => {
     });
     user.save();
     const response = await api
-      .post("/login")
+      .post("/api/login")
       .send({ username: "dsabelli", password: "ArnoandLily1!" });
 
     token = response.body.token;
@@ -34,7 +34,7 @@ describe("When a user attempts to create a task", () => {
       project: 1,
     };
     await api
-      .post("/tasks")
+      .post("/api/tasks")
       .send(newTask)
       .set("Authorization", `bearer ${token}`)
       .expect(201)
@@ -48,7 +48,7 @@ describe("When a user attempts to create a task", () => {
       project: 1,
     };
     await api
-      .post("/tasks")
+      .post("/api/tasks")
       .send(newTask)
       .set("Authorization", `bearer ${token}`)
       .expect(400)
@@ -61,7 +61,7 @@ describe("When a user attemps to modify a task", () => {
   let taskId;
   beforeAll(async () => {
     const response = await api
-      .post("/login")
+      .post("/api/login")
       .send({ username: "dsabelli", password: "ArnoandLily1!" });
 
     token = response.body.token;
@@ -71,7 +71,7 @@ describe("When a user attemps to modify a task", () => {
       project: 1,
     };
     const res = await api
-      .post("/tasks")
+      .post("/api/tasks")
       .send(newTask)
       .set("Authorization", `bearer ${token}`);
 
@@ -85,7 +85,7 @@ describe("When a user attemps to modify a task", () => {
       title: "changed",
     };
     await api
-      .put(`/tasks/${foundTask._id}`)
+      .put(`/api/tasks/${foundTask._id}`)
       .send(changedTask)
       .set("Authorization", `bearer ${token}`)
       .expect(200);
@@ -97,7 +97,7 @@ describe("When a user attemps to delete a task", () => {
   let taskId;
   beforeAll(async () => {
     const response = await api
-      .post("/login")
+      .post("/api/login")
       .send({ username: "dsabelli", password: "ArnoandLily1!" });
 
     token = response.body.token;
@@ -107,7 +107,7 @@ describe("When a user attemps to delete a task", () => {
       project: 1,
     };
     const res = await api
-      .post("/tasks")
+      .post("/api/tasks")
       .send(newTask)
       .set("Authorization", `bearer ${token}`);
 
@@ -118,7 +118,7 @@ describe("When a user attemps to delete a task", () => {
     const foundTask = await Task.findById(taskId);
 
     await api
-      .delete(`/tasks/${foundTask._id}`)
+      .delete(`/api/tasks/${foundTask._id}`)
       .set("Authorization", `bearer ${token}`)
       .expect(204);
   }, 100000);
