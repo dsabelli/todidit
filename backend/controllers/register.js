@@ -18,11 +18,11 @@ router.post("/", async (request, response) => {
 
   const existingEmail = await User.findOne({ email });
   if (!validator.isEmail(email)) {
-    return response.status(400).json({ error: "please enter a valid email" });
+    return response.status(400).json({ error: "Please enter a valid email" });
   }
   if (existingEmail) {
     return response.status(400).json({
-      error: "an account with this email address already exists",
+      error: "An account with this email address already exists",
     });
   }
 
@@ -34,12 +34,12 @@ router.post("/", async (request, response) => {
   // }
   if (!password || !validator.isStrongPassword(password)) {
     return response.status(400).json({
-      error: "invalid password",
+      error: "Invalid password",
     });
   }
   if (password !== confirmPassword) {
     return response.status(400).json({
-      error: "passwords must match",
+      error: "Passwords must match",
     });
   }
 

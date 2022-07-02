@@ -5,14 +5,13 @@ const User = require("../models/user");
 
 router.post("/", async (request, response) => {
   const { email, password } = request.body;
-
   const user = await User.findOne({ email });
   const passwordCorrect =
     user === null ? false : await bcrypt.compare(password, user.passwordHash);
 
   if (!(user && passwordCorrect)) {
     return response.status(401).json({
-      error: "invalid email or password",
+      error: "Invalid email or password",
     });
   }
 

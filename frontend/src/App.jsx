@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Register from "./components/Register";
-import Login from "./components/Loginn";
+import Login from "./components/Login";
 import Task from "./components/Task";
 import CreateTaskForm from "./components/CreateTaskForm";
 import UpdateTaskForm from "./components/UpdateTaskForm";
@@ -30,28 +30,28 @@ function App() {
     setNewUser((prevVal) => !prevVal);
   };
 
-  //function for handling user login
-  const handleLogin = async (e) => {
-    try {
-      e.preventDefault();
-      const user = await loginService.login({ username, password });
-      window.localStorage.setItem("loggedIn", JSON.stringify(user));
-      taskService.setToken(user.token);
-      setUser(user);
-      setUsername("");
-      setPassword("");
-    } catch (error) {
-      setSystemMessage("System encountered an error");
-      setTimeout(() => {
-        setSystemMessage(null);
-      }, 3000);
-    }
-  };
+  // //function for handling user login
+  // const handleLogin = async (e) => {
+  //   try {
+  //     e.preventDefault();
+  //     const user = await loginService.login({ username, password });
+  //     window.localStorage.setItem("loggedIn", JSON.stringify(user));
+  //     taskService.setToken(user.token);
+  //     setUser(user);
+  //     setUsername("");
+  //     setPassword("");
+  //   } catch (error) {
+  //     setSystemMessage("System encountered an error");
+  //     setTimeout(() => {
+  //       setSystemMessage(null);
+  //     }, 3000);
+  //   }
+  // };
 
-  //review if this is secure, what about backend logout?
-  const handleLogout = () => {
-    window.localStorage.clear();
-  };
+  // //review if this is secure, what about backend logout?
+  // const handleLogout = () => {
+  //   window.localStorage.clear();
+  // };
 
   //button to show create task form
   const showCreateTaskForm = () => {
@@ -212,7 +212,9 @@ function App() {
       />
     )
   );
-
+  const handleLogout = () => {
+    window.localStorage.clear();
+  };
   //Get a user's tasks. Look into setting a timeout and "loading" screen
   useEffect(() => {
     try {
@@ -255,13 +257,7 @@ function App() {
         />
       )}
       {!user && (
-        <Login
-          username={username}
-          password={password}
-          onUsernameChange={setUsername}
-          onPasswordChange={setPassword}
-          onLogin={handleLogin}
-        />
+        <Login onUser={setUser} setSystemMessage={() => setSystemMessage()} />
       )}
       {taskElements}
       {user && addTask ? (
