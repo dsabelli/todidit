@@ -3,6 +3,7 @@ import registrationService from "../services/register";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import FormError from "./FormError";
 
 const schema = yup.object().shape({
   username: yup
@@ -78,7 +79,9 @@ const Registerv = ({ setSystemMessage, handleNewUser }) => {
                   placeholder="username"
                   className="input input-bordered"
                 />
-                <p>{errors.username?.message}</p>
+                {errors.username && (
+                  <FormError errorMessage={errors.username?.message} />
+                )}
               </div>
               <div className="form-control">
                 <label htmlFor="email" className="label">
@@ -91,7 +94,9 @@ const Registerv = ({ setSystemMessage, handleNewUser }) => {
                   placeholder="email"
                   className="input input-bordered"
                 />
-                <p>{errors.email?.message}</p>
+                {errors.email && (
+                  <FormError errorMessage={errors.email?.message} />
+                )}
               </div>
               <div className="form-control">
                 <label htmlFor="password" className="label">
@@ -104,7 +109,9 @@ const Registerv = ({ setSystemMessage, handleNewUser }) => {
                   placeholder="password"
                   className="input input-bordered"
                 />
-                <p>{errors.password?.message}</p>
+                {errors.password && (
+                  <FormError errorMessage={errors.password?.message} />
+                )}
               </div>
               <div className="form-control">
                 <label htmlFor="confirmPassword" className="label">
@@ -117,7 +124,9 @@ const Registerv = ({ setSystemMessage, handleNewUser }) => {
                   placeholder="confirm password"
                   className="input input-bordered"
                 />
-                <p>{errors.confirmPassword?.message}</p>
+                {errors.confirmPassword && (
+                  <FormError errorMessage={errors.confirmPassword?.message} />
+                )}
               </div>
               <div className="form-control mt-6">
                 <button type="submit" className="btn btn-primary">
