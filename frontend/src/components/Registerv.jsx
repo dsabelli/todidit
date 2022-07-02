@@ -8,14 +8,23 @@ import FormError from "./FormError";
 const schema = yup.object().shape({
   username: yup
     .string()
+    .min(3)
     .max(20)
+    .trim()
     .matches(/^[A-Za-z0-9]+$/i, {
       message: "Must not use special characters",
       excludeEmptyString: true,
     })
     .required(),
-  email: yup.string().email().required(),
-  password: yup.string().min(8).max(16).required(),
+  email: yup.string().trim().email().required(),
+  password: yup
+    .string()
+    .trim()
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,16}$/, {
+      message:
+        "Must include 8-16 characters with a mix of letters, numbers & symbols.",
+    })
+    .required(),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password"), null], "passwords must match"),
@@ -30,8 +39,24 @@ const Registerv = ({ setSystemMessage, handleNewUser }) => {
     resolver: yupResolver(schema),
     mode: "onTouched",
   });
+
   const onSubmit = ({ username, email, password, confirmPassword }) =>
     handleRegistration({ username, email, password, confirmPassword });
+
+  const onBlur = async (data) => {
+    console.log(data.email);
+    if (data.email) {
+      try {
+        await registrationService.checkEmail(data);
+      } catch (error) {
+        console.log(error.response.data.error);
+        setSystemMessage("System encountered an error");
+        setTimeout(() => {
+          setSystemMessage(null);
+        }, 3000);
+      }
+    }
+  };
 
   const handleRegistration = async ({
     username,
@@ -48,7 +73,7 @@ const Registerv = ({ setSystemMessage, handleNewUser }) => {
       });
       handleNewUser();
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.error);
       setSystemMessage("System encountered an error");
       setTimeout(() => {
         setSystemMessage(null);
@@ -63,7 +88,7 @@ const Registerv = ({ setSystemMessage, handleNewUser }) => {
           <h1 className="text-5xl font-bold">Register now!</h1>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} onBlur={handleSubmit(onBlur)}>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div className="card-body">
               <div className="form-control">
@@ -72,6 +97,7 @@ const Registerv = ({ setSystemMessage, handleNewUser }) => {
                 </label>
 
                 <input
+                  onBlur={() => console.log("hi mom")}
                   required
                   type="text"
                   name="username"
