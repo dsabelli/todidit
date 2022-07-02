@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Register from "./components/Register";
-import Login from "./components/Login";
+import Login from "./components/Loginn";
 import Task from "./components/Task";
 import CreateTaskForm from "./components/CreateTaskForm";
 import UpdateTaskForm from "./components/UpdateTaskForm";
@@ -10,7 +10,7 @@ import loginService from "./services/login";
 import taskService from "./services/tasks";
 
 import "./App.css";
-import Registerv from "./components/Registerv";
+import Registerv from "./components/Register";
 
 function App() {
   const [tasks, setTasks] = useState([]);
