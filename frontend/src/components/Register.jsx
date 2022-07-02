@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import registrationService from "../services/register";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -30,12 +30,11 @@ const schema = yup.object().shape({
     .oneOf([yup.ref("password"), null], "passwords must match"),
 });
 
-const Register = ({ setSystemMessage, handleNewUser }) => {
-  const [asyncError, setAsyncError] = React.useState("");
+const Register = ({ handleNewUser }) => {
+  const [asyncError, setAsyncError] = useState("");
   const {
     register,
     handleSubmit,
-    trigger,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -76,10 +75,9 @@ const Register = ({ setSystemMessage, handleNewUser }) => {
       const errorMsg = error.response.data.error;
       console.log(errorMsg);
       setAsyncError(errorMsg);
-      setSystemMessage("System encountered an error");
       setTimeout(() => {
-        setSystemMessage(null);
-      }, 3000);
+        setAsyncError(null);
+      }, 5000);
     }
   };
 

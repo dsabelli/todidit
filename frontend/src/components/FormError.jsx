@@ -1,5 +1,3 @@
-import React from "react";
-
 const FormError = ({ errorMessage }) => {
   return (
     <div className="alert alert-error shadow-lg">

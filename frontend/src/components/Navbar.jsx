@@ -1,5 +1,3 @@
-import React from "react";
-
 const Navbar = ({ user, onLogout, onNewUser, newUser }) => {
   return (
     <div className="navbar bg-base-100">

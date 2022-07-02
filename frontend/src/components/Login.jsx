@@ -4,7 +4,7 @@ import taskService from "../services/tasks";
 import FormError from "./FormError";
 import { useForm } from "react-hook-form";
 
-const Login = ({ setSystemMessage, onUser }) => {
+const Login = ({ onUser }) => {
   const [asyncError, setAsyncError] = useState("");
   const {
     register,
@@ -25,10 +25,9 @@ const Login = ({ setSystemMessage, onUser }) => {
       const errorMsg = error.response.data.error;
       console.log(errorMsg);
       setAsyncError(errorMsg);
-      setSystemMessage("System encountered an error");
       setTimeout(() => {
-        setSystemMessage(null);
-      }, 3000);
+        setAsyncError(null);
+      }, 5000);
     }
   };
 

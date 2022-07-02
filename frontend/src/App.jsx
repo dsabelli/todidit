@@ -5,12 +5,9 @@ import Task from "./components/Task";
 import CreateTaskForm from "./components/CreateTaskForm";
 import UpdateTaskForm from "./components/UpdateTaskForm";
 import Navbar from "./components/Navbar";
-
-import loginService from "./services/login";
 import taskService from "./services/tasks";
 
 import "./App.css";
-import Registerv from "./components/Register";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -29,29 +26,6 @@ function App() {
   const handleNewUser = () => {
     setNewUser((prevVal) => !prevVal);
   };
-
-  // //function for handling user login
-  // const handleLogin = async (e) => {
-  //   try {
-  //     e.preventDefault();
-  //     const user = await loginService.login({ username, password });
-  //     window.localStorage.setItem("loggedIn", JSON.stringify(user));
-  //     taskService.setToken(user.token);
-  //     setUser(user);
-  //     setUsername("");
-  //     setPassword("");
-  //   } catch (error) {
-  //     setSystemMessage("System encountered an error");
-  //     setTimeout(() => {
-  //       setSystemMessage(null);
-  //     }, 3000);
-  //   }
-  // };
-
-  // //review if this is secure, what about backend logout?
-  // const handleLogout = () => {
-  //   window.localStorage.clear();
-  // };
 
   //button to show create task form
   const showCreateTaskForm = () => {
@@ -250,15 +224,8 @@ function App() {
         onNewUser={handleNewUser}
       />
       <h2 className="bg-red-700 my-5"> {systemMessage}</h2>
-      {newUser && (
-        <Registerv
-          handleNewUser={() => handleNewUser()}
-          setSystemMessage={() => setSystemMessage()}
-        />
-      )}
-      {!user && (
-        <Login onUser={setUser} setSystemMessage={() => setSystemMessage()} />
-      )}
+      {newUser && <Register handleNewUser={handleNewUser} />}
+      {!user && <Login onUser={setUser} />}
       {taskElements}
       {user && addTask ? (
         <CreateTaskForm

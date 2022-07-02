@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const Task = (props) => {
   return (
     <div className="flex justify-between px-40 ">
