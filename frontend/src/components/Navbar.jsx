@@ -2,7 +2,7 @@ const Navbar = ({ user, onLogout, onNewUser, newUser }) => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl">toDid</a>
+        <a className="btn btn-ghost normal-case text-xl">toDidit</a>
       </div>
       <div>
         {!user && (
