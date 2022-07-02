@@ -1,55 +1,81 @@
-import { useState } from "react";
+import React from "react";
 import registrationService from "../services/register";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import FormError from "./FormError";
 
 const schema = yup.object().shape({
   username: yup
     .string()
-    .max(20)
+    .min(4)
+    .max(18)
+    .trim()
     .matches(/^[A-Za-z0-9]+$/i, {
       message: "Must not use special characters",
       excludeEmptyString: true,
     })
     .required(),
-  email: yup.string().email().required(),
-  password: yup.string().min(8).max(16).required(),
-  confirmPassword: yup.string().oneOf([yup.ref("password"), null]),
+  email: yup.string().trim().email().required(),
+  password: yup
+    .string()
+    .trim()
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,16}$/, {
+      message:
+        "Must include 8-16 characters with a mix of letters, numbers & symbols.",
+    })
+    .required(),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "passwords must match"),
 });
 
 const Register = ({ setSystemMessage, handleNewUser }) => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [asyncError, setAsyncError] = React.useState("");
   const {
     register,
     handleSubmit,
+    trigger,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: "onTouched",
   });
-  const onSubmit = (data) => console.log(data);
 
-  const handleRegistration = async (e) => {
+  const onSubmit = ({ username, email, password, confirmPassword }) =>
+    handleRegistration({ username, email, password, confirmPassword });
+
+  // const checkEmail = async ({ email }) => {
+  //   try {
+  //     await registrationService.checkEmail({ email });
+  //   } catch (error) {
+  //     console.log(error.response.data.error);
+  //     setSystemMessage("System encountered an error");
+  //     setTimeout(() => {
+  //       setSystemMessage(null);
+  //     }, 3000);
+  //   }
+  // };
+
+  const handleRegistration = async ({
+    email,
+    username,
+    password,
+    confirmPassword,
+  }) => {
     try {
-      e.preventDefault();
       await registrationService.register({
-        username,
         email,
+        username,
         password,
         confirmPassword,
       });
-      setUsername("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
+      setAsyncError("");
       handleNewUser();
     } catch (error) {
-      console.log(error);
+      const errorMsg = error.response.data.error;
+      console.log(errorMsg);
+      setAsyncError(errorMsg);
       setSystemMessage("System encountered an error");
       setTimeout(() => {
         setSystemMessage(null);
@@ -63,24 +89,9 @@ const Register = ({ setSystemMessage, handleNewUser }) => {
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Register now!</h1>
         </div>
-
-        <form onSubmit={(e) => handleRegistration(e)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div className="card-body">
-              <div className="form-control">
-                <label htmlFor="username" className="label">
-                  <span className="label-text">Username</span>
-                </label>
-
-                <input
-                  required
-                  type="text"
-                  name="username"
-                  onChange={({ target }) => setUsername(target.value.trim())}
-                  placeholder="username"
-                  className="input input-bordered"
-                />
-              </div>
               <div className="form-control">
                 <label htmlFor="email" className="label">
                   <span className="label-text">Email</span>
@@ -88,10 +99,30 @@ const Register = ({ setSystemMessage, handleNewUser }) => {
                 <input
                   type="text"
                   name="email"
-                  onChange={({ target }) => setEmail(target.value.trim())}
+                  {...register("email")}
                   placeholder="email"
                   className="input input-bordered"
                 />
+                {errors.email && (
+                  <FormError errorMessage={errors.email?.message} />
+                )}
+                {asyncError && <FormError errorMessage={asyncError} />}
+              </div>
+              <div className="form-control">
+                <label htmlFor="username" className="label">
+                  <span className="label-text">Username</span>
+                </label>
+                <input
+                  required
+                  type="text"
+                  name="username"
+                  {...register("username")}
+                  placeholder="username"
+                  className="input input-bordered"
+                />
+                {errors.username && (
+                  <FormError errorMessage={errors.username?.message} />
+                )}
               </div>
               <div className="form-control">
                 <label htmlFor="password" className="label">
@@ -100,10 +131,13 @@ const Register = ({ setSystemMessage, handleNewUser }) => {
                 <input
                   type="password"
                   name="password"
-                  onChange={({ target }) => setPassword(target.value.trim())}
+                  {...register("password")}
                   placeholder="password"
                   className="input input-bordered"
                 />
+                {errors.password && (
+                  <FormError errorMessage={errors.password?.message} />
+                )}
               </div>
               <div className="form-control">
                 <label htmlFor="confirmPassword" className="label">
@@ -112,12 +146,13 @@ const Register = ({ setSystemMessage, handleNewUser }) => {
                 <input
                   type="password"
                   name="confirmPassword"
-                  onChange={({ target }) =>
-                    setConfirmPassword(target.value.trim())
-                  }
+                  {...register("confirmPassword")}
                   placeholder="confirm password"
                   className="input input-bordered"
                 />
+                {errors.confirmPassword && (
+                  <FormError errorMessage={errors.confirmPassword?.message} />
+                )}
               </div>
               <div className="form-control mt-6">
                 <button type="submit" className="btn btn-primary">

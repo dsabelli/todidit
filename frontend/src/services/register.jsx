@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const checkEmail = async (data) => {
-  console.log(data.email);
+const checkEmail = async (email) => {
+  console.log(email);
   const response = await axios.get("/api/register", {
-    params: { email: data.email },
+    params: { email: email },
   });
   return response.data;
 };

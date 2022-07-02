@@ -14,24 +14,7 @@ router.get("/", async (request, response) => {
 });
 
 router.post("/", async (request, response) => {
-  const { username, email, password, confirmPassword, date } = request.body;
-
-  if (!password || !validator.isStrongPassword(password)) {
-    return response.status(400).json({
-      error: "invalid password",
-    });
-  }
-  if (password !== confirmPassword) {
-    return response.status(400).json({
-      error: "passwords must match",
-    });
-  }
-  const existingUser = await User.findOne({ username });
-  if (existingUser) {
-    return response.status(400).json({
-      error: "Username is already taken, try another.",
-    });
-  }
+  const { email, username, password, confirmPassword, date } = request.body;
 
   const existingEmail = await User.findOne({ email });
   if (!validator.isEmail(email)) {
@@ -43,12 +26,29 @@ router.post("/", async (request, response) => {
     });
   }
 
+  // const existingUser = await User.findOne({ username });
+  // if (existingUser) {
+  //   return response.status(400).json({
+  //     error: "Username is already taken, try another.",
+  //   });
+  // }
+  if (!password || !validator.isStrongPassword(password)) {
+    return response.status(400).json({
+      error: "invalid password",
+    });
+  }
+  if (password !== confirmPassword) {
+    return response.status(400).json({
+      error: "passwords must match",
+    });
+  }
+
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
   const user = new User({
-    username,
     email,
+    username,
     passwordHash,
     date,
   });
