@@ -1,10 +1,8 @@
 const router = require("express").Router();
-const Task = require("../models/task");
+const Task = require("../models/task1");
 
 router.get("/", async (request, response) => {
-  const tasks = await Task.find({
-    $and: [{ user: request.query.user }, { _id: request.query.id }],
-  });
+  const tasks = await Task.find({ user: request.query.id });
   response.json(tasks);
 });
 
@@ -25,22 +23,6 @@ router.post("/", async (request, response) => {
   await user.save();
 
   response.status(201).json(savedTask);
-});
-
-router.post("/:id", async (request, response) => {
-  if (!request.user) {
-    return response.status(401).json({ error: "token missing or invalid" });
-  }
-
-  const task = {
-    ...request.body.tasks,
-  };
-  const docToGet = await Task.findById(request.params.id);
-
-  docToGet.tasks = docToGet.tasks.concat(task);
-  await docToGet.save();
-
-  response.status(201).json(task);
 });
 
 router.get("/:id", async (request, response) => {

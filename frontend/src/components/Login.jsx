@@ -4,7 +4,7 @@ import taskService from "../services/tasks";
 import FormError from "./FormError";
 import { useForm } from "react-hook-form";
 
-const Login = ({ onUser }) => {
+const Login = ({ onUser, onLogin }) => {
   const [asyncError, setAsyncError] = useState("");
   const {
     register,
@@ -21,6 +21,9 @@ const Login = ({ onUser }) => {
       window.localStorage.setItem("loggedIn", JSON.stringify(user));
       taskService.setToken(user.token);
       onUser(user);
+      setTimeout(() => {
+        onLogin();
+      }, 500);
     } catch (error) {
       const errorMsg = error.response.data.error;
       console.log(errorMsg);

@@ -6,20 +6,31 @@ const setToken = (newToken) => {
   token = `bearer ${newToken}`;
 };
 
-const getTasks = async (user) => {
+const getTasks = async (user, id) => {
+  console.log(user, id);
   const config = {
     headers: { Authorization: token },
-    params: { id: user.id },
+    params: { user: user, id: id },
   };
   const response = await axios.get(baseUrl, config);
   return response.data;
 };
 
+const createDoc = async (doc) => {
+  console.log("hello");
+  console.log(doc);
+  const config = {
+    headers: { Authorization: token },
+    params: { user: doc.id },
+  };
+  const response = await axios.post(baseUrl, doc, config);
+  return response.data;
+};
 const createTasks = async (task) => {
   const config = {
     headers: { Authorization: token },
   };
-  const response = await axios.post(baseUrl, task, config);
+  const response = await axios.post(`${baseUrl}/${task.id}`, task, config);
   return response.data;
 };
 
@@ -39,4 +50,11 @@ const deleteTasks = async (task) => {
   return response.data;
 };
 
-export default { getTasks, setToken, createTasks, updateTasks, deleteTasks };
+export default {
+  getTasks,
+  setToken,
+  createTasks,
+  updateTasks,
+  deleteTasks,
+  createDoc,
+};
