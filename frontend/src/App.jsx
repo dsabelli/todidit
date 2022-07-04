@@ -6,11 +6,13 @@ import CreateTaskForm from "./components/CreateTaskForm";
 import UpdateTaskForm from "./components/UpdateTaskForm";
 import Navbar from "./components/Navbar";
 import taskService from "./services/tasks";
+import diditService from "./services/didits";
 
 import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [didits, setDidits] = useState([]);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -47,11 +49,13 @@ function App() {
   const handleCreateTask = async (e) => {
     try {
       e.preventDefault();
+
       const newTask = await taskService.createTasks({
         title: taskTitle,
         description: taskDescription,
         isChecked: false,
         isEditing: false,
+        date: Date.now(),
       });
       setTaskTitle("");
       setTaskDescription("");
@@ -149,6 +153,10 @@ function App() {
   const handleDeleteTask = async (id) => {
     try {
       const deletedTask = tasks.filter((task) => task.id === id)[0];
+      const newDidit = diditService.createDidits({ ...deletedTask }, user);
+
+      setDidits((prevDidits) => prevDidits.concat(newDidit));
+
       await taskService.deleteTasks(deletedTask);
 
       setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
@@ -181,6 +189,7 @@ function App() {
         onUpdate={showUpdateTaskForm}
         title={task.title}
         description={task.description}
+        date={task.date}
         key={task.id}
         id={task.id}
       />
@@ -189,6 +198,17 @@ function App() {
   const handleLogout = () => {
     window.localStorage.clear();
   };
+
+  //Checks if a user's token is stored in local storage
+  useEffect(() => {
+    const loggedIn = window.localStorage.getItem("loggedIn");
+    if (loggedIn) {
+      const user = JSON.parse(loggedIn);
+      taskService.setToken(user.token);
+      setUser(user);
+    }
+  }, []);
+
   //Get a user's tasks. Look into setting a timeout and "loading" screen
   useEffect(() => {
     try {
@@ -205,15 +225,23 @@ function App() {
     }
   }, [user]);
 
-  //Checks if a user's token is stored in local storage
+  //get a user's didits
   useEffect(() => {
-    const loggedIn = window.localStorage.getItem("loggedIn");
-    if (loggedIn) {
-      const user = JSON.parse(loggedIn);
-      taskService.setToken(user.token);
-      setUser(user);
+    try {
+      const getDidits = async () => {
+        const response = await diditService.getDidits(user || "");
+        setDidits(response);
+      };
+      setTimeout(() => {
+        getDidits();
+      }, 1000);
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
     }
-  }, []);
+  }, [user]);
 
   return (
     <div className="App">
