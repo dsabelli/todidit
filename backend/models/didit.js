@@ -25,8 +25,9 @@ const schema = mongoose.Schema({
   },
   createdOn: {
     type: Date,
+    immutable: true,
   },
-  date: {
+  completedOn: {
     type: Date,
   },
 });

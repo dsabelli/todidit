@@ -32,9 +32,8 @@ const schema = mongoose.Schema({
     immutable: true,
     default: Date.now,
   },
-  date: {
+  completedOn: {
     type: Date,
-    immutable: true,
   },
 });
 

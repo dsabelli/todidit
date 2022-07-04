@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Task from "./components/Task";
+import Didit from "./components/Didit";
 import CreateTaskForm from "./components/CreateTaskForm";
 import UpdateTaskForm from "./components/UpdateTaskForm";
 import Navbar from "./components/Navbar";
@@ -45,13 +46,12 @@ function App() {
   const handleCreateTask = async (e) => {
     try {
       e.preventDefault();
-
+      const currentDate = new Date();
       const newTask = await taskService.createTasks({
         title: taskTitle,
         description: taskDescription,
         isChecked: false,
         isEditing: false,
-        date: Date.now(),
       });
       setTaskTitle("");
       setTaskDescription("");
@@ -126,15 +126,19 @@ function App() {
   //function to update if a task has been completed
   const handleUpdateCheck = async (id) => {
     try {
+      const currentDate = new Date();
       const updatedTask = tasks.filter((task) => task.id === id)[0];
       await taskService.updateTasks({
         ...updatedTask,
         isChecked: !updatedTask.isChecked,
+        completedOn: currentDate,
       });
 
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
-          task.id === id ? { ...task, isChecked: !task.isChecked } : task
+          task.id === id
+            ? { ...task, isChecked: !task.isChecked, completedOn: currentDate }
+            : task
         )
       );
     } catch (error) {
@@ -149,7 +153,10 @@ function App() {
   const handleDeleteTask = async (id) => {
     try {
       const deletedTask = tasks.filter((task) => task.id === id)[0];
-      const newDidit = diditService.createDidits({ ...deletedTask }, user);
+      const newDidit = await diditService.createDidits(
+        { ...deletedTask },
+        user
+      );
 
       setDidits((prevDidits) => prevDidits.concat(newDidit));
 
@@ -191,6 +198,17 @@ function App() {
       />
     )
   );
+
+  const diditElements = didits.map((didit) => (
+    <Didit
+      title={didit.title}
+      description={didit.description}
+      date={didit.date}
+      key={didit.id}
+      id={didit.id}
+    />
+  ));
+
   const handleLogout = () => {
     window.localStorage.clear();
   };
@@ -267,6 +285,7 @@ function App() {
           </button>
         )
       )}
+      {/* {diditElements} */}
     </div>
   );
 }
