@@ -25,7 +25,12 @@ router.post("/", async (request, response) => {
   response.status(201).json(savedTask);
 });
 
-router.get("/:date", async (request, response) => {
+router.delete("/", async (request, response) => {
+  const updatedTasks = await Didit.deleteMany({});
+  response.status(204).json(updatedTasks);
+});
+
+router.get("/:id", async (request, response) => {
   const taskToGet = await Didit.findById(request.params.id);
   if (!taskToGet) {
     return response.status(404, { error: "task not found" }).end();

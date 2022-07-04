@@ -19,6 +19,7 @@ const Task = (props) => {
         >
           <div className="">{props.title}</div>
           <div className="text-xs mb-5 ">{props.description}</div>
+          <div className="text-xs mb-5 ">{props.date}</div>
         </div>
       </div>
       <div className="flex gap-4">
