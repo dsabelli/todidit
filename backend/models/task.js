@@ -8,8 +8,12 @@ const schema = mongoose.Schema({
   description: {
     type: String,
   },
-  isChecked: Boolean,
-  isEditing: Boolean,
+  isChecked: {
+    type: Boolean,
+  },
+  isEditing: {
+    type: Boolean,
+  },
   dueDate: {
     type: Date,
   },
@@ -25,10 +29,12 @@ const schema = mongoose.Schema({
   },
   createdOn: {
     type: Date,
+    immutable: true,
     default: Date.now,
   },
   date: {
     type: Date,
+    immutable: true,
   },
 });
 
