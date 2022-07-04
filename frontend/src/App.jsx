@@ -13,10 +13,6 @@ import "./App.css";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [didits, setDidits] = useState([]);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [user, setUser] = useState(null);
   const [newUser, setNewUser] = useState(false);
   const [addTask, setAddTask] = useState(false);
@@ -149,7 +145,7 @@ function App() {
     }
   };
 
-  //function to handle deleting a task
+  //function to handle deleting a task and posting to didits
   const handleDeleteTask = async (id) => {
     try {
       const deletedTask = tasks.filter((task) => task.id === id)[0];
