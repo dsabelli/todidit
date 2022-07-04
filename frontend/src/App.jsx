@@ -50,7 +50,7 @@ function App() {
       const newTask = await taskService.createTasks({
         title: taskTitle,
         description: taskDescription,
-        checked: false,
+        isChecked: false,
         isEditing: false,
       });
       setTaskTitle("");
@@ -129,12 +129,12 @@ function App() {
       const updatedTask = tasks.filter((task) => task.id === id)[0];
       await taskService.updateTasks({
         ...updatedTask,
-        checked: !updatedTask.checked,
+        isChecked: !updatedTask.isChecked,
       });
 
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
-          task.id === id ? { ...task, checked: !task.checked } : task
+          task.id === id ? { ...task, isChecked: !task.isChecked } : task
         )
       );
     } catch (error) {
@@ -175,7 +175,7 @@ function App() {
       />
     ) : (
       <Task
-        checked={task.checked}
+        checked={task.isChecked}
         onCheck={handleUpdateCheck}
         onDelete={handleDeleteTask}
         onUpdate={showUpdateTaskForm}
