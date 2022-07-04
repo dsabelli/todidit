@@ -25,7 +25,7 @@ router.post("/", async (request, response) => {
   response.status(201).json(savedTask);
 });
 
-router.get("/:id", async (request, response) => {
+router.get("/:date", async (request, response) => {
   const taskToGet = await Task.findById(request.params.id);
   if (!taskToGet) {
     return response.status(404, { error: "task not found" }).end();

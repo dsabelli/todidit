@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 require("express-async-errors");
 
 const taskRouter = require("./controllers/task");
+const diditRouter = require("./controllers/didit");
 const registerRouter = require("./controllers/register");
 const loginRouter = require("./controllers/login");
 // const testingRouter = require("./controllers/testing");
@@ -19,6 +20,7 @@ const connectDB = async () => {
     await mongoose.connect(config.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      family: 4,
     });
     logger.info("connected to MongoDB");
   } catch (error) {
@@ -34,7 +36,7 @@ app.use(express.json());
 app.use("/api/register", registerRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/tasks", userExtractor, taskRouter);
-
+app.use("/api/didits", userExtractor, diditRouter);
 // if (process.env.NODE_ENV === "test") {
 //   const testingRouter = require("./controllers/testing");
 //   app.use("/api/testing", testingRouter);

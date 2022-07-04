@@ -25,7 +25,6 @@ const schema = mongoose.Schema({
   },
   createdOn: {
     type: Date,
-    default: Date.now,
   },
   date: {
     type: Date,
@@ -40,4 +39,4 @@ schema.set("toJSON", {
   },
 });
 
-module.exports = mongoose.model("Task", schema);
+module.exports = mongoose.model("Didit", schema);
