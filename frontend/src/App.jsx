@@ -19,8 +19,9 @@ function App() {
   const [addTask, setAddTask] = useState(false);
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
+  const [taskDueDate, setTaskDueDate] = useState(new Date());
   const [systemMessage, setSystemMessage] = useState("");
-
+  // console.log(tasks[4].dueDate.toLocaleDateString());
   //look for a better solution to this
   const handleNewUser = () => {
     setNewUser((prevVal) => !prevVal);
@@ -40,21 +41,23 @@ function App() {
     setAddTask((prevVal) => !prevVal);
     setTaskTitle("");
     setTaskDescription("");
+    setTaskDueDate(new Date());
   };
 
   //function to create tasks
   const handleCreateTask = async (e) => {
     try {
       e.preventDefault();
-      const currentDate = new Date();
       const newTask = await taskService.createTasks({
         title: taskTitle,
         description: taskDescription,
+        dueDate: taskDueDate,
         isChecked: false,
         isEditing: false,
       });
       setTaskTitle("");
       setTaskDescription("");
+      setTaskDueDate(new Date());
       setTasks((prevTasks) => prevTasks.concat(newTask));
       showCreateTaskForm();
     } catch (error) {
@@ -83,6 +86,7 @@ function App() {
   const hideUpdateTaskForm = () => {
     setTaskTitle("");
     setTaskDescription("");
+    setTaskDueDate(new Date());
     setTasks((prevTasks) =>
       prevTasks.map((task) => ({ ...task, isEditing: false }))
     );
@@ -96,6 +100,7 @@ function App() {
       //move these into taskservice function
       updatedTask.title = taskTitle;
       updatedTask.description = taskDescription;
+      updatedTask.dueDate = taskDueDate;
       updatedTask.isEditing = false;
       await taskService.updateTasks({
         ...updatedTask,
@@ -115,6 +120,7 @@ function App() {
       );
       setTaskTitle("");
       setTaskDescription("");
+      setTaskDueDate(new Date());
     } catch (error) {
       setSystemMessage("System encountered an error");
       setTimeout(() => {
@@ -179,9 +185,11 @@ function App() {
         id={task.id}
         title={taskTitle}
         description={taskDescription || task.description}
+        dueDate={taskDueDate}
         onTaskUpdate={handleUpdateTask}
         onTitleChange={setTaskTitle}
         onDescriptionChange={setTaskDescription}
+        onDueDate={setTaskDueDate}
         cancel={hideUpdateTaskForm}
       />
     ) : (
@@ -192,7 +200,7 @@ function App() {
         onUpdate={showUpdateTaskForm}
         title={task.title}
         description={task.description}
-        date={task.date}
+        dueDate={task.dueDate}
         key={task.id}
         id={task.id}
       />
@@ -274,8 +282,10 @@ function App() {
           onTaskCreation={handleCreateTask}
           title={taskTitle}
           description={taskDescription}
+          dueDate={taskDueDate}
           onTitleChange={setTaskTitle}
           onDescriptionChange={setTaskDescription}
+          onDueDate={setTaskDueDate}
           cancel={hideCreateTaskForm}
         />
       ) : (

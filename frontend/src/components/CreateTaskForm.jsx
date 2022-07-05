@@ -1,3 +1,5 @@
+import DueDate from "./DueDate";
+
 const CreateTaskForm = (props) => {
   return (
     <form onSubmit={(e) => props.onTaskCreation(e)}>
@@ -25,6 +27,9 @@ const CreateTaskForm = (props) => {
           onChange={({ target }) => props.onDescriptionChange(target.value)}
           className="textarea textarea-ghost w-full max-w-xs h-24"
         />
+      </div>
+      <div>
+        <DueDate dueDate={props.dueDate} onDueDate={props.onDueDate} />
       </div>
       <button
         className={props.title ? "btn" : "btn btn-disabled opacity-50"}

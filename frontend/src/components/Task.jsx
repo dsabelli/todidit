@@ -1,4 +1,7 @@
+import { format, parseJSON } from "date-fns";
+
 const Task = (props) => {
+  const dateDue = format(parseJSON(props.dueDate), "dd-MM-yyyy");
   return (
     <div className="flex justify-between px-40 ">
       <div className="flex gap-3 ">
@@ -19,7 +22,13 @@ const Task = (props) => {
         >
           <div className="">{props.title}</div>
           <div className="text-xs mb-5 ">{props.description}</div>
-          <div className="text-xs mb-5 ">{props.date}</div>
+          <div className="text-xs mb-5 ">
+            {dateDue === format(new Date(), "dd-MM-yyyy") ? (
+              <span className="bg-red-500">Today</span>
+            ) : (
+              dateDue
+            )}
+          </div>
         </div>
       </div>
       <div className="flex gap-4">
