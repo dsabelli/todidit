@@ -9,7 +9,7 @@ const taskRouter = require("./controllers/task");
 const diditRouter = require("./controllers/didit");
 const registerRouter = require("./controllers/register");
 const loginRouter = require("./controllers/login");
-// const testingRouter = require("./controllers/testing");
+const projectRouter = require("./controllers/project");
 const { errorHandler, userExtractor } = require("./utils/middleware");
 const logger = require("./utils/logger");
 
@@ -37,10 +37,7 @@ app.use("/api/register", registerRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/tasks", userExtractor, taskRouter);
 app.use("/api/didits", userExtractor, diditRouter);
-// if (process.env.NODE_ENV === "test") {
-//   const testingRouter = require("./controllers/testing");
-//   app.use("/api/testing", testingRouter);
-// }
+app.use("/api/projects", userExtractor, projectRouter);
 
 app.use(errorHandler);
 

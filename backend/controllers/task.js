@@ -10,17 +10,28 @@ router.post("/", async (request, response) => {
   if (!request.user) {
     return response.status(401).json({ error: "token missing or invalid" });
   }
+  if (!request.body.projects) {
+    return response.status(401).json({ error: "select a project" });
+  }
 
   const user = request.user;
+  const projects = request.projects;
+  console.log(request.projects);
   const task = new Task({
     ...request.body,
     user: user.id,
   });
 
+  const project = projects.filter(
+    (project) => project.id === request.body.project
+  );
+  console.log(project);
   const savedTask = await task.save();
 
   user.tasks = user.tasks.concat(savedTask._id);
+  project[0].tasks = project[0].tasks.concat(savedTask._id);
   await user.save();
+  await project[0].save();
 
   response.status(201).json(savedTask);
 });

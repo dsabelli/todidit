@@ -8,16 +8,21 @@ const schema = mongoose.Schema({
   description: {
     type: String,
   },
-  isChecked: Boolean,
-  isEditing: Boolean,
+  isChecked: {
+    type: Boolean,
+  },
+  isEditing: {
+    type: Boolean,
+  },
   dueDate: {
     type: Date,
   },
-  project: {
-    type: Number,
-  },
   priority: {
     type: Number,
+  },
+  project: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Project",
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
