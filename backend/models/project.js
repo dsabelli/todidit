@@ -5,6 +5,9 @@ const schema = mongoose.Schema({
     type: String,
     required: true,
   },
+  isEditing: {
+    type: Boolean,
+  },
   tasks: [
     {
       type: mongoose.Schema.Types.ObjectId,

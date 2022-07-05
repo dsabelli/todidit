@@ -1,8 +1,5 @@
-import { format, parseJSON } from "date-fns";
-
-const Task = (props) => {
+const Project = (props) => {
   const dateDue = format(parseJSON(props.dueDate), "dd-MM-yyyy");
-
   return (
     <div className="flex justify-between px-40 ">
       <div className="flex gap-3 ">
@@ -70,4 +67,4 @@ const Task = (props) => {
   );
 };
 
-export default Task;
+export default Project;

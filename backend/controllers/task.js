@@ -10,7 +10,7 @@ router.post("/", async (request, response) => {
   if (!request.user) {
     return response.status(401).json({ error: "token missing or invalid" });
   }
-  if (!request.body.projects) {
+  if (!request.body.project) {
     return response.status(401).json({ error: "select a project" });
   }
 

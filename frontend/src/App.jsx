@@ -5,14 +5,17 @@ import Task from "./components/Task";
 import Didit from "./components/Didit";
 import CreateTaskForm from "./components/CreateTaskForm";
 import UpdateTaskForm from "./components/UpdateTaskForm";
+import CreateProjectForm from "./components/CreateProjectForm";
 import Navbar from "./components/Navbar";
 import taskService from "./services/tasks";
+import projectService from "./services/projects";
 import diditService from "./services/didits";
 
 import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [didits, setDidits] = useState([]);
   const [user, setUser] = useState(null);
   const [newUser, setNewUser] = useState(false);
@@ -20,6 +23,9 @@ function App() {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskDueDate, setTaskDueDate] = useState(new Date());
+  const [addProject, setAddProject] = useState(false);
+  const [projectTitle, setProjectTitle] = useState("");
+  const [projectId, setProjectId] = useState("");
   const [systemMessage, setSystemMessage] = useState("");
   // console.log(tasks[4].dueDate.toLocaleDateString());
   //look for a better solution to this
@@ -35,6 +41,13 @@ function App() {
     );
   };
 
+  const showCreateProjectForm = () => {
+    setAddProject((prevVal) => !prevVal);
+    setProjects((prevProjects) =>
+      prevProjects.map((project) => ({ ...project, isEditing: false }))
+    );
+  };
+
   //button to hide create task form
   const hideCreateTaskForm = (e) => {
     e.preventDefault();
@@ -44,22 +57,52 @@ function App() {
     setTaskDueDate(new Date());
   };
 
+  const hideCreateProjectForm = (e) => {
+    e.preventDefault();
+    setAddProject((prevVal) => !prevVal);
+    setProjectTitle("");
+  };
+
   //function to create tasks
   const handleCreateTask = async (e) => {
     try {
       e.preventDefault();
+      console.log(e);
       const newTask = await taskService.createTasks({
         title: taskTitle,
         description: taskDescription,
         dueDate: taskDueDate,
         isChecked: false,
         isEditing: false,
+        project: projectId,
       });
       setTaskTitle("");
       setTaskDescription("");
       setTaskDueDate(new Date());
+      setProjectId("");
       setTasks((prevTasks) => prevTasks.concat(newTask));
       showCreateTaskForm();
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
+    }
+  };
+
+  const handleCreateProject = async (e) => {
+    try {
+      e.preventDefault();
+      const newProject = await projectService.createProjects(
+        {
+          title: projectTitle,
+        },
+        user
+      );
+      setProjectTitle("");
+
+      setProjects((prevProjects) => prevProjects.concat(newProject));
+      showCreateProjectForm();
     } catch (error) {
       setSystemMessage("System encountered an error");
       setTimeout(() => {
@@ -231,6 +274,21 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    try {
+      const getProjects = async () => {
+        const response = await projectService.getProjects(user || "");
+        setProjects(response);
+      };
+      getProjects();
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
+    }
+  }, [user]);
+
   //Get a user's tasks. Look into setting a timeout and "loading" screen
   useEffect(() => {
     try {
@@ -287,11 +345,31 @@ function App() {
           onDescriptionChange={setTaskDescription}
           onDueDate={setTaskDueDate}
           cancel={hideCreateTaskForm}
+          projects={projects}
+          projectId={projectId}
+          onProjectId={setProjectId}
         />
       ) : (
         user && (
           <button onClick={() => showCreateTaskForm()} className="btn mt-10 ">
             Add Task
+          </button>
+        )
+      )}
+      {user && addProject ? (
+        <CreateProjectForm
+          onProjectCreation={handleCreateProject}
+          title={projectTitle}
+          onTitleChange={setProjectTitle}
+          cancel={hideCreateProjectForm}
+        />
+      ) : (
+        user && (
+          <button
+            onClick={() => showCreateProjectForm()}
+            className="btn mt-10 "
+          >
+            Add Project
           </button>
         )
       )}
