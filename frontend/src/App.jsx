@@ -7,6 +7,7 @@ import CreateTaskForm from "./components/CreateTaskForm";
 import UpdateTaskForm from "./components/UpdateTaskForm";
 import CreateProjectForm from "./components/CreateProjectForm";
 import Navbar from "./components/Navbar";
+import Menu from "./components/Menu";
 import taskService from "./services/tasks";
 import projectService from "./services/projects";
 import diditService from "./services/didits";
@@ -145,6 +146,7 @@ function App() {
       updatedTask.description = taskDescription;
       updatedTask.dueDate = taskDueDate;
       updatedTask.isEditing = false;
+      updatedTask.project = projectId;
       await taskService.updateTasks({
         ...updatedTask,
       });
@@ -157,6 +159,7 @@ function App() {
                 title: updatedTask.title,
                 description: updatedTask.description,
                 isEditing: updatedTask.isEditing,
+                project: projectId,
               }
             : task
         )
@@ -164,6 +167,7 @@ function App() {
       setTaskTitle("");
       setTaskDescription("");
       setTaskDueDate(new Date());
+      setProjectId("");
     } catch (error) {
       setSystemMessage("System encountered an error");
       setTimeout(() => {
@@ -234,6 +238,9 @@ function App() {
         onDescriptionChange={setTaskDescription}
         onDueDate={setTaskDueDate}
         cancel={hideUpdateTaskForm}
+        projects={projects}
+        projectId={projectId}
+        onProjectId={setProjectId}
       />
     ) : (
       <Task
@@ -334,7 +341,8 @@ function App() {
       <h2 className="bg-red-700 my-5"> {systemMessage}</h2>
       {newUser && <Register handleNewUser={handleNewUser} />}
       {!user && <Login onUser={setUser} />}
-      {taskElements}
+      {user && <Menu projects={projects} />}
+      {user && taskElements}
       {user && addTask ? (
         <CreateTaskForm
           onTaskCreation={handleCreateTask}

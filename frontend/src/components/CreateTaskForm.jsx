@@ -4,7 +4,7 @@ import DueDate from "./DueDate";
 const CreateTaskForm = (props) => {
   const [selectedProject, setSelectedProject] = useState("");
   const projects = props.projects.map((project) => (
-    <li onClick={() => setSelectedProject(project.title)}>
+    <li key={project.id} onClick={() => setSelectedProject(project.title)}>
       <a onClick={() => props.onProjectId(project.id)}>{project.title}</a>
     </li>
   ));
