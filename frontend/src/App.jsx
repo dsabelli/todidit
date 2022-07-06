@@ -12,11 +12,11 @@ import taskService from "./services/tasks";
 import projectService from "./services/projects";
 import diditService from "./services/didits";
 
+import Swal from "sweetalert2";
 import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [displayedTasks, setDisplayedTasks] = useState([]);
   const [projects, setProjects] = useState([]);
   const [didits, setDidits] = useState([]);
   const [user, setUser] = useState(null);
@@ -291,11 +291,16 @@ function App() {
   const handleDeleteProject = async (e, id) => {
     e.stopPropagation();
     const deletedProject = projects.filter((project) => project.id === id)[0];
-    if (
-      window.confirm(
-        `Are you sure you want to delete Project ${deletedProject.title}?`
-      )
-    ) {
+    const alert = await Swal.fire({
+      title: "Are you sure you want to delete?",
+      text: `Project ${deletedProject.title}`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+    if (alert) {
       try {
         const deletedTasks = tasks.filter((task) => task.project === id);
         for (let task of deletedTasks) {
@@ -321,6 +326,7 @@ function App() {
           setSystemMessage(null);
         }, 3000);
       }
+      await Swal.fire("Deleted!", "Your file has been deleted.", "success");
     }
   };
 
@@ -402,7 +408,6 @@ function App() {
       const getTasks = async () => {
         const response = await taskService.getTasks(user || "");
         setTasks(response);
-        setDisplayedTasks(response);
       };
       getTasks();
     } catch (error) {
@@ -483,7 +488,6 @@ function App() {
           onDescriptionChange={setTaskDescription}
           onDueDate={setTaskDueDate}
           cancel={hideCreateTaskForm}
-          projects={displayedProjects}
           projectId={projectId}
           onProjectId={setProjectId}
         />
