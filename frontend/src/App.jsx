@@ -493,6 +493,7 @@ function App() {
           onDescriptionChange={setTaskDescription}
           onDueDate={setTaskDueDate}
           cancel={hideCreateTaskForm}
+          projects={projects}
           projectId={projectId}
           onProjectId={setProjectId}
         />

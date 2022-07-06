@@ -3,11 +3,15 @@ import DueDate from "./DueDate";
 
 const CreateTaskForm = (props) => {
   const [selectedProject, setSelectedProject] = useState("");
-  const projects = props.projects.map((project) => (
-    <li key={project.id} onClick={() => setSelectedProject(project.title)}>
-      <a onClick={() => props.onProjectId(project.id)}>{project.title}</a>
-    </li>
-  ));
+  const projects = props.projects.map((project) =>
+    !project.isArchived ? (
+      <li key={project.id} onClick={() => setSelectedProject(project.title)}>
+        <a onClick={() => props.onProjectId(project.id)}>{project.title}</a>
+      </li>
+    ) : (
+      ""
+    )
+  );
 
   return (
     <form onSubmit={(e) => props.onTaskCreation(e)}>
