@@ -18,6 +18,7 @@ const createProjects = async (project, user) => {
 };
 
 const updateProjects = async (project, user) => {
+  console.log(project.id);
   const config = {
     headers: { Authorization: `bearer ${user.token}` },
   };
@@ -26,10 +27,8 @@ const updateProjects = async (project, user) => {
 };
 
 const deleteProjects = async (project, user) => {
-  const config = {
-    headers: { Authorization: `bearer ${user.token}` },
-  };
-  const response = await axios.delete(`${baseUrl}/${project.id}`, config);
+  const config = { headers: { Authorization: `bearer ${user.token}` } };
+  const response = await axios.put(`${baseUrl}/${project.id}`, project, config);
   return response.data;
 };
 

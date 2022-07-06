@@ -33,29 +33,29 @@ router.get("/:id", async (request, response) => {
   return response.json(projectToGet);
 });
 
-router.delete("/:id", async (request, response) => {
-  const projectToDelete = await Project.findById(request.params.id);
-  if (!projectToDelete) {
-    return response.status(204).end();
-  }
+// router.delete("/:id", async (request, response) => {
+//   const projectToDelete = await Project.findById(request.params.id);
+//   if (!projectToDelete) {
+//     return response.status(204).end();
+//   }
 
-  if (
-    projectToDelete.user &&
-    projectToDelete.user.toString() !== request.user.id
-  ) {
-    return response.status(401).json({
-      error: "only the creator can delete a task",
-    });
-  }
+//   if (
+//     projectToDelete.user &&
+//     projectToDelete.user.toString() !== request.user.id
+//   ) {
+//     return response.status(401).json({
+//       error: "only the creator can delete a task",
+//     });
+//   }
 
-  await Project.findByIdAndRemove(request.params.id);
+//   await Project.findByIdAndRemove(request.params.id);
 
-  response.status(204).end();
-});
+//   response.status(204).end();
+// });
 
 router.put("/:id", async (request, response) => {
   const project = request.body;
-
+  console.log(project);
   const updatedProject = await Project.findByIdAndUpdate(
     request.params.id,
     project,

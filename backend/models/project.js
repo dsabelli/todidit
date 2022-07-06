@@ -8,6 +8,13 @@ const schema = mongoose.Schema({
   isEditing: {
     type: Boolean,
   },
+  isArchived: {
+    type: Boolean,
+    default: false,
+  },
+  archivedOn: {
+    type: Date,
+  },
   tasks: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -28,9 +35,6 @@ const schema = mongoose.Schema({
     type: Date,
     immutable: true,
     default: Date.now,
-  },
-  archivedOn: {
-    type: Date,
   },
 });
 

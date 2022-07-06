@@ -288,6 +288,42 @@ function App() {
     }
   };
 
+  const handleDeleteProject = async (e, id) => {
+    e.stopPropagation();
+    const deletedProject = projects.filter((project) => project.id === id)[0];
+    if (
+      window.confirm(
+        `Are you sure you want to delete Project ${deletedProject.title}?`
+      )
+    ) {
+      try {
+        const deletedTasks = tasks.filter((task) => task.project === id);
+        for (let task of deletedTasks) {
+          const newDidit = await diditService.createDidits({ ...task }, user);
+
+          setDidits((prevDidits) => prevDidits.concat(newDidit));
+          await taskService.deleteTasks(task);
+        }
+
+        deletedProject.isArchived = true;
+        deletedProject.archivedOn = new Date();
+        await projectService.deleteProjects({ ...deletedProject }, user);
+
+        setProjects((prevProjects) =>
+          prevProjects.filter((project) => project.id !== id)
+        );
+        setTasks((prevTasks) =>
+          prevTasks.filter((task) => task.project !== id)
+        );
+      } catch (error) {
+        setSystemMessage("System encountered an error");
+        setTimeout(() => {
+          setSystemMessage(null);
+        }, 3000);
+      }
+    }
+  };
+
   //map out tasks into Task Components and on edit switch out for Task Form
   const taskElements = tasks.map((task) =>
     task.isEditing ? (
@@ -415,6 +451,7 @@ function App() {
           onProjectUpdate={handleUpdateProject}
           onUpdate={showUpdateProjectForm}
           cancel={hideUpdateProjectForm}
+          onDelete={handleDeleteProject}
         >
           {addProject ? (
             <CreateProjectForm
@@ -446,7 +483,7 @@ function App() {
           onDescriptionChange={setTaskDescription}
           onDueDate={setTaskDueDate}
           cancel={hideCreateTaskForm}
-          projects={projects}
+          projects={displayedProjects}
           projectId={projectId}
           onProjectId={setProjectId}
         />
@@ -457,7 +494,6 @@ function App() {
           </button>
         )
       )}
-
       {/* {diditElements} */}
     </div>
   );
