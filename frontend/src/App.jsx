@@ -16,6 +16,7 @@ import "./App.css";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [displayedTasks, setDisplayedTasks] = useState([]);
   const [projects, setProjects] = useState([]);
   const [didits, setDidits] = useState([]);
   const [user, setUser] = useState(null);
@@ -28,7 +29,7 @@ function App() {
   const [projectTitle, setProjectTitle] = useState("");
   const [projectId, setProjectId] = useState("");
   const [systemMessage, setSystemMessage] = useState("");
-  // console.log(tasks[4].dueDate.toLocaleDateString());
+
   //look for a better solution to this
   const handleNewUser = () => {
     setNewUser((prevVal) => !prevVal);
@@ -36,6 +37,8 @@ function App() {
 
   //button to show create task form
   const showCreateTaskForm = () => {
+    setTaskTitle("");
+    setTaskDescription("");
     setAddTask((prevVal) => !prevVal);
     setTasks((prevTasks) =>
       prevTasks.map((task) => ({ ...task, isEditing: false }))
@@ -43,6 +46,7 @@ function App() {
   };
 
   const showCreateProjectForm = () => {
+    setProjectTitle("");
     setAddProject((prevVal) => !prevVal);
     setProjects((prevProjects) =>
       prevProjects.map((project) => ({ ...project, isEditing: false }))
@@ -136,6 +140,29 @@ function App() {
     );
   };
 
+  //button to show task form for editing task
+  const showUpdateProjectForm = (e, id) => {
+    e.stopPropagation();
+    setAddProject(false);
+    setProjectTitle(projects.filter((project) => project.id === id)[0].title);
+
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        project.id === id
+          ? { ...project, isEditing: !project.isEditing }
+          : { ...project, isEditing: false }
+      )
+    );
+  };
+
+  //button to hide task form for editing task
+  const hideUpdateProjectForm = () => {
+    setProjectTitle("");
+    setProjects((prevProjects) =>
+      prevProjects.map((project) => ({ ...project, isEditing: false }))
+    );
+  };
+
   //function to update tasks
   const handleUpdateTask = async (e, id) => {
     try {
@@ -194,6 +221,43 @@ function App() {
             : task
         )
       );
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
+    }
+  };
+
+  //function to update tasks
+  const handleUpdateProject = async (e, id) => {
+    try {
+      e.preventDefault();
+      e.stopPropagation();
+      const updatedProject = projects.filter((project) => project.id === id)[0];
+      //move these into taskservice function
+
+      updatedProject.title = projectTitle;
+      updatedProject.isEditing = false;
+      await projectService.updateProjects(
+        {
+          ...updatedProject,
+        },
+        user
+      );
+
+      setProjects((prevProjects) =>
+        prevProjects.map((project) =>
+          project.id === id
+            ? {
+                ...project,
+                title: updatedProject.title,
+                isEditing: updatedProject.isEditing,
+              }
+            : project
+        )
+      );
+      setProjectTitle("");
     } catch (error) {
       setSystemMessage("System encountered an error");
       setTimeout(() => {
@@ -302,6 +366,7 @@ function App() {
       const getTasks = async () => {
         const response = await taskService.getTasks(user || "");
         setTasks(response);
+        setDisplayedTasks(response);
       };
       getTasks();
     } catch (error) {
@@ -341,7 +406,35 @@ function App() {
       <h2 className="bg-red-700 my-5"> {systemMessage}</h2>
       {newUser && <Register handleNewUser={handleNewUser} />}
       {!user && <Login onUser={setUser} />}
-      {user && <Menu projects={projects} />}
+      {user && (
+        <Menu
+          tasks={tasks}
+          projects={projects}
+          title={projectTitle}
+          onTitleChange={setProjectTitle}
+          onProjectUpdate={handleUpdateProject}
+          onUpdate={showUpdateProjectForm}
+          cancel={hideUpdateProjectForm}
+        >
+          {addProject ? (
+            <CreateProjectForm
+              onProjectCreation={handleCreateProject}
+              title={projectTitle}
+              onTitleChange={setProjectTitle}
+              cancel={hideCreateProjectForm}
+            />
+          ) : (
+            user && (
+              <button
+                onClick={() => showCreateProjectForm()}
+                className="btn mt-10 "
+              >
+                Add Project
+              </button>
+            )
+          )}
+        </Menu>
+      )}
       {user && taskElements}
       {user && addTask ? (
         <CreateTaskForm
@@ -364,23 +457,7 @@ function App() {
           </button>
         )
       )}
-      {user && addProject ? (
-        <CreateProjectForm
-          onProjectCreation={handleCreateProject}
-          title={projectTitle}
-          onTitleChange={setProjectTitle}
-          cancel={hideCreateProjectForm}
-        />
-      ) : (
-        user && (
-          <button
-            onClick={() => showCreateProjectForm()}
-            className="btn mt-10 "
-          >
-            Add Project
-          </button>
-        )
-      )}
+
       {/* {diditElements} */}
     </div>
   );

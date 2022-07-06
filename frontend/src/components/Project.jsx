@@ -1,3 +1,5 @@
+import { format, parseJSON } from "date-fns";
+
 const Project = (props) => {
   const dateDue = format(parseJSON(props.dueDate), "dd-MM-yyyy");
   return (
