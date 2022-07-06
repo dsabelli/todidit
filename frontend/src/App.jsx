@@ -300,7 +300,8 @@ function App() {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
     });
-    if (alert) {
+    if (alert.isConfirmed) {
+      console.log(alert);
       try {
         const deletedTasks = tasks.filter((task) => task.project === id);
         for (let task of deletedTasks) {
@@ -326,7 +327,11 @@ function App() {
           setSystemMessage(null);
         }, 3000);
       }
-      await Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      await Swal.fire(
+        "Deleted!",
+        `Project ${deletedProject.title} has been deleted.`,
+        "success"
+      );
     }
   };
 
