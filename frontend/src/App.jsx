@@ -424,22 +424,22 @@ function App() {
   }, [user]);
 
   //get a user's didits
-  useEffect(() => {
-    try {
-      const getDidits = async () => {
-        const response = await diditService.getDidits(user || "");
-        setDidits(response);
-      };
-      setTimeout(() => {
-        getDidits();
-      }, 1000);
-    } catch (error) {
-      setSystemMessage("System encountered an error");
-      setTimeout(() => {
-        setSystemMessage(null);
-      }, 3000);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   try {
+  //     const getDidits = async () => {
+  //       const response = await diditService.getDidits(user || "");
+  //       setDidits(response);
+  //     };
+  //     setTimeout(() => {
+  //       getDidits();
+  //     }, 1000);
+  //   } catch (error) {
+  //     setSystemMessage("System encountered an error");
+  //     setTimeout(() => {
+  //       setSystemMessage(null);
+  //     }, 3000);
+  //   }
+  // }, [user]);
 
   return (
     <div className="App">

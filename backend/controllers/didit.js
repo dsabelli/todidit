@@ -2,8 +2,13 @@ const router = require("express").Router();
 const Didit = require("../models/didit");
 
 router.get("/", async (request, response) => {
-  const tasks = await Didit.find({ user: request.query.id });
-  response.json(tasks);
+  const didits = await Didit.find({
+    $or: [
+      { title: { $regex: request.query.title || 0 } },
+      { createdOn: { $gte: request.query.dateA, $lt: request.query.dateB } },
+    ],
+  });
+  response.json(didits);
 });
 
 router.post("/", async (request, response) => {
@@ -33,10 +38,10 @@ router.post("/", async (request, response) => {
   response.status(201).json(savedDidit);
 });
 
-router.delete("/", async (request, response) => {
-  const updatedTasks = await Didit.deleteMany({});
-  response.status(204).json(updatedTasks);
-});
+// router.delete("/", async (request, response) => {
+//   const updatedTasks = await Didit.deleteMany({});
+//   response.status(204).json(updatedTasks);
+// });
 
 router.get("/:id", async (request, response) => {
   const taskToGet = await Didit.findById(request.params.id);
