@@ -17,11 +17,12 @@ const schema = mongoose.Schema({
   dueDate: {
     type: Date,
   },
-  project: {
-    type: Number,
-  },
   priority: {
     type: Number,
+  },
+  project: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Project",
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,

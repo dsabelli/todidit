@@ -12,17 +12,25 @@ router.post("/", async (request, response) => {
   }
 
   const user = request.user;
-  const task = new Didit({
+  const projects = request.projects;
+  console.log(request.projects);
+  const didit = new Didit({
     ...request.body,
     user: user.id,
   });
 
-  const savedTask = await task.save();
+  const project = projects.filter(
+    (project) => project.id === request.body.project
+  );
+  console.log(project);
+  const savedDidit = await didit.save();
 
-  user.tasks = user.tasks.concat(savedTask._id);
+  user.didits = user.didits.concat(savedDidit._id);
+  project[0].didits = project[0].didits.concat(savedDidit._id);
   await user.save();
+  await project[0].save();
 
-  response.status(201).json(savedTask);
+  response.status(201).json(savedDidit);
 });
 
 router.delete("/", async (request, response) => {

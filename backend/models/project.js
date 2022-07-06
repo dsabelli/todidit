@@ -1,32 +1,20 @@
 const mongoose = require("mongoose");
 
 const schema = mongoose.Schema({
-  email: {
+  title: {
     type: String,
     required: true,
-    unique: true,
   },
-  username: {
-    type: String,
-    required: true,
-    minlength: 4,
-    maxLength: 18,
+  isEditing: {
+    type: Boolean,
   },
-  passwordHash: {
-    type: String,
-    required: true,
-    unique: true,
+  isArchived: {
+    type: Boolean,
+    default: false,
   },
-  date: {
+  archivedOn: {
     type: Date,
-    default: Date.now,
   },
-  projects: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Project",
-    },
-  ],
   tasks: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -39,6 +27,15 @@ const schema = mongoose.Schema({
       ref: "Didit",
     },
   ],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  createdOn: {
+    type: Date,
+    immutable: true,
+    default: Date.now,
+  },
 });
 
 schema.set("toJSON", {
@@ -46,9 +43,7 @@ schema.set("toJSON", {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
     delete returnedObject.__v;
-    // the passwordHash should not be revealed
-    delete returnedObject.passwordHash;
   },
 });
 
-module.exports = mongoose.model("User", schema);
+module.exports = mongoose.model("Project", schema);

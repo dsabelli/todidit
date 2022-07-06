@@ -1,6 +1,7 @@
 const logger = require("./logger");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const Project = require("../models/project");
 
 const errorHandler = (error, request, response, next) => {
   logger.error(error.message);
@@ -18,6 +19,8 @@ const errorHandler = (error, request, response, next) => {
   next(error);
 };
 
+//if a user is logged in this function grabs the bearer token and if its able to decode it,
+//it finds the user associated with the login as well as their projects/didits and sends into the request object
 const userExtractor = async (request, response, next) => {
   const authorization = request.get("authorization");
   if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
@@ -27,6 +30,7 @@ const userExtractor = async (request, response, next) => {
     );
     if (decodedToken) {
       request.user = await User.findById(decodedToken.id);
+      request.projects = await Project.find({ user: decodedToken.id });
     }
   }
 

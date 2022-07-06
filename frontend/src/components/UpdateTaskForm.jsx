@@ -1,6 +1,17 @@
+import { useState } from "react";
 import DueDate from "./DueDate";
 
 const UpdateTaskForm = (props) => {
+  const [selectedProject, setSelectedProject] = useState("");
+  const projects = props.projects.map((project) =>
+    !project.isArchived ? (
+      <li key={project.id} onClick={() => setSelectedProject(project.title)}>
+        <a onClick={() => props.onProjectId(project.id)}>{project.title}</a>
+      </li>
+    ) : (
+      ""
+    )
+  );
   return (
     <form onSubmit={(e) => props.onTaskUpdate(e, props.id)}>
       <div>
@@ -31,8 +42,23 @@ const UpdateTaskForm = (props) => {
       <div>
         <DueDate dueDate={props.dueDate} onDueDate={props.onDueDate} />
       </div>
+      <div>
+        <div className="dropdown dropdown-hover">
+          <label tabIndex="0" className="btn m-1">
+            {selectedProject || "Click"}
+          </label>
+          <ul
+            tabIndex="0"
+            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            {projects}
+          </ul>
+        </div>
+      </div>
       <button
-        className={props.title ? "btn" : "btn btn-disabled opacity-50"}
+        className={
+          props.title && props.projectId ? "btn" : "btn btn-disabled opacity-50"
+        }
         type="submit"
       >
         save

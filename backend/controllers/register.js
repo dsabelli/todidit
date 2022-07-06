@@ -26,12 +26,6 @@ router.post("/", async (request, response) => {
     });
   }
 
-  // const existingUser = await User.findOne({ username });
-  // if (existingUser) {
-  //   return response.status(400).json({
-  //     error: "Username is already taken, try another.",
-  //   });
-  // }
   if (!password || !validator.isStrongPassword(password)) {
     return response.status(400).json({
       error: "Invalid password",
