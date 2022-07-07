@@ -12,7 +12,9 @@ const Navbar = ({
 }) => {
   let didits;
   if (diditTitle) {
-    didits = diditTitle.map((didit) => <Didit title={didit.title} />);
+    didits = diditTitle.map((didit) => (
+      <Didit key={didit.id} title={didit.title} />
+    ));
   }
 
   return (
