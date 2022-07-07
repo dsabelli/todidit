@@ -2,8 +2,21 @@ const router = require("express").Router();
 const Didit = require("../models/didit");
 
 router.get("/", async (request, response) => {
-  const tasks = await Didit.find({ user: request.query.id });
-  response.json(tasks);
+  if (request.query) {
+    console.log(request.query);
+    const didits = await Didit.find({
+      $and: [
+        { title: { $regex: request.query.title, $options: "i" || "" } },
+        {
+          createdOn: {
+            $gte: request.query.dateA || new Date(1970),
+            $lt: request.query.dateB || new Date(),
+          },
+        },
+      ],
+    });
+    response.json(didits);
+  }
 });
 
 router.post("/", async (request, response) => {
@@ -18,7 +31,7 @@ router.post("/", async (request, response) => {
     ...request.body,
     user: user.id,
   });
-
+  console.log(didit);
   const project = projects.filter(
     (project) => project.id === request.body.project
   );
@@ -33,10 +46,10 @@ router.post("/", async (request, response) => {
   response.status(201).json(savedDidit);
 });
 
-router.delete("/", async (request, response) => {
-  const updatedTasks = await Didit.deleteMany({});
-  response.status(204).json(updatedTasks);
-});
+// router.delete("/", async (request, response) => {
+//   const updatedTasks = await Didit.deleteMany({});
+//   response.status(204).json(updatedTasks);
+// });
 
 router.get("/:id", async (request, response) => {
   const taskToGet = await Didit.findById(request.params.id);

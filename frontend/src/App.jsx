@@ -19,6 +19,9 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [projects, setProjects] = useState([]);
   const [didits, setDidits] = useState([]);
+  const [diditTitle, setDiditTitle] = useState("");
+  const [diditDateStart, setDiditDateStart] = useState("");
+  const [diditDateEnd, setDiditDateEnd] = useState("");
   const [user, setUser] = useState(null);
   const [newUser, setNewUser] = useState(false);
   const [addTask, setAddTask] = useState(false);
@@ -72,7 +75,7 @@ function App() {
   const handleCreateTask = async (e) => {
     try {
       e.preventDefault();
-      console.log(e);
+
       const newTask = await taskService.createTasks({
         title: taskTitle,
         description: taskDescription,
@@ -301,7 +304,6 @@ function App() {
       confirmButtonText: "Yes, delete it!",
     });
     if (alert.isConfirmed) {
-      console.log(alert);
       try {
         const deletedTasks = tasks.filter((task) => task.project === id);
         for (let task of deletedTasks) {
@@ -368,6 +370,26 @@ function App() {
     )
   );
 
+  const getDidits = async (diditTitle) => {
+    if (diditTitle) {
+      const didits = await diditService.getDidits(
+        diditTitle,
+        diditDateStart,
+        diditDateEnd
+      );
+      setDiditTitle(didits);
+      // } else if ((diditDateStart, diditDateEnd)) {
+      //   const didits = await diditService.getDidits(
+      //     (diditTitle = ""),
+      //     diditDateStart,
+      //     diditDateEnd
+      //   );
+      //   setDiditTitle(didits);
+    } else {
+      setDiditTitle("");
+    }
+  };
+
   const diditElements = didits.map((didit) => (
     <Didit
       title={didit.title}
@@ -424,22 +446,22 @@ function App() {
   }, [user]);
 
   //get a user's didits
-  useEffect(() => {
-    try {
-      const getDidits = async () => {
-        const response = await diditService.getDidits(user || "");
-        setDidits(response);
-      };
-      setTimeout(() => {
-        getDidits();
-      }, 1000);
-    } catch (error) {
-      setSystemMessage("System encountered an error");
-      setTimeout(() => {
-        setSystemMessage(null);
-      }, 3000);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   try {
+  //     const getDidits = async () => {
+  //       const response = await diditService.getDidits(user || "");
+  //       setDidits(response);
+  //     };
+  //     setTimeout(() => {
+  //       getDidits();
+  //     }, 1000);
+  //   } catch (error) {
+  //     setSystemMessage("System encountered an error");
+  //     setTimeout(() => {
+  //       setSystemMessage(null);
+  //     }, 3000);
+  //   }
+  // }, [user]);
 
   return (
     <div className="App">
@@ -448,6 +470,11 @@ function App() {
         onLogout={handleLogout}
         newUser={newUser}
         onNewUser={handleNewUser}
+        diditTitle={diditTitle}
+        onDiditTitleChange={setDiditTitle}
+        onDiditSearch={getDidits}
+        onDiditDateStart={setDiditDateStart}
+        onDiditDateEnd={setDiditDateEnd}
       />
       <h2 className="bg-red-700 my-5"> {systemMessage}</h2>
       {newUser && <Register handleNewUser={handleNewUser} />}
