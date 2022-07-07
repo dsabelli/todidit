@@ -75,7 +75,7 @@ function App() {
   const handleCreateTask = async (e) => {
     try {
       e.preventDefault();
-      console.log(e);
+
       const newTask = await taskService.createTasks({
         title: taskTitle,
         description: taskDescription,
@@ -304,7 +304,6 @@ function App() {
       confirmButtonText: "Yes, delete it!",
     });
     if (alert.isConfirmed) {
-      console.log(alert);
       try {
         const deletedTasks = tasks.filter((task) => task.project === id);
         for (let task of deletedTasks) {

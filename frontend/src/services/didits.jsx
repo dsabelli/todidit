@@ -10,7 +10,6 @@ const baseUrl = "/api/didits";
 // };
 
 const getDidits = async (diditTitle, diditDateStart, diditDateEnd) => {
-  console.log(diditDateStart);
   const config = {
     params: {
       title: diditTitle,
@@ -19,7 +18,6 @@ const getDidits = async (diditTitle, diditDateStart, diditDateEnd) => {
     },
   };
   const response = await axios.get(baseUrl, config);
-  console.log(response.data);
   return response.data;
 };
 

@@ -73,7 +73,6 @@ const Register = ({ handleNewUser }) => {
       handleNewUser();
     } catch (error) {
       const errorMsg = error.response.data.error;
-      console.log(errorMsg);
       setAsyncError(errorMsg);
       setTimeout(() => {
         setAsyncError(null);
