@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DueDate from "./DueDate";
+import Button from "./Button";
 
 const CreateTaskForm = (props) => {
   const [selectedProject, setSelectedProject] = useState("");
@@ -56,7 +57,15 @@ const CreateTaskForm = (props) => {
           </ul>
         </div>
       </div>
-      <button
+      <Button
+        className={
+          props.title && props.projectId ? "btn" : "btn btn-disabled opacity-50"
+        }
+        type="submit"
+        text="add"
+      />
+      <Button text="cancel" onClick={props.cancel} />
+      {/* <button
         className={
           props.title && props.projectId ? "btn" : "btn btn-disabled opacity-50"
         }
@@ -66,7 +75,7 @@ const CreateTaskForm = (props) => {
       </button>
       <button className="btn" onClick={(e) => props.cancel(e)}>
         cancel
-      </button>
+      </button> */}
     </form>
   );
 };

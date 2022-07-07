@@ -1,3 +1,4 @@
+import Button from "./Button";
 const CreateProjectForm = (props) => {
   return (
     <form onSubmit={(e) => props.onProjectCreation(e)}>
@@ -14,16 +15,21 @@ const CreateProjectForm = (props) => {
           className="input input-ghost w-full max-w-xs"
         />
       </div>
-
-      <button
+      <Button
+        className={props.title ? "btn" : "btn btn-disabled opacity-50"}
+        type="submit"
+        text={"add"}
+      />
+      <Button onClick={props.cancel} text={"cancel"} />
+      {/* <button
         className={props.title ? "btn" : "btn btn-disabled opacity-50"}
         type="submit"
       >
         add
-      </button>
-      <button className="btn" onClick={(e) => props.cancel(e)}>
+      </button> */}
+      {/* <button className="btn" onClick={(e) => props.cancel(e)}>
         cancel
-      </button>
+      </button> */}
     </form>
   );
 };

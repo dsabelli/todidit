@@ -1,5 +1,7 @@
 import Didit from "./Didit";
 import DateRange from "./DateRange";
+import Button from "./Button";
+
 const Navbar = ({
   user,
   onLogout,
@@ -24,19 +26,25 @@ const Navbar = ({
       </div>
       <div>
         {!user && (
-          <button onClick={() => onNewUser()} className="btn">
-            {newUser ? "Cancel" : "Get Started"}
-          </button>
+          <Button
+            onClick={() => onNewUser()}
+            text={newUser ? "Cancel" : "Get Started"}
+          />
+          // <button onClick={() => onNewUser()} className="btn">
+          //   {newUser ? "Cancel" : "Get Started"}
+          // </button>
         )}
       </div>
       <div className="flex-none gap-2">
-        <>
-          <DateRange
-            onDiditSearch={onDiditSearch}
-            onDiditDateStart={onDiditDateStart}
-            onDiditDateEnd={onDiditDateEnd}
-          />
-        </>
+        {user && (
+          <>
+            <DateRange
+              onDiditSearch={onDiditSearch}
+              onDiditDateStart={onDiditDateStart}
+              onDiditDateEnd={onDiditDateEnd}
+            />
+          </>
+        )}
         <div className="form-control ">
           {user && (
             <input
