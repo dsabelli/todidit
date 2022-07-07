@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import FormError from "./FormError";
+import Button from "./Button";
 
 const schema = yup.object().shape({
   username: yup
@@ -152,9 +153,14 @@ const Register = ({ handleNewUser }) => {
                 )}
               </div>
               <div className="form-control mt-6">
-                <button type="submit" className="btn btn-primary">
+                <Button
+                  text={"Register"}
+                  type="submit"
+                  className={"btn-primary"}
+                />
+                {/* <button type="submit" className="btn btn-primary">
                   Register
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
