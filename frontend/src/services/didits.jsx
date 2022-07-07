@@ -9,20 +9,18 @@ const baseUrl = "/api/didits";
 //   return response.data;
 // };
 
-const getDidits = async () => {
+const getDidits = async (diditTitle) => {
   const config = {
     params: {
-      title: "test",
-      dateA: new Date(2022, 6, 6),
-      dateB: new Date(),
+      title: diditTitle,
+      // dateA: new Date(2022, 5, 5),
+      // dateB: new Date(),
     },
   };
   const response = await axios.get(baseUrl, config);
-  console.log(response);
+  console.log(response.data);
   return response.data;
 };
-
-getDidits();
 
 const createDidits = async (didit, user) => {
   const config = {

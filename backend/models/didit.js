@@ -24,6 +24,10 @@ const schema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Project",
   },
+  // projectTitle: {
+  //   type: String,
+  //   ref: "Project",
+  // },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

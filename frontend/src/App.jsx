@@ -19,6 +19,7 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [projects, setProjects] = useState([]);
   const [didits, setDidits] = useState([]);
+  const [diditTitle, setDiditTitle] = useState("");
   const [user, setUser] = useState(null);
   const [newUser, setNewUser] = useState(false);
   const [addTask, setAddTask] = useState(false);
@@ -368,6 +369,15 @@ function App() {
     )
   );
 
+  const getDidits = async (diditTitle) => {
+    if (diditTitle) {
+      const didits = await diditService.getDidits(diditTitle);
+      setDiditTitle(didits);
+    } else {
+      setDiditTitle("");
+    }
+  };
+
   const diditElements = didits.map((didit) => (
     <Didit
       title={didit.title}
@@ -448,6 +458,9 @@ function App() {
         onLogout={handleLogout}
         newUser={newUser}
         onNewUser={handleNewUser}
+        diditTitle={diditTitle}
+        onDiditTitleChange={setDiditTitle}
+        onDiditSearch={getDidits}
       />
       <h2 className="bg-red-700 my-5"> {systemMessage}</h2>
       {newUser && <Register handleNewUser={handleNewUser} />}

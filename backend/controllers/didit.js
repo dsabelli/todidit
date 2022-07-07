@@ -2,13 +2,21 @@ const router = require("express").Router();
 const Didit = require("../models/didit");
 
 router.get("/", async (request, response) => {
-  const didits = await Didit.find({
-    $or: [
-      { title: { $regex: request.query.title || 0 } },
-      { createdOn: { $gte: request.query.dateA, $lt: request.query.dateB } },
-    ],
-  });
-  response.json(didits);
+  if (request.query) {
+    console.log(request.query);
+    const didits = await Didit.find({
+      $and: [
+        { title: { $regex: request.query.title, $options: "i" || "" } },
+        {
+          createdOn: {
+            $gte: request.query.dateA || new Date(1970),
+            $lt: request.query.dateB || new Date(),
+          },
+        },
+      ],
+    });
+    response.json(didits);
+  }
 });
 
 router.post("/", async (request, response) => {
