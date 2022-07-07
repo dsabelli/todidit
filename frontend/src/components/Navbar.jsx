@@ -30,9 +30,6 @@ const Navbar = ({
             onClick={() => onNewUser()}
             text={newUser ? "Cancel" : "Get Started"}
           />
-          // <button onClick={() => onNewUser()} className="btn">
-          //   {newUser ? "Cancel" : "Get Started"}
-          // </button>
         )}
       </div>
       <div className="flex-none gap-2">

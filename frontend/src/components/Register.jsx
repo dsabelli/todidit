@@ -158,9 +158,6 @@ const Register = ({ handleNewUser }) => {
                   type="submit"
                   className={"btn-primary"}
                 />
-                {/* <button type="submit" className="btn btn-primary">
-                  Register
-                </button> */}
               </div>
             </div>
           </div>

@@ -84,9 +84,6 @@ const Login = ({ onUser }) => {
                   text={"Login"}
                   className={"btn-primary"}
                 />
-                {/* <button type="submit" className="btn btn-primary">
-                  Login
-                </button> */}
               </div>
             </div>
           </div>

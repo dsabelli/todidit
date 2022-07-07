@@ -13,7 +13,6 @@ const CreateTaskForm = (props) => {
       ""
     )
   );
-
   return (
     <form onSubmit={(e) => props.onTaskCreation(e)}>
       <div>
@@ -65,17 +64,6 @@ const CreateTaskForm = (props) => {
         text="add"
       />
       <Button text="cancel" onClick={props.cancel} />
-      {/* <button
-        className={
-          props.title && props.projectId ? "btn" : "btn btn-disabled opacity-50"
-        }
-        type="submit"
-      >
-        add
-      </button>
-      <button className="btn" onClick={(e) => props.cancel(e)}>
-        cancel
-      </button> */}
     </form>
   );
 };

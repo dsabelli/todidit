@@ -35,35 +35,6 @@ const Menu = (props) => {
                   </svg>
                 }
               />
-              {/* <button
-                className="btn"
-                onClick={(e) => {
-                  props.onUpdate(e, project.id);
-                }}
-              >
-                edit
-              </button> */}
-              {/* <button
-                className={`btn btn-square `}
-                onClick={(e) => {
-                  props.onDelete(e, project.id);
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button> */}
             </div>
           </a>
         </li>

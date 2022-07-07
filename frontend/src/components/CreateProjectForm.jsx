@@ -21,15 +21,6 @@ const CreateProjectForm = (props) => {
         text={"add"}
       />
       <Button onClick={props.cancel} text={"cancel"} />
-      {/* <button
-        className={props.title ? "btn" : "btn btn-disabled opacity-50"}
-        type="submit"
-      >
-        add
-      </button> */}
-      {/* <button className="btn" onClick={(e) => props.cancel(e)}>
-        cancel
-      </button> */}
     </form>
   );
 };
