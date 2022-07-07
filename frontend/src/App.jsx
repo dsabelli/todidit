@@ -20,6 +20,8 @@ function App() {
   const [projects, setProjects] = useState([]);
   const [didits, setDidits] = useState([]);
   const [diditTitle, setDiditTitle] = useState("");
+  const [diditDateStart, setDiditDateStart] = useState("");
+  const [diditDateEnd, setDiditDateEnd] = useState("");
   const [user, setUser] = useState(null);
   const [newUser, setNewUser] = useState(false);
   const [addTask, setAddTask] = useState(false);
@@ -371,8 +373,19 @@ function App() {
 
   const getDidits = async (diditTitle) => {
     if (diditTitle) {
-      const didits = await diditService.getDidits(diditTitle);
+      const didits = await diditService.getDidits(
+        diditTitle,
+        diditDateStart,
+        diditDateEnd
+      );
       setDiditTitle(didits);
+      // } else if ((diditDateStart, diditDateEnd)) {
+      //   const didits = await diditService.getDidits(
+      //     (diditTitle = ""),
+      //     diditDateStart,
+      //     diditDateEnd
+      //   );
+      //   setDiditTitle(didits);
     } else {
       setDiditTitle("");
     }
@@ -461,6 +474,8 @@ function App() {
         diditTitle={diditTitle}
         onDiditTitleChange={setDiditTitle}
         onDiditSearch={getDidits}
+        onDiditDateStart={setDiditDateStart}
+        onDiditDateEnd={setDiditDateEnd}
       />
       <h2 className="bg-red-700 my-5"> {systemMessage}</h2>
       {newUser && <Register handleNewUser={handleNewUser} />}

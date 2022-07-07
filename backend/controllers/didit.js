@@ -31,7 +31,7 @@ router.post("/", async (request, response) => {
     ...request.body,
     user: user.id,
   });
-
+  console.log(didit);
   const project = projects.filter(
     (project) => project.id === request.body.project
   );

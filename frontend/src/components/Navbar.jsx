@@ -1,4 +1,5 @@
 import Didit from "./Didit";
+import DateRange from "./DateRange";
 const Navbar = ({
   user,
   onLogout,
@@ -6,6 +7,8 @@ const Navbar = ({
   newUser,
   onDiditSearch,
   diditTitle,
+  onDiditDateStart,
+  onDiditDateEnd,
 }) => {
   let didits;
   if (diditTitle) {
@@ -25,6 +28,13 @@ const Navbar = ({
         )}
       </div>
       <div className="flex-none gap-2">
+        <>
+          <DateRange
+            onDiditSearch={onDiditSearch}
+            onDiditDateStart={onDiditDateStart}
+            onDiditDateEnd={onDiditDateEnd}
+          />
+        </>
         <div className="form-control ">
           {user && (
             <input
