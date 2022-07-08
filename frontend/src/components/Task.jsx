@@ -1,5 +1,6 @@
 import { format, parseJSON } from "date-fns";
 import Button from "./Button";
+import Checkbox from "./Checkbox";
 
 const Task = (props) => {
   const dateDue = format(parseJSON(props.dueDate), "dd-MM-yyyy");
@@ -8,13 +9,11 @@ const Task = (props) => {
     <div className="flex justify-between px-40 ">
       <div className="flex gap-3 ">
         <div>
-          <input
-            type="checkbox"
-            className="checkbox"
-            name="checkbox"
-            id=""
+          <Checkbox
             checked={props.checked}
             onChange={() => props.onCheck(props.id)}
+            id="checkbox"
+            name="checkbox"
           />
         </div>
         <div
