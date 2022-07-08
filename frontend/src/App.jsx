@@ -497,6 +497,7 @@ function App() {
               value={projectTitle}
               onChange={(e) => setProjectTitle(e.target.value)}
               onClick={hideCreateProjectForm}
+              submitText="add"
             />
           ) : (
             user && (

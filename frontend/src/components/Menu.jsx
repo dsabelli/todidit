@@ -53,6 +53,7 @@ const Menu = ({
           value={title}
           id={project.id}
           key={project.id}
+          submitText="save"
         />
       )
     ) : (

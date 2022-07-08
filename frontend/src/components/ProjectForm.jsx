@@ -1,7 +1,7 @@
 import Button from "./Button";
 import Input from "./Input";
 
-const ProjectForm = ({ onSubmit, value, onChange, onClick }) => {
+const ProjectForm = ({ onSubmit, value, onChange, onClick, submitText }) => {
   return (
     <form onSubmit={onSubmit}>
       <div>
@@ -20,7 +20,7 @@ const ProjectForm = ({ onSubmit, value, onChange, onClick }) => {
       <Button
         className={value ? "btn" : "btn btn-disabled opacity-50"}
         type="submit"
-        text={"add"}
+        text={submitText}
       />
       <Button onClick={onClick} text={"cancel"} />
     </form>
