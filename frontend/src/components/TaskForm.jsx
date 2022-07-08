@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DueDate from "./DueDate";
-import Button from "./Button";
-import Input from "./Input";
+import Button from "./UI/Button";
+import Input from "./UI/Input";
 
 const TaskForm = ({
   onSubmit,

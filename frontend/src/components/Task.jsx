@@ -1,6 +1,6 @@
 import { format, parseJSON } from "date-fns";
-import Button from "./Button";
-import Checkbox from "./Checkbox";
+import Button from "./UI/Button";
+import Checkbox from "./UI/Checkbox";
 import DeleteSvg from "./svg/DeleteSvg";
 
 const Task = ({

@@ -1,7 +1,7 @@
 import Didit from "./Didit";
-import DateRange from "./DateRange";
-import Button from "./Button";
-import Input from "./Input";
+import DateRange from "./UI/DateRange";
+import Button from "./UI/Button";
+import Input from "./UI/Input";
 const Navbar = ({
   user,
   onLogout,

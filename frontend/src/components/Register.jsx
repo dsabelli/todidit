@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import FormError from "./FormError";
-import Button from "./Button";
+import Button from "./UI/Button";
 
 const schema = yup.object().shape({
   username: yup

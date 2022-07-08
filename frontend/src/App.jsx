@@ -7,7 +7,7 @@ import TaskForm from "./components/TaskForm";
 import ProjectForm from "./components/ProjectForm";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
-import Button from "./components/Button";
+import Button from "./components/UI/Button";
 import taskService from "./services/tasks";
 import projectService from "./services/projects";
 import diditService from "./services/didits";

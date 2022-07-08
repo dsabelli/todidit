@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ProjectForm from "./ProjectForm";
-import Button from "./Button";
+import Button from "./UI/Button";
 import DeleteSvg from "./svg/DeleteSvg";
 
 const Menu = ({
