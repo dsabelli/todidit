@@ -3,6 +3,7 @@ import loginService from "../services/login";
 import taskService from "../services/tasks";
 import FormError from "./FormError";
 import { useForm } from "react-hook-form";
+import Button from "./UI/Button";
 
 const Login = ({ onUser }) => {
   const [asyncError, setAsyncError] = useState("");
@@ -78,9 +79,11 @@ const Login = ({ onUser }) => {
                 </label>*/}
               </div>
               <div className="form-control mt-6">
-                <button type="submit" className="btn btn-primary">
-                  Login
-                </button>
+                <Button
+                  type="submit"
+                  text={"Login"}
+                  className={"btn-primary"}
+                />
               </div>
             </div>
           </div>
