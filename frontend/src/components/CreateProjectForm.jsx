@@ -1,10 +1,12 @@
 import Button from "./Button";
+import Input from "./Input";
+
 const CreateProjectForm = (props) => {
   return (
     <form onSubmit={(e) => props.onProjectCreation(e)}>
       <div>
         <label htmlFor="Title"></label>
-        <input
+        <Input
           autoFocus
           placeholder="e.g., style this project better"
           id="Title"

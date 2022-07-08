@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DueDate from "./DueDate";
 import Button from "./Button";
+import Input from "./Input";
 
 const CreateTaskForm = (props) => {
   const [selectedProject, setSelectedProject] = useState("");
@@ -17,7 +18,7 @@ const CreateTaskForm = (props) => {
     <form onSubmit={(e) => props.onTaskCreation(e)}>
       <div>
         <label htmlFor="Title"></label>
-        <input
+        <Input
           autoFocus
           placeholder="e.g., style this project better"
           id="Title"
@@ -30,7 +31,7 @@ const CreateTaskForm = (props) => {
       </div>
       <div>
         <label htmlFor="Description"></label>
-        <input
+        <Input
           id="Description"
           placeholder="Description"
           type="text"

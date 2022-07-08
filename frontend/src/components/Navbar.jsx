@@ -1,7 +1,7 @@
 import Didit from "./Didit";
 import DateRange from "./DateRange";
 import Button from "./Button";
-
+import Input from "./Input";
 const Navbar = ({
   user,
   onLogout,
@@ -44,7 +44,7 @@ const Navbar = ({
         )}
         <div className="form-control ">
           {user && (
-            <input
+            <Input
               type="text"
               placeholder="Search"
               className="input input-bordered"
