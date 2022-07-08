@@ -1,9 +1,14 @@
 import Button from "./Button";
 import Input from "./Input";
 
-const CreateProjectForm = (props) => {
+const CreateProjectForm = ({
+  onProjectCreation,
+  title,
+  onTitleChange,
+  cancel,
+}) => {
   return (
-    <form onSubmit={(e) => props.onProjectCreation(e)}>
+    <form onSubmit={(e) => onProjectCreation(e)}>
       <div>
         <label htmlFor="Title"></label>
         <Input
@@ -11,18 +16,18 @@ const CreateProjectForm = (props) => {
           placeholder="e.g., style this project better"
           id="Title"
           type="text"
-          value={props.title}
+          value={title}
           name="Title"
-          onChange={({ target }) => props.onTitleChange(target.value)}
+          onChange={({ target }) => onTitleChange(target.value)}
           className="input input-ghost w-full max-w-xs"
         />
       </div>
       <Button
-        className={props.title ? "btn" : "btn btn-disabled opacity-50"}
+        className={title ? "btn" : "btn btn-disabled opacity-50"}
         type="submit"
         text={"add"}
       />
-      <Button onClick={props.cancel} text={"cancel"} />
+      <Button onClick={cancel} text={"cancel"} />
     </form>
   );
 };

@@ -2,21 +2,28 @@ import { useState } from "react";
 import UpdateProjectForm from "./UpdateProjectForm";
 import Button from "./Button";
 
-const Menu = (props) => {
+const Menu = ({
+  projects,
+  onProjectId,
+  onUpdate,
+  onDelete,
+  onProjectUpdate,
+  onTitleChange,
+  cancel,
+  title,
+  children,
+}) => {
   const [selectedProject, setSelectedProject] = useState("");
-  const projects = props.projects.map((project) =>
+  const projectElements = projects.map((project) =>
     !project.isArchived ? (
       !project.isEditing ? (
         <li key={project.id} onClick={() => setSelectedProject(project.title)}>
-          <a onClick={() => props.onProjectId(project.id)}>
+          <a onClick={() => onProjectId(project.id)}>
             {project.title}
             <div className="flex gap-4">
+              <Button onClick={(e) => onUpdate(e, project.id)} text={"edit"} />
               <Button
-                onClick={(e) => props.onUpdate(e, project.id)}
-                text={"edit"}
-              />
-              <Button
-                onClick={(e) => props.onDelete(e, project.id)}
+                onClick={(e) => onDelete(e, project.id)}
                 className="btn-square"
                 text={
                   <svg
@@ -40,10 +47,10 @@ const Menu = (props) => {
         </li>
       ) : (
         <UpdateProjectForm
-          onProjectUpdate={props.onProjectUpdate}
-          onTitleChange={props.onTitleChange}
-          cancel={props.cancel}
-          title={props.title}
+          onProjectUpdate={onProjectUpdate}
+          onTitleChange={onTitleChange}
+          cancel={cancel}
+          title={title}
           id={project.id}
           key={project.id}
         />
@@ -60,9 +67,9 @@ const Menu = (props) => {
         <input type="checkbox" />
         <div className="collapse-title text-xl font-medium">Projects</div>
 
-        <div>{props.children}</div>
+        <div>{children}</div>
         <div className="collapse-content">
-          <ul>{projects}</ul>
+          <ul>{projectElements}</ul>
         </div>
       </div>
     </ul>

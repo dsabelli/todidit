@@ -2,27 +2,36 @@ import { format, parseJSON } from "date-fns";
 import Button from "./Button";
 import Checkbox from "./Checkbox";
 
-const Task = (props) => {
-  const dateDue = format(parseJSON(props.dueDate), "dd-MM-yyyy");
+const Task = ({
+  dueDate,
+  checked,
+  id,
+  onCheck,
+  onUpdate,
+  onDelete,
+  title,
+  description,
+}) => {
+  const dateDue = format(parseJSON(dueDate), "dd-MM-yyyy");
 
   return (
     <div className="flex justify-between px-40 ">
       <div className="flex gap-3 ">
         <div>
           <Checkbox
-            checked={props.checked}
-            onChange={() => props.onCheck(props.id)}
+            checked={checked}
+            onChange={() => onCheck(id)}
             id="checkbox"
             name="checkbox"
           />
         </div>
         <div
           className={`flex flex-col items-start ${
-            props.checked ? "line-through" : ""
+            checked ? "line-through" : ""
           }`}
         >
-          <div className="">{props.title}</div>
-          <div className="text-xs mb-5 ">{props.description}</div>
+          <div className="">{title}</div>
+          <div className="text-xs mb-5 ">{description}</div>
           <div className="text-xs mb-5 ">
             {dateDue === format(new Date(), "dd-MM-yyyy") ? (
               <span className="bg-red-500">Today</span>
@@ -35,16 +44,16 @@ const Task = (props) => {
       <div className="flex gap-4">
         <Button
           onClick={() => {
-            props.onUpdate(props.id);
+            onUpdate(id);
           }}
           text="edit"
         />
         <Button
           className={`btn btn-square ${
-            props.checked ? "" : "btn-disabled opacity-50"
+            checked ? "" : "btn-disabled opacity-50"
           }`}
           onClick={() => {
-            props.onDelete(props.id);
+            onDelete(id);
           }}
           text={
             <svg

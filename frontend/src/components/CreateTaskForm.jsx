@@ -3,19 +3,33 @@ import DueDate from "./DueDate";
 import Button from "./Button";
 import Input from "./Input";
 
-const CreateTaskForm = (props) => {
+const CreateTaskForm = ({
+  onTaskCreation,
+  title,
+  onTitleChange,
+  description,
+  onDescriptionChange,
+  dueDate,
+  onDueDate,
+  projects,
+  projectId,
+  onProjectId,
+  cancel,
+}) => {
   const [selectedProject, setSelectedProject] = useState("");
-  const projects = props.projects.map((project) =>
+
+  const projectElements = projects.map((project) =>
     !project.isArchived ? (
       <li key={project.id} onClick={() => setSelectedProject(project.title)}>
-        <a onClick={() => props.onProjectId(project.id)}>{project.title}</a>
+        <a onClick={() => onProjectId(project.id)}>{project.title}</a>
       </li>
     ) : (
       ""
     )
   );
+
   return (
-    <form onSubmit={(e) => props.onTaskCreation(e)}>
+    <form onSubmit={(e) => onTaskCreation(e)}>
       <div>
         <label htmlFor="Title"></label>
         <Input
@@ -23,9 +37,9 @@ const CreateTaskForm = (props) => {
           placeholder="e.g., style this project better"
           id="Title"
           type="text"
-          value={props.title}
+          value={title}
           name="Title"
-          onChange={({ target }) => props.onTitleChange(target.value)}
+          onChange={({ target }) => onTitleChange(target.value)}
           className="input input-ghost w-full max-w-xs"
         />
       </div>
@@ -35,14 +49,14 @@ const CreateTaskForm = (props) => {
           id="Description"
           placeholder="Description"
           type="text"
-          value={props.description}
+          value={description}
           name="Description"
-          onChange={({ target }) => props.onDescriptionChange(target.value)}
+          onChange={({ target }) => onDescriptionChange(target.value)}
           className="textarea textarea-ghost w-full max-w-xs h-24"
         />
       </div>
       <div>
-        <DueDate dueDate={props.dueDate} onDueDate={props.onDueDate} />
+        <DueDate dueDate={dueDate} onDueDate={onDueDate} />
       </div>
       <div>
         <div className="dropdown dropdown-hover">
@@ -53,18 +67,16 @@ const CreateTaskForm = (props) => {
             tabIndex="0"
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
           >
-            {projects}
+            {projectElements}
           </ul>
         </div>
       </div>
       <Button
-        className={
-          props.title && props.projectId ? "btn" : "btn btn-disabled opacity-50"
-        }
+        className={title && projectId ? "btn" : "btn btn-disabled opacity-50"}
         type="submit"
         text="add"
       />
-      <Button text="cancel" onClick={props.cancel} />
+      <Button text="cancel" onClick={cancel} />
     </form>
   );
 };
