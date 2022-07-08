@@ -8,6 +8,7 @@ import UpdateTaskForm from "./components/UpdateTaskForm";
 import CreateProjectForm from "./components/CreateProjectForm";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
+import Button from "./components/Button";
 import taskService from "./services/tasks";
 import projectService from "./services/projects";
 import diditService from "./services/didits";
@@ -499,12 +500,11 @@ function App() {
             />
           ) : (
             user && (
-              <button
+              <Button
                 onClick={() => showCreateProjectForm()}
                 className="btn mt-10 "
-              >
-                Add Project
-              </button>
+                text="Add Project"
+              />
             )
           )}
         </Menu>
@@ -526,9 +526,11 @@ function App() {
         />
       ) : (
         user && (
-          <button onClick={() => showCreateTaskForm()} className="btn mt-10 ">
-            Add Task
-          </button>
+          <Button
+            onClick={() => showCreateTaskForm()}
+            className="btn mt-10 "
+            text="Add Task"
+          />
         )
       )}
       {/* {diditElements} */}
