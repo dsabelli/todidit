@@ -1,14 +1,9 @@
 import Button from "./Button";
 import Input from "./Input";
 
-const CreateProjectForm = ({
-  onProjectCreation,
-  title,
-  onTitleChange,
-  cancel,
-}) => {
+const ProjectForm = ({ onSubmit, value, onChange, onClick }) => {
   return (
-    <form onSubmit={(e) => onProjectCreation(e)}>
+    <form onSubmit={onSubmit}>
       <div>
         <label htmlFor="Title"></label>
         <Input
@@ -16,20 +11,20 @@ const CreateProjectForm = ({
           placeholder="e.g., style this project better"
           id="Title"
           type="text"
-          value={title}
+          value={value}
           name="Title"
-          onChange={({ target }) => onTitleChange(target.value)}
+          onChange={onChange}
           className="input input-ghost w-full max-w-xs"
         />
       </div>
       <Button
-        className={title ? "btn" : "btn btn-disabled opacity-50"}
+        className={value ? "btn" : "btn btn-disabled opacity-50"}
         type="submit"
         text={"add"}
       />
-      <Button onClick={cancel} text={"cancel"} />
+      <Button onClick={onClick} text={"cancel"} />
     </form>
   );
 };
 
-export default CreateProjectForm;
+export default ProjectForm;

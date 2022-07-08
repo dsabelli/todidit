@@ -1,5 +1,5 @@
 import { useState } from "react";
-import UpdateProjectForm from "./UpdateProjectForm";
+import ProjectForm from "./ProjectForm";
 import Button from "./Button";
 
 const Menu = ({
@@ -46,11 +46,11 @@ const Menu = ({
           </a>
         </li>
       ) : (
-        <UpdateProjectForm
-          onProjectUpdate={onProjectUpdate}
-          onTitleChange={onTitleChange}
-          cancel={cancel}
-          title={title}
+        <ProjectForm
+          onSubmit={(e) => onProjectUpdate(e, project.id)}
+          onChange={(e) => onTitleChange(e.target.value)}
+          onClick={cancel}
+          value={title}
           id={project.id}
           key={project.id}
         />

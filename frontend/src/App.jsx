@@ -3,9 +3,8 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Task from "./components/Task";
 import Didit from "./components/Didit";
-import CreateTaskForm from "./components/CreateTaskForm";
-import UpdateTaskForm from "./components/UpdateTaskForm";
-import CreateProjectForm from "./components/CreateProjectForm";
+import TaskForm from "./components/TaskForm";
+import ProjectForm from "./components/ProjectForm";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import Button from "./components/Button";
@@ -341,20 +340,21 @@ function App() {
   //map out tasks into Task Components and on edit switch out for Task Form
   const taskElements = tasks.map((task) =>
     task.isEditing ? (
-      <UpdateTaskForm
+      <TaskForm
         key={task.id}
         id={task.id}
-        title={taskTitle}
-        description={taskDescription || task.description}
+        titleValue={taskTitle}
+        descriptionValue={taskDescription || task.description}
         dueDate={taskDueDate}
-        onTaskUpdate={handleUpdateTask}
-        onTitleChange={setTaskTitle}
-        onDescriptionChange={setTaskDescription}
+        onSubmit={(e) => handleUpdateTask(e, task.id)}
+        onTitleChange={(e) => setTaskTitle(e.target.value)}
+        onDescriptionChange={(e) => setTaskDescription(e.target.value)}
         onDueDate={setTaskDueDate}
-        cancel={hideUpdateTaskForm}
+        onClick={hideUpdateTaskForm}
         projects={projects}
         projectId={projectId}
         onProjectId={setProjectId}
+        submitText="save"
       />
     ) : (
       <Task
@@ -492,11 +492,11 @@ function App() {
           onDelete={handleDeleteProject}
         >
           {addProject ? (
-            <CreateProjectForm
-              onProjectCreation={handleCreateProject}
-              title={projectTitle}
-              onTitleChange={setProjectTitle}
-              cancel={hideCreateProjectForm}
+            <ProjectForm
+              onSubmit={(e) => handleCreateProject(e)}
+              value={projectTitle}
+              onChange={(e) => setProjectTitle(e.target.value)}
+              onClick={hideCreateProjectForm}
             />
           ) : (
             user && (
@@ -511,18 +511,19 @@ function App() {
       )}
       {user && taskElements}
       {user && addTask ? (
-        <CreateTaskForm
-          onTaskCreation={handleCreateTask}
-          title={taskTitle}
-          description={taskDescription}
+        <TaskForm
+          onSubmit={(e) => handleCreateTask(e)}
+          titleValue={taskTitle}
+          descriptionValue={taskDescription}
           dueDate={taskDueDate}
-          onTitleChange={setTaskTitle}
-          onDescriptionChange={setTaskDescription}
+          onTitleChange={(e) => setTaskTitle(e.target.value)}
+          onDescriptionChange={(e) => setTaskDescription(e.target.value)}
           onDueDate={setTaskDueDate}
-          cancel={hideCreateTaskForm}
+          onClick={hideCreateTaskForm}
           projects={projects}
           projectId={projectId}
           onProjectId={setProjectId}
+          submitText="add"
         />
       ) : (
         user && (
