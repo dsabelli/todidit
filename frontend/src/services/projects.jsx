@@ -18,7 +18,6 @@ const createProjects = async (project, user) => {
 };
 
 const updateProjects = async (project, user) => {
-  console.log(project.id);
   const config = {
     headers: { Authorization: `bearer ${user.token}` },
   };
