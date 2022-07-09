@@ -3,7 +3,7 @@ import registrationService from "../services/register";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "./UI/ErrorMessage";
 import Button from "./UI/Button";
 
 const schema = yup.object().shape({

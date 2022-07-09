@@ -1,7 +1,7 @@
 import { useState } from "react";
 import loginService from "../services/login";
 import taskService from "../services/tasks";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "./UI/ErrorMessage";
 import { useForm } from "react-hook-form";
 import Button from "./UI/Button";
 

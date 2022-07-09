@@ -1,4 +1,4 @@
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "./UI/ErrorMessage";
 
 const ErrorFallback = ({ error }) => {
   return (

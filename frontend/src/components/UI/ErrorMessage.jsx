@@ -1,4 +1,4 @@
-import ErrorSvg from "./svg/ErrorSvg";
+import ErrorSvg from "../svg/ErrorSvg";
 
 const ErrorMessage = ({ errorMessage }) => {
   return (
