@@ -541,6 +541,7 @@ function App() {
           onDueDate={setTaskDueDate}
           onClick={hideCreateTaskForm}
           projects={projects}
+          projectTitle={projectTitle}
           projectId={projectId}
           onProjectId={setProjectId}
           submitText="add"

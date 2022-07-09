@@ -75,7 +75,9 @@ const TaskForm = ({
       </div>
       <Button
         className={
-          titleValue && projectTitle ? "btn" : "btn btn-disabled opacity-50"
+          (titleValue && projectTitle) || (titleValue && projectId)
+            ? "btn"
+            : "btn btn-disabled opacity-50"
         }
         type="submit"
         text={submitText}
