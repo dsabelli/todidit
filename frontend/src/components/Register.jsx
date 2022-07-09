@@ -3,7 +3,7 @@ import registrationService from "../services/register";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import FormError from "./FormError";
+import ErrorMessage from "./ErrorMessage";
 import Button from "./UI/Button";
 
 const schema = yup.object().shape({
@@ -102,9 +102,9 @@ const Register = ({ handleNewUser }) => {
                   className="input input-bordered"
                 />
                 {errors.email && (
-                  <FormError errorMessage={errors.email?.message} />
+                  <ErrorMessage errorMessage={errors.email?.message} />
                 )}
-                {asyncError && <FormError errorMessage={asyncError} />}
+                {asyncError && <ErrorMessage errorMessage={asyncError} />}
               </div>
               <div className="form-control">
                 <label htmlFor="username" className="label">
@@ -119,7 +119,7 @@ const Register = ({ handleNewUser }) => {
                   className="input input-bordered"
                 />
                 {errors.username && (
-                  <FormError errorMessage={errors.username?.message} />
+                  <ErrorMessage errorMessage={errors.username?.message} />
                 )}
               </div>
               <div className="form-control">
@@ -134,7 +134,7 @@ const Register = ({ handleNewUser }) => {
                   className="input input-bordered"
                 />
                 {errors.password && (
-                  <FormError errorMessage={errors.password?.message} />
+                  <ErrorMessage errorMessage={errors.password?.message} />
                 )}
               </div>
               <div className="form-control">
@@ -149,7 +149,9 @@ const Register = ({ handleNewUser }) => {
                   className="input input-bordered"
                 />
                 {errors.confirmPassword && (
-                  <FormError errorMessage={errors.confirmPassword?.message} />
+                  <ErrorMessage
+                    errorMessage={errors.confirmPassword?.message}
+                  />
                 )}
               </div>
               <div className="form-control mt-6">

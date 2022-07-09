@@ -14,7 +14,6 @@ const alert = (title) => {
 };
 
 const success = (title) => {
-  console.log(title);
   return Swal.fire("Deleted!", `Project ${title} has been deleted.`, "success");
 };
 

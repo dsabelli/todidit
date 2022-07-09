@@ -1,6 +1,6 @@
 import ErrorSvg from "./svg/ErrorSvg";
 
-const FormError = ({ errorMessage }) => {
+const ErrorMessage = ({ errorMessage }) => {
   return (
     <div className="alert alert-error shadow-lg">
       <div>
@@ -11,4 +11,4 @@ const FormError = ({ errorMessage }) => {
   );
 };
 
-export default FormError;
+export default ErrorMessage;

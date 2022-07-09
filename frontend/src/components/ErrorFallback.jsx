@@ -1,8 +1,10 @@
+import ErrorMessage from "./ErrorMessage";
+
 const ErrorFallback = ({ error }) => {
   return (
     <div role="alert">
       <p>Something went wrong:</p>
-      <pre>{error.message}</pre>
+      <ErrorMessage errorMessage={error.message} />
     </div>
   );
 };
