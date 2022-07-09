@@ -8,11 +8,12 @@ import ProjectForm from "./components/ProjectForm";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import Button from "./components/UI/Button";
+import ErrorMessage from "./components/UI/ErrorMessage";
 import taskService from "./services/tasks";
 import projectService from "./services/projects";
 import diditService from "./services/didits";
+import alertService from "./services/alerts";
 
-import Swal from "sweetalert2";
 import "./App.css";
 
 function App() {
@@ -294,15 +295,7 @@ function App() {
   const handleDeleteProject = async (e, id) => {
     e.stopPropagation();
     const deletedProject = projects.filter((project) => project.id === id)[0];
-    const alert = await Swal.fire({
-      title: "Are you sure you want to delete?",
-      text: `Project ${deletedProject.title}`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    });
+    const alert = await alertService.alert(deletedProject.title);
     if (alert.isConfirmed) {
       try {
         const deletedTasks = tasks.filter((task) => task.project === id);
@@ -323,17 +316,14 @@ function App() {
         setTasks((prevTasks) =>
           prevTasks.filter((task) => task.project !== id)
         );
+
+        alertService.success(deletedProject.title);
       } catch (error) {
         setSystemMessage("System encountered an error");
         setTimeout(() => {
           setSystemMessage(null);
         }, 3000);
       }
-      await Swal.fire(
-        "Deleted!",
-        `Project ${deletedProject.title} has been deleted.`,
-        "success"
-      );
     }
   };
 
@@ -477,7 +467,7 @@ function App() {
         onDiditDateStart={setDiditDateStart}
         onDiditDateEnd={setDiditDateEnd}
       />
-      <h2 className="bg-red-700 my-5"> {systemMessage}</h2>
+      {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
       {newUser && <Register handleNewUser={handleNewUser} />}
       {!user && <Login onUser={setUser} />}
       {user && (
@@ -487,6 +477,7 @@ function App() {
           title={projectTitle}
           onTitleChange={setProjectTitle}
           onProjectUpdate={handleUpdateProject}
+          onProjectId={setProjectId}
           onUpdate={showUpdateProjectForm}
           cancel={hideUpdateProjectForm}
           onDelete={handleDeleteProject}

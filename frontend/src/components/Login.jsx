@@ -1,7 +1,7 @@
 import { useState } from "react";
 import loginService from "../services/login";
 import taskService from "../services/tasks";
-import FormError from "./FormError";
+import ErrorMessage from "./UI/ErrorMessage";
 import { useForm } from "react-hook-form";
 import Button from "./UI/Button";
 
@@ -46,7 +46,7 @@ const Login = ({ onUser }) => {
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div className="card-body">
               <div className="form-control">
-                {asyncError && <FormError errorMessage={asyncError} />}
+                {asyncError && <ErrorMessage errorMessage={asyncError} />}
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
