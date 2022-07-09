@@ -8,12 +8,12 @@ import ProjectForm from "./components/ProjectForm";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import Button from "./components/UI/Button";
+import ErrorMessage from "./components/UI/ErrorMessage";
 import taskService from "./services/tasks";
 import projectService from "./services/projects";
 import diditService from "./services/didits";
 import alertService from "./services/alerts";
 
-import Swal from "sweetalert2";
 import "./App.css";
 
 function App() {
@@ -467,7 +467,7 @@ function App() {
         onDiditDateStart={setDiditDateStart}
         onDiditDateEnd={setDiditDateEnd}
       />
-      <h2 className="bg-red-700 my-5"> {systemMessage}</h2>
+      {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
       {newUser && <Register handleNewUser={handleNewUser} />}
       {!user && <Login onUser={setUser} />}
       {user && (
