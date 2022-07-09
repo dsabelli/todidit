@@ -34,12 +34,13 @@ function App() {
   const [projectId, setProjectId] = useState("");
   const [systemMessage, setSystemMessage] = useState("");
 
+  //shows or hides the register form
   //look for a better solution to this
   const handleNewUser = () => {
     setNewUser((prevVal) => !prevVal);
   };
 
-  //button to show create task form
+  //function to show create task form
   const showCreateTaskForm = () => {
     setTaskTitle("");
     setTaskDescription("");
@@ -49,6 +50,7 @@ function App() {
     );
   };
 
+  //function to show create project form
   const showCreateProjectForm = () => {
     setProjectTitle("");
     setAddProject((prevVal) => !prevVal);
@@ -57,7 +59,7 @@ function App() {
     );
   };
 
-  //button to hide create task form
+  //function to hide create task form
   const hideCreateTaskForm = (e) => {
     e.preventDefault();
     setAddTask((prevVal) => !prevVal);
@@ -66,13 +68,15 @@ function App() {
     setTaskDueDate(new Date());
   };
 
+  //function to hide create project form
   const hideCreateProjectForm = (e) => {
     e.preventDefault();
     setAddProject((prevVal) => !prevVal);
     setProjectTitle("");
   };
 
-  //function to create tasks
+  //function to create tasks from submission of form event
+  //posts to db with helper function and adds new task to UI
   const handleCreateTask = async (e) => {
     try {
       e.preventDefault();
@@ -99,6 +103,8 @@ function App() {
     }
   };
 
+  //function to create projects from submission of form event
+  //posts to db with helper function and adds new task to UI
   const handleCreateProject = async (e) => {
     try {
       e.preventDefault();
@@ -120,8 +126,11 @@ function App() {
     }
   };
 
-  //button to show task form for editing task
+  //function to show task form for editing task inline, populates fields with current data
+  //hides the current task being edited
   const showUpdateTaskForm = (id) => {
+    const projectId = tasks.filter((task) => task.id === id)[0].project;
+    setProjectTitle(projects.filter((task) => task.id === projectId)[0].title);
     setAddTask(false);
     setTaskTitle(tasks.filter((task) => task.id === id)[0].title);
     setTaskDescription(tasks.filter((task) => task.id === id)[0].description);
@@ -134,17 +143,8 @@ function App() {
     );
   };
 
-  //button to hide task form for editing task
-  const hideUpdateTaskForm = () => {
-    setTaskTitle("");
-    setTaskDescription("");
-    setTaskDueDate(new Date());
-    setTasks((prevTasks) =>
-      prevTasks.map((task) => ({ ...task, isEditing: false }))
-    );
-  };
-
-  //button to show task form for editing task
+  //function to show task form for editing task inline, populates fields with current data
+  //hides the current task being edited
   const showUpdateProjectForm = (e, id) => {
     e.stopPropagation();
     setAddProject(false);
@@ -159,7 +159,20 @@ function App() {
     );
   };
 
-  //button to hide task form for editing task
+  //function to hide task form for editing task
+  //resets form fields on cancel
+  const hideUpdateTaskForm = () => {
+    setTaskTitle("");
+    setTaskDescription("");
+    setTaskDueDate(new Date());
+    setProjectTitle("");
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => ({ ...task, isEditing: false }))
+    );
+  };
+
+  //function to hide task form for editing project
+  //resets form fields on cancel
   const hideUpdateProjectForm = () => {
     setProjectTitle("");
     setProjects((prevProjects) =>
@@ -167,7 +180,8 @@ function App() {
     );
   };
 
-  //function to update tasks
+  //function to update tasks from submission of form event
+  //puts to db with helper function and updates task in UI
   const handleUpdateTask = async (e, id) => {
     try {
       e.preventDefault();
@@ -208,6 +222,7 @@ function App() {
   };
 
   //function to update if a task has been completed
+  //sets completedOn date and updates UI to show strikethrough task
   const handleUpdateCheck = async (id) => {
     try {
       const currentDate = new Date();
@@ -233,7 +248,8 @@ function App() {
     }
   };
 
-  //function to update tasks
+  //function to update project from submission of form event
+  //puts to db with helper function and updates task in UI
   const handleUpdateProject = async (e, id) => {
     try {
       e.preventDefault();
@@ -270,7 +286,9 @@ function App() {
     }
   };
 
-  //function to handle deleting a task and posting to didits
+  //function to delete tasks from submission of form event
+  //deletes to db with helper function and updates task in UI
+  //before deleting, a didit is created from task object and posted with helper
   const handleDeleteTask = async (id) => {
     try {
       const deletedTask = tasks.filter((task) => task.id === id)[0];
@@ -291,6 +309,12 @@ function App() {
       }, 3000);
     }
   };
+
+  //function to delete projects from submission of form event
+  //alerts user and requires confirmation on project delete
+  //deletes to db with helper function and updates projects in UI
+  //deletes all tasks with helper function and updates task in UI
+  //before deleting, a didit is created from each task object and posted with helper
 
   const handleDeleteProject = async (e, id) => {
     e.stopPropagation();
@@ -342,6 +366,7 @@ function App() {
         onDueDate={setTaskDueDate}
         onClick={hideUpdateTaskForm}
         projects={projects}
+        projectTitle={projectTitle}
         projectId={projectId}
         onProjectId={setProjectId}
         submitText="save"
@@ -391,11 +416,13 @@ function App() {
     />
   ));
 
+  //Logs user out of current session
   const handleLogout = () => {
     window.localStorage.clear();
   };
 
   //Checks if a user's token is stored in local storage
+  //If it is, re-login is not required and token is parsed and set for use
   useEffect(() => {
     const loggedIn = window.localStorage.getItem("loggedIn");
     if (loggedIn) {
@@ -405,6 +432,7 @@ function App() {
     }
   }, []);
 
+  //get's a user's projects.
   useEffect(() => {
     try {
       const getProjects = async () => {

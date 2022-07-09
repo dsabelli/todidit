@@ -12,6 +12,7 @@ const TaskForm = ({
   dueDate,
   onDueDate,
   projects,
+  projectTitle,
   projectId,
   onProjectId,
   onClick,
@@ -62,7 +63,7 @@ const TaskForm = ({
       <div>
         <div className="dropdown dropdown-hover">
           <label tabIndex="0" className="btn m-1">
-            {selectedProject || "Click"}
+            {selectedProject || projectTitle || "Select"}
           </label>
           <ul
             tabIndex="0"
@@ -74,7 +75,7 @@ const TaskForm = ({
       </div>
       <Button
         className={
-          titleValue && projectId ? "btn" : "btn btn-disabled opacity-50"
+          titleValue && projectTitle ? "btn" : "btn btn-disabled opacity-50"
         }
         type="submit"
         text={submitText}
