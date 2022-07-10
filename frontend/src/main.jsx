@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./components/UI/ErrorFallback";
@@ -11,7 +12,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       FallbackComponent={ErrorFallback}
       onError={(error, errorInfo) => console.log({ error, errorInfo })}
     >
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ErrorBoundary>
   </React.StrictMode>
 );
