@@ -360,25 +360,19 @@ function App() {
         />
       )}
       <Outlet />
-      {user && addTask ? (
-        <CreateTask
-          onAddTask={setAddTask}
-          onTasks={setTasks}
-          onSystemMessage={setSystemMessage}
-          projects={projects}
-          projectTitle={projectTitle}
-          projectId={projectId}
-          onProjectId={setProjectId}
-        />
-      ) : (
-        user && (
-          <Button
-            onClick={() => showCreateTaskForm()}
-            className="btn mt-10 "
-            text="Add Task"
-          />
-        )
-      )}
+
+      <CreateTask
+        user={user}
+        addTask={addTask}
+        onAddTask={setAddTask}
+        onTasks={setTasks}
+        onSystemMessage={setSystemMessage}
+        projects={projects}
+        projectTitle={projectTitle}
+        projectId={projectId}
+        onProjectId={setProjectId}
+      />
+
       {/* {diditElements} */}
     </div>
   );

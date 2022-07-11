@@ -1,13 +1,16 @@
 import { useState } from "react";
 import taskService from "../../services/tasks";
 import TaskForm from "./TaskForm";
+import Button from "../UI/Button";
 
 const CreateTask = ({
+  user,
   projects,
   projectTitle,
   projectId,
   onProjectId,
   onTasks,
+  addTask,
   onAddTask,
   onSystemMessage,
 }) => {
@@ -63,22 +66,31 @@ const CreateTask = ({
 
   return (
     <>
-      {" "}
-      <TaskForm
-        onSubmit={(e) => handleCreateTask(e)}
-        titleValue={taskTitle}
-        descriptionValue={taskDescription}
-        dueDate={taskDueDate}
-        onTitleChange={(e) => setTaskTitle(e.target.value)}
-        onDescriptionChange={(e) => setTaskDescription(e.target.value)}
-        onDueDate={setTaskDueDate}
-        onClick={hideCreateTaskForm}
-        projects={projects}
-        projectTitle={projectTitle}
-        projectId={projectId}
-        onProjectId={onProjectId}
-        submitText="add"
-      />
+      {user && addTask ? (
+        <TaskForm
+          onSubmit={(e) => handleCreateTask(e)}
+          titleValue={taskTitle}
+          descriptionValue={taskDescription}
+          dueDate={taskDueDate}
+          onTitleChange={(e) => setTaskTitle(e.target.value)}
+          onDescriptionChange={(e) => setTaskDescription(e.target.value)}
+          onDueDate={setTaskDueDate}
+          onClick={hideCreateTaskForm}
+          projects={projects}
+          projectTitle={projectTitle}
+          projectId={projectId}
+          onProjectId={onProjectId}
+          submitText="add"
+        />
+      ) : (
+        user && (
+          <Button
+            onClick={() => showCreateTaskForm()}
+            className="btn mt-10 "
+            text="Add Task"
+          />
+        )
+      )}
     </>
   );
 };
