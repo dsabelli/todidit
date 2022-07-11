@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import Register from "./components/Register";
-import Login from "./components/Login";
+import { useNavigate, Outlet } from "react-router-dom";
+import { isToday, parseJSON } from "date-fns";
+import Register from "./routes/Register";
+import Login from "./routes/Login";
 import Task from "./components/Task";
 import Didit from "./components/Didit";
 import TaskForm from "./components/TaskForm";
@@ -80,7 +82,7 @@ function App() {
   const handleCreateTask = async (e) => {
     try {
       e.preventDefault();
-
+      console.log(taskDueDate);
       const newTask = await taskService.createTasks({
         title: taskTitle,
         description: taskDescription,
@@ -529,7 +531,30 @@ function App() {
           )}
         </Menu>
       )}
+      <Button
+        text="Today"
+        onClick={() => {
+          setTasks((prevTasks) =>
+            prevTasks.filter((task) => isToday(parseJSON(task.dueDate)))
+          );
+          // navigate("/today");
+        }}
+      />
+
+      <Button
+        text="All"
+        onClick={() => {
+          const getTasks = async () => {
+            const response = await taskService.getTasks(user || "");
+            setTasks(response);
+          };
+          getTasks();
+          // navigate("/all");
+        }}
+      />
       {user && taskElements}
+
+      <Outlet />
       {user && addTask ? (
         <TaskForm
           onSubmit={(e) => handleCreateTask(e)}

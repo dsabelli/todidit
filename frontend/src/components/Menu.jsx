@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ProjectForm from "./ProjectForm";
 import Button from "./UI/Button";
 import DeleteSvg from "./svg/DeleteSvg";
@@ -14,6 +15,7 @@ const Menu = ({
   title,
   children,
 }) => {
+  let navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState("");
   const projectElements = projects.map((project) =>
     !project.isArchived ? (
@@ -48,8 +50,6 @@ const Menu = ({
   );
   return (
     <ul className="menu bg-base-100 w-56">
-      <Button text="Today" />
-      <Button text="All" />
       <div className="collapse">
         <input type="checkbox" />
         <div className="collapse-title text-xl font-medium">Projects</div>
