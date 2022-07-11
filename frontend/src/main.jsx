@@ -23,7 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           {/* <Route path="/" element={<Landing />}></Route>
           <Route exact path="/register" element={<Register />}></Route>
           <Route exact path="login" element={<Login />}></Route> */}
-          <Route path="/app" element={<App />}>
+          <Route path="/" element={<App />}>
             <Route path="all" element={<All />} />
           </Route>
         </Routes>

@@ -54,7 +54,7 @@ const Task = ({
             checked ? "" : "btn-disabled opacity-50"
           }`}
           onClick={() => {
-            onDelete(id);
+            onDelete();
           }}
           text={<DeleteSvg />}
         />
