@@ -16,7 +16,7 @@ router.post("/", async (request, response) => {
 
   const user = request.user;
   const projects = request.projects;
-  console.log(request.projects);
+  console.log(request.body);
   const task = new Task({
     ...request.body,
     user: user.id,

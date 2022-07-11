@@ -1,7 +1,7 @@
 import { useState } from "react";
-import DueDate from "./DueDate";
-import Button from "./UI/Button";
-import Input from "./UI/Input";
+import DueDate from "../DueDate";
+import Button from "../UI/Button";
+import Input from "../UI/Input";
 
 const TaskForm = ({
   onSubmit,
@@ -25,9 +25,7 @@ const TaskForm = ({
       <li key={project.id} onClick={() => setSelectedProject(project.title)}>
         <a onClick={() => onProjectId(project.id)}>{project.title}</a>
       </li>
-    ) : (
-      ""
-    )
+    ) : null
   );
 
   return (

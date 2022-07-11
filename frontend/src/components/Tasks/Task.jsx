@@ -1,7 +1,7 @@
 import { format, parseJSON } from "date-fns";
-import Button from "./UI/Button";
-import Checkbox from "./UI/Checkbox";
-import DeleteSvg from "./svg/DeleteSvg";
+import Button from "../UI/Button";
+import Checkbox from "../UI/Checkbox";
+import DeleteSvg from "../svg/DeleteSvg";
 
 const Task = ({
   dueDate,
@@ -54,7 +54,7 @@ const Task = ({
             checked ? "" : "btn-disabled opacity-50"
           }`}
           onClick={() => {
-            onDelete(id);
+            onDelete();
           }}
           text={<DeleteSvg />}
         />
