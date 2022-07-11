@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import App from "./App";
-import All from "./routes/All";
-import Landing from "./routes/Landing";
-import Register from "./routes/Register";
-import Login from "./routes/Login";
+
+import Landing from "./pages/Landing";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./components/UI/ErrorFallback";
@@ -23,9 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           {/* <Route path="/" element={<Landing />}></Route>
           <Route exact path="/register" element={<Register />}></Route>
           <Route exact path="login" element={<Login />}></Route> */}
-          <Route path="/" element={<App />}>
-            <Route path="all" element={<All />} />
-          </Route>
+          <Route path="/" element={<App />}></Route>
         </Routes>
       </BrowserRouter>
     </ErrorBoundary>

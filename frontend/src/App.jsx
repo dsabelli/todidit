@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import { isToday, parseJSON } from "date-fns";
-import Register from "./routes/Register";
-import Login from "./routes/Login";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 import Didit from "./components/Didit";
-import ProjectForm from "./components/Projects/ProjectForm";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import Button from "./components/UI/Button";
@@ -12,14 +11,15 @@ import ErrorMessage from "./components/UI/ErrorMessage";
 import taskService from "./services/tasks";
 import projectService from "./services/projects";
 import diditService from "./services/didits";
-import alertService from "./services/alerts";
 import CreateTask from "./components/Tasks/CreateTask";
 import ReadAndUpdateTasks from "./components/Tasks/ReadAndUpdateTasks";
-import "./App.css";
 import CreateProject from "./components/Projects/CreateProject";
 import ReadAndUpdateProjects from "./components/Projects/ReadAndUpdateProjects";
 
+import "./App.css";
+
 function App() {
+  let navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [allTasks, setAllTasks] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -183,10 +183,10 @@ function App() {
       <Button
         text="Today"
         onClick={() => {
-          setTasks((prevTasks) =>
-            prevTasks.filter((task) => isToday(parseJSON(task.dueDate)))
-          );
-          // navigate("/today");
+          // setTasks((prevTasks) =>
+          //   prevTasks.filter((task) => isToday(parseJSON(task.dueDate)))
+          // );
+          navigate("/today", { state: tasks });
         }}
       />
       {/* {//Sets back all tasks (TEMPORARRY FUNCTION!!)} */}
