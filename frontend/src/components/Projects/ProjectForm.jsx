@@ -1,5 +1,5 @@
-import Button from "./UI/Button";
-import Input from "./UI/Input";
+import Button from "../UI/Button";
+import Input from "../UI/Input";
 
 const ProjectForm = ({ onSubmit, value, onChange, onClick, submitText }) => {
   return (

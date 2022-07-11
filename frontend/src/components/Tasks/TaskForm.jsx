@@ -25,9 +25,7 @@ const TaskForm = ({
       <li key={project.id} onClick={() => setSelectedProject(project.title)}>
         <a onClick={() => onProjectId(project.id)}>{project.title}</a>
       </li>
-    ) : (
-      ""
-    )
+    ) : null
   );
 
   return (
