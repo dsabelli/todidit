@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
-import Task from "../components/Task";
-import TaskForm from "../components/TaskForm";
+import Task from "../components/Tasks/Task";
+import TaskForm from "../components/Tasks/TaskForm";
 
 const All = ({}) => {
   let location = useLocation();

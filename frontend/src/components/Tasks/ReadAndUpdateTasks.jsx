@@ -1,8 +1,8 @@
 import { useState } from "react";
 import taskService from "../../services/tasks";
 import diditService from "../../services/didits";
-import TaskForm from "../TaskForm";
-import Task from "../Task";
+import TaskForm from "./TaskForm";
+import Task from "./Task";
 import handleDeleteTask from "./DeleteTask";
 
 const ReadAndUpdateTasks = ({

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import taskService from "../../services/tasks";
-import TaskForm from "../TaskForm";
+import TaskForm from "./TaskForm";
 
 const CreateTask = ({
   projects,

@@ -1,5 +1,5 @@
-import Task from "../components/Task";
-import TaskForm from "../components/TaskForm";
+import Task from "../components/Tasks/Task";
+import TaskForm from "../components/Tasks/TaskForm";
 
 const Today = ({ tasks }) => {
   const taskElements = tasks.map((task) =>
