@@ -1,7 +1,11 @@
+import { useLocation } from "react-router-dom";
 import Task from "../components/Task";
 import TaskForm from "../components/TaskForm";
 
-const Today = ({ tasks }) => {
+const All = ({}) => {
+  let location = useLocation();
+  let tasks = location.state;
+  console.log(location);
   const taskElements = tasks.map((task) =>
     task.isEditing ? (
       <TaskForm
@@ -38,4 +42,4 @@ const Today = ({ tasks }) => {
   return { taskElements };
 };
 
-export default Today;
+export default All;

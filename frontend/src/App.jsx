@@ -19,7 +19,9 @@ import alertService from "./services/alerts";
 import "./App.css";
 
 function App() {
+  let navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
+  const [allTasks, setAllTasks] = useState([]);
   const [projects, setProjects] = useState([]);
   const [didits, setDidits] = useState([]);
   const [diditTitle, setDiditTitle] = useState("");
@@ -82,7 +84,6 @@ function App() {
   const handleCreateTask = async (e) => {
     try {
       e.preventDefault();
-      console.log(taskDueDate);
       const newTask = await taskService.createTasks({
         title: taskTitle,
         description: taskDescription,
@@ -453,9 +454,11 @@ function App() {
   //Get a user's tasks. Look into setting a timeout and "loading" screen
   useEffect(() => {
     try {
+      console.log("rendereddskfbgldskgldksr");
       const getTasks = async () => {
-        const response = await taskService.getTasks(user || "");
+        const response = await taskService.getTasks(user);
         setTasks(response);
+        setAllTasks(response);
       };
       getTasks();
     } catch (error) {
@@ -531,6 +534,7 @@ function App() {
           )}
         </Menu>
       )}
+      {/* {//filter and display tasks due today (TEMPORARY FUNCTION!!!!)} */}
       <Button
         text="Today"
         onClick={() => {
@@ -540,20 +544,15 @@ function App() {
           // navigate("/today");
         }}
       />
-
+      {/* {//Sets back all tasks (TEMPORARRY FUNCTION!!)} */}
       <Button
         text="All"
         onClick={() => {
-          const getTasks = async () => {
-            const response = await taskService.getTasks(user || "");
-            setTasks(response);
-          };
-          getTasks();
-          // navigate("/all");
+          // setTasks(allTasks);
+          // navigate("/app/all");
         }}
       />
       {user && taskElements}
-
       <Outlet />
       {user && addTask ? (
         <TaskForm
