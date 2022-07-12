@@ -1,4 +1,4 @@
-import Didit from "./Didit";
+import Didit from "./Didits/Didit";
 import DateRange from "./UI/DateRange";
 import Button from "./UI/Button";
 import Input from "./UI/Input";

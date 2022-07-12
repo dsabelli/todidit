@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Outlet } from "react-router-dom";
 import { isToday, parseJSON } from "date-fns";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
-import Didit from "./components/Didit";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import Button from "./components/UI/Button";
@@ -19,7 +17,7 @@ import ReadAndUpdateProjects from "./components/Projects/ReadAndUpdateProjects";
 import "./App.css";
 
 function App() {
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [allTasks, setAllTasks] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -61,18 +59,9 @@ function App() {
     }
   };
 
-  const diditElements = didits.map((didit) => (
-    <Didit
-      title={didit.title}
-      description={didit.description}
-      date={didit.date}
-      key={didit.id}
-      id={didit.id}
-    />
-  ));
-
   //Logs user out of current session
   const handleLogout = () => {
+    // navigate("/");
     window.localStorage.clear();
   };
 
@@ -120,24 +109,6 @@ function App() {
     }
   }, [user]);
 
-  //get a user's didits
-  // useEffect(() => {
-  //   try {
-  //     const getDidits = async () => {
-  //       const response = await diditService.getDidits(user || "");
-  //       setDidits(response);
-  //     };
-  //     setTimeout(() => {
-  //       getDidits();
-  //     }, 1000);
-  //   } catch (error) {
-  //     setSystemMessage("System encountered an error");
-  //     setTimeout(() => {
-  //       setSystemMessage(null);
-  //     }, 3000);
-  //   }
-  // }, [user]);
-
   return (
     <div className="App">
       <Navbar
@@ -153,7 +124,7 @@ function App() {
       />
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
       {newUser && <Register handleNewUser={handleNewUser} />}
-      {!user && <Login onUser={setUser} />}
+      {!user && !newUser && <Login onUser={setUser} />}
       {user && (
         <Menu>
           <ReadAndUpdateProjects
@@ -180,23 +151,25 @@ function App() {
         </Menu>
       )}
       {/* {//filter and display tasks due today (TEMPORARY FUNCTION!!!!)} */}
-      <Button
-        text="Today"
-        onClick={() => {
-          // setTasks((prevTasks) =>
-          //   prevTasks.filter((task) => isToday(parseJSON(task.dueDate)))
-          // );
-          navigate("/today", { state: tasks });
-        }}
-      />
+      {user && (
+        <Button
+          text="Today"
+          onClick={() => {
+            setTasks((prevTasks) =>
+              prevTasks.filter((task) => isToday(parseJSON(task.dueDate)))
+            );
+          }}
+        />
+      )}
       {/* {//Sets back all tasks (TEMPORARRY FUNCTION!!)} */}
-      <Button
-        text="All"
-        onClick={() => {
-          setTasks(allTasks);
-          // navigate("/all");
-        }}
-      />
+      {user && (
+        <Button
+          text="All"
+          onClick={() => {
+            setTasks(allTasks);
+          }}
+        />
+      )}
       {user && (
         <ReadAndUpdateTasks
           user={user}
@@ -212,7 +185,6 @@ function App() {
           onProjectId={setProjectId}
         />
       )}
-      <Outlet />
 
       <CreateTask
         user={user}
