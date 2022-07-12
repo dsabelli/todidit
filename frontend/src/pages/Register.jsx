@@ -45,18 +45,6 @@ const Register = ({ handleNewUser }) => {
   const onSubmit = ({ username, email, password, confirmPassword }) =>
     handleRegistration({ username, email, password, confirmPassword });
 
-  // const checkEmail = async ({ email }) => {
-  //   try {
-  //     await registrationService.checkEmail({ email });
-  //   } catch (error) {
-  //     console.log(error.response.data.error);
-  //     setSystemMessage("System encountered an error");
-  //     setTimeout(() => {
-  //       setSystemMessage(null);
-  //     }, 3000);
-  //   }
-  // };
-
   const handleRegistration = async ({
     email,
     username,
@@ -73,7 +61,7 @@ const Register = ({ handleNewUser }) => {
       setAsyncError("");
       handleNewUser();
     } catch (error) {
-      const errorMsg = error.response.data.error;
+      const errorMsg = error;
       setAsyncError(errorMsg);
       setTimeout(() => {
         setAsyncError(null);
