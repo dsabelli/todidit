@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Didit from "./Didit";
-import DateRange from "../UI/DateRange";
+import DateRange from "./DateRange";
 import Input from "../UI/Input";
 import diditService from "../../services/didits";
 import { debounce } from "lodash";
