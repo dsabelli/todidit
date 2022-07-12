@@ -4,7 +4,6 @@ const router = require("express").Router();
 const User = require("../models/user");
 
 router.get("/", async (request, response) => {
-  console.log(request.query);
   const existingEmail = await User.findOne({ email: request.query.email });
   if (existingEmail) {
     return response.status(400).json({
