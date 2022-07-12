@@ -92,11 +92,7 @@ function App() {
         onLogout={handleLogout}
         newUser={newUser}
         onNewUser={handleNewUser}
-        diditTitle={diditTitle}
-        onDiditTitleChange={setDiditTitle}
-        onDiditSearch={getDidits}
-        onDiditDateStart={setDiditDateStart}
-        onDiditDateEnd={setDiditDateEnd}
+        projects={projects}
       />
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
       {newUser && <Register handleNewUser={handleNewUser} />}

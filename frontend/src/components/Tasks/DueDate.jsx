@@ -2,7 +2,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
-import Button from "./UI/Button";
+import Button from "../UI/Button";
 
 const DueDate = ({ dueDate, onDueDate }) => {
   const [isOpen, setIsOpen] = useState(false);
