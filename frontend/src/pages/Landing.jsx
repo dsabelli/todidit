@@ -1,8 +1,8 @@
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/UI/Button";
 import Hero from "../components/UI/Hero";
 const Landing = () => {
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
   return (
     <div>
       <nav className="navbar bg-base-100 flex px-4">
@@ -13,7 +13,7 @@ const Landing = () => {
           <Button
             text={"Login"}
             onClick={() => {
-              navigate("login");
+              navigate("/login");
             }}
           />
         </div>
@@ -23,7 +23,6 @@ const Landing = () => {
           navigate("/register");
         }}
       />
-      <Outlet />
     </div>
   );
 };

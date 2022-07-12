@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Menu = ({ children }) => {
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   return (
     <ul className="menu bg-base-100 w-56">

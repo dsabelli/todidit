@@ -3,12 +3,12 @@ import loginService from "../services/login";
 import taskService from "../services/tasks";
 import ErrorMessage from "../components/UI/ErrorMessage";
 import { useForm } from "react-hook-form";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/UI/Button";
 
 const Login = ({ onUser }) => {
   const [asyncError, setAsyncError] = useState("");
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -23,7 +23,6 @@ const Login = ({ onUser }) => {
       window.localStorage.setItem("loggedIn", JSON.stringify(user));
       taskService.setToken(user.token);
       onUser(user);
-      // navigate("/app", { replace: true });
     } catch (error) {
       const errorMsg = error;
       setAsyncError(errorMsg);
