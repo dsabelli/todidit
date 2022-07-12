@@ -19,9 +19,7 @@ const handleDeleteProject = async (
     try {
       const deletedTasks = tasks.filter((task) => task.project === id);
       for (let task of deletedTasks) {
-        const newDidit = await diditService.createDidits({ ...task }, user);
-
-        onDidits((prevDidits) => prevDidits.concat(newDidit));
+        await diditService.createDidits({ ...task }, user);
         await taskService.deleteTasks(task);
       }
 

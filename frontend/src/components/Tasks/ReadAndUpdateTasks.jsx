@@ -15,7 +15,6 @@ const ReadAndUpdateTasks = ({
   tasks,
   onTasks,
   onAddTask,
-  onDidits,
   onSystemMessage,
 }) => {
   const [taskTitle, setTaskTitle] = useState("");
@@ -139,7 +138,6 @@ const ReadAndUpdateTasks = ({
             {
               tasks,
               onTasks,
-              onDidits,
               onSystemMessage,
               user,
             },

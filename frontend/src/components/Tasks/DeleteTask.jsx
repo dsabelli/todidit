@@ -12,10 +12,7 @@ const handleDeleteTask = async (
 ) => {
   try {
     const deletedTask = tasks.filter((task) => task.id === id)[0];
-    const newDidit = await diditService.createDidits({ ...deletedTask }, user);
-
-    onDidits((prevDidits) => prevDidits.concat(newDidit));
-
+    await diditService.createDidits({ ...deletedTask }, user);
     await taskService.deleteTasks(deletedTask);
 
     onTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));

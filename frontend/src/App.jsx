@@ -21,10 +21,6 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [allTasks, setAllTasks] = useState([]);
   const [projects, setProjects] = useState([]);
-  const [didits, setDidits] = useState([]);
-  const [diditTitle, setDiditTitle] = useState("");
-  const [diditDateStart, setDiditDateStart] = useState("");
-  const [diditDateEnd, setDiditDateEnd] = useState("");
   const [user, setUser] = useState(null);
   const [newUser, setNewUser] = useState(false);
   const [addTask, setAddTask] = useState(false);
@@ -37,26 +33,6 @@ function App() {
   //look for a better solution to this
   const handleNewUser = () => {
     setNewUser((prevVal) => !prevVal);
-  };
-
-  const getDidits = async (diditTitle) => {
-    if (diditTitle) {
-      const didits = await diditService.getDidits(
-        diditTitle,
-        diditDateStart,
-        diditDateEnd
-      );
-      setDiditTitle(didits);
-      // } else if ((diditDateStart, diditDateEnd)) {
-      //   const didits = await diditService.getDidits(
-      //     (diditTitle = ""),
-      //     diditDateStart,
-      //     diditDateEnd
-      //   );
-      //   setDiditTitle(didits);
-    } else {
-      setDiditTitle("");
-    }
   };
 
   //Logs user out of current session
@@ -136,7 +112,6 @@ function App() {
             projectTitle={projectTitle}
             onProjectTitle={setProjectTitle}
             onAddProject={setAddProject}
-            onDidits={setDidits}
             onSystemMessage={setSystemMessage}
           />
           <CreateProject
@@ -176,7 +151,6 @@ function App() {
           tasks={tasks}
           onAddTask={setAddTask}
           onTasks={setTasks}
-          onDidits={setDidits}
           onSystemMessage={setSystemMessage}
           projects={projects}
           projectTitle={projectTitle}
