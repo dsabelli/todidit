@@ -1,14 +1,6 @@
 import axios from "axios";
 const baseUrl = "/api/didits";
 
-// const getDidits = async (user) => {
-//   const config = {
-//     params: { id: user.id },
-//   };
-//   const response = await axios.get(baseUrl, config);
-//   return response.data;
-// };
-
 const getDidits = async (diditTitle, diditDateStart, diditDateEnd) => {
   const config = {
     params: {
