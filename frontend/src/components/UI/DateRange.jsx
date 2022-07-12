@@ -9,7 +9,9 @@ const DateRange = ({ onDiditDateStart, onDiditDateEnd }) => {
     <>
       <DatePicker
         selected={startDate}
-        onChange={(date) => (setStartDate(date), onDiditDateStart(date))}
+        onChange={(date) => (
+          date.setHours(0, 0, 0, 0), setStartDate(date), onDiditDateStart(date)
+        )}
         selectsStart
         startDate={startDate}
         endDate={endDate}
@@ -19,7 +21,7 @@ const DateRange = ({ onDiditDateStart, onDiditDateEnd }) => {
       <DatePicker
         selected={endDate}
         onChange={(date) => (
-          date.setHours(23, 59, 59), setEndDate(date), onDiditDateEnd(date)
+          date.setHours(19, 59, 59, 59), setEndDate(date), onDiditDateEnd(date)
         )}
         selectsEnd
         startDate={startDate}
