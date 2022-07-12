@@ -10,7 +10,7 @@ import alertService from "../../services/alerts";
 //before deleting, a didit is created from each task object and posted with helper
 //state and id are passed in as props from ReadandUpdateProjects->Project
 const handleDeleteProject = async (
-  { user, tasks, onTasks, projects, onProjects, onDidits, onSystemMessage },
+  { user, tasks, onTasks, projects, onProjects, onSystemMessage },
   id
 ) => {
   const deletedProject = projects.filter((project) => project.id === id)[0];
@@ -19,6 +19,7 @@ const handleDeleteProject = async (
     try {
       const deletedTasks = tasks.filter((task) => task.project === id);
       for (let task of deletedTasks) {
+        task.completedOn ? null : (task.completedOn = new Date());
         await diditService.createDidits({ ...task }, user);
         await taskService.deleteTasks(task);
       }
