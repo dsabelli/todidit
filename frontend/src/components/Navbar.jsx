@@ -1,7 +1,7 @@
 import DiditSearch from "./Didits/DiditSearch";
 import Button from "./UI/Button";
 import Input from "./UI/Input";
-const Navbar = ({ user, onLogout, onNewUser, newUser }) => {
+const Navbar = ({ user, onLogout, onNewUser, newUser, projects }) => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -15,7 +15,7 @@ const Navbar = ({ user, onLogout, onNewUser, newUser }) => {
           />
         )}
       </div>
-      <DiditSearch />
+      <DiditSearch projects={projects} />
       <div className="dropdown dropdown-end">
         <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
           {user && (

@@ -92,6 +92,7 @@ function App() {
         onLogout={handleLogout}
         newUser={newUser}
         onNewUser={handleNewUser}
+        projects={projects}
       />
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
       {newUser && <Register handleNewUser={handleNewUser} />}
