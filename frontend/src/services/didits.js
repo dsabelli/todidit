@@ -10,7 +10,6 @@ const baseUrl = "/api/didits";
 // };
 
 const getDidits = async (diditTitle, diditDateStart, diditDateEnd) => {
-  console.log(diditTitle);
   const config = {
     params: {
       title: diditTitle,
