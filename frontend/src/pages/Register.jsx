@@ -87,6 +87,7 @@ const Register = ({}) => {
                   <span className="label-text">Email</span>
                 </label>
                 <input
+                  autoFocus
                   type="text"
                   name="email"
                   {...register("email")}

@@ -56,6 +56,7 @@ const Login = () => {
                   <span className="label-text">Email</span>
                 </label>
                 <input
+                  autoFocus
                   required
                   type="text"
                   name="email"
