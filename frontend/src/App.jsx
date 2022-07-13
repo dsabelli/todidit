@@ -8,7 +8,7 @@ import Button from "./components/UI/Button";
 import ErrorMessage from "./components/UI/ErrorMessage";
 import taskService from "./services/tasks";
 import projectService from "./services/projects";
-import diditService from "./services/didits";
+import userService from "./services/users";
 import CreateTask from "./components/Tasks/CreateTask";
 import ReadAndUpdateTasks from "./components/Tasks/ReadAndUpdateTasks";
 import CreateProject from "./components/Projects/CreateProject";
@@ -85,8 +85,14 @@ function App() {
     }
   }, [user]);
 
+  const handleDeleteUser = async (user) => {
+    await userService.deleteUser(user);
+    handleLogout();
+  };
+
   return (
     <div className="App">
+      {/* <Button text="Delete Self" onClick={() => handleDeleteUser(user)} /> */}
       <Navbar
         user={user}
         onLogout={handleLogout}

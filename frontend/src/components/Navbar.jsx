@@ -15,7 +15,7 @@ const Navbar = ({ user, onLogout, onNewUser, newUser, projects }) => {
           />
         )}
       </div>
-      <DiditSearch projects={projects} />
+      {user && <DiditSearch projects={projects} />}
       <div className="dropdown dropdown-end">
         <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
           {user && (

@@ -6,8 +6,8 @@ router.delete("/:id", async (request, response) => {
   if (!userToDelete) {
     return response.status(204).end();
   }
-  console.log(userToDelete.id);
-  console.log(request.user.id);
+  console.log(userToDelete);
+
   if (userToDelete.id && userToDelete.id.toString() !== request.user.id) {
     return response.status(401).json({
       error: "only the creator can delete their account",
