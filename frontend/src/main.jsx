@@ -20,15 +20,15 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       onError={(error, errorInfo) => console.log({ error, errorInfo })}
     >
       <App />
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="login" element={<Login />} />
           <Route path="/app" element={<App />} />
-          <Route element={<ProtectedRoutes />}></Route>
+          {/* <Route element={<ProtectedRoutes />}></Route> */}
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </ErrorBoundary>
   </React.StrictMode>
 );
