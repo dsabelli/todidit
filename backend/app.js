@@ -10,6 +10,7 @@ const diditRouter = require("./controllers/didit");
 const registerRouter = require("./controllers/register");
 const loginRouter = require("./controllers/login");
 const projectRouter = require("./controllers/project");
+const userRouter = require("./controllers/user");
 const { errorHandler, userExtractor } = require("./utils/middleware");
 const logger = require("./utils/logger");
 
@@ -38,6 +39,7 @@ app.use("/api/login", loginRouter);
 app.use("/api/tasks", userExtractor, taskRouter);
 app.use("/api/didits", userExtractor, diditRouter);
 app.use("/api/projects", userExtractor, projectRouter);
+app.use("/api/users", userExtractor, userRouter);
 
 app.use(errorHandler);
 

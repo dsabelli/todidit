@@ -54,7 +54,6 @@ router.delete("/:id", async (request, response) => {
   if (!taskToDelete) {
     return response.status(204).end();
   }
-
   if (taskToDelete.user && taskToDelete.user.toString() !== request.user.id) {
     return response.status(401).json({
       error: "only the creator can delete a task",
