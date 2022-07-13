@@ -5,6 +5,7 @@ import Landing from "./pages/Landing";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Index from "./pages/Index";
 import All from "./pages/All";
 import Today from "./pages/Today";
 import Week from "./pages/Week";
@@ -27,7 +28,8 @@ function App() {
         <Route path="login" element={<Login />} />
 
         <Route element={<ProtectedRoutes />}>
-          <Route path="/app" element={<All />}>
+          <Route path="/app" element={<Index />}>
+            <Route path="all" element={<All />} />
             <Route path="today" element={<Today />} />
             <Route path="week" element={<Week />} />
             <Route path="project/:id" element={<Project />} />
