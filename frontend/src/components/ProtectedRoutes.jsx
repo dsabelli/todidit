@@ -1,20 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-let loggedIn = false;
-
-export const setLoggedIn = (user) => {
-  console.log(user);
-  user ? (loggedIn = true) : false;
-};
+import { UserContext } from "./context/UserContext";
 
 const ProtectedRoutes = () => {
-  useEffect(() => {
-    const user = window.localStorage.getItem("loggedIn");
-    if (user) {
-      loggedIn = true;
-    }
-  }, []);
-  return loggedIn ? <Outlet /> : <Navigate to="/" />;
+  const { user } = useContext(UserContext);
+  return user ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default ProtectedRoutes;

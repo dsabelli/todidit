@@ -1,5 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useContext } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { isToday, parseJSON } from "date-fns";
+import Landing from "./pages/Landing";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
@@ -13,27 +16,23 @@ import CreateTask from "./components/Tasks/CreateTask";
 import ReadAndUpdateTasks from "./components/Tasks/ReadAndUpdateTasks";
 import CreateProject from "./components/Projects/CreateProject";
 import ReadAndUpdateProjects from "./components/Projects/ReadAndUpdateProjects";
-
+import All from "./pages/All";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "./components/context/UserContext";
 import "./App.css";
 
 function App() {
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
   const [allTasks, setAllTasks] = useState([]);
   const [projects, setProjects] = useState([]);
   const [user, setUser] = useState(null);
-  const [newUser, setNewUser] = useState(false);
   const [addTask, setAddTask] = useState(false);
   const [addProject, setAddProject] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
   const [projectId, setProjectId] = useState("");
   const [systemMessage, setSystemMessage] = useState("");
-
-  //shows or hides the register form
-  //look for a better solution to this
-  const handleNewUser = () => {
-    setNewUser((prevVal) => !prevVal);
-  };
+  const value = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   //Logs user out of current session
   const handleLogout = () => {
@@ -93,16 +92,9 @@ function App() {
   return (
     <div className="App">
       {/* <Button text="Delete Self" onClick={() => handleDeleteUser(user)} /> */}
-      <Navbar
-        user={user}
-        onLogout={handleLogout}
-        newUser={newUser}
-        onNewUser={handleNewUser}
-        projects={projects}
-      />
+      <Navbar user={user} onLogout={handleLogout} projects={projects} />
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
-      {newUser && <Register handleNewUser={handleNewUser} />}
-      {!user && !newUser && <Login onUser={setUser} />}
+
       {user && (
         <Menu>
           <ReadAndUpdateProjects
@@ -173,6 +165,18 @@ function App() {
         projectId={projectId}
         onProjectId={setProjectId}
       />
+
+      <UserContext.Provider value={value}>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/app/all" element={<All />} />
+          </Route>
+        </Routes>
+      </UserContext.Provider>
     </div>
   );
 }

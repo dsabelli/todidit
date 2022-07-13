@@ -1,8 +1,9 @@
 import { useState } from "react";
-import registrationService from "../services/register";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import registrationService from "../services/register";
 import ErrorMessage from "../components/UI/ErrorMessage";
 import Button from "../components/UI/Button";
 
@@ -31,7 +32,8 @@ const schema = yup.object().shape({
     .oneOf([yup.ref("password"), null], "passwords must match"),
 });
 
-const Register = ({ handleNewUser }) => {
+const Register = ({}) => {
+  let navigate = useNavigate();
   const [asyncError, setAsyncError] = useState("");
   const {
     register,
@@ -59,9 +61,11 @@ const Register = ({ handleNewUser }) => {
         confirmPassword,
       });
       setAsyncError("");
-      handleNewUser();
+      // onNewUser();
+      navigate("/login");
     } catch (error) {
-      const errorMsg = error.response.data.error;
+      console.log(error);
+      const errorMsg = error.response ? error.response.data.error : error;
       setAsyncError(errorMsg);
       setTimeout(() => {
         setAsyncError(null);
