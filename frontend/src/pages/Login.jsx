@@ -24,7 +24,7 @@ const Login = ({ onUser }) => {
       taskService.setToken(user.token);
       onUser(user);
     } catch (error) {
-      const errorMsg = error;
+      const errorMsg = error.response.data.error;
       setAsyncError(errorMsg);
       setTimeout(() => {
         setAsyncError(null);
