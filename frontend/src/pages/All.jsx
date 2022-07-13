@@ -12,7 +12,7 @@ import ReadAndUpdateTasks from "../components/Tasks/ReadAndUpdateTasks";
 import CreateProject from "../components/Projects/CreateProject";
 import ReadAndUpdateProjects from "../components/Projects/ReadAndUpdateProjects";
 import { UserContext } from "../components/context/UserContext";
-
+import { Link, Outlet } from "react-router-dom";
 const All = () => {
   const [tasks, setTasks] = useState([]);
   const [allTasks, setAllTasks] = useState([]);
@@ -79,7 +79,7 @@ const All = () => {
     handleLogout();
   };
   return (
-    <div className="All">
+    <div className="App">
       {/* <Button text="Delete Self" onClick={() => handleDeleteUser(user)} /> */}
       <Navbar user={user} onLogout={handleLogout} projects={projects} />
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
@@ -109,6 +109,7 @@ const All = () => {
         </Menu>
       )}
       {/* {//filter and display tasks due today (TEMPORARY FUNCTION!!!!)} */}
+      <Link to="/app/today">Today</Link>
       {user && (
         <Button
           text="Today"
@@ -154,6 +155,7 @@ const All = () => {
         projectId={projectId}
         onProjectId={setProjectId}
       />
+      <Outlet />
     </div>
   );
 };

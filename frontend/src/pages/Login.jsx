@@ -25,7 +25,7 @@ const Login = () => {
       window.localStorage.setItem("loggedIn", JSON.stringify(user));
       taskService.setToken(user.token);
       setUser(user);
-      navigate("/app/all");
+      navigate("/app");
     } catch (error) {
       console.log(error);
       let errorMsg = error.response.data.error || error;
