@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
-import loginService from "../services/login";
-import taskService from "../services/tasks";
-import ErrorMessage from "../components/UI/ErrorMessage";
+import loginService from "../../services/login";
+import taskService from "../../services/tasks";
+import ErrorMessage from "../../components/UI/ErrorMessage";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/UI/Button";
-import { UserContext } from "../components/context/UserContext";
+import Button from "../../components/UI/Button";
+import { UserContext } from "../../components/context/UserContext";
 
 const Login = () => {
   let navigate = useNavigate();

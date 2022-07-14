@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import registrationService from "../services/register";
-import ErrorMessage from "../components/UI/ErrorMessage";
-import Button from "../components/UI/Button";
+import registrationService from "../../services/register";
+import ErrorMessage from "../../components/UI/ErrorMessage";
+import Button from "../../components/UI/Button";
 
 const schema = yup.object().shape({
   username: yup

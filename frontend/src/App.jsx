@@ -1,12 +1,12 @@
 import { useEffect, useState, useMemo } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Landing from "./pages/Landing";
-import ProtectedRoutes from "./components/ProtectedRoutes";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
+import Landing from "./pages/Unprotected/Landing";
+import ProtectedRoutes from "./pages/ProtectedRoutes";
+import Register from "./pages/Unprotected/Register";
+import Login from "./pages/Unprotected/Login";
 import Index from "./pages/Index";
-import All from "./pages/All";
+import All from "./pages/Protected/All";
 import Today from "./pages/Today";
 import Week from "./pages/Week";
 import Project from "./pages/Project";

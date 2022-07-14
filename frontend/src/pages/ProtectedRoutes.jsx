@@ -1,9 +1,9 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { UserContext } from "./context/UserContext";
+import { UserContext } from "../components/context/UserContext";
 
 const ProtectedRoutes = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   return user || window.localStorage.getItem("loggedIn") ? (
     <Outlet />
   ) : (
