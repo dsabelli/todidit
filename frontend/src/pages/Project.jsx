@@ -1,7 +1,9 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 const Project = () => {
-  return <div>Project</div>;
+  let params = useParams();
+  return <div>Project {params.id}</div>;
 };
 
 export default Project;
