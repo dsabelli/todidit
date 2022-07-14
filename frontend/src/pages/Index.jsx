@@ -109,7 +109,7 @@ const All = () => {
         </Menu>
       )}
       {/* {//filter and display tasks due today (TEMPORARY FUNCTION!!!!)} */}
-      <Link to="/app/today">Today</Link>
+
       {user && (
         <Button
           text="Today"

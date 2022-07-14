@@ -6,6 +6,7 @@ import diditService from "../../services/didits";
 import { debounce } from "lodash";
 import { parseJSON } from "date-fns";
 import Modal from "../UI/Modal";
+import { Link } from "react-router-dom";
 
 const DiditSearch = ({ projects }) => {
   const [didits, setDidits] = useState([]);
@@ -16,7 +17,7 @@ const DiditSearch = ({ projects }) => {
     //temp fix for didits with no completed on
     didit.completedOn ? (
       //change modal to button that routes to own "page"
-      <Modal key={didit.id} title={didit.title}>
+      <Link to={`/app/didit/${didit.id}`} key={didit.id} title={didit.title}>
         <Didit
           key={didit.id}
           title={didit.title}
@@ -28,7 +29,7 @@ const DiditSearch = ({ projects }) => {
           }
           completedOn={parseJSON(didit.completedOn)}
         />
-      </Modal>
+      </Link>
     ) : null
   );
 
