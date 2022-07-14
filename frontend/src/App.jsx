@@ -1,5 +1,5 @@
-import { useEffect, useState, useMemo } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useMemo } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import Landing from "./pages/Unprotected/Landing";
 import ProtectedRoutes from "./pages/ProtectedRoutes";

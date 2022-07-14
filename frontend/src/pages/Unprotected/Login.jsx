@@ -9,7 +9,7 @@ import { UserContext } from "../../components/context/UserContext";
 
 const Login = () => {
   let navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [asyncError, setAsyncError] = useState("");
   const {
     register,

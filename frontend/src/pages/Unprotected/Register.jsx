@@ -61,7 +61,6 @@ const Register = ({}) => {
         confirmPassword,
       });
       setAsyncError("");
-      // onNewUser();
       navigate("/login");
     } catch (error) {
       console.log(error);
