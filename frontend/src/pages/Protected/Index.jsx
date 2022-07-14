@@ -1,19 +1,19 @@
 import { useState, useEffect, useContext } from "react";
 import { isToday, parseJSON } from "date-fns";
-import Navbar from "../components/Navbar";
-import Menu from "../components/Menu";
-import Button from "../components/UI/Button";
-import ErrorMessage from "../components/UI/ErrorMessage";
-import projectService from "../services/projects";
-import userService from "../services/users";
-import taskService from "../services/tasks";
-import CreateTask from "../components/Tasks/CreateTask";
-import ReadAndUpdateTasks from "../components/Tasks/ReadAndUpdateTasks";
-import CreateProject from "../components/Projects/CreateProject";
-import ReadAndUpdateProjects from "../components/Projects/ReadAndUpdateProjects";
-import { UserContext } from "../components/context/UserContext";
+import Navbar from "../../components/Navbar";
+import Menu from "../../components/Menu";
+import Button from "../../components/UI/Button";
+import ErrorMessage from "../../components/UI/ErrorMessage";
+import projectService from "../../services/projects";
+import userService from "../../services/users";
+import taskService from "../../services/tasks";
+import CreateTask from "../../components/Tasks/CreateTask";
+import ReadAndUpdateTasks from "../../components/Tasks/ReadAndUpdateTasks";
+import CreateProject from "../../components/Projects/CreateProject";
+import ReadAndUpdateProjects from "../../components/Projects/ReadAndUpdateProjects";
+import { UserContext } from "../../components/context/UserContext";
 import { Link, Outlet } from "react-router-dom";
-const All = () => {
+const Index = () => {
   const [tasks, setTasks] = useState([]);
   const [allTasks, setAllTasks] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -69,10 +69,10 @@ const All = () => {
     }
   }, [user]);
 
-  const handleDeleteUser = async (user) => {
-    await userService.deleteUser(user);
-    handleLogout();
-  };
+  // const handleDeleteUser = async (user) => {
+  //   await userService.deleteUser(user);
+  //   handleLogout();
+  // };
   return (
     <div className="App">
       {/* <Button text="Delete Self" onClick={() => handleDeleteUser(user)} /> */}
@@ -155,4 +155,4 @@ const All = () => {
   );
 };
 
-export default All;
+export default Index;
