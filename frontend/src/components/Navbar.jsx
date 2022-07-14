@@ -1,20 +1,22 @@
+import { useContext } from "react";
+import { UserContext } from "./context/UserContext";
+import { Link } from "react-router-dom";
 import DiditSearch from "./Didits/DiditSearch";
 import Button from "./UI/Button";
-import Input from "./UI/Input";
-const Navbar = ({ user, onLogout, onNewUser, newUser, projects }) => {
+
+const Navbar = ({ projects }) => {
+  const { user } = useContext(UserContext);
+
+  const handleLogout = () => {
+    // navigate("/");
+    window.localStorage.clear();
+  };
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <a className="btn btn-ghost normal-case text-xl">toDidit</a>
       </div>
-      <div>
-        {!user && (
-          <Button
-            onClick={() => onNewUser()}
-            text={newUser ? "Cancel" : "Get Started"}
-          />
-        )}
-      </div>
+
       {user && <DiditSearch projects={projects} />}
       <div className="dropdown dropdown-end">
         <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
@@ -31,16 +33,17 @@ const Navbar = ({ user, onLogout, onNewUser, newUser, projects }) => {
           className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
         >
           <li>
-            <a className="justify-between">
-              Profile
-              <span className="badge">New</span>
-            </a>
+            <Link to="/app/profile">
+              <p className="justify-between">Profile</p>
+            </Link>
           </li>
           <li>
-            <a>Settings</a>
+            <Link to="/app/settings">
+              <p>Settings</p>
+            </Link>
           </li>
           <li>
-            <form onSubmit={() => onLogout()}>
+            <form onSubmit={() => handleLogout()}>
               <button type="submit">Logout</button>
             </form>
           </li>

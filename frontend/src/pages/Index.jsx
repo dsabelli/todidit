@@ -25,11 +25,6 @@ const All = () => {
   const [systemMessage, setSystemMessage] = useState("");
   const { user, setUser } = useContext(UserContext);
 
-  const handleLogout = () => {
-    // navigate("/");
-    window.localStorage.clear();
-  };
-
   //Checks if a user's token is stored in local storage
   //If it is, re-login is not required and token is parsed and set for use
   useEffect(() => {
@@ -81,7 +76,7 @@ const All = () => {
   return (
     <div className="App">
       {/* <Button text="Delete Self" onClick={() => handleDeleteUser(user)} /> */}
-      <Navbar user={user} onLogout={handleLogout} projects={projects} />
+      <Navbar projects={projects} />
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
 
       {user && (
