@@ -13,6 +13,7 @@ import Project from "./pages/Protected/Project";
 import Didit from "./pages/Protected/Didit";
 import Profile from "./pages/Protected/Profile";
 import Settings from "./pages/Protected/Settings";
+import Error from "./pages/Unprotected/Error";
 import { UserContext } from "./components/context/UserContext";
 
 import "./App.css";
@@ -27,7 +28,6 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
-
         <Route element={<ProtectedRoutes />}>
           <Route path="/app" element={<Home />}>
             <Route path="all" element={<All />} />
@@ -39,6 +39,7 @@ function App() {
             <Route path="settings" element={<Settings />} />
           </Route>
         </Route>
+        <Route path="*" element={<Error />} />
       </Routes>
     </UserContext.Provider>
   );
