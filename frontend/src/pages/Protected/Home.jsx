@@ -80,66 +80,62 @@ const Home = () => {
       <Navbar projects={projects} />
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
 
-      {user && (
-        <Menu>
-          <ReadAndUpdateProjects
-            user={user}
-            tasks={tasks}
-            onTasks={setTasks}
-            projects={projects}
-            onProjects={setProjects}
-            projectTitle={projectTitle}
-            onProjectTitle={setProjectTitle}
-            onAddProject={setAddProject}
-            onSystemMessage={setSystemMessage}
-          />
-          <CreateProject
-            user={user}
-            onProjects={setProjects}
-            projectTitle={projectTitle}
-            onProjectTitle={setProjectTitle}
-            addProject={addProject}
-            onAddProject={setAddProject}
-            onSystemMessage={setSystemMessage}
-          />
-        </Menu>
-      )}
-      {/* {//filter and display tasks due today (TEMPORARY FUNCTION!!!!)} */}
-
-      {user && (
-        <Button
-          text="Today"
-          onClick={() => {
-            setTasks((prevTasks) =>
-              prevTasks.filter((task) => isToday(parseJSON(task.dueDate)))
-            );
-          }}
-        />
-      )}
-      {/* {//Sets back all tasks (TEMPORARRY FUNCTION!!)} */}
-      {user && (
-        <Button
-          text="All"
-          onClick={() => {
-            setTasks(allTasks);
-          }}
-        />
-      )}
-      {user && (
-        <ReadAndUpdateTasks
+      <Menu>
+        <ReadAndUpdateProjects
           user={user}
           tasks={tasks}
-          onAddTask={setAddTask}
           onTasks={setTasks}
-          onSystemMessage={setSystemMessage}
           projects={projects}
+          onProjects={setProjects}
           projectTitle={projectTitle}
           onProjectTitle={setProjectTitle}
-          projectId={projectId}
-          onProjectId={setProjectId}
+          onAddProject={setAddProject}
+          onSystemMessage={setSystemMessage}
         />
-      )}
+        <CreateProject
+          user={user}
+          onProjects={setProjects}
+          projectTitle={projectTitle}
+          onProjectTitle={setProjectTitle}
+          addProject={addProject}
+          onAddProject={setAddProject}
+          onSystemMessage={setSystemMessage}
+        />
+      </Menu>
 
+      {/* {//filter and display tasks due today (TEMPORARY FUNCTION!!!!)} */}
+
+      <Button
+        text="Today"
+        onClick={() => {
+          setTasks((prevTasks) =>
+            prevTasks.filter((task) => isToday(parseJSON(task.dueDate)))
+          );
+        }}
+      />
+
+      {/* {//Sets back all tasks (TEMPORARRY FUNCTION!!)} */}
+
+      <Button
+        text="All"
+        onClick={() => {
+          setTasks(allTasks);
+        }}
+      />
+
+      <ReadAndUpdateTasks
+        user={user}
+        tasks={tasks}
+        onAddTask={setAddTask}
+        onTasks={setTasks}
+        onSystemMessage={setSystemMessage}
+        projects={projects}
+        projectTitle={projectTitle}
+        onProjectTitle={setProjectTitle}
+        projectId={projectId}
+        onProjectId={setProjectId}
+      />
+      <Outlet />
       <CreateTask
         user={user}
         addTask={addTask}
@@ -151,7 +147,6 @@ const Home = () => {
         projectId={projectId}
         onProjectId={setProjectId}
       />
-      <Outlet />
     </div>
   );
 };
