@@ -13,7 +13,7 @@ import CreateProject from "../../components/Projects/CreateProject";
 import ReadAndUpdateProjects from "../../components/Projects/ReadAndUpdateProjects";
 import { UserContext } from "../../components/context/UserContext";
 import { Link, Outlet } from "react-router-dom";
-const Index = () => {
+const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [allTasks, setAllTasks] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -27,6 +27,7 @@ const Index = () => {
 
   //Checks if a user's token is stored in local storage
   //If it is, re-login is not required and token is parsed and set for use
+
   useEffect(() => {
     const loggedIn = window.localStorage.getItem("loggedIn");
     if (loggedIn) {
@@ -155,4 +156,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Home;

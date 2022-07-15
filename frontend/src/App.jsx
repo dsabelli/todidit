@@ -5,7 +5,7 @@ import Landing from "./pages/Unprotected/Landing";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 import Register from "./pages/Unprotected/Register";
 import Login from "./pages/Unprotected/Login";
-import Index from "./pages/protected/Index";
+import Home from "./pages/Protected/Home";
 import All from "./pages/Protected/All";
 import Today from "./pages/Protected/Today";
 import Week from "./pages/Protected/Week";
@@ -14,21 +14,22 @@ import Didit from "./pages/Protected/Didit";
 import Profile from "./pages/Protected/Profile";
 import Settings from "./pages/Protected/Settings";
 import { UserContext } from "./components/context/UserContext";
+
 import "./App.css";
 
 function App() {
   const [user, setUser] = useState(null);
-  const value = useMemo(() => ({ user, setUser }), [user, setUser]);
+  const userValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   return (
-    <UserContext.Provider value={value}>
+    <UserContext.Provider value={userValue}>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
 
         <Route element={<ProtectedRoutes />}>
-          <Route path="/app" element={<Index />}>
+          <Route path="/app" element={<Home />}>
             <Route path="all" element={<All />} />
             <Route path="today" element={<Today />} />
             <Route path="week" element={<Week />} />
