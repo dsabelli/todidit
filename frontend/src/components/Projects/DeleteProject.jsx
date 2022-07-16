@@ -29,7 +29,9 @@ const handleDeleteProject = async (
       await projectService.deleteProjects({ ...deletedProject }, user);
 
       onProjects((prevProjects) =>
-        prevProjects.filter((project) => project.id !== id)
+        prevProjects.map((project) =>
+          project.id === id ? { ...deletedProject } : project
+        )
       );
       onTasks((prevTasks) => prevTasks.filter((task) => task.project !== id));
 

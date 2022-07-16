@@ -16,7 +16,7 @@ const ArchivedProject = () => {
     getArchivedProject();
   }, [params.id]);
 
-  const diditEl = didits.map((didit) => (
+  const diditElements = didits.map((didit) => (
     <Didit
       key={didit.id}
       title={didit.title}
@@ -29,7 +29,7 @@ const ArchivedProject = () => {
       completedOn={parseJSON(didit.completedOn)}
     />
   ));
-  return <div>{diditEl}</div>;
+  return <div>{diditElements}</div>;
 };
 
 export default ArchivedProject;
