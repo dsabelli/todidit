@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import taskService from "../../services/tasks";
-import diditService from "../../services/didits";
 import TaskForm from "./TaskForm";
 import Task from "./Task";
 import handleDeleteTask from "./DeleteTask";
@@ -14,12 +13,18 @@ const ReadAndUpdateTasks = ({
   onProjectId,
   tasks,
   onTasks,
+  onAllTasks,
   onAddTask,
   onSystemMessage,
 }) => {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskDueDate, setTaskDueDate] = useState(new Date());
+
+  //keep UI up to date with backend between routes
+  useEffect(() => {
+    onAllTasks(tasks);
+  }, [tasks]);
 
   //function to show task form for editing task inline, populates fields with current data
   //hides the current task being edited
