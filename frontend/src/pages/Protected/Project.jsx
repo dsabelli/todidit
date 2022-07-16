@@ -21,12 +21,15 @@ const Today = () => {
   ] = useOutletContext();
   useEffect(() => {
     setTasks(allTasks);
-  }, [params]);
+    console.log(allTasks);
+    console.log("setting all tasks");
+  }, [params.id]);
   useEffect(() => {
     setTasks((prevTasks) =>
       prevTasks.filter((task) => task.project === params.id)
     );
-  }, [params]);
+    console.log("filtering tasks");
+  }, [params.id]);
 
   return (
     <div>

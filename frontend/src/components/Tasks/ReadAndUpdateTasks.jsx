@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import taskService from "../../services/tasks";
 import TaskForm from "./TaskForm";
 import Task from "./Task";
@@ -20,11 +20,6 @@ const ReadAndUpdateTasks = ({
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskDueDate, setTaskDueDate] = useState(new Date());
-
-  //keep UI up to date with backend between routes
-  useEffect(() => {
-    onAllTasks(tasks);
-  }, [tasks]);
 
   //function to show task form for editing task inline, populates fields with current data
   //hides the current task being edited
@@ -76,6 +71,9 @@ const ReadAndUpdateTasks = ({
       onTasks((prevTasks) =>
         prevTasks.map((task) => (task.id === id ? { ...updatedTask } : task))
       );
+      onAllTasks((prevTasks) =>
+        prevTasks.map((task) => (task.id === id ? { ...updatedTask } : task))
+      );
       setTaskTitle("");
       setTaskDescription("");
       setTaskDueDate(new Date());
@@ -101,6 +99,13 @@ const ReadAndUpdateTasks = ({
       });
 
       onTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === id
+            ? { ...task, isChecked: !task.isChecked, completedOn: currentDate }
+            : task
+        )
+      );
+      onAllTasks((prevTasks) =>
         prevTasks.map((task) =>
           task.id === id
             ? { ...task, isChecked: !task.isChecked, completedOn: currentDate }
@@ -143,6 +148,7 @@ const ReadAndUpdateTasks = ({
             {
               tasks,
               onTasks,
+              onAllTasks,
               onSystemMessage,
               user,
             },
