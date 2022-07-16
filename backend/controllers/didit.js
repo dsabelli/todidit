@@ -2,7 +2,12 @@ const router = require("express").Router();
 const Didit = require("../models/didit");
 
 router.get("/", async (request, response) => {
-  if (request.query) {
+  if (request.query.project) {
+    const didits = await Didit.find({
+      project: request.query.project,
+    });
+    response.json(didits);
+  } else if (request.query) {
     console.log(request.query);
     const didits = await Didit.find({
       $and: [

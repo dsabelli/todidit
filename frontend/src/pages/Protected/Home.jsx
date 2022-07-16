@@ -9,6 +9,7 @@ import userService from "../../services/users";
 import taskService from "../../services/tasks";
 import CreateTask from "../../components/Tasks/CreateTask";
 import ReadAndUpdateTasks from "../../components/Tasks/ReadAndUpdateTasks";
+import ArchivedProjects from "../../components/Projects/ArchivedProjects";
 import CreateProject from "../../components/Projects/CreateProject";
 import ReadAndUpdateProjects from "../../components/Projects/ReadAndUpdateProjects";
 import { UserContext } from "../../components/context/UserContext";
@@ -109,6 +110,7 @@ const Home = () => {
           onAddProject={setAddProject}
           onSystemMessage={setSystemMessage}
         />
+        <ArchivedProjects projects={projects} />
       </Menu>
       <DiditContext.Provider value={diditValue}>
         <Outlet
