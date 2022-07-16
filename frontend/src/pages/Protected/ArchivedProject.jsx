@@ -7,7 +7,7 @@ const ArchivedProject = () => {
   let params = useParams();
   const [didits, setDidits] = useState([]);
   const [tasks, setTasks, allTasks, setAllTasks, projects] = useOutletContext();
-  console.log(projects);
+
   useEffect(() => {
     const getArchivedProject = async () => {
       const archivedProject = await diditService.getArchivedProject(params.id);

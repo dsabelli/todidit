@@ -16,7 +16,10 @@ const ArchivedProjects = ({ projects }) => {
 
   return (
     <div className="overflow-y-auto max-h-96 flex flex-col ">
-      <Toggle> {projectElements}</Toggle>
+      <Toggle visText="Hide Archived Projects" invisText="Archived Projects">
+        {" "}
+        {projectElements}
+      </Toggle>
     </div>
   );
 };

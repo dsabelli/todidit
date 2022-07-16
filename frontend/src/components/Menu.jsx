@@ -1,21 +1,16 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import Toggle from "./UI/Toggle";
 
 const Menu = ({ children }) => {
-  // let navigate = useNavigate();
-
   return (
     <ul className="menu bg-base-100 w-56">
       <Link to="/app/all">All</Link>
       <Link to="/app/today">Today</Link>
       <Link to="/app/week">This Week</Link>
       <div className="collapse">
-        <input type="checkbox" />
-        <div className="collapse-title text-xl font-medium">Projects</div>
-
-        <div className="collapse-content">
+        <Toggle visText="Projects" invisText="Projects">
           <div>{children}</div>
-        </div>
+        </Toggle>
       </div>
     </ul>
   );
