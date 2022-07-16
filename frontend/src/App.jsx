@@ -10,7 +10,7 @@ import All from "./pages/Protected/All";
 import Today from "./pages/Protected/Today";
 import Week from "./pages/Protected/Week";
 import Project from "./pages/Protected/Project";
-import Didit from "./pages/Protected/Didit";
+import Didits from "./pages/Protected/Didits";
 import Profile from "./pages/Protected/Profile";
 import Settings from "./pages/Protected/Settings";
 import Error from "./pages/Unprotected/Error";
@@ -34,7 +34,7 @@ function App() {
             <Route path="today" element={<Today />} />
             <Route path="week" element={<Week />} />
             <Route path="project/:id" element={<Project />} />
-            <Route path="didit/:id" element={<Didit />} />
+            <Route path="didit/:id" element={<Didits />} />
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
           </Route>

@@ -2,7 +2,7 @@ import { useEffect, useContext } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import { UserContext } from "../../components/context/UserContext";
 import ReadAndUpdateTasks from "../../components/Tasks/ReadAndUpdateTasks";
-import { isToday, parseJSON } from "date-fns";
+
 const Today = () => {
   let params = useParams();
   const { user } = useContext(UserContext);
