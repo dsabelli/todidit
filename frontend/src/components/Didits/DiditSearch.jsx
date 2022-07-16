@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import Didit from "./Didit";
 import DateRange from "./DateRange";
 import Input from "../UI/Input";
@@ -6,32 +6,42 @@ import diditService from "../../services/didits";
 import { debounce } from "lodash";
 import { parseJSON } from "date-fns";
 import Modal from "../UI/Modal";
+import { useContext } from "react";
+import { DiditContext } from "../../components/context/DiditContext";
 import { Link } from "react-router-dom";
 
 const DiditSearch = ({ projects }) => {
-  const [didits, setDidits] = useState([]);
+  const { didits, setDidits } = useContext(DiditContext);
   const [diditDateStart, setDiditDateStart] = useState("");
   const [diditDateEnd, setDiditDateEnd] = useState("");
 
-  const diditElements = didits.map((didit) =>
-    //temp fix for didits with no completed on
-    didit.completedOn ? (
-      //change modal to button that routes to own "page"
-      <Link to={`/app/didit/${didit.id}`} key={didit.id} title={didit.title}>
-        <Didit
-          key={didit.id}
-          title={didit.title}
-          //temp fix for didits with no project
-          project={
-            didit.project
-              ? projects.find((project) => project.id === didit.project).title
-              : null
-          }
-          completedOn={parseJSON(didit.completedOn)}
-        />
-      </Link>
-    ) : null
-  );
+  const diditElements = didits
+    ? didits.map((didit) =>
+        //temp fix for didits with no completed on
+        didit.completedOn ? (
+          //change modal to button that routes to own "page"
+
+          <Link
+            to={`/app/didit/${didit.id}`}
+            key={didit.id}
+            title={didit.title}
+          >
+            <Didit
+              key={didit.id}
+              title={didit.title}
+              //temp fix for didits with no project
+              project={
+                didit.project
+                  ? projects.find((project) => project.id === didit.project)
+                      .title
+                  : null
+              }
+              completedOn={parseJSON(didit.completedOn)}
+            />
+          </Link>
+        ) : null
+      )
+    : null;
 
   const getDidits = debounce(async (title) => {
     const searchedDidits = await diditService.getDidits(

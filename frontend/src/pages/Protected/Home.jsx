@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useMemo } from "react";
 import { isToday, parseJSON } from "date-fns";
 import Navbar from "../../components/Navbar";
 import Menu from "../../components/Menu";
@@ -13,6 +13,7 @@ import CreateProject from "../../components/Projects/CreateProject";
 import ReadAndUpdateProjects from "../../components/Projects/ReadAndUpdateProjects";
 import { UserContext } from "../../components/context/UserContext";
 import { Link, Outlet } from "react-router-dom";
+import { DiditContext } from "../../components/context/DiditContext";
 const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [allTasks, setAllTasks] = useState([]);
@@ -24,6 +25,11 @@ const Home = () => {
   const [projectId, setProjectId] = useState("");
   const [systemMessage, setSystemMessage] = useState("");
   const { user, setUser } = useContext(UserContext);
+  const [didits, setDidits] = useState([]);
+  const diditValue = useMemo(
+    () => ({ didits, setDidits }),
+    [didits, setDidits]
+  );
 
   //Checks if a user's token is stored in local storage
   //If it is, re-login is not required and token is parsed and set for use
@@ -77,7 +83,9 @@ const Home = () => {
   return (
     <div className="App">
       {/* <Button text="Delete Self" onClick={() => handleDeleteUser(user)} /> */}
-      <Navbar projects={projects} />
+      <DiditContext.Provider value={diditValue}>
+        <Navbar projects={projects} />
+      </DiditContext.Provider>
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
 
       <Menu>
@@ -102,22 +110,23 @@ const Home = () => {
           onSystemMessage={setSystemMessage}
         />
       </Menu>
-
-      <Outlet
-        context={[
-          tasks,
-          setTasks,
-          allTasks,
-          setAllTasks,
-          projects,
-          setAddTask,
-          projectTitle,
-          setProjectTitle,
-          projectId,
-          setProjectId,
-          setSystemMessage,
-        ]}
-      />
+      <DiditContext.Provider value={diditValue}>
+        <Outlet
+          context={[
+            tasks,
+            setTasks,
+            allTasks,
+            setAllTasks,
+            projects,
+            setAddTask,
+            projectTitle,
+            setProjectTitle,
+            projectId,
+            setProjectId,
+            setSystemMessage,
+          ]}
+        />
+      </DiditContext.Provider>
       <CreateTask
         user={user}
         addTask={addTask}
