@@ -17,4 +17,20 @@ const success = (title) => {
   return Swal.fire("Deleted!", `Project ${title} has been deleted.`, "success");
 };
 
-export default { alert, success };
+const userAlert = () => {
+  const alert = Swal.fire({
+    title: "Are you sure you want to delete your account?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  });
+  return alert;
+};
+
+const userSuccess = () => {
+  return Swal.fire("Deleted!", `Your account has been deleted.`, "success");
+};
+
+export default { alert, success, userAlert, userSuccess };

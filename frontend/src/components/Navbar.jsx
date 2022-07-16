@@ -8,7 +8,6 @@ const Navbar = ({ projects }) => {
   const { user } = useContext(UserContext);
 
   const handleLogout = () => {
-    // navigate("/");
     window.localStorage.clear();
   };
   return (

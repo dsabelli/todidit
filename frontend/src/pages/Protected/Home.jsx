@@ -77,13 +77,8 @@ const Home = () => {
     }
   }, [user]);
 
-  // const handleDeleteUser = async (user) => {
-  //   await userService.deleteUser(user);
-  //   handleLogout();
-  // };
   return (
     <div className="App">
-      {/* <Button text="Delete Self" onClick={() => handleDeleteUser(user)} /> */}
       <DiditContext.Provider value={diditValue}>
         <Navbar projects={projects} />
       </DiditContext.Provider>
