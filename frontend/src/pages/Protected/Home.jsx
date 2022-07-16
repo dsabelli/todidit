@@ -123,24 +123,32 @@ const Home = () => {
         }}
       />
 
-      <ReadAndUpdateTasks
-        user={user}
-        tasks={tasks}
-        onAddTask={setAddTask}
-        onTasks={setTasks}
-        onSystemMessage={setSystemMessage}
-        projects={projects}
-        projectTitle={projectTitle}
-        onProjectTitle={setProjectTitle}
-        projectId={projectId}
-        onProjectId={setProjectId}
+      <Outlet
+        context={[
+          tasks,
+          setTasks,
+          allTasks,
+          setAllTasks,
+          projects,
+          setProjects,
+          addTask,
+          setAddTask,
+          addProject,
+          setAddProject,
+          projectTitle,
+          setProjectTitle,
+          projectId,
+          setProjectId,
+          systemMessage,
+          setSystemMessage,
+        ]}
       />
-      <Outlet />
       <CreateTask
         user={user}
         addTask={addTask}
         onAddTask={setAddTask}
         onTasks={setTasks}
+        onAllTasks={setAllTasks}
         onSystemMessage={setSystemMessage}
         projects={projects}
         projectTitle={projectTitle}
