@@ -1,4 +1,4 @@
-import { parseJSON, parseISO } from "date-fns";
+import { parseJSON, format } from "date-fns";
 import { Link } from "react-router-dom";
 import Toggle from "../UI/Toggle";
 const ArchivedProjects = ({ projects }) => {
@@ -9,7 +9,10 @@ const ArchivedProjects = ({ projects }) => {
         key={project.id}
         id={project.id}
       >
-        <div> {project.title}</div>
+        <div>
+          {project.title}
+          <p>{format(parseJSON(project.archivedOn), "dd-MM-yyyy")}</p>
+        </div>
       </Link>
     ) : null
   );
@@ -17,7 +20,6 @@ const ArchivedProjects = ({ projects }) => {
   return (
     <div className="overflow-y-auto max-h-96 flex flex-col ">
       <Toggle visText="Hide Archived Projects" invisText="Archived Projects">
-        {" "}
         {projectElements}
       </Toggle>
     </div>
