@@ -10,6 +10,7 @@ const CreateTask = ({
   projectId,
   onProjectId,
   onTasks,
+  onAllTasks,
   addTask,
   onAddTask,
   onSystemMessage,
@@ -55,6 +56,7 @@ const CreateTask = ({
       setTaskDueDate(new Date());
       onProjectId("");
       onTasks((prevTasks) => prevTasks.concat(newTask));
+      onAllTasks((prevTasks) => prevTasks.concat(newTask));
       showCreateTaskForm();
     } catch (error) {
       onSystemMessage("System encountered an error");

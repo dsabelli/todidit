@@ -1,6 +1,5 @@
 import { useState } from "react";
 import taskService from "../../services/tasks";
-import diditService from "../../services/didits";
 import TaskForm from "./TaskForm";
 import Task from "./Task";
 import handleDeleteTask from "./DeleteTask";
@@ -14,6 +13,7 @@ const ReadAndUpdateTasks = ({
   onProjectId,
   tasks,
   onTasks,
+  onAllTasks,
   onAddTask,
   onSystemMessage,
 }) => {
@@ -71,6 +71,9 @@ const ReadAndUpdateTasks = ({
       onTasks((prevTasks) =>
         prevTasks.map((task) => (task.id === id ? { ...updatedTask } : task))
       );
+      onAllTasks((prevTasks) =>
+        prevTasks.map((task) => (task.id === id ? { ...updatedTask } : task))
+      );
       setTaskTitle("");
       setTaskDescription("");
       setTaskDueDate(new Date());
@@ -96,6 +99,13 @@ const ReadAndUpdateTasks = ({
       });
 
       onTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === id
+            ? { ...task, isChecked: !task.isChecked, completedOn: currentDate }
+            : task
+        )
+      );
+      onAllTasks((prevTasks) =>
         prevTasks.map((task) =>
           task.id === id
             ? { ...task, isChecked: !task.isChecked, completedOn: currentDate }
@@ -138,6 +148,7 @@ const ReadAndUpdateTasks = ({
             {
               tasks,
               onTasks,
+              onAllTasks,
               onSystemMessage,
               user,
             },

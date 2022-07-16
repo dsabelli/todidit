@@ -1,14 +1,16 @@
-import { useState } from "react";
-import loginService from "../services/login";
-import taskService from "../services/tasks";
-import ErrorMessage from "../components/UI/ErrorMessage";
+import { useState, useContext } from "react";
+import loginService from "../../services/login";
+import taskService from "../../services/tasks";
+import ErrorMessage from "../../components/UI/ErrorMessage";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/UI/Button";
+import Button from "../../components/UI/Button";
+import { UserContext } from "../../components/context/UserContext";
 
-const Login = ({ onUser }) => {
+const Login = () => {
+  let navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
   const [asyncError, setAsyncError] = useState("");
-  // let navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -22,9 +24,11 @@ const Login = ({ onUser }) => {
       const user = await loginService.login({ email, password });
       window.localStorage.setItem("loggedIn", JSON.stringify(user));
       taskService.setToken(user.token);
-      onUser(user);
+      setUser(user);
+      navigate("/app/today");
     } catch (error) {
-      const errorMsg = error.response.data.error;
+      console.log(error);
+      let errorMsg = error.response.data.error || error;
       setAsyncError(errorMsg);
       setTimeout(() => {
         setAsyncError(null);
@@ -52,6 +56,7 @@ const Login = ({ onUser }) => {
                   <span className="label-text">Email</span>
                 </label>
                 <input
+                  autoFocus
                   required
                   type="text"
                   name="email"

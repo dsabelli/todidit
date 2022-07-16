@@ -7,7 +7,7 @@ import diditService from "../../services/didits";
 
 //state and id are passed in as props from ReadandUpdateTasks->Task
 const handleDeleteTask = async (
-  { tasks, onTasks, onDidits, onSystemMessage, user },
+  { tasks, onTasks, onAllTasks, onSystemMessage, user },
   id
 ) => {
   try {
@@ -17,6 +17,7 @@ const handleDeleteTask = async (
     await taskService.deleteTasks(deletedTask);
 
     onTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    onAllTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   } catch (error) {
     onSystemMessage("System encountered an error");
     setTimeout(() => {

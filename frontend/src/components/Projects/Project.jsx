@@ -1,12 +1,13 @@
 import Button from "../UI/Button";
 import DeleteSvg from "../svg/DeleteSvg";
+import { Link } from "react-router-dom";
 
 const Project = ({ id, onUpdate, onDelete, title }) => {
   return (
     <div className="flex justify-between  ">
-      <button onClick={() => console.log(id)}>
+      <Link to={`project/${id}`}>
         <div className="">{title}</div>
-      </button>
+      </Link>
 
       <div className="flex gap-4">
         <Button
