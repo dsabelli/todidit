@@ -31,6 +31,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route element={<ProtectedRoutes />}>
           <Route path="/app" element={<Home />}>
+            <Route index element={<div>There's nothing here!</div>} />
             <Route path="all" element={<All />} />
             <Route path="today" element={<Today />} />
             <Route path="week" element={<Week />} />
