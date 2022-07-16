@@ -11,10 +11,10 @@ const Toggle = ({ children }) => {
     <div>
       <div>
         <button onClick={() => toggleVisibility()}>
-          {visible ? "Archived Projects" : "Hide Archived Projects"}
+          {visible ? "Hide Archived Projects" : "Archived Projects"}
         </button>
       </div>
-      <div className={visible ? "hidden" : ""}>{children}</div>
+      <div className={visible ? "" : "hidden"}>{children}</div>
     </div>
   );
 };
