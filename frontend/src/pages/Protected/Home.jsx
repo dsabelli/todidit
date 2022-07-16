@@ -103,26 +103,6 @@ const Home = () => {
         />
       </Menu>
 
-      {/* {//filter and display tasks due today (TEMPORARY FUNCTION!!!!)} */}
-
-      <Button
-        text="Today"
-        onClick={() => {
-          setTasks((prevTasks) =>
-            prevTasks.filter((task) => isToday(parseJSON(task.dueDate)))
-          );
-        }}
-      />
-
-      {/* {//Sets back all tasks (TEMPORARRY FUNCTION!!)} */}
-
-      <Button
-        text="All"
-        onClick={() => {
-          setTasks(allTasks);
-        }}
-      />
-
       <Outlet
         context={[
           tasks,
@@ -130,16 +110,11 @@ const Home = () => {
           allTasks,
           setAllTasks,
           projects,
-          setProjects,
-          addTask,
           setAddTask,
-          addProject,
-          setAddProject,
           projectTitle,
           setProjectTitle,
           projectId,
           setProjectId,
-          systemMessage,
           setSystemMessage,
         ]}
       />

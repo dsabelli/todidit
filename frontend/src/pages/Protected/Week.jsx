@@ -11,21 +11,18 @@ const Week = () => {
     allTasks,
     setAllTasks,
     projects,
-    setProjects,
-    addTask,
     setAddTask,
-    addProject,
-    setAddProject,
     projectTitle,
     setProjectTitle,
     projectId,
     setProjectId,
-    systemMessage,
     setSystemMessage,
   ] = useOutletContext();
+
   useEffect(() => {
     setTasks(allTasks);
   }, []);
+
   useEffect(() => {
     setTasks((prevTasks) =>
       prevTasks.filter(
@@ -35,15 +32,15 @@ const Week = () => {
       )
     );
   }, []);
-  console.log(tasks);
+
   return (
     <div>
-      All
       <ReadAndUpdateTasks
         user={user}
         tasks={tasks}
         onAddTask={setAddTask}
         onTasks={setTasks}
+        onAllTasks={setAllTasks}
         onSystemMessage={setSystemMessage}
         projects={projects}
         projectTitle={projectTitle}
