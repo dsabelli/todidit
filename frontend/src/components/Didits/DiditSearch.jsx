@@ -12,8 +12,18 @@ import { Link } from "react-router-dom";
 
 const DiditSearch = ({ projects }) => {
   const { didits, setDidits } = useContext(DiditContext);
+  const [visible, setVisible] = useState(false);
   const [diditDateStart, setDiditDateStart] = useState("");
   const [diditDateEnd, setDiditDateEnd] = useState("");
+
+  const getDidits = debounce(async (title) => {
+    const searchedDidits = await diditService.getDidits(
+      title,
+      diditDateStart,
+      diditDateEnd
+    );
+    setDidits(searchedDidits);
+  }, 200);
 
   const diditElements = didits
     ? didits.map((didit) =>
@@ -25,6 +35,7 @@ const DiditSearch = ({ projects }) => {
             to={`/app/didit/${didit.id}`}
             key={didit.id}
             title={didit.title}
+            onClick={() => setVisible(false)}
           >
             <Didit
               key={didit.id}
@@ -43,14 +54,6 @@ const DiditSearch = ({ projects }) => {
       )
     : null;
 
-  const getDidits = debounce(async (title) => {
-    const searchedDidits = await diditService.getDidits(
-      title,
-      diditDateStart,
-      diditDateEnd
-    );
-    setDidits(searchedDidits);
-  }, 200);
   return (
     <div className="flex-none gap-2">
       <>
@@ -63,25 +66,25 @@ const DiditSearch = ({ projects }) => {
       <div className="form-control ">
         <Input
           type="text"
-          placeholder="Search"
+          placeholder="Search Didits..."
           className="input input-bordered"
           //if not an empty string, get diddits with title of value, otherwise
           //clear (fix debonuce issue) blur to setDidits back to blank and focus for next searcg
           onChange={(e) =>
             e.target.value !== ""
-              ? getDidits(e.target.value)
-              : (e.target.blur(), (e.target.value = ""), e.target.focus())
+              ? (getDidits(e.target.value), setVisible(true))
+              : (setVisible(false), (e.target.value = ""), e.target.focus())
           }
           onKeyDown={(e) =>
             e.key === "Escape"
-              ? (e.target.blur(), (e.target.value = ""), setDidits([]))
-              : ""
+              ? ((e.target.value = ""), setVisible(false))
+              : null
           }
           onBlur={(e) => (e.target.value = "")}
         />
 
         <div className="overflow-y-auto max-h-48 flex flex-col ">
-          {diditElements}
+          <div className={`${visible ? "" : "hidden"}`}>{diditElements}</div>
         </div>
       </div>
     </div>
