@@ -88,59 +88,62 @@ const Home = () => {
         <Navbar projects={projects} />
       </DiditContext.Provider>
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
-
-      <Menu>
-        <ReadAndUpdateProjects
-          user={user}
-          tasks={tasks}
-          onTasks={setTasks}
-          projects={projects}
-          onProjects={setProjects}
-          projectTitle={projectTitle}
-          onProjectTitle={setProjectTitle}
-          onAddProject={setAddProject}
-          onSystemMessage={setSystemMessage}
-        />
-        <CreateProject
-          user={user}
-          onProjects={setProjects}
-          projectTitle={projectTitle}
-          onProjectTitle={setProjectTitle}
-          addProject={addProject}
-          onAddProject={setAddProject}
-          onSystemMessage={setSystemMessage}
-        />
-        <ArchivedProjects projects={projects} />
-      </Menu>
-      <DiditContext.Provider value={diditValue}>
-        <Outlet
-          context={[
-            tasks,
-            setTasks,
-            allTasks,
-            setAllTasks,
-            projects,
-            setAddTask,
-            projectTitle,
-            setProjectTitle,
-            projectId,
-            setProjectId,
-            setSystemMessage,
-          ]}
-        />
-      </DiditContext.Provider>
-      <CreateTask
-        user={user}
-        addTask={addTask}
-        onAddTask={setAddTask}
-        onTasks={setTasks}
-        onAllTasks={setAllTasks}
-        onSystemMessage={setSystemMessage}
-        projects={projects}
-        projectTitle={projectTitle}
-        projectId={projectId}
-        onProjectId={setProjectId}
-      />
+      <div className="flex">
+        <Menu>
+          <ReadAndUpdateProjects
+            user={user}
+            tasks={tasks}
+            onTasks={setTasks}
+            projects={projects}
+            onProjects={setProjects}
+            projectTitle={projectTitle}
+            onProjectTitle={setProjectTitle}
+            onAddProject={setAddProject}
+            onSystemMessage={setSystemMessage}
+          />
+          <CreateProject
+            user={user}
+            onProjects={setProjects}
+            projectTitle={projectTitle}
+            onProjectTitle={setProjectTitle}
+            addProject={addProject}
+            onAddProject={setAddProject}
+            onSystemMessage={setSystemMessage}
+          />
+          <ArchivedProjects projects={projects} />
+        </Menu>
+        <div>
+          <DiditContext.Provider value={diditValue}>
+            <Outlet
+              context={[
+                tasks,
+                setTasks,
+                allTasks,
+                setAllTasks,
+                projects,
+                setAddTask,
+                projectTitle,
+                setProjectTitle,
+                projectId,
+                setProjectId,
+                setSystemMessage,
+              ]}
+            />
+          </DiditContext.Provider>
+          <CreateTask
+            user={user}
+            addTask={addTask}
+            onAddTask={setAddTask}
+            onTasks={setTasks}
+            onAllTasks={setAllTasks}
+            onSystemMessage={setSystemMessage}
+            projects={projects}
+            projectTitle={projectTitle}
+            projectId={projectId}
+            onProjectId={setProjectId}
+          />
+        </div>
+      </div>
     </div>
   );
 };

@@ -16,7 +16,7 @@ const Task = ({
   const dateDue = format(parseJSON(dueDate), "dd-MM-yyyy");
 
   return (
-    <div className="flex justify-between px-40 ">
+    <div className="flex justify-between px-4 ">
       <div className="flex gap-3 ">
         <div>
           <Checkbox
