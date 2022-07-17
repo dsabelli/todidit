@@ -17,7 +17,7 @@ const DueDate = ({ dueDate, onDueDate }) => {
   };
   return (
     <>
-      <Button onClick={handleClick} text={format(dueDate, "dd-MM-yyyy")} />
+      <Button onClick={handleClick} text={format(dueDate, "MMM-dd-yyyy")} />
       {isOpen && (
         <DatePicker selected={dueDate} onChange={handleChange} inline />
       )}

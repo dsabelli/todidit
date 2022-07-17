@@ -1,7 +1,14 @@
-import { format, parseJSON } from "date-fns";
+import {
+  format,
+  parseJSON,
+  isPast,
+  parseISO,
+  differenceInCalendarDays,
+} from "date-fns";
 import Button from "../UI/Button";
 import Checkbox from "../UI/Checkbox";
 import DeleteSvg from "../svg/DeleteSvg";
+import { difference } from "lodash";
 
 const Task = ({
   dueDate,
@@ -13,8 +20,8 @@ const Task = ({
   title,
   description,
 }) => {
-  const dateDue = format(parseJSON(dueDate), "dd-MM-yyyy");
-
+  const dateDue = format(parseJSON(dueDate), "MMM-dd-yyyy");
+  let difference;
   return (
     <div className="flex justify-between px-4 ">
       <div className="flex gap-3 ">
@@ -34,10 +41,19 @@ const Task = ({
           <div className="">{title}</div>
           <div className="text-xs mb-5 ">{description}</div>
           <div className="text-xs mb-5 ">
-            {dateDue === format(new Date(), "dd-MM-yyyy") ? (
+            {dateDue === format(new Date(), "MMM-dd-yyyy") ? (
               <span className="bg-yellow-500">Today</span>
-            ) : dateDue < format(new Date(), "dd-MM-yyyy") ? (
-              <span className="bg-red-500">Overdue</span>
+            ) : isPast(parseISO(dueDate)) ? (
+              <span className="bg-red-500">
+                Overdue by{" "}
+                {
+                  (difference = differenceInCalendarDays(
+                    new Date(),
+                    parseISO(dueDate)
+                  ))
+                }{" "}
+                {difference === 1 ? "day" : "days"}
+              </span>
             ) : (
               dateDue
             )}

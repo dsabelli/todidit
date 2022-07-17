@@ -11,7 +11,7 @@ const ArchivedProjects = ({ projects }) => {
       >
         <div>
           {project.title}
-          <p>{format(parseJSON(project.archivedOn), "dd-MM-yyyy")}</p>
+          <p>{format(parseJSON(project.archivedOn), "MMM-dd-yyyy")}</p>
         </div>
       </Link>
     ) : null
