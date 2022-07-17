@@ -3,7 +3,7 @@ import taskService from "../../services/tasks";
 import TaskForm from "./TaskForm";
 import Task from "./Task";
 import handleDeleteTask from "./DeleteTask";
-
+import { parseJSON } from "date-fns";
 const ReadAndUpdateTasks = ({
   user,
   projects,
@@ -31,6 +31,9 @@ const ReadAndUpdateTasks = ({
     onAddTask(false);
     setTaskTitle(tasks.filter((task) => task.id === id)[0].title);
     setTaskDescription(tasks.filter((task) => task.id === id)[0].description);
+    setTaskDueDate(
+      parseJSON(tasks.filter((task) => task.id === id)[0].dueDate)
+    );
     onTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === id
