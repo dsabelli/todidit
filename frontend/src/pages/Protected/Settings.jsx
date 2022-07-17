@@ -1,7 +1,12 @@
 import React from "react";
-
+import Navbar from "../../components/Navbar";
 const Settings = () => {
-  return <div>Settings</div>;
+  return (
+    <>
+      <Navbar notApp={true} />
+      <div>Settings</div>
+    </>
+  );
 };
 
 export default Settings;

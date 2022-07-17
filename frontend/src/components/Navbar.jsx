@@ -3,7 +3,7 @@ import { UserContext } from "./context/UserContext";
 import { Link } from "react-router-dom";
 import DiditSearch from "./Didits/DiditSearch";
 
-const Navbar = ({ projects }) => {
+const Navbar = ({ projects, notApp }) => {
   const { user } = useContext(UserContext);
 
   const handleLogout = () => {
@@ -12,10 +12,12 @@ const Navbar = ({ projects }) => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl">toDidit</a>
+        <Link to="/app/all">
+          <a className="btn btn-ghost normal-case text-xl">toDidit</a>
+        </Link>
       </div>
 
-      {user && <DiditSearch projects={projects} />}
+      {!notApp && <DiditSearch projects={projects} />}
       <div className="dropdown dropdown-end">
         <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
           {user && (

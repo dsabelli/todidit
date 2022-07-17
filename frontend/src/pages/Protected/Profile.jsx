@@ -4,6 +4,7 @@ import Button from "../../components/UI/Button";
 import userService from "../../services/users";
 import alertService from "../../services/alerts";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/Navbar";
 
 const Profile = () => {
   let navigate = useNavigate();
@@ -23,15 +24,18 @@ const Profile = () => {
     }
   };
   return (
-    <div>
-      {
-        <Button
-          className="btn-error"
-          text="Delete Self"
-          onClick={() => handleDeleteUser()}
-        />
-      }
-    </div>
+    <>
+      <Navbar notApp={true} />
+      <div>
+        {
+          <Button
+            className="btn-error"
+            text="Delete Self"
+            onClick={() => handleDeleteUser()}
+          />
+        }
+      </div>
+    </>
   );
 };
 export default Profile;
