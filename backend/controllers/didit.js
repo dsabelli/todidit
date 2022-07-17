@@ -37,16 +37,16 @@ router.post("/", async (request, response) => {
     user: user.id,
   });
   console.log(didit);
-  const project = projects.filter(
+  const project = projects.find(
     (project) => project.id === request.body.project
   );
   console.log(project);
   const savedDidit = await didit.save();
 
   user.didits = user.didits.concat(savedDidit._id);
-  project[0].didits = project[0].didits.concat(savedDidit._id);
+  project.didits = project.didits.concat(savedDidit._id);
   await user.save();
-  await project[0].save();
+  await project.save();
 
   response.status(201).json(savedDidit);
 });
