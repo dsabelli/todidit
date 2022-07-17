@@ -22,16 +22,16 @@ router.post("/", async (request, response) => {
     user: user.id,
   });
 
-  const project = projects.filter(
+  const project = projects.find(
     (project) => project.id === request.body.project
   );
   console.log(project);
   const savedTask = await task.save();
 
   user.tasks = user.tasks.concat(savedTask._id);
-  project[0].tasks = project[0].tasks.concat(savedTask._id);
+  project.tasks = project.tasks.concat(savedTask._id);
   await user.save();
-  await project[0].save();
+  await project.save();
 
   response.status(201).json(savedTask);
 });
