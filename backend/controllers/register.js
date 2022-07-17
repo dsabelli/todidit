@@ -44,6 +44,7 @@ router.post("/", async (request, response) => {
     username,
     passwordHash,
     date,
+    dateFormat: "MMM-dd-yyyy",
   });
 
   const savedUser = await user.save();

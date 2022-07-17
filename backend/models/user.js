@@ -21,6 +21,7 @@ const schema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  dateFormat: String,
   projects: [
     {
       type: mongoose.Schema.Types.ObjectId,

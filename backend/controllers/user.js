@@ -1,12 +1,21 @@
 const router = require("express").Router();
 const User = require("../models/user");
 
+router.put("/:id", async (request, response) => {
+  const update = request.body;
+  const updatedUser = await User.findByIdAndUpdate(request.params.id, update, {
+    new: true,
+    runValidators: true,
+    context: "query",
+  });
+  response.json(updatedUser);
+});
+
 router.delete("/:id", async (request, response) => {
   const userToDelete = await User.findById(request.params.id);
   if (!userToDelete) {
     return response.status(204).end();
   }
-  console.log(userToDelete);
 
   if (userToDelete.id && userToDelete.id.toString() !== request.user.id) {
     return response.status(401).json({
