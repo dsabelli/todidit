@@ -16,34 +16,44 @@ import Profile from "./pages/Protected/Profile";
 import Settings from "./pages/Protected/Settings";
 import Error from "./pages/Unprotected/Error";
 import { UserContext } from "./components/context/UserContext";
+import { DateFormatContext } from "./components/context/DateFormatContext";
 
 import "./App.css";
 
 function App() {
   const [user, setUser] = useState(null);
   const userValue = useMemo(() => ({ user, setUser }), [user, setUser]);
-
+  const [dateFormat, setDateFormat] = useState("MMM-dd-yyyy");
+  const dateFormatValue = useMemo(
+    () => ({ dateFormat, setDateFormat }),
+    [dateFormat, setDateFormat]
+  );
   return (
     <UserContext.Provider value={userValue}>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="register" element={<Register />} />
-        <Route path="login" element={<Login />} />
-        <Route element={<ProtectedRoutes />}>
-          <Route path="profile" element={<Profile />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="/app" element={<Home />}>
-            <Route index element={<div>There's nothing here!</div>} />
-            <Route path="all" element={<All />} />
-            <Route path="today" element={<Today />} />
-            <Route path="week" element={<Week />} />
-            <Route path="project/:id" element={<Project />} />
-            <Route path="project/archived/:id" element={<ArchivedProject />} />
-            <Route path="didit/:id" element={<Didits />} />
+      <DateFormatContext.Provider value={dateFormatValue}>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="profile" element={<Profile />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="/app" element={<Home />}>
+              <Route index element={<div>There's nothing here!</div>} />
+              <Route path="all" element={<All />} />
+              <Route path="today" element={<Today />} />
+              <Route path="week" element={<Week />} />
+              <Route path="project/:id" element={<Project />} />
+              <Route
+                path="project/archived/:id"
+                element={<ArchivedProject />}
+              />
+              <Route path="didit/:id" element={<Didits />} />
+            </Route>
           </Route>
-        </Route>
-        <Route path="*" element={<Error />} />
-      </Routes>
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </DateFormatContext.Provider>
     </UserContext.Provider>
   );
 }
