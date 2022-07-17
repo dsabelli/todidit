@@ -30,6 +30,8 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route element={<ProtectedRoutes />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
           <Route path="/app" element={<Home />}>
             <Route index element={<div>There's nothing here!</div>} />
             <Route path="all" element={<All />} />
@@ -38,8 +40,6 @@ function App() {
             <Route path="project/:id" element={<Project />} />
             <Route path="project/archived/:id" element={<ArchivedProject />} />
             <Route path="didit/:id" element={<Didits />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="settings" element={<Settings />} />
           </Route>
         </Route>
         <Route path="*" element={<Error />} />
