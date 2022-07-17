@@ -1,8 +1,14 @@
 const router = require("express").Router();
 const User = require("../models/user");
 
+router.get("/:id", async (request, response) => {
+  const userToGet = await User.findById(request.params.id);
+  return response.json(userToGet);
+});
+
 router.put("/:id", async (request, response) => {
   const update = request.body;
+  console.log(request.body);
   const updatedUser = await User.findByIdAndUpdate(request.params.id, update, {
     new: true,
     runValidators: true,

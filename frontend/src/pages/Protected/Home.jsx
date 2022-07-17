@@ -1,19 +1,17 @@
 import { useState, useEffect, useContext, useMemo } from "react";
-import { isToday, parseJSON } from "date-fns";
+import { Outlet } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Menu from "../../components/Menu";
-import Button from "../../components/UI/Button";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import projectService from "../../services/projects";
 import userService from "../../services/users";
 import taskService from "../../services/tasks";
 import CreateTask from "../../components/Tasks/CreateTask";
-import ReadAndUpdateTasks from "../../components/Tasks/ReadAndUpdateTasks";
 import ArchivedProjects from "../../components/Projects/ArchivedProjects";
 import CreateProject from "../../components/Projects/CreateProject";
 import ReadAndUpdateProjects from "../../components/Projects/ReadAndUpdateProjects";
 import { UserContext } from "../../components/context/UserContext";
-import { Link, Outlet } from "react-router-dom";
+import { DateFormatContext } from "../../components/context/DateFormatContext";
 import { DiditContext } from "../../components/context/DiditContext";
 const Home = () => {
   const [tasks, setTasks] = useState([]);
@@ -25,6 +23,7 @@ const Home = () => {
   const [projectTitle, setProjectTitle] = useState("");
   const [projectId, setProjectId] = useState("");
   const [systemMessage, setSystemMessage] = useState("");
+  const { setDateFormat } = useContext(DateFormatContext);
   const { user, setUser } = useContext(UserContext);
   const [didits, setDidits] = useState([]);
   const diditValue = useMemo(
@@ -34,7 +33,6 @@ const Home = () => {
 
   //Checks if a user's token is stored in local storage
   //If it is, re-login is not required and token is parsed and set for use
-
   useEffect(() => {
     const loggedIn = window.localStorage.getItem("loggedIn");
     if (loggedIn) {
@@ -43,6 +41,14 @@ const Home = () => {
       setUser(user);
     }
   }, []);
+
+  useEffect(() => {
+    const getUserSettings = async () => {
+      const response = await userService.getUser(user);
+      setDateFormat(response.dateFormat);
+    };
+    getUserSettings();
+  }, [user]);
 
   //get's a user's projects.
   useEffect(() => {

@@ -23,11 +23,12 @@ import "./App.css";
 function App() {
   const [user, setUser] = useState(null);
   const userValue = useMemo(() => ({ user, setUser }), [user, setUser]);
-  const [dateFormat, setDateFormat] = useState("MMM-dd-yyyy");
+  const [dateFormat, setDateFormat] = useState(null);
   const dateFormatValue = useMemo(
     () => ({ dateFormat, setDateFormat }),
     [dateFormat, setDateFormat]
   );
+
   return (
     <UserContext.Provider value={userValue}>
       <DateFormatContext.Provider value={dateFormatValue}>
