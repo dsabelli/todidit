@@ -26,6 +26,7 @@ const Profile = () => {
   return (
     <>
       <Navbar notApp={true} />
+      <h1>User Profile</h1>
       <div>
         {
           <Button

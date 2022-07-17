@@ -34,6 +34,7 @@ const Settings = () => {
   return (
     <>
       <Navbar notApp={true} />
+      <h1>Account Settings</h1>
       <div>
         <Select
           onChange={(e) => handleSelect(e.target.value)}
