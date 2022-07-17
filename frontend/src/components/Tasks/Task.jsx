@@ -43,7 +43,7 @@ const Task = ({
           <div className="">{title}</div>
           <div className="text-xs mb-5 ">{description}</div>
           <div className="text-xs mb-5 ">
-            {dateDue === format(new Date(), "MMM-dd-yyyy") ? (
+            {dateDue === format(new Date(), dateFormat) ? (
               <span className="bg-yellow-500">Today</span>
             ) : isPast(parseISO(dueDate)) ? (
               <span className="bg-red-500">
