@@ -5,7 +5,6 @@ import Input from "../UI/Input";
 import diditService from "../../services/didits";
 import { debounce } from "lodash";
 import { parseJSON } from "date-fns";
-import Modal from "../UI/Modal";
 import { useContext } from "react";
 import { DiditContext } from "../../components/context/DiditContext";
 import { Link } from "react-router-dom";

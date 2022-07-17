@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { UserContext } from "./context/UserContext";
 import { Link } from "react-router-dom";
 import DiditSearch from "./Didits/DiditSearch";
-import Button from "./UI/Button";
 
 const Navbar = ({ projects }) => {
   const { user } = useContext(UserContext);
