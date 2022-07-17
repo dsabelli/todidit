@@ -13,11 +13,12 @@ import ReadAndUpdateProjects from "../../components/Projects/ReadAndUpdateProjec
 import { UserContext } from "../../components/context/UserContext";
 import { DateFormatContext } from "../../components/context/DateFormatContext";
 import { DiditContext } from "../../components/context/DiditContext";
+import { ClimbingBoxLoader } from "react-spinners";
 const Home = () => {
+  const [loaded, setLoaded] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [allTasks, setAllTasks] = useState([]);
   const [projects, setProjects] = useState([]);
-
   const [addTask, setAddTask] = useState(false);
   const [addProject, setAddProject] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
@@ -39,25 +40,27 @@ const Home = () => {
       const user = JSON.parse(loggedIn);
       taskService.setToken(user.token);
       setUser(user);
+      setTimeout(() => {
+        setLoaded(true);
+      }, 1000);
     }
   }, []);
-
   useEffect(() => {
     const getUserSettings = async () => {
       const response = await userService.getUser(user);
       setDateFormat(response.dateFormat);
     };
-    getUserSettings();
+    user && getUserSettings();
   }, [user]);
 
   //get's a user's projects.
   useEffect(() => {
     try {
       const getProjects = async () => {
-        const response = await projectService.getProjects(user || "");
+        const response = await projectService.getProjects(user);
         setProjects(response);
       };
-      getProjects();
+      user && getProjects();
     } catch (error) {
       setSystemMessage("System encountered an error");
       setTimeout(() => {
@@ -70,11 +73,11 @@ const Home = () => {
   useEffect(() => {
     try {
       const getTasks = async () => {
-        const response = await taskService.getTasks(user || "");
+        const response = await taskService.getTasks(user);
         setTasks(response);
         setAllTasks(response);
       };
-      getTasks();
+      user && getTasks();
     } catch (error) {
       setSystemMessage("System encountered an error");
       setTimeout(() => {
@@ -83,7 +86,7 @@ const Home = () => {
     }
   }, [user]);
 
-  return (
+  return loaded ? (
     <div className="App">
       <DiditContext.Provider value={diditValue}>
         <Navbar projects={projects} />
@@ -146,6 +149,8 @@ const Home = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <ClimbingBoxLoader />
   );
 };
 
