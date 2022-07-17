@@ -13,7 +13,7 @@ const Navbar = ({ projects, notApp }) => {
     <div className="navbar bg-base-100">
       <div className="flex-1">
         <Link to="/app/all">
-          <a className="btn btn-ghost normal-case text-xl">toDidit</a>
+          <p className="btn btn-ghost normal-case text-xl">toDidit</p>
         </Link>
       </div>
 
