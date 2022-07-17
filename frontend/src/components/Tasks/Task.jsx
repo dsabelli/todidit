@@ -35,7 +35,9 @@ const Task = ({
           <div className="text-xs mb-5 ">{description}</div>
           <div className="text-xs mb-5 ">
             {dateDue === format(new Date(), "dd-MM-yyyy") ? (
-              <span className="bg-red-500">Today</span>
+              <span className="bg-yellow-500">Today</span>
+            ) : dateDue < format(new Date(), "dd-MM-yyyy") ? (
+              <span className="bg-red-500">Overdue</span>
             ) : (
               dateDue
             )}
