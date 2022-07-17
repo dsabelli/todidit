@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import Button from "../UI/Button";
-
+import { DateFormatContext } from "../../components/context/DateFormatContext";
 const DueDate = ({ dueDate, onDueDate }) => {
+  const { dateFormat } = useContext(DateFormatContext);
   const [isOpen, setIsOpen] = useState(false);
   const handleChange = (e) => {
     setIsOpen(!isOpen);
@@ -17,7 +18,7 @@ const DueDate = ({ dueDate, onDueDate }) => {
   };
   return (
     <>
-      <Button onClick={handleClick} text={format(dueDate, "MMM-dd-yyyy")} />
+      <Button onClick={handleClick} text={format(dueDate, dateFormat)} />
       {isOpen && (
         <DatePicker selected={dueDate} onChange={handleChange} inline />
       )}

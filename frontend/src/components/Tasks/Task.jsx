@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   format,
   parseJSON,
@@ -5,10 +6,10 @@ import {
   parseISO,
   differenceInCalendarDays,
 } from "date-fns";
+import { DateFormatContext } from "../context/DateFormatContext";
 import Button from "../UI/Button";
 import Checkbox from "../UI/Checkbox";
 import DeleteSvg from "../svg/DeleteSvg";
-import { difference } from "lodash";
 
 const Task = ({
   dueDate,
@@ -20,7 +21,8 @@ const Task = ({
   title,
   description,
 }) => {
-  const dateDue = format(parseJSON(dueDate), "MMM-dd-yyyy");
+  const { dateFormat } = useContext(DateFormatContext);
+  const dateDue = format(parseJSON(dueDate), dateFormat);
   let difference;
   return (
     <div className="flex justify-between px-4 ">

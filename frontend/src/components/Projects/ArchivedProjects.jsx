@@ -1,7 +1,10 @@
+import { useContext } from "react";
+import { DateFormatContext } from "../context/DateFormatContext";
 import { parseJSON, format } from "date-fns";
 import { Link } from "react-router-dom";
 import Toggle from "../UI/Toggle";
 const ArchivedProjects = ({ projects }) => {
+  const { dateFormat } = useContext(DateFormatContext);
   const projectElements = projects.map((project) =>
     project.isArchived ? (
       <Link
@@ -11,7 +14,7 @@ const ArchivedProjects = ({ projects }) => {
       >
         <div>
           {project.title}
-          <p>{format(parseJSON(project.archivedOn), "MMM-dd-yyyy")}</p>
+          <p>{format(parseJSON(project.archivedOn), dateFormat)}</p>
         </div>
       </Link>
     ) : null
