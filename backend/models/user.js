@@ -21,7 +21,10 @@ const schema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  dateFormat: String,
+  dateFormat: {
+    type: String,
+    default: "MMM-dd-yyyy",
+  },
   projects: [
     {
       type: mongoose.Schema.Types.ObjectId,
