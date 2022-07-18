@@ -17,6 +17,7 @@ import Settings from "./pages/Protected/Settings";
 import Error from "./pages/Unprotected/Error";
 import Verified from "./pages/Unprotected/Verified";
 import ResetPassword from "./pages/Unprotected/ResetPassword";
+import ConfirmReset from "./pages/Unprotected/ConfirmReset";
 import { UserContext } from "./components/context/UserContext";
 import { DateFormatContext } from "./components/context/DateFormatContext";
 
@@ -39,6 +40,7 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="reset-password" element={<ResetPassword />} />
+          <Route path="reset-password/:token" element={<ConfirmReset />} />
           <Route path="verify/:token" element={<Verified />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="profile" element={<Profile />} />

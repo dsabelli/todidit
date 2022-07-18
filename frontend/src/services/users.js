@@ -22,6 +22,17 @@ const updateUser = async (update, user) => {
   return response.data;
 };
 
+const confirmReset = async (password, token) => {
+  // const config = {
+  //   headers: { Authorization: `bearer ${user.token}` },
+  // };
+  const response = await axios.put(
+    `${baseUrl}/confirm-reset/${token}`,
+    password
+  );
+  return response.data;
+};
+
 const deleteUser = async (user) => {
   const config = {
     headers: { Authorization: `bearer ${user.token}` },
@@ -29,4 +40,10 @@ const deleteUser = async (user) => {
   const response = await axios.delete(`${baseUrl}/${user.id}`, config);
   return response.data;
 };
-export default { deleteUser, updateUser, getUser, resetPassword };
+export default {
+  deleteUser,
+  updateUser,
+  getUser,
+  resetPassword,
+  confirmReset,
+};

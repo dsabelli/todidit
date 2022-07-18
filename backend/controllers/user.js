@@ -2,7 +2,8 @@ const router = require("express").Router();
 const User = require("../models/user");
 const config = require("../utils/config");
 const sgMail = require("@sendgrid/mail");
-
+const validator = require("validator");
+const bcrypt = require("bcrypt");
 // const bcrypt = require("bcrypt");
 sgMail.setApiKey(config.SENDGRID_API_KEY);
 
@@ -48,6 +49,35 @@ router.put("/:id", async (request, response) => {
     context: "query",
   });
   response.json(updatedUser);
+});
+
+router.put("/confirm-reset/:token", async (request, response) => {
+  const { password, confirmPassword } = request.body;
+  const token = request.params.token;
+  console.log(request.body, token);
+
+  if (!password || !validator.isStrongPassword(password)) {
+    return response.status(400).json({
+      error:
+        "Password must include 8-16 characters with a mix of letters, numbers & symbols.",
+    });
+  }
+  if (password !== confirmPassword) {
+    return response.status(400).json({
+      error: "Passwords must match",
+    });
+  }
+
+  const updatedUser = await User.findOne({ vToken: token });
+
+  const saltRounds = 10;
+  const updatedHash = await bcrypt.hash(password, saltRounds);
+
+  updatedUser.passwordHash = updatedHash;
+
+  const savedUser = await updatedUser.save();
+
+  response.json(savedUser);
 });
 
 router.delete("/:id", async (request, response) => {
