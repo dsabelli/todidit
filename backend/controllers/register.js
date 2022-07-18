@@ -7,6 +7,7 @@ const config = require("../utils/config");
 const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(config.SENDGRID_API_KEY);
+
 // router.get("/", async (request, response) => {
 //   const existingEmail = await User.findOne({ email: request.query.email });
 //   if (existingEmail) {
@@ -43,16 +44,6 @@ router.post("/", async (request, response) => {
 
   const token = jwt.sign({ email: email }, config.EMAIL_SECRET);
 
-  await sgMail.send({
-    to: email,
-    from: "noreply@todidit.com",
-    subject: "Please verify your account",
-    html: `<h1>You're nearly there!</h1>
-    <h2>Hi ${username},</h2>
-    <p>To finish setting up your account, verify we've got the correct email for you.</p>
-        <button><a href=http://localhost:3000/verify/${token}>Verify your email</a></button>`,
-  });
-
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
 
@@ -65,8 +56,21 @@ router.post("/", async (request, response) => {
   });
 
   const savedUser = await user.save();
-
-  response.status(201).json(savedUser);
+  if (savedUser) {
+    await sgMail.send({
+      to: email,
+      from: "noreply@todidit.com",
+      subject: "Please verify your account",
+      html: `<h1>You're nearly there!</h1>
+      <h2>Hi ${username},</h2>
+      <p>To finish setting up your account, verify we've got the correct email for you.</p>
+          <button><a href=http://localhost:3000/verify/${token}>Verify your email</a></button>`,
+    });
+    response.status(201).json(savedUser);
+  } else
+    response.status(500).json({
+      error: "Unable to register createTestAccount, please try again later",
+    });
 });
 
 router.get("/verify/:token", async (request, response) => {
