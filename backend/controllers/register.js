@@ -59,7 +59,7 @@ router.post("/", async (request, response) => {
     html: `<h1>You're nearly there!</h1>
     <h2>Hi ${username},</h2>
     <p>To finish setting up your account, verify we've got the correct email for you.</p>
-        <button><a href=http://localhost:3003/api/register/verify/${token}>Verify your email</a></button>`,
+        <button><a href=http://localhost:3000/verify/${token}>Verify your email</a></button>`,
   });
 
   const saltRounds = 10;
