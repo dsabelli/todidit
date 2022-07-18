@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import registrationService from "../../services/register";
@@ -33,7 +32,7 @@ const schema = yup.object().shape({
 });
 
 const Register = ({}) => {
-  let navigate = useNavigate();
+  const [registered, setRegistered] = useState(false);
   const [asyncError, setAsyncError] = useState("");
   const {
     register,
@@ -60,8 +59,8 @@ const Register = ({}) => {
         password,
         confirmPassword,
       });
+      setRegistered(true);
       setAsyncError("");
-      navigate("/login");
     } catch (error) {
       console.log(error);
       const errorMsg = error.response ? error.response.data.error : error;
@@ -72,7 +71,7 @@ const Register = ({}) => {
     }
   };
 
-  return (
+  return !registered ? (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
@@ -157,6 +156,11 @@ const Register = ({}) => {
           </div>
         </form>
       </div>
+    </div>
+  ) : (
+    <div>
+      Thank you for registering. Please check your email for a verification
+      link!
     </div>
   );
 };
