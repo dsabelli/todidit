@@ -25,6 +25,14 @@ const schema = mongoose.Schema({
     type: String,
     default: "MMM-dd-yyyy",
   },
+  vToken: {
+    type: String,
+    unique: true,
+  },
+  verified: {
+    type: Boolean,
+    default: false,
+  },
   projects: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -52,6 +60,7 @@ schema.set("toJSON", {
     delete returnedObject.__v;
     // the passwordHash should not be revealed
     delete returnedObject.passwordHash;
+    delete returnedObject.vToken;
   },
 });
 

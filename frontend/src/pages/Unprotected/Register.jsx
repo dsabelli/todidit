@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import registrationService from "../../services/register";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import Button from "../../components/UI/Button";
-
+import { useNavigate } from "react-router-dom";
+import UNavbar from "../../components/UNavbar";
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -34,6 +34,7 @@ const schema = yup.object().shape({
 
 const Register = ({}) => {
   let navigate = useNavigate();
+  const [registered, setRegistered] = useState(false);
   const [asyncError, setAsyncError] = useState("");
   const {
     register,
@@ -60,8 +61,8 @@ const Register = ({}) => {
         password,
         confirmPassword,
       });
+      setRegistered(true);
       setAsyncError("");
-      navigate("/login");
     } catch (error) {
       console.log(error);
       const errorMsg = error.response ? error.response.data.error : error;
@@ -72,92 +73,111 @@ const Register = ({}) => {
     }
   };
 
-  return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Register now!</h1>
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <div className="card-body">
-              <div className="form-control">
-                <label htmlFor="email" className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  autoFocus
-                  type="text"
-                  name="email"
-                  {...register("email")}
-                  placeholder="email"
-                  className="input input-bordered"
-                />
-                {errors.email && (
-                  <ErrorMessage errorMessage={errors.email?.message} />
-                )}
-                {asyncError && <ErrorMessage errorMessage={asyncError} />}
-              </div>
-              <div className="form-control">
-                <label htmlFor="username" className="label">
-                  <span className="label-text">Username</span>
-                </label>
-                <input
-                  required
-                  type="text"
-                  name="username"
-                  {...register("username")}
-                  placeholder="username"
-                  className="input input-bordered"
-                />
-                {errors.username && (
-                  <ErrorMessage errorMessage={errors.username?.message} />
-                )}
-              </div>
-              <div className="form-control">
-                <label htmlFor="password" className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  {...register("password")}
-                  placeholder="password"
-                  className="input input-bordered"
-                />
-                {errors.password && (
-                  <ErrorMessage errorMessage={errors.password?.message} />
-                )}
-              </div>
-              <div className="form-control">
-                <label htmlFor="confirmPassword" className="label">
-                  <span className="label-text">Confirm Password</span>
-                </label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  {...register("confirmPassword")}
-                  placeholder="confirm password"
-                  className="input input-bordered"
-                />
-                {errors.confirmPassword && (
-                  <ErrorMessage
-                    errorMessage={errors.confirmPassword?.message}
+  useEffect(() => {
+    registered &&
+      setTimeout(() => {
+        navigate("/");
+      }, 5000);
+  }, [registered]);
+
+  return !registered ? (
+    <>
+      <UNavbar />
+      <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content flex-col lg:flex-row-reverse">
+          <div className="text-center lg:text-left">
+            <h1 className="text-5xl font-bold">Register now!</h1>
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+              <div className="card-body">
+                <div className="form-control">
+                  <label htmlFor="email" className="label">
+                    <span className="label-text">Email</span>
+                  </label>
+                  <input
+                    autoFocus
+                    type="text"
+                    name="email"
+                    {...register("email")}
+                    placeholder="email"
+                    className="input input-bordered"
                   />
-                )}
-              </div>
-              <div className="form-control mt-6">
-                <Button
-                  text={"Register"}
-                  type="submit"
-                  className={"btn-primary"}
-                />
+                  {errors.email && (
+                    <ErrorMessage errorMessage={errors.email?.message} />
+                  )}
+                  {asyncError && <ErrorMessage errorMessage={asyncError} />}
+                </div>
+                <div className="form-control">
+                  <label htmlFor="username" className="label">
+                    <span className="label-text">Username</span>
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="username"
+                    {...register("username")}
+                    placeholder="username"
+                    className="input input-bordered"
+                  />
+                  {errors.username && (
+                    <ErrorMessage errorMessage={errors.username?.message} />
+                  )}
+                </div>
+                <div className="form-control">
+                  <label htmlFor="password" className="label">
+                    <span className="label-text">Password</span>
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    {...register("password")}
+                    placeholder="password"
+                    className="input input-bordered"
+                  />
+                  {errors.password && (
+                    <ErrorMessage errorMessage={errors.password?.message} />
+                  )}
+                </div>
+                <div className="form-control">
+                  <label htmlFor="confirmPassword" className="label">
+                    <span className="label-text">Confirm Password</span>
+                  </label>
+                  <input
+                    type="password"
+                    name="confirmPassword"
+                    {...register("confirmPassword")}
+                    placeholder="confirm password"
+                    className="input input-bordered"
+                  />
+                  {errors.confirmPassword && (
+                    <ErrorMessage
+                      errorMessage={errors.confirmPassword?.message}
+                    />
+                  )}
+                </div>
+                <div className="form-control mt-6">
+                  <Button
+                    text={"Register"}
+                    type="submit"
+                    className={"btn-primary"}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
+  ) : (
+    <>
+      {" "}
+      <UNavbar />{" "}
+      <div>
+        Thank you for registering. Please check your email for a verification
+        link!
+      </div>
+    </>
   );
 };
 
