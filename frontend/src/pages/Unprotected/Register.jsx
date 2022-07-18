@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import registrationService from "../../services/register";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import Button from "../../components/UI/Button";
-
+import { useNavigate } from "react-router-dom";
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -32,6 +32,7 @@ const schema = yup.object().shape({
 });
 
 const Register = ({}) => {
+  let navigate = useNavigate();
   const [registered, setRegistered] = useState(false);
   const [asyncError, setAsyncError] = useState("");
   const {
@@ -70,6 +71,13 @@ const Register = ({}) => {
       }, 5000);
     }
   };
+
+  useEffect(() => {
+    registered &&
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+  }, [registered]);
 
   return !registered ? (
     <div className="hero min-h-screen bg-base-200">
