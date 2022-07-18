@@ -3,7 +3,7 @@ import loginService from "../../services/login";
 import taskService from "../../services/tasks";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import { UserContext } from "../../components/context/UserContext";
 
@@ -11,6 +11,7 @@ const Login = () => {
   let navigate = useNavigate();
   const { setUser } = useContext(UserContext);
   const [asyncError, setAsyncError] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -77,12 +78,15 @@ const Login = () => {
                   className="input input-bordered"
                   {...register("password")}
                 />
-                {/*
+
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <Link
+                    to="/reset-password"
+                    className="label-text-alt link link-hover"
+                  >
                     Forgot password?
-                  </a> 
-                </label>*/}
+                  </Link>
+                </label>
               </div>
               <div className="form-control mt-6">
                 <Button
