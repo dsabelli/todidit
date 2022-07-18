@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import UNavbar from "../../components/UNavbar";
 import registerService from "../../services/register";
 
 const Verified = () => {
@@ -12,12 +13,15 @@ const Verified = () => {
     verify();
   }, []);
   return (
-    <div>
-      Verified{" "}
-      <Link className="btn" to="/login">
-        Please Login
-      </Link>
-    </div>
+    <>
+      <UNavbar />
+      <div>
+        Verified{" "}
+        <Link className="btn" to="/login">
+          Please Login
+        </Link>
+      </div>
+    </>
   );
 };
 

@@ -3,10 +3,12 @@ import userService from "../../services/users";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/UI/Button";
+import ErrorMessage from "../../components/UI/ErrorMessage";
 
 const ResetPassword = () => {
   let navigate = useNavigate();
   const [reset, setReset] = useState(false);
+  const [asyncError, setAsyncError] = useState("");
   const {
     register,
     handleSubmit,
@@ -17,10 +19,15 @@ const ResetPassword = () => {
   //function for handling user login
   const handleReset = async ({ email }) => {
     try {
-      const user = await userService.resetPassword({ email });
+      await userService.resetPassword({ email });
       setReset(true);
     } catch (error) {
       console.log(error);
+      let errorMsg = error.response.data.error || error;
+      setAsyncError(errorMsg);
+      setTimeout(() => {
+        setAsyncError(null);
+      }, 5000);
     }
   };
 
@@ -28,7 +35,7 @@ const ResetPassword = () => {
     reset &&
       setTimeout(() => {
         navigate("/");
-      }, 2000);
+      }, 5000);
   }, [reset]);
 
   return reset ? (
@@ -47,6 +54,7 @@ const ResetPassword = () => {
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div className="card-body">
               <div className="form-control">
+                {asyncError && <ErrorMessage errorMessage={asyncError} />}
                 <input
                   autoFocus
                   required

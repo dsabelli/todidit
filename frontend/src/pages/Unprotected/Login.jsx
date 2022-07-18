@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import { UserContext } from "../../components/context/UserContext";
+import UNavbar from "../../components/UNavbar";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -38,68 +39,71 @@ const Login = () => {
   };
 
   return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="hero-content flex-col lg:flex-row-reverse">
-        <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Login now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <div className="card-body">
-              <div className="form-control">
-                {asyncError && <ErrorMessage errorMessage={asyncError} />}
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  autoFocus
-                  required
-                  type="text"
-                  name="email"
-                  placeholder="email"
-                  className="input input-bordered"
-                  {...register("email")}
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  required
-                  type="password"
-                  name="password"
-                  placeholder="password"
-                  className="input input-bordered"
-                  {...register("password")}
-                />
+    <>
+      <UNavbar />
+      <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content flex-col lg:flex-row-reverse">
+          <div className="text-center lg:text-left">
+            <h1 className="text-5xl font-bold">Login now!</h1>
+            <p className="py-6">
+              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
+              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
+              et a id nisi.
+            </p>
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+              <div className="card-body">
+                <div className="form-control">
+                  {asyncError && <ErrorMessage errorMessage={asyncError} />}
+                  <label className="label">
+                    <span className="label-text">Email</span>
+                  </label>
+                  <input
+                    autoFocus
+                    required
+                    type="text"
+                    name="email"
+                    placeholder="email"
+                    className="input input-bordered"
+                    {...register("email")}
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Password</span>
+                  </label>
+                  <input
+                    required
+                    type="password"
+                    name="password"
+                    placeholder="password"
+                    className="input input-bordered"
+                    {...register("password")}
+                  />
 
-                <label className="label">
-                  <Link
-                    to="/reset-password"
-                    className="label-text-alt link link-hover"
-                  >
-                    Forgot password?
-                  </Link>
-                </label>
-              </div>
-              <div className="form-control mt-6">
-                <Button
-                  type="submit"
-                  text={"Login"}
-                  className={"btn-primary"}
-                />
+                  <label className="label">
+                    <Link
+                      to="/reset-password"
+                      className="label-text-alt link link-hover"
+                    >
+                      Forgot password?
+                    </Link>
+                  </label>
+                </div>
+                <div className="form-control mt-6">
+                  <Button
+                    type="submit"
+                    text={"Login"}
+                    className={"btn-primary"}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
