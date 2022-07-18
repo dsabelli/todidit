@@ -83,7 +83,7 @@ router.get("/verify/:token", async (request, response) => {
   verifiedUser.verified = true;
   const savedUser = await verifiedUser.save();
 
-  response.status(201).json(savedUser);
+  response.status(200).json(savedUser);
 });
 
 module.exports = router;
