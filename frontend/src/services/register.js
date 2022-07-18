@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const checkEmail = async (email) => {
-  console.log(email);
-  const response = await axios.get("/api/register", {
-    params: { email: email },
+const verifyEmail = async (token) => {
+  console.log(token);
+  const response = await axios.get(`/api/register/verify/${token}`, {
+    params: { token: token },
   });
   return response.data;
 };
@@ -13,4 +13,4 @@ const register = async (credentials) => {
   return response.data;
 };
 
-export default { register, checkEmail };
+export default { register, verifyEmail };
