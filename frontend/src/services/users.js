@@ -1,6 +1,11 @@
 import axios from "axios";
 const baseUrl = "/api/users";
 
+const resetPassword = async (email) => {
+  const response = await axios.post(baseUrl, email);
+  return response.data;
+};
+
 const getUser = async (user) => {
   const config = {
     headers: { Authorization: `bearer ${user.token}` },
@@ -24,4 +29,4 @@ const deleteUser = async (user) => {
   const response = await axios.delete(`${baseUrl}/${user.id}`, config);
   return response.data;
 };
-export default { deleteUser, updateUser, getUser };
+export default { deleteUser, updateUser, getUser, resetPassword };
