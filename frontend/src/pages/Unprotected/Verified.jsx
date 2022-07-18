@@ -13,7 +13,10 @@ const Verified = () => {
   }, []);
   return (
     <div>
-      Verified <Link to="/login">Please Login</Link>
+      Verified{" "}
+      <Link className="btn" to="/login">
+        Please Login
+      </Link>
     </div>
   );
 };
