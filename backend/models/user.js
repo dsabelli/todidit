@@ -25,6 +25,10 @@ const schema = mongoose.Schema({
     type: String,
     default: "MMM-dd-yyyy",
   },
+  verified: {
+    type: Boolean,
+    default: false,
+  },
   projects: [
     {
       type: mongoose.Schema.Types.ObjectId,
