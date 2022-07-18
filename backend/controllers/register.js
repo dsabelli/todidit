@@ -3,9 +3,10 @@ const validator = require("validator");
 const router = require("express").Router();
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
 const config = require("../utils/config");
+const sgMail = require("@sendgrid/mail");
 
+sgMail.setApiKey(config.SENDGRID_API_KEY);
 // router.get("/", async (request, response) => {
 //   const existingEmail = await User.findOne({ email: request.query.email });
 //   if (existingEmail) {
@@ -39,22 +40,12 @@ router.post("/", async (request, response) => {
       error: "Passwords must match",
     });
   }
-  console.log(email);
+
   const token = jwt.sign({ email: email }, config.EMAIL_SECRET);
 
-  const transport = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false,
-    auth: {
-      user: "amani.purdy@ethereal.email",
-      pass: "4P8advDsxmwXxax4X9",
-    },
-  });
-
-  await transport.sendMail({
-    from: "toDidit",
+  await sgMail.send({
     to: email,
+    from: "noreply@todidit.com",
     subject: "Please verify your account",
     html: `<h1>You're nearly there!</h1>
     <h2>Hi ${username},</h2>
