@@ -130,24 +130,8 @@ describe("When a user attempts to get projects", () => {
   });
 
   it("succeeds if user query found", async () => {
-    const newProject = {
-      title: "Test Project",
-    };
-    const response = await api
-      .post("/api/projects")
-      .send(newProject)
-      .set("Authorization", `bearer ${token}`);
-
-    projectId = response.body.id;
-
-    const query = {
-      params: { id: userId },
-    };
-    console.log(query);
     await api
-      .get(`/api/projects/`)
-      .send(query)
-      .set("Authorization", `bearer ${token}`)
+      .get(`/api/projects/?user=${userId}`)
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });

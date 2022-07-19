@@ -142,13 +142,8 @@ describe("When a user attemps to get a task", () => {
   });
 
   it("succeeds if user query found", async () => {
-    const query = {
-      params: { id: userId },
-    };
     await api
-      .get(`/api/tasks/`)
-      .send(query)
-      .set("Authorization", `bearer ${token}`)
+      .get(`/api/tasks/?user=${userId}`)
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });
