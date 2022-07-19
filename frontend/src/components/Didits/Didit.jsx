@@ -4,6 +4,7 @@ import { DateFormatContext } from "../context/DateFormatContext";
 
 const Didit = ({ title, completedOn, project }) => {
   const { dateFormat } = useContext(DateFormatContext);
+
   return (
     <div className="flex justify-between px-40 ">
       <div className="flex gap-3 ">

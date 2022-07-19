@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import Didit from "./Didit";
 import DateRange from "./DateRange";
 import Input from "../UI/Input";
@@ -7,9 +7,11 @@ import { debounce } from "lodash";
 import { parseJSON } from "date-fns";
 import { useContext } from "react";
 import { DiditContext } from "../../components/context/DiditContext";
+import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
 
 const DiditSearch = ({ projects }) => {
+  const { user } = useContext(UserContext);
   const { didits, setDidits } = useContext(DiditContext);
   const [visible, setVisible] = useState(false);
   const [diditDateStart, setDiditDateStart] = useState("");
@@ -19,38 +21,30 @@ const DiditSearch = ({ projects }) => {
     const searchedDidits = await diditService.getDidits(
       title,
       diditDateStart,
-      diditDateEnd
+      diditDateEnd,
+      user
     );
     setDidits(searchedDidits);
   }, 200);
 
   const diditElements = didits
-    ? didits.map((didit) =>
-        //temp fix for didits with no completed on
-        didit.completedOn ? (
-          //change modal to button that routes to own "page"
-
-          <Link
-            to={`/app/didit/${didit.id}`}
+    ? didits.map((didit) => (
+        <Link
+          to={`/app/didit/${didit.id}`}
+          key={didit.id}
+          title={didit.title}
+          onClick={() => setVisible(false)}
+        >
+          <Didit
             key={didit.id}
             title={didit.title}
-            onClick={() => setVisible(false)}
-          >
-            <Didit
-              key={didit.id}
-              title={didit.title}
-              //temp fix for didits with no project
-              project={
-                didit.project
-                  ? projects.find((project) => project.id === didit.project)
-                      .title
-                  : null
-              }
-              completedOn={parseJSON(didit.completedOn)}
-            />
-          </Link>
-        ) : null
-      )
+            project={
+              projects.find((project) => project.id === didit.project).title
+            }
+            completedOn={parseJSON(didit.completedOn)}
+          />
+        </Link>
+      ))
     : null;
 
   return (

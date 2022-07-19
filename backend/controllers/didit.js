@@ -2,16 +2,21 @@ const router = require("express").Router();
 const Didit = require("../models/didit");
 
 router.get("/", async (request, response) => {
+  if (!request.user) {
+    return response.status(401).json({ error: "token missing or invalid" });
+  }
+
   if (Object.keys(request.query).length === 0) {
     return response.status(404, { error: "didit not found" }).end();
   } else if (request.query.project) {
     const didits = await Didit.find({
-      project: request.query.project,
+      $and: [{ user: request.query.user }, { project: request.query.project }],
     });
     response.json(didits);
   } else if (request.query) {
     const didits = await Didit.find({
       $and: [
+        { user: request.query.user },
         { title: { $regex: request.query.title, $options: "i" || "" } },
         {
           createdOn: {
