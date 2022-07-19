@@ -22,7 +22,7 @@ describe("When a user attempts to create a project", () => {
       vToken: "abc123",
     });
 
-    user.save();
+    await user.save();
     const response = await api
       .post("/api/login")
       .send({ email: "dsabelli@gmail.com", password: "ArnoandLily1!" })
@@ -118,7 +118,7 @@ describe("When a user attempts to update a project", () => {
 describe("When a user attempts to get projects", () => {
   let token;
   let projectId;
-  let user;
+  let userId;
   beforeAll(async () => {
     const response = await api
       .post("/api/login")
@@ -126,7 +126,7 @@ describe("When a user attempts to get projects", () => {
       .expect(200);
 
     token = response.body.token;
-    user = response.body.id;
+    userId = response.body.id;
   });
 
   it("succeeds if user query found", async () => {
@@ -141,8 +141,9 @@ describe("When a user attempts to get projects", () => {
     projectId = response.body.id;
 
     const query = {
-      params: { id: user.id },
+      params: { id: userId },
     };
+    console.log(query);
     await api
       .get(`/api/projects/`)
       .send(query)
@@ -167,6 +168,14 @@ describe("When a user attempts to get projects", () => {
       .set("Authorization", `bearer ${token}`)
       .expect(200)
       .expect("Content-Type", /application\/json/);
+  });
+
+  it("fails if project id not found", async () => {
+    let notReal = "92d6d4d5ce37e7f3c87558f1";
+    await api
+      .get(`/api/projects/${notReal}`)
+      .set("Authorization", `bearer ${token}`)
+      .expect(404);
   });
 });
 
