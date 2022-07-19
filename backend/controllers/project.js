@@ -28,7 +28,7 @@ router.post("/", async (request, response) => {
 router.get("/:id", async (request, response) => {
   const projectToGet = await Project.findById(request.params.id);
   if (!projectToGet) {
-    return response.status(404, { error: "task not found" }).end();
+    return response.status(404, { error: "project not found" }).end();
   }
   return response.json(projectToGet);
 });
