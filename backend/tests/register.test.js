@@ -15,22 +15,10 @@ describe("When a user registers", () => {
       username: "dsabelli",
       email: "dsabelli@gmail.com",
       passwordHash,
+      verified: true,
     });
     user.save();
     // await api.post("/register").send(newUser).expect(201);
-  }, 100000);
-
-  it("register succeeds if unique username and email and strong password", async () => {
-    const newUser = {
-      username: "vsabelli",
-      email: "vsabelli@gmail.com",
-      password: "ArbyandAsh1!",
-    };
-    await api
-      .post("/api/register")
-      .send(newUser)
-      .expect(201)
-      .expect("Content-Type", /application\/json/);
   }, 100000);
 
   it("register fails if password is not strong", async () => {
@@ -46,22 +34,9 @@ describe("When a user registers", () => {
       .expect("Content-Type", /application\/json/);
   }, 100000);
 
-  it("register fails if username not unique", async () => {
-    const newUser = {
-      username: "dsabelli",
-      email: "uniqueEmail@gmail.com",
-      password: "TheStrongestp@55word!",
-    };
-    await api
-      .post("/api/register")
-      .send(newUser)
-      .expect(400)
-      .expect("Content-Type", /application\/json/);
-  }, 100000);
-
   it("register fails if email not unique", async () => {
     const newUser = {
-      username: "dsabelli1",
+      username: "dsabelli",
       email: "dsabelli@gmail.com",
       password: "TheStrongestp@55word!",
     };
@@ -71,6 +46,33 @@ describe("When a user registers", () => {
       .expect(400)
       .expect("Content-Type", /application\/json/);
   }, 100000);
+
+  it("register succeeds if unique username and email and strong password", async () => {
+    const newUser = {
+      username: "vsabelli",
+      email: "vsabelli@gmail.com",
+      password: "ArbyandAsh1!",
+      confirmPassword: "ArbyandAsh1!",
+    };
+    await api
+      .post("/api/register")
+      .send(newUser)
+      .expect(201)
+      .expect("Content-Type", /application\/json/);
+  }, 100000);
+
+  // it("register fails if email not unique", async () => {
+  //   const newUser = {
+  //     username: "dsabelli1",
+  //     email: "dsabelli@gmail.com",
+  //     password: "TheStrongestp@55word!",
+  //   };
+  //   await api
+  //     .post("/api/register")
+  //     .send(newUser)
+  //     .expect(400)
+  //     .expect("Content-Type", /application\/json/);
+  // }, 100000);
 });
 
 afterAll(() => {
