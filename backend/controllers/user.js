@@ -42,7 +42,7 @@ router.get("/:id", async (request, response) => {
 
 router.put("/:id", async (request, response) => {
   const update = request.body;
-  console.log(request.body);
+
   const updatedUser = await User.findByIdAndUpdate(request.params.id, update, {
     new: true,
     runValidators: true,
@@ -54,7 +54,6 @@ router.put("/:id", async (request, response) => {
 router.put("/confirm-reset/:token", async (request, response) => {
   const { password, confirmPassword } = request.body;
   const token = request.params.token;
-  console.log(request.body, token);
 
   if (!password || !validator.isStrongPassword(password)) {
     return response.status(400).json({

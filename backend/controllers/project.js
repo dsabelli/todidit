@@ -33,6 +33,22 @@ router.get("/:id", async (request, response) => {
   return response.json(projectToGet);
 });
 
+router.put("/:id", async (request, response) => {
+  const project = request.body;
+
+  const updatedProject = await Project.findByIdAndUpdate(
+    request.params.id,
+    project,
+    {
+      new: true,
+      runValidators: true,
+      context: "query",
+    }
+  );
+
+  response.json(updatedProject);
+});
+
 // router.delete("/:id", async (request, response) => {
 //   const projectToDelete = await Project.findById(request.params.id);
 //   if (!projectToDelete) {
@@ -52,21 +68,5 @@ router.get("/:id", async (request, response) => {
 
 //   response.status(204).end();
 // });
-
-router.put("/:id", async (request, response) => {
-  const project = request.body;
-  console.log(project);
-  const updatedProject = await Project.findByIdAndUpdate(
-    request.params.id,
-    project,
-    {
-      new: true,
-      runValidators: true,
-      context: "query",
-    }
-  );
-
-  response.json(updatedProject);
-});
 
 module.exports = router;

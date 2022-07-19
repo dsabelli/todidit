@@ -9,7 +9,7 @@ router.post("/", async (request, response) => {
   const user = await User.findOne({ email });
   const passwordCorrect =
     user === null ? false : await bcrypt.compare(password, user.passwordHash);
-  console.log(user);
+
   if (!(user && passwordCorrect)) {
     return response.status(401).json({
       error: "Invalid email or password",

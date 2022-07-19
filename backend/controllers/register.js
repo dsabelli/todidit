@@ -8,15 +8,6 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(config.SENDGRID_API_KEY);
 
-// router.get("/", async (request, response) => {
-//   const existingEmail = await User.findOne({ email: request.query.email });
-//   if (existingEmail) {
-//     return response.status(400).json({
-//       error: "An account with this email address already exists, try another.",
-//     });
-//   }
-// });
-
 router.post("/", async (request, response) => {
   const { email, username, password, confirmPassword, date } = request.body;
 
@@ -85,5 +76,14 @@ router.get("/verify/:token", async (request, response) => {
 
   response.status(200).json(savedUser);
 });
+
+// router.get("/", async (request, response) => {
+//   const existingEmail = await User.findOne({ email: request.query.email });
+//   if (existingEmail) {
+//     return response.status(400).json({
+//       error: "An account with this email address already exists, try another.",
+//     });
+//   }
+// });
 
 module.exports = router;

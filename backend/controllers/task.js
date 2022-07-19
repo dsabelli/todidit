@@ -16,7 +16,7 @@ router.post("/", async (request, response) => {
 
   const user = request.user;
   const projects = request.projects;
-  console.log(request.body);
+
   const task = new Task({
     ...request.body,
     user: user.id,
@@ -25,7 +25,7 @@ router.post("/", async (request, response) => {
   const project = projects.find(
     (project) => project.id === request.body.project
   );
-  console.log(project);
+
   const savedTask = await task.save();
 
   user.tasks = user.tasks.concat(savedTask._id);

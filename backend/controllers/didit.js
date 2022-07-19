@@ -8,7 +8,6 @@ router.get("/", async (request, response) => {
     });
     response.json(didits);
   } else if (request.query) {
-    console.log(request.query);
     const didits = await Didit.find({
       $and: [
         { title: { $regex: request.query.title, $options: "i" || "" } },
@@ -31,16 +30,16 @@ router.post("/", async (request, response) => {
 
   const user = request.user;
   const projects = request.projects;
-  console.log(request.projects);
+
   const didit = new Didit({
     ...request.body,
     user: user.id,
   });
-  console.log(didit);
+
   const project = projects.find(
     (project) => project.id === request.body.project
   );
-  console.log(project);
+
   const savedDidit = await didit.save();
 
   user.didits = user.didits.concat(savedDidit._id);
