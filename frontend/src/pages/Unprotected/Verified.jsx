@@ -5,7 +5,7 @@ import registerService from "../../services/register";
 
 const Verified = () => {
   let params = useParams();
-  console.log(params);
+
   const verify = async () => {
     await registerService.verifyEmail(params.token);
   };
