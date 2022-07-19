@@ -36,11 +36,6 @@ router.post("/", async (request, response) => {
   response.status(201).json(savedTask);
 });
 
-router.delete("/", async (request, response) => {
-  const updatedTasks = await Task.deleteMany({});
-  response.status(204).json(updatedTasks);
-});
-
 router.get("/:id", async (request, response) => {
   const taskToGet = await Task.findById(request.params.id);
   if (!taskToGet) {
