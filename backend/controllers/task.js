@@ -11,7 +11,7 @@ router.post("/", async (request, response) => {
     return response.status(401).json({ error: "token missing or invalid" });
   }
   if (!request.body.project) {
-    return response.status(401).json({ error: "select a project" });
+    return response.status(400).json({ error: "select a project" });
   }
 
   const user = request.user;
