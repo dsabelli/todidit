@@ -40,9 +40,10 @@ const Home = () => {
       const user = JSON.parse(loggedIn);
       taskService.setToken(user.token);
       setUser(user);
-      setTimeout(() => {
-        setLoaded(true);
-      }, 1000);
+      setLoaded(true);
+      // setTimeout(() => {
+      //   setLoaded(true);
+      // }, 1000);
     }
   }, []);
   useEffect(() => {
