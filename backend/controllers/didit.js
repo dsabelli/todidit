@@ -2,7 +2,9 @@ const router = require("express").Router();
 const Didit = require("../models/didit");
 
 router.get("/", async (request, response) => {
-  if (request.query.project) {
+  if (Object.keys(request.query).length === 0) {
+    return response.status(404, { error: "didit not found" }).end();
+  } else if (request.query.project) {
     const didits = await Didit.find({
       project: request.query.project,
     });
@@ -50,15 +52,10 @@ router.post("/", async (request, response) => {
   response.status(201).json(savedDidit);
 });
 
-// router.delete("/", async (request, response) => {
-//   const updatedTasks = await Didit.deleteMany({});
-//   response.status(204).json(updatedTasks);
-// });
-
 router.get("/:id", async (request, response) => {
   const taskToGet = await Didit.findById(request.params.id);
   if (!taskToGet) {
-    return response.status(404, { error: "task not found" }).end();
+    return response.status(404, { error: "didit not found" }).end();
   }
   return response.json(taskToGet);
 });
