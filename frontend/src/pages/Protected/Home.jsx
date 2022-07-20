@@ -13,7 +13,7 @@ import ReadAndUpdateProjects from "../../components/Projects/ReadAndUpdateProjec
 import { UserContext } from "../../components/context/UserContext";
 import { DateFormatContext } from "../../components/context/DateFormatContext";
 import { DiditContext } from "../../components/context/DiditContext";
-import { ClimbingBoxLoader } from "react-spinners";
+import { ClockLoader } from "react-spinners";
 const Home = () => {
   const [loaded, setLoaded] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -151,7 +151,7 @@ const Home = () => {
       </div>
     </div>
   ) : (
-    <ClimbingBoxLoader />
+    <ClockLoader />
   );
 };
 
