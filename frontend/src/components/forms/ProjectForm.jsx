@@ -8,7 +8,7 @@ const ProjectForm = ({ onSubmit, value, onChange, onClick, submitText }) => {
         <label htmlFor="Title"></label>
         <Input
           autoFocus
-          placeholder="e.g., style this project better"
+          placeholder="project name"
           id="Title"
           type="text"
           value={value}
