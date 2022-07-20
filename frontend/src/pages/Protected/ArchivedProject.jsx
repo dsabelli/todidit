@@ -25,12 +25,7 @@ const ArchivedProject = () => {
     <Didit
       key={didit.id}
       title={didit.title}
-      //temp fix for didits with no project
-      project={
-        didit.project
-          ? projects.find((project) => project.id === didit.project).title
-          : null
-      }
+      project={projects.find((project) => project.id === didit.project).title}
       completedOn={parseJSON(didit.completedOn)}
     />
   ));
