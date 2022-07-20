@@ -61,7 +61,7 @@ const DiditSearch = ({ projects }) => {
           type="text"
           placeholder="Search Didits..."
           className="input input-bordered"
-          //if not an empty string, get diddits with title of value, otherwise
+          //if not an empty string, get didits with title of value, otherwise
           //clear (fix debonuce issue) blur to setDidits back to blank and focus for next searcg
           onChange={(e) =>
             e.target.value !== ""
@@ -70,7 +70,7 @@ const DiditSearch = ({ projects }) => {
           }
           onKeyDown={(e) =>
             e.key === "Escape"
-              ? ((e.target.value = ""), setVisible(false))
+              ? ((e.target.value = ""), setVisible(false), e.target.blur())
               : null
           }
           onBlur={(e) => (e.target.value = "")}
