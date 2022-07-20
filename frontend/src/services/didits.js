@@ -5,7 +5,6 @@ const getDidits = async (diditTitle, diditDateStart, diditDateEnd, user) => {
   const config = {
     headers: { Authorization: `bearer ${user.token}` },
     params: {
-      user: user.id,
       title: diditTitle,
       dateA: diditDateStart,
       dateB: diditDateEnd,
@@ -18,7 +17,6 @@ const getArchivedProject = async (id, user) => {
   const config = {
     headers: { Authorization: `bearer ${user.token}` },
     params: {
-      user: user.id,
       project: id,
     },
   };

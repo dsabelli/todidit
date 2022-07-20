@@ -10,13 +10,13 @@ router.get("/", async (request, response) => {
     return response.status(404, { error: "didit not found" }).end();
   } else if (request.query.project) {
     const didits = await Didit.find({
-      $and: [{ user: request.query.user }, { project: request.query.project }],
+      $and: [{ user: request.user.id }, { project: request.query.project }],
     });
     response.json(didits);
   } else if (request.query) {
     const didits = await Didit.find({
       $and: [
-        { user: request.query.user },
+        { user: request.user.id },
         { title: { $regex: request.query.title, $options: "i" || "" } },
         {
           createdOn: {
