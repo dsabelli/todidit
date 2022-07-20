@@ -31,7 +31,7 @@ const Home = () => {
     () => ({ didits, setDidits }),
     [didits, setDidits]
   );
-  console.log(loaded);
+
   //Checks if a user's token is stored in local storage
   //If it is, re-login is not required and token is parsed and set for use
   useEffect(() => {
