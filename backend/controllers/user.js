@@ -36,13 +36,18 @@ router.post("/", async (request, response) => {
 });
 
 router.get("/:id", async (request, response) => {
+  if (!request.user) {
+    return response.status(401).json({ error: "token missing or invalid" });
+  }
   const userToGet = await User.findById(request.params.id);
   return response.json(userToGet);
 });
 
 router.put("/:id", async (request, response) => {
   const update = request.body;
-
+  if (!request.user) {
+    return response.status(401).json({ error: "token missing or invalid" });
+  }
   const updatedUser = await User.findByIdAndUpdate(request.params.id, update, {
     new: true,
     runValidators: true,
