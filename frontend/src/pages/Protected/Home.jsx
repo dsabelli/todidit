@@ -31,7 +31,7 @@ const Home = () => {
     () => ({ didits, setDidits }),
     [didits, setDidits]
   );
-
+  console.log(loaded);
   //Checks if a user's token is stored in local storage
   //If it is, re-login is not required and token is parsed and set for use
   useEffect(() => {
@@ -40,10 +40,10 @@ const Home = () => {
       const user = JSON.parse(loggedIn);
       taskService.setToken(user.token);
       setUser(user);
-      setLoaded(true);
-      // setTimeout(() => {
-      //   setLoaded(true);
-      // }, 1000);
+      // setLoaded(true);
+      setTimeout(() => {
+        setLoaded(true);
+      }, 1000);
     }
   }, []);
   useEffect(() => {
