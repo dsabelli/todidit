@@ -116,7 +116,6 @@ describe("When a user attemps to get a didit", () => {
       .expect(200);
 
     token = response.body.token;
-    console.log(response.user);
 
     const project = {
       title: "Test Project",
