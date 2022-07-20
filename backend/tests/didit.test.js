@@ -116,6 +116,7 @@ describe("When a user attemps to get a didit", () => {
       .expect(200);
 
     token = response.body.token;
+    console.log(response.user);
 
     const project = {
       title: "Test Project",
@@ -143,6 +144,7 @@ describe("When a user attemps to get a didit", () => {
   it("succeeds if project query found", async () => {
     await api
       .get(`/api/didits?project=${projectId}`)
+      .set("Authorization", `bearer ${token}`)
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });
@@ -150,6 +152,7 @@ describe("When a user attemps to get a didit", () => {
   it("succeeds if title query found", async () => {
     await api
       .get(`/api/didits?title=${didit.title}`)
+      .set("Authorization", `bearer ${token}`)
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });
@@ -161,6 +164,7 @@ describe("When a user attemps to get a didit", () => {
           1970
         )}&dateB=${new Date()}`
       )
+      .set("Authorization", `bearer ${token}`)
       .expect(200)
       .expect("Content-Type", /application\/json/);
   });
@@ -168,13 +172,17 @@ describe("When a user attemps to get a didit", () => {
   it("fails if no project or title or dateA/dateB", async () => {
     const response = await api
       .get(`/api/didits?title=notARealTitle`)
+      .set("Authorization", `bearer ${token}`)
       .expect(200)
       .expect("Content-Type", /application\/json/);
     expect(response.body).not.toBe();
   });
 
   it("fails if empty query string", async () => {
-    await api.get(`/api/didits`).expect(404);
+    await api
+      .get(`/api/didits`)
+      .set("Authorization", `bearer ${token}`)
+      .expect(404);
   });
 
   it("succeeds if didit id found", async () => {
