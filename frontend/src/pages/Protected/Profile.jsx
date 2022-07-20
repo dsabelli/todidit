@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { UserContext } from "../../components/context/UserContext";
+import { UserContext } from "../../context/UserContext";
 import Button from "../../components/UI/Button";
 import userService from "../../services/users";
 import alertService from "../../services/alerts";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../layouts/Navbar";
 
 const Profile = () => {
   let navigate = useNavigate();

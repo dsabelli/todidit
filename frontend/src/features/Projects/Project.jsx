@@ -1,5 +1,5 @@
-import Button from "../UI/Button";
-import DeleteSvg from "../svg/DeleteSvg";
+import Button from "../../components/UI/Button";
+import DeleteSvg from "../../Assets/DeleteSvg";
 import { Link } from "react-router-dom";
 
 const Project = ({ id, onUpdate, onDelete, title }) => {

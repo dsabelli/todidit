@@ -1,6 +1,6 @@
 import { useState } from "react";
 import taskService from "../../services/tasks";
-import TaskForm from "./TaskForm";
+import TaskForm from "../../components/forms/TaskForm";
 import Task from "./Task";
 import handleDeleteTask from "./DeleteTask";
 import { parseJSON } from "date-fns";

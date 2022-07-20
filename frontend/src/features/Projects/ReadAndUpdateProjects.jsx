@@ -1,6 +1,6 @@
 import { useState } from "react";
 import projectService from "../../services/projects";
-import ProjectForm from "./ProjectForm";
+import ProjectForm from "../../components/forms/ProjectForm";
 import Project from "./Project";
 import handleDeleteProject from "./DeleteProject";
 

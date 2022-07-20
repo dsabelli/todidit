@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DueDate from "./DueDate";
+import DueDate from "../../features/Tasks/DueDate";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 import Textarea from "../UI/Textarea";

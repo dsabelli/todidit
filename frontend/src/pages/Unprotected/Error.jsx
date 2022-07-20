@@ -1,5 +1,5 @@
 import React from "react";
-import UNavbar from "../../components/UNavbar";
+import UNavbar from "../../layouts/UNavbar";
 
 const Error = () => {
   return (

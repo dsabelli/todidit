@@ -6,7 +6,7 @@ import registrationService from "../../services/register";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import Button from "../../components/UI/Button";
 import { useNavigate } from "react-router-dom";
-import UNavbar from "../../components/UNavbar";
+import UNavbar from "../../layouts/UNavbar";
 const schema = yup.object().shape({
   username: yup
     .string()

@@ -5,8 +5,8 @@ import ErrorMessage from "../../components/UI/ErrorMessage";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/UI/Button";
-import { UserContext } from "../../components/context/UserContext";
-import UNavbar from "../../components/UNavbar";
+import { UserContext } from "../../context/UserContext";
+import UNavbar from "../../layouts/UNavbar";
 
 const Login = () => {
   let navigate = useNavigate();

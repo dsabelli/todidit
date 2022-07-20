@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
-import { UserContext } from "../../components/context/UserContext";
-import ReadAndUpdateTasks from "../../components/Tasks/ReadAndUpdateTasks";
+import { UserContext } from "../../context/UserContext";
+import ReadAndUpdateTasks from "../../features/Tasks/ReadAndUpdateTasks";
 
 const Today = () => {
   let params = useParams();

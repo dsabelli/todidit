@@ -2,8 +2,8 @@ import { useEffect, useState, useContext } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import diditService from "../../services/didits";
 import { parseJSON } from "date-fns";
-import Didit from "../../components/Didits/Didit";
-import { UserContext } from "../../components/context/UserContext";
+import Didit from "../../features/Didits/Didit";
+import { UserContext } from "../../context/UserContext";
 const ArchivedProject = () => {
   let params = useParams();
   const { user } = useContext(UserContext);

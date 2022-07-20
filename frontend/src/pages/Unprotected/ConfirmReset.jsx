@@ -6,7 +6,7 @@ import userService from "../../services/users";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import Button from "../../components/UI/Button";
 import { useNavigate, useParams } from "react-router-dom";
-import UNavbar from "../../components/UNavbar";
+import UNavbar from "../../layouts/UNavbar";
 import { ClockLoader } from "react-spinners";
 const schema = yup.object().shape({
   password: yup

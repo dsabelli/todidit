@@ -18,8 +18,8 @@ import Error from "./pages/Unprotected/Error";
 import Verified from "./pages/Unprotected/Verified";
 import ResetPassword from "./pages/Unprotected/ResetPassword";
 import ConfirmReset from "./pages/Unprotected/ConfirmReset";
-import { UserContext } from "./components/context/UserContext";
-import { DateFormatContext } from "./components/context/DateFormatContext";
+import { UserContext } from "./context/UserContext";
+import { DateFormatContext } from "./context/DateFormatContext";
 
 import "./App.css";
 

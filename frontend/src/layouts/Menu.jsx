@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Toggle from "./UI/Toggle";
+import Toggle from "../components/UI/Toggle";
 
 const Menu = ({ children }) => {
   return (

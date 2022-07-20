@@ -1,7 +1,7 @@
 import { useState } from "react";
 import projectService from "../../services/projects";
-import ProjectForm from "./ProjectForm";
-import Button from "../UI/Button";
+import ProjectForm from "../../components/forms/ProjectForm";
+import Button from "../../components/UI/Button";
 
 const CreateProject = ({
   user,

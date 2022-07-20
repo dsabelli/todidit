@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import UNavbar from "../../components/UNavbar";
+import UNavbar from "../../layouts/UNavbar";
 import registerService from "../../services/register";
 
 const Verified = () => {

@@ -1,8 +1,8 @@
 import { useState, useContext, useId } from "react";
-import { DateFormatContext } from "../../components/context/DateFormatContext";
-import { UserContext } from "../../components/context/UserContext";
+import { DateFormatContext } from "../../context/DateFormatContext";
+import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../layouts/Navbar";
 import Button from "../../components/UI/Button";
 import Select from "../../components/UI/Select";
 import dateService from "../../services/dates";

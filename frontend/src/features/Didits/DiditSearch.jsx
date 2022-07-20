@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Didit from "./Didit";
 import DateRange from "./DateRange";
-import Input from "../UI/Input";
+import Input from "../../components/UI/Input";
 import diditService from "../../services/didits";
 import { debounce } from "lodash";
 import { parseJSON } from "date-fns";
 import { useContext } from "react";
-import { DiditContext } from "../../components/context/DiditContext";
-import { UserContext } from "../context/UserContext";
+import { DiditContext } from "../../context/DiditContext";
+import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 
 const DiditSearch = ({ projects }) => {

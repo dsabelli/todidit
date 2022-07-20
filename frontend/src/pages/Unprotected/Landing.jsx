@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import UNavbar from "../../components/UNavbar";
+import UNavbar from "../../layouts/UNavbar";
 import Hero from "../../components/UI/Hero";
 const Landing = () => {
   let navigate = useNavigate();

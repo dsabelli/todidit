@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { DateFormatContext } from "../context/DateFormatContext";
+import { DateFormatContext } from "../../context/DateFormatContext";
 import { parseJSON, format } from "date-fns";
 import { Link } from "react-router-dom";
-import Toggle from "../UI/Toggle";
+import Toggle from "../../components/UI/Toggle";
 
 const ArchivedProjects = ({ projects }) => {
   const { dateFormat } = useContext(DateFormatContext);

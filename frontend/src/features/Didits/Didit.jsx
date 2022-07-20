@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { format } from "date-fns";
-import { DateFormatContext } from "../context/DateFormatContext";
+import { DateFormatContext } from "../../context/DateFormatContext";
 
 const Didit = ({ title, completedOn, project }) => {
   const { dateFormat } = useContext(DateFormatContext);

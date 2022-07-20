@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams, useOutletContext } from "react-router-dom";
 import { useContext } from "react";
-import { DiditContext } from "../../components/context/DiditContext";
-import Didit from "../../components/Didits/Didit";
+import { DiditContext } from "../../context/DiditContext";
+import Didit from "../../features/Didits/Didit";
 import { parseJSON } from "date-fns";
 
 const Didits = () => {

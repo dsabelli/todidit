@@ -1,18 +1,18 @@
 import { useState, useEffect, useContext, useMemo } from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "../../components/Navbar";
-import Menu from "../../components/Menu";
+import Navbar from "../../layouts/Navbar";
+import Menu from "../../layouts/Menu";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import projectService from "../../services/projects";
 import userService from "../../services/users";
 import taskService from "../../services/tasks";
-import CreateTask from "../../components/Tasks/CreateTask";
-import ArchivedProjects from "../../components/Projects/ArchivedProjects";
-import CreateProject from "../../components/Projects/CreateProject";
-import ReadAndUpdateProjects from "../../components/Projects/ReadAndUpdateProjects";
-import { UserContext } from "../../components/context/UserContext";
-import { DateFormatContext } from "../../components/context/DateFormatContext";
-import { DiditContext } from "../../components/context/DiditContext";
+import CreateTask from "../../features/Tasks/CreateTask";
+import ArchivedProjects from "../../features/Projects/ArchivedProjects";
+import CreateProject from "../../features/Projects/CreateProject";
+import ReadAndUpdateProjects from "../../features/Projects/ReadAndUpdateProjects";
+import { UserContext } from "../../context/UserContext";
+import { DateFormatContext } from "../../context/DateFormatContext";
+import { DiditContext } from "../../context/DiditContext";
 import { ClockLoader } from "react-spinners";
 const Home = () => {
   const [loaded, setLoaded] = useState(false);

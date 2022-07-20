@@ -6,10 +6,10 @@ import {
   parseISO,
   differenceInCalendarDays,
 } from "date-fns";
-import { DateFormatContext } from "../context/DateFormatContext";
-import Button from "../UI/Button";
-import Checkbox from "../UI/Checkbox";
-import DeleteSvg from "../svg/DeleteSvg";
+import { DateFormatContext } from "../../context/DateFormatContext";
+import Button from "../../components/UI/Button";
+import Checkbox from "../../components/UI/Checkbox";
+import DeleteSvg from "../../Assets/DeleteSvg";
 
 const Task = ({
   dueDate,
