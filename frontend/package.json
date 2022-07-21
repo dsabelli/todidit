@@ -8,6 +8,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "test": "vitest",
+    "test:ui": "vitest --ui",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run"
   },
@@ -36,6 +37,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^1.3.0",
+    "@vitest/ui": "^0.18.1",
     "autoprefixer": "^10.4.7",
     "cypress": "^10.2.0",
     "eslint": "^8.18.0",
