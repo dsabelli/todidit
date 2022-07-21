@@ -10,7 +10,7 @@ const Navbar = ({ projects, notApp }) => {
     window.localStorage.clear();
   };
   return (
-    <div className="navbar bg-base-100">
+    <nav className="navbar bg-base-100">
       <div className="flex-1">
         <Link to="/app/all">
           <p className="btn btn-ghost normal-case text-xl">toDidit</p>
@@ -49,7 +49,7 @@ const Navbar = ({ projects, notApp }) => {
           </li>
         </ul>
       </div>
-    </div>
+    </nav>
   );
 };
 export default Navbar;
