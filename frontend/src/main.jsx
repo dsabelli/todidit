@@ -13,7 +13,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       FallbackComponent={ErrorFallback}
       onError={(error, errorInfo) => console.log({ error, errorInfo })}
     >
-      <Theme dataTheme="forest">
+      <Theme dataTheme="dark">
         <BrowserRouter>
           <App />
         </BrowserRouter>
