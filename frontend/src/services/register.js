@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const verifyEmail = async (token) => {
-  console.log(token);
   const response = await axios.get(`/api/register/verify/${token}`, {
     params: { token: token },
   });
