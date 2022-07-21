@@ -1,6 +1,6 @@
 import React from "react";
 
-const RegisteredSvg = ({ className }) => {
+const VerifiedSvg = ({ className }) => {
   return (
     <div className={`${className}`}>
       {" "}
@@ -93,4 +93,4 @@ const RegisteredSvg = ({ className }) => {
   );
 };
 
-export default RegisteredSvg;
+export default VerifiedSvg;

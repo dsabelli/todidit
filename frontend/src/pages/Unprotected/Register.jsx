@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import UNavbar from "../../layouts/UNavbar";
 import Hero from "../../components/UI/Hero";
 import RegisterSvg from "../../Assets/RegisterSvg";
-import RegisteredSvg from "../../Assets/RegisteredSvg";
+import EmailSvg from "../../Assets/EmailSvg";
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -37,7 +37,7 @@ const schema = yup.object().shape({
 
 const Register = ({}) => {
   let navigate = useNavigate();
-  const [registered, setRegistered] = useState(false);
+  const [registered, setRegistered] = useState(true);
   const [asyncError, setAsyncError] = useState("");
   const {
     register,
@@ -181,17 +181,15 @@ const Register = ({}) => {
       <Hero
         text={
           <>
-            <h1 className="text-5xl font-bold">
-              Welcome to <span className="text-primary">toDidit!</span>
-            </h1>
-            <p className="pt-6 ">Thank you for registering!</p>
-            <p className="pb-6 ">
-              Please check your email for a verification link.
+            <h1 className="text-5xl font-bold">Thank you for registering!</h1>
+            <p className="pt-6 md:text-xl">
+              Please check your email for a verification
             </p>
+            <p className="pb-6 md:text-xl">link to confirm your account.</p>
           </>
         }
       >
-        <RegisteredSvg className={"pr-10 w-72"} />
+        <EmailSvg className={"hidden md:block w-56"} />
       </Hero>
     </>
   );
