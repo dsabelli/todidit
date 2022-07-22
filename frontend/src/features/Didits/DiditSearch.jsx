@@ -49,10 +49,10 @@ const DiditSearch = ({ projects }) => {
 
   return (
     <div className="flex gap-2">
-      <DateRange
+      {/* <DateRange
         onDiditDateStart={setDiditDateStart}
         onDiditDateEnd={setDiditDateEnd}
-      />
+      /> */}
       <div className="form-control ">
         <Input
           type="text"
