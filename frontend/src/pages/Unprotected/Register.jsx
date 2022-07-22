@@ -37,7 +37,7 @@ const schema = yup.object().shape({
 
 const Register = ({}) => {
   let navigate = useNavigate();
-  const [registered, setRegistered] = useState(true);
+  const [registered, setRegistered] = useState(false);
   const [asyncError, setAsyncError] = useState("");
   const {
     register,
@@ -89,7 +89,7 @@ const Register = ({}) => {
       <div className="hero md:min-h-screen bg-base-200">
         <div className="hero-content flex-col md:flex-row-reverse gap-12">
           <div className="text-center md:text-left gap-32 flex flex-col justify-between">
-            <RegisterSvg className={"hidden md:block w-72"} />
+            <RegisterSvg className={"hidden lg:block w-80"} />
           </div>
           <div className="">
             <h1 className="text-5xl font-bold pb-4">Register now!</h1>

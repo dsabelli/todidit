@@ -7,6 +7,7 @@ import ErrorMessage from "../../components/UI/ErrorMessage";
 import Button from "../../components/UI/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import UNavbar from "../../layouts/UNavbar";
+import ConfirmPWSvg from "../../Assets/ConfirmPWSvg";
 import { ClockLoader } from "react-spinners";
 const schema = yup.object().shape({
   password: yup
@@ -64,12 +65,12 @@ const ConfirmReset = ({}) => {
     }
   };
 
-  useEffect(() => {
-    reset &&
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
-  }, [reset]);
+  // useEffect(() => {
+  //   reset &&
+  //     setTimeout(() => {
+  //       navigate("/login");
+  //     }, 3000);
+  // }, [reset]);
 
   return loaded ? (
     reset ? (
@@ -81,49 +82,54 @@ const ConfirmReset = ({}) => {
       <>
         <UNavbar />
         <div className="hero min-h-screen bg-base-200">
-          <div className="hero-content flex-col lg:flex-row-reverse">
-            <div className="text-center lg:text-left">
-              <h1 className="text-5xl font-bold">Confirm New Password</h1>
+          <div className="hero-content flex-col md:flex-row-reverse">
+            <div className="text-center md:text-left">
+              <ConfirmPWSvg className={"hidden md:block w-80"} />
             </div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                <div className="card-body">
-                  <div className="form-control">
-                    <input
-                      type="password"
-                      name="password"
-                      {...register("password")}
-                      placeholder="new password"
-                      className="input input-bordered"
-                    />
-                    {errors.password && (
-                      <ErrorMessage errorMessage={errors.password?.message} />
-                    )}
-                  </div>
-                  <div className="form-control">
-                    <input
-                      type="password"
-                      name="confirmPassword"
-                      {...register("confirmPassword")}
-                      placeholder="new confirm password"
-                      className="input input-bordered"
-                    />
-                    {errors.confirmPassword && (
-                      <ErrorMessage
-                        errorMessage={errors.confirmPassword?.message}
+            <div>
+              <h1 className="text-5xl font-bold pb-4 overflow???">
+                Confirm New Password
+              </h1>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                  <div className="card-body">
+                    <div className="form-control">
+                      <input
+                        type="password"
+                        name="password"
+                        {...register("password")}
+                        placeholder="new password"
+                        className="input input-bordered"
                       />
-                    )}
-                  </div>
-                  <div className="form-control mt-6">
-                    <Button
-                      text={"Confirm"}
-                      type="submit"
-                      className={"btn-primary"}
-                    />
+                      {errors.password && (
+                        <ErrorMessage errorMessage={errors.password?.message} />
+                      )}
+                    </div>
+                    <div className="form-control">
+                      <input
+                        type="password"
+                        name="confirmPassword"
+                        {...register("confirmPassword")}
+                        placeholder="new confirm password"
+                        className="input input-bordered"
+                      />
+                      {errors.confirmPassword && (
+                        <ErrorMessage
+                          errorMessage={errors.confirmPassword?.message}
+                        />
+                      )}
+                    </div>
+                    <div className="form-control mt-6">
+                      <Button
+                        text={"Confirm"}
+                        type="submit"
+                        className={"btn-primary"}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </>
