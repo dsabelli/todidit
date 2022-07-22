@@ -2,12 +2,12 @@ import { useContext } from "react";
 import { format, parseJSON, isPast, differenceInCalendarDays } from "date-fns";
 import { DateFormatContext } from "../../context/DateFormatContext";
 
-const DueOn = ({ completedOn, dueDate }) => {
+const DueOn = ({ completedOn, dueDate, className }) => {
   const { dateFormat } = useContext(DateFormatContext);
   const dateDue = format(parseJSON(dueDate), dateFormat);
   let difference;
   return (
-    <div className="text-xs mb-5 ">
+    <div className={` ${className}`}>
       {completedOn ? (
         <span className="text-success">
           {format(parseJSON(completedOn), dateFormat)}
