@@ -93,31 +93,33 @@ const Home = () => {
         <Navbar projects={projects} />
       </DiditContext.Provider>
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
-      <div className="flex">
-        <Menu>
-          <ReadAndUpdateProjects
-            user={user}
-            tasks={tasks}
-            onTasks={setTasks}
-            projects={projects}
-            onProjects={setProjects}
-            projectTitle={projectTitle}
-            onProjectTitle={setProjectTitle}
-            onAddProject={setAddProject}
-            onSystemMessage={setSystemMessage}
-          />
-          <CreateProject
-            user={user}
-            onProjects={setProjects}
-            projectTitle={projectTitle}
-            onProjectTitle={setProjectTitle}
-            addProject={addProject}
-            onAddProject={setAddProject}
-            onSystemMessage={setSystemMessage}
-          />
-          <ArchivedProjects projects={projects} />
-        </Menu>
-        <div>
+      <div className="grid grid-cols-4 gap-x-8">
+        <div className="col-span-1 min-w-fit p-8">
+          <Menu className="">
+            <ReadAndUpdateProjects
+              user={user}
+              tasks={tasks}
+              onTasks={setTasks}
+              projects={projects}
+              onProjects={setProjects}
+              projectTitle={projectTitle}
+              onProjectTitle={setProjectTitle}
+              onAddProject={setAddProject}
+              onSystemMessage={setSystemMessage}
+            />
+            <CreateProject
+              user={user}
+              onProjects={setProjects}
+              projectTitle={projectTitle}
+              onProjectTitle={setProjectTitle}
+              addProject={addProject}
+              onAddProject={setAddProject}
+              onSystemMessage={setSystemMessage}
+            />
+            <ArchivedProjects projects={projects} />
+          </Menu>
+        </div>
+        <div className="col-span-3 p-8">
           <DiditContext.Provider value={diditValue}>
             <Outlet
               context={[
