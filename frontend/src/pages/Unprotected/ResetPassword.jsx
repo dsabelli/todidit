@@ -48,7 +48,7 @@ const ResetPassword = () => {
       <div>pw reset, check email</div>
     ) : (
       <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col-reverse md:flex-row gap-20">
+        <div className="hero-content flex-col-reverse md:flex-row gap-20 items-center">
           <div className="flex">
             <ForgotPWSvg className={" hidden md:block w-96 my-auto mt-10 "} />
           </div>

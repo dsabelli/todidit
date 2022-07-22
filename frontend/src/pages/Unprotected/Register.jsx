@@ -87,10 +87,8 @@ const Register = ({}) => {
     <>
       <UNavbar />
       <div className="hero md:min-h-screen bg-base-200">
-        <div className="hero-content flex-col md:flex-row-reverse gap-12">
-          <div className="text-center md:text-left gap-32 flex flex-col justify-between">
-            <RegisterSvg className={"hidden lg:block w-80"} />
-          </div>
+        <div className="hero-content flex-col md:flex-row-reverse gap-20 items-center ">
+          <RegisterSvg className={"hidden lg:block w-80"} />
           <div className="">
             <h1 className="text-5xl font-bold pb-4">Register now!</h1>
             <form onSubmit={handleSubmit(onSubmit)}>

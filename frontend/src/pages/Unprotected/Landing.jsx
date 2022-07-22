@@ -19,7 +19,7 @@ const Landing = () => {
           </>
         }
       >
-        <HeroSvg className={"flex w-80"} />
+        <HeroSvg className={"flex w-96"} />
       </Hero>
     </div>
   );

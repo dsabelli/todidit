@@ -42,10 +42,8 @@ const Login = () => {
     <>
       <UNavbar />
       <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col md:flex-row-reverse gap-20">
-          <div className="text-center lg:text-left">
-            <LoginSvg className={"hidden md:block w-96"} />
-          </div>
+        <div className="hero-content flex-col md:flex-row-reverse items-center gap-20">
+          <LoginSvg className={"hidden md:block w-96"} />
           <div>
             <h1 className="text-5xl font-bold pb-4">Login now!</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -82,13 +80,13 @@ const Login = () => {
                     <label className="label">
                       <Link
                         to="/reset-password"
-                        className="label-text-alt link link-hover"
+                        className="label-text-alt link link-hover text-2xs "
                       >
                         Forgot password?
                       </Link>
                     </label>
                   </div>
-                  <div className="form-control mt-6">
+                  <div className="form-control ">
                     <Button
                       type="submit"
                       text={"Login"}
