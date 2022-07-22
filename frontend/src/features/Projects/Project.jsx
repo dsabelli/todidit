@@ -1,5 +1,5 @@
 import Button from "../../components/UI/Button";
-import DeleteSvg from "../../Assets/DeleteSvg";
+import DeleteIcon from "../../Assets/DeleteIcon";
 import { Link } from "react-router-dom";
 
 const Project = ({ id, onUpdate, onDelete, title }) => {
@@ -21,7 +21,7 @@ const Project = ({ id, onUpdate, onDelete, title }) => {
           onClick={() => {
             onDelete();
           }}
-          text={<DeleteSvg />}
+          text={<DeleteIcon />}
         />
       </div>
     </div>
