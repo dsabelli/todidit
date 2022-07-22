@@ -42,13 +42,13 @@ const Settings = () => {
         >
           {dateOptions}
         </Select>
-        <Link to="/app/all">
+        <Link to="/app/today">
           <Button
             text="save"
             onClick={() => handleUserUpdate(selectedDateFormat, user)}
           />
         </Link>
-        <Link to="/app/all">
+        <Link to="/app/today">
           <Button text="cancel" />
         </Link>
       </div>
