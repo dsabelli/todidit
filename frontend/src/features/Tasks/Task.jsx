@@ -1,16 +1,7 @@
-import { useContext } from "react";
-import {
-  format,
-  parseJSON,
-  isPast,
-  parseISO,
-  differenceInCalendarDays,
-} from "date-fns";
-import { DateFormatContext } from "../../context/DateFormatContext";
 import Button from "../../components/UI/Button";
 import Checkbox from "../../components/UI/Checkbox";
 import DeleteSvg from "../../Assets/DeleteSvg";
-
+import DueOn from "./DueOn";
 const Task = ({
   dueDate,
   completedOn,
@@ -22,12 +13,9 @@ const Task = ({
   title,
   description,
 }) => {
-  const { dateFormat } = useContext(DateFormatContext);
-  const dateDue = format(parseJSON(dueDate), dateFormat);
-  let difference;
   return (
-    <div className="flex justify-between px-4 ">
-      <div className="flex gap-3 ">
+    <div className="flex justify-between px-4 items-center">
+      <div className="flex gap-3 items-center ">
         <div>
           <Checkbox
             checked={checked}
@@ -43,28 +31,7 @@ const Task = ({
         >
           <div className="">{title}</div>
           <div className="text-xs mb-5 ">{description}</div>
-          <div className="text-xs mb-5 ">
-            {completedOn ? (
-              <span className="text-success">
-                {format(parseJSON(completedOn), dateFormat)}
-              </span>
-            ) : dateDue === format(new Date(), dateFormat) ? (
-              <span className="text-warning">Today</span>
-            ) : isPast(parseISO(dueDate)) ? (
-              <span className="text-error">
-                Overdue by{" "}
-                {
-                  (difference = differenceInCalendarDays(
-                    new Date(),
-                    parseISO(dueDate)
-                  ))
-                }{" "}
-                {difference === 1 ? "day" : "days"}
-              </span>
-            ) : (
-              dateDue
-            )}
-          </div>
+          <DueOn completedOn={completedOn} dueDate={dueDate} />
         </div>
       </div>
       <div className="flex gap-4">
