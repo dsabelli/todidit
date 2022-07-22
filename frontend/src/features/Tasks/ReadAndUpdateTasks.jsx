@@ -104,7 +104,11 @@ const ReadAndUpdateTasks = ({
       onTasks((prevTasks) =>
         prevTasks.map((task) =>
           task.id === id
-            ? { ...task, isChecked: !task.isChecked, completedOn: currentDate }
+            ? {
+                ...task,
+                isChecked: !task.isChecked,
+                completedOn: !task.isChecked ? currentDate : null,
+              }
             : task
         )
       );
@@ -164,6 +168,7 @@ const ReadAndUpdateTasks = ({
         dueDate={task.dueDate}
         key={task.id}
         id={task.id}
+        completedOn={task.completedOn}
       />
     )
   );
