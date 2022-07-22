@@ -8,10 +8,10 @@ const Navbar = ({ projects, notApp }) => {
   const { user } = useContext(UserContext);
 
   const handleLogout = () => {
-    window.localStorage.clear();
+    window.localStorage.removeItem("loggedIn");
   };
   return (
-    <nav className="navbar bg-base-100 flex justify-between">
+    <nav className="navbar flex justify-between bg-accent">
       <ToDidit user={user} />
       <div>
         {!notApp && <DiditSearch projects={projects} />}
