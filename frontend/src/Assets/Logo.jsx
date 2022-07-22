@@ -1,6 +1,6 @@
 import React from "react";
 
-const ToDidit = ({ className, themeLines, themeCheck }) => {
+const Logo = ({ className, themeLines, themeCheck }) => {
   return (
     <div className={`${className}`}>
       <svg
@@ -37,4 +37,4 @@ const ToDidit = ({ className, themeLines, themeCheck }) => {
   );
 };
 
-export default ToDidit;
+export default Logo;
