@@ -1,13 +1,13 @@
 const Checkbox = ({ checked, id, onChange, name, className }) => {
   return (
-    <div>
+    <div className={` ${className}`}>
       <input
         type="Checkbox"
         checked={checked}
         id={id}
         onChange={onChange}
         name={name}
-        className={`checkbox  checkbox-primary w-4 h-4 ${className}`}
+        className={`checkbox  checkbox-primary w-4 h-4 `}
       />
     </div>
   );
