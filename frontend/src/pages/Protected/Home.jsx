@@ -13,7 +13,7 @@ import ReadAndUpdateProjects from "../../features/Projects/ReadAndUpdateProjects
 import { UserContext } from "../../context/UserContext";
 import { DateFormatContext } from "../../context/DateFormatContext";
 import { DiditContext } from "../../context/DiditContext";
-import { ClockLoader } from "react-spinners";
+import Loader from "../../components/UI/Loader";
 const Home = () => {
   const [loaded, setLoaded] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -153,7 +153,7 @@ const Home = () => {
       </div>
     </div>
   ) : (
-    <ClockLoader />
+    <Loader />
   );
 };
 
