@@ -53,7 +53,7 @@ const TaskForm = ({
           value={descriptionValue}
           name="Description"
           onChange={onDescriptionChange}
-          className="textarea textarea-ghost w-full max-w-xs h-24"
+          className="textarea textarea-ghost resize-none w-full max-w-xs h-24"
         />
       </div>
       <div>
