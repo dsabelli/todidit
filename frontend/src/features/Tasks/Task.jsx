@@ -75,13 +75,11 @@ const Task = ({
           text="edit"
         />
         <Button
-          className={`btn btn-square ${
-            checked ? "" : "btn-disabled opacity-50"
-          }`}
+          className={` btn-square ${checked ? "" : "btn-disabled opacity-50"}`}
           onClick={() => {
             onDelete();
           }}
-          text={<DeleteSvg />}
+          text={<DeleteSvg className={"w-6 hover:text-error"} />}
         />
       </div>
     </div>

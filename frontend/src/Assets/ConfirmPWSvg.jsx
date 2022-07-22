@@ -2,7 +2,7 @@ import React from "react";
 
 const ConfirmPWSvg = ({ className }) => {
   return (
-    <div className={`${className}`}>
+    <div className={` ${className}`}>
       <svg
         data-name="Layer 1"
         xmlns="http://www.w3.org/2000/svg"
