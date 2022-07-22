@@ -98,7 +98,7 @@ const ReadAndUpdateTasks = ({
       await taskService.updateTasks({
         ...updatedTask,
         isChecked: !updatedTask.isChecked,
-        completedOn: currentDate,
+        completedOn: !updatedTask.isChecked ? currentDate : null,
       });
 
       onTasks((prevTasks) =>
