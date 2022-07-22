@@ -15,16 +15,17 @@ const Task = ({
   description,
 }) => {
   return (
-    <div className="flex justify-between px-4 items-center mb-4 ">
-      <div className="flex-col min-w-full ">
+    <div className="flex ">
+      <Checkbox
+        checked={checked}
+        onChange={() => onCheck(id)}
+        id="checkbox"
+        name="checkbox"
+        className={"1"}
+      />
+      <div className="flex-col w-full max-w-2xl px-4 mb-4">
         <div className="flex items-center justify-between">
           <div className="flex gap-3 items-center">
-            <Checkbox
-              checked={checked}
-              onChange={() => onCheck(id)}
-              id="checkbox"
-              name="checkbox"
-            />
             <div
               className={`flex flex-col items-start ${
                 checked ? "line-through" : ""
