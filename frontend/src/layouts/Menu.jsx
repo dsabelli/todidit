@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import Toggle from "../components/UI/Toggle";
 
-const Menu = ({ children }) => {
+const Menu = ({ children, className }) => {
   return (
-    <ul className="menu bg-base-100 w-56">
+    <ul className={`menu bg-base-100 w-56 ${className}`}>
       <Link to="/app/all">All</Link>
       <Link to="/app/today">Today</Link>
       <Link to="/app/week">This Week</Link>
