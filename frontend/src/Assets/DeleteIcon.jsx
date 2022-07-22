@@ -1,4 +1,4 @@
-const DeleteSvg = ({ className }) => {
+const DeleteIcon = ({ className }) => {
   return (
     <div className={` ${className}`}>
       <svg
@@ -17,4 +17,4 @@ const DeleteSvg = ({ className }) => {
     </div>
   );
 };
-export default DeleteSvg;
+export default DeleteIcon;
