@@ -5,42 +5,16 @@ const EditIcon = ({ className }) => {
     <div className={` ${className}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 64 64"
-        fill="currentColor"
+        viewBox="0 0 24 24"
+        fill="none"
         stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-edit"
       >
-        <title>Edit</title>
-        <desc>A line styled icon from Orion Icon Library.</desc>
-        <path
-          data-name="layer1"
-          fill="currentColor"
-          stroke="#202020"
-          strokeMiterlimit="10"
-          strokeWidth="2"
-          d="M56 2.4l-26.1 26-4 9.7 9.7-4.1 26-26L56 2.4z"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-        ></path>
-        <path
-          data-name="layer2"
-          fill="currentColor"
-          stroke="#202020"
-          strokeMiterlimit="10"
-          strokeWidth="2"
-          d="M34.4 11.6h-32v50h50v-32"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-        ></path>
-        <path
-          data-name="layer1"
-          fill="currentColor"
-          stroke="#202020"
-          strokeMiterlimit="10"
-          strokeWidth="2"
-          d="M50.8 7.6l5.6 5.6"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-        ></path>
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
       </svg>
     </div>
   );
