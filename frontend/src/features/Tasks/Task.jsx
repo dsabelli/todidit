@@ -2,6 +2,7 @@ import Button from "../../components/UI/Button";
 import Checkbox from "../../components/UI/Checkbox";
 import DeleteIcon from "../../Assets/DeleteIcon";
 import EditIcon from "../../Assets/EditIcon";
+import StarIcon from "../../Assets/StarIcon";
 import DueOn from "./DueOn";
 const Task = ({
   dueDate,
@@ -15,35 +16,48 @@ const Task = ({
   description,
 }) => {
   return (
-    <div className="flex ">
+    <div className="flex p-1 gap-2 justify-center">
       <Checkbox
         checked={checked}
         onChange={() => onCheck(id)}
         id="checkbox"
         name="checkbox"
-        className={"py-1"}
+        className={"py-1.5"}
       />
-      <div className="flex-col w-full max-w-2xl px-4 mb-4">
-        <div className="flex items-center justify-between">
+      <div className="flex-col w-full max-w-2xl ">
+        <div className="flex items-center justify-between ">
           <div className="flex gap-3 items-center">
             <div
-              className={`flex flex-col items-start ${
+              className={`text-xl flex flex-col items-start ${
                 checked ? "line-through" : ""
               }`}
             >
               {title}
             </div>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-1 ">
             <Button
-              className={"btn-xs"}
+              className={
+                "btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-300"
+              }
               onClick={() => {
                 onUpdate(id);
               }}
-              text={"edit"}
-            />
+            >
+              <StarIcon className={"w-6 h-6 hover:text-warning"} />
+            </Button>
             <Button
-              className={`btn-xs  btn-square ${
+              className={
+                "btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-300"
+              }
+              onClick={() => {
+                onUpdate(id);
+              }}
+            >
+              <EditIcon className={"w-6 h-6 hover:text-primary"} />
+            </Button>
+            <Button
+              className={`btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-300 ${
                 checked ? "" : "btn-disabled opacity-50"
               }`}
               onClick={() => {
@@ -55,15 +69,15 @@ const Task = ({
         </div>
         <div className="text-left">
           <div
-            className={`text-xs flex flex-col items-start ${
+            className={`text-sm mb-0.5 flex flex-col items-start ${
               checked ? "line-through" : ""
             }`}
           >
             {description}
           </div>
-          <div className="flex justify-between pr-10">
+          <div className="flex justify-between mt-1 pr-1 border-b border-neutral">
             <DueOn
-              className={`text-xs flex flex-col items-start ${
+              className={`text-xs flex flex-col items-start pb-2 ${
                 checked ? "line-through" : ""
               }`}
               completedOn={completedOn}
