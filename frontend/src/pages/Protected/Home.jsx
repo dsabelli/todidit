@@ -94,7 +94,7 @@ const Home = () => {
       </DiditContext.Provider>
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
       <div className="grid grid-cols-4 gap-x-8">
-        <div className="col-span-1 min-w-fit p-8">
+        <div className="col-span-1 min-w-fit py-4">
           <Menu className="">
             <ReadAndUpdateProjects
               user={user}
@@ -119,8 +119,11 @@ const Home = () => {
             <ArchivedProjects projects={projects} />
           </Menu>
         </div>
-        <div className="col-span-3 p-8">
+        <div className="col-span-3 px-12 ">
           <DiditContext.Provider value={diditValue}>
+            <header>
+              <h1 className="text-left text-2xl mt-6 mb-4">Placeholder</h1>
+            </header>
             <Outlet
               context={[
                 tasks,
