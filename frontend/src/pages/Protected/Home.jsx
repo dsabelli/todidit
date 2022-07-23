@@ -122,7 +122,9 @@ const Home = () => {
         <div className="col-span-4 md:col-span-3 px-12 ">
           <DiditContext.Provider value={diditValue}>
             <header>
-              <h1 className="text-left text-2xl mt-6 mb-4">Placeholder</h1>
+              <h1 className="text-left text-2xl mt-6 mb-4 max-w-2xl mx-auto">
+                Placeholder
+              </h1>
             </header>
             <Outlet
               context={[
