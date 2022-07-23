@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import UNavbar from "../../layouts/UNavbar";
 import Button from "../../components/UI/Button";
 import Hero from "../../components/UI/Hero";
-import HeroSvg from "../../Assets/HeroSvg";
+// import HeroSvg from "../../Assets/HeroSvg";
+import { ReactComponent as HeroSv } from "../../Assets/Hero.svg";
 const Landing = () => {
   return (
     <div>
@@ -19,7 +20,10 @@ const Landing = () => {
           </>
         }
       >
-        <HeroSvg className={"flex w-96"} />
+        {/* <HeroSvg className={"flex w-96"} /> */}
+        <div className="w-96 flex">
+          <HeroSv />
+        </div>
       </Hero>
     </div>
   );
