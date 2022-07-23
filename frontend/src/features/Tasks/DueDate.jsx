@@ -4,11 +4,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import Dropdown from "../../components/UI/Dropdown";
 import { DateFormatContext } from "../../context/DateFormatContext";
-const DueDate = ({ dueDate, onDueDate }) => {
+const DueDate = ({ dueDate, onDueDate, className }) => {
   const { dateFormat } = useContext(DateFormatContext);
 
   return (
-    <Dropdown text={format(dueDate, dateFormat)}>
+    <Dropdown className={className} text={format(dueDate, dateFormat)}>
       <DatePicker selected={dueDate} onChange={(e) => onDueDate(e)} inline />
     </Dropdown>
   );
