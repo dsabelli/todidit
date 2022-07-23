@@ -21,7 +21,7 @@ const Task = ({
         onChange={() => onCheck(id)}
         id="checkbox"
         name="checkbox"
-        className={"1"}
+        className={"py-1"}
       />
       <div className="flex-col w-full max-w-2xl px-4 mb-4">
         <div className="flex items-center justify-between">
