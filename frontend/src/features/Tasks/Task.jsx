@@ -69,7 +69,7 @@ const Task = ({
         </div>
         <div className="text-left">
           <div
-            className={`text-sm mb-0.5 flex flex-col items-start ${
+            className={`text-sm mb-0.5 flex flex-col items-start whitespace-pre-line  ${
               checked ? "line-through" : ""
             }`}
           >
