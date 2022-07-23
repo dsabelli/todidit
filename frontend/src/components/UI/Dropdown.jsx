@@ -3,7 +3,10 @@ import React from "react";
 const Dropdown = ({ text, onClick, className, children }) => {
   return (
     <div className={`dropdown ${className}`} onClick={onClick}>
-      <label tabIndex="0" className="btn m-1">
+      <label
+        tabIndex="0"
+        className="text-xs flex flex-col items-start pb-2 cursor-pointer "
+      >
         {text || children}
       </label>
       <ul
