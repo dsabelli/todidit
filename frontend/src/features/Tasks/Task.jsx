@@ -63,8 +63,9 @@ const Task = ({
               onClick={() => {
                 onDelete();
               }}
-              text={<DeleteIcon className={"w-6 hover:text-error"} />}
-            />
+            >
+              <DeleteIcon className={"w-6 hover:text-error"} />
+            </Button>
           </div>
         </div>
         <div className="text-left">
