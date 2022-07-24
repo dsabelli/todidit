@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Project = ({ id, onUpdate, onDelete, title }) => {
   return (
-    <ul className="menu text-base ">
+    <ul className="menu text-base pl-3 ">
       <li className="">
         <Link to={`project/${id}`}>
           <div className="p-0 flex justify-between w-full">
