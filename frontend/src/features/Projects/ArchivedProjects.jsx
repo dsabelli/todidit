@@ -15,24 +15,26 @@ const ArchivedProjects = ({ projects }) => {
     }));
 
   const projectElements = formattedProjects.map((project) => (
-    <Link
-      to={`/app/project/archived/${project.id}`}
-      key={project.id}
-      id={project.id}
-    >
-      <div>
-        {project.title}
-        <p>{project.archivedOn}</p>
-      </div>
-    </Link>
+    <li key={project.id}>
+      <Link
+        className="p-0"
+        to={`/app/project/archived/${project.id}`}
+        id={project.id}
+      >
+        <div className="">
+          <p className="text-base"> {project.title}</p>
+          <p className="text-2xs">Archived: {project.archivedOn}</p>
+        </div>
+      </Link>
+    </li>
   ));
 
   return (
-    <div className="overflow-y-auto max-h-96 flex flex-col ">
-      <Toggle visText="Hide Archived Projects" invisText="Archived Projects">
+    <Toggle visText="Hide Archived Projects" invisText="Archived Projects">
+      <ul className=" overflow-y-auto max-h-96 flex flex-col  menu  ">
         {projectElements.reverse()}
-      </Toggle>
-    </div>
+      </ul>
+    </Toggle>
   );
 };
 
