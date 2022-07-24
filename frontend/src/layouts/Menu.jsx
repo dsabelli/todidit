@@ -64,7 +64,7 @@ const Menu = ({ children, className, tasks }) => {
             </div>
           }
         >
-          <div className="pl-7">{children}</div>
+          <div className="">{children}</div>
         </Toggle>
       </div>
     </ul>
