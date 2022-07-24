@@ -3,6 +3,7 @@ import { DateFormatContext } from "../../context/DateFormatContext";
 import { parseJSON, format } from "date-fns";
 import { Link } from "react-router-dom";
 import Toggle from "../../components/UI/Toggle";
+import { ChevronIconDown, ChevronIconRight } from "../../Assets/ChevronIcons";
 
 const ArchivedProjects = ({ projects }) => {
   const { dateFormat } = useContext(DateFormatContext);
@@ -22,7 +23,7 @@ const ArchivedProjects = ({ projects }) => {
         id={project.id}
       >
         <div className="">
-          <p className="text-base"> {project.title}</p>
+          <p className="text-sm">{project.title}</p>
           <p className="text-2xs">Archived: {project.archivedOn}</p>
         </div>
       </Link>
@@ -30,8 +31,20 @@ const ArchivedProjects = ({ projects }) => {
   ));
 
   return (
-    <Toggle visText="Hide Archived Projects" invisText="Archived Projects">
-      <ul className=" overflow-y-auto max-h-96 flex flex-col  menu  ">
+    <Toggle
+      className={"w-full text-lg opacity-60"}
+      visText={
+        <div className="flex items-center gap-2 mb-4">
+          <ChevronIconDown classNameDown={"w-5"} /> <p>Archived Projects</p>
+        </div>
+      }
+      invisText={
+        <div className="flex items-center gap-2 mb-4">
+          <ChevronIconRight classNameRight={"w-5"} /> <p>Archived Projects</p>
+        </div>
+      }
+    >
+      <ul className="menu flex flex-col max-h-80 overflow-y-auto pl-7   ">
         {projectElements.reverse()}
       </ul>
     </Toggle>
