@@ -24,7 +24,7 @@ const Task = ({
         name="checkbox"
         className={"py-1.5"}
       />
-      <div className="flex-col w-full max-w-2xl ">
+      <div className="flex-col w-full max-w-3xl ">
         <div className="flex items-center justify-between ">
           <div className="flex gap-3 items-center">
             <div
