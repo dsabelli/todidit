@@ -8,16 +8,9 @@ const Error = ({ error }) => {
         className={"w-screen"}
         text={
           <div className=" px-20 md:ml-20 md:p-0">
-            <h1 className="text-6xl font-bold">{error.message || "Oh NO!"}</h1>
-            <p className="pt-6 ">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
-              ipsum nisi provident maxime rem illum voluptas beatae, blanditiis
-              dolorem?
-            </p>
-            <p className="pb-6 ">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias,
-              iusto. Ducimus velit laboriosam molestiae?
-            </p>
+            <h1 className="text-6xl font-bold">{error.message || "Uh oh!"}</h1>
+            <p className="pt-6 ">Something went wrong.</p>
+            <p className="pb-6 ">Please go back or try again later.</p>
           </div>
         }
       >
