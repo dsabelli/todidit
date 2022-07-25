@@ -8,7 +8,7 @@ import { ClockLoader } from "react-spinners";
 import ForgotPWSvg from "../../Assets/SVGs/ForgotPWSvg";
 const ResetPassword = () => {
   // let navigate = useNavigate();
-  const [loaded, setLoaded] = useState(true);
+  const [loaded, setLoaded] = useState(false);
   const [reset, setReset] = useState(false);
   const [asyncError, setAsyncError] = useState("");
   const {
