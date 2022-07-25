@@ -7,6 +7,7 @@ const alert = (title) => {
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
+    background: "#000",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes, delete it!",
   });
@@ -14,7 +15,12 @@ const alert = (title) => {
 };
 
 const success = (title) => {
-  return Swal.fire("Deleted!", `Project ${title} has been deleted.`, "success");
+  return Swal.fire({
+    background: "#000",
+    title: "Deleted!",
+    text: `Project ${title} has been deleted.`,
+    icon: "success",
+  });
 };
 
 const userAlert = () => {
@@ -23,6 +29,7 @@ const userAlert = () => {
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
+    background: "#000",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes, delete it!",
   });
@@ -30,7 +37,12 @@ const userAlert = () => {
 };
 
 const userSuccess = () => {
-  return Swal.fire("Deleted!", `Your account has been deleted.`, "success");
+  return Swal.fire({
+    background: "#000",
+    title: "Deleted!",
+    text: `Your account has successfully been deleted. Thank you for using toDidit.`,
+    icon: "success",
+  });
 };
 
 export default { alert, success, userAlert, userSuccess };
