@@ -65,7 +65,7 @@ const DiditSearch = ({ projects }) => {
               : (setVisible(false), (e.target.value = ""), e.target.focus())
           }
           onKeyDown={(e) =>
-            e.key === "Escape"
+            e.key === "Escape" || e.key === "Enter"
               ? ((e.target.value = ""), setVisible(false), e.target.blur())
               : null
           }
