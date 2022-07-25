@@ -8,12 +8,12 @@ const Project = ({ id, onUpdate, onDelete, title }) => {
     <ul className="menu text-base pl-3 ">
       <li className="">
         <Link to={`project/${id}`}>
-          <div className="p-0 flex justify-between w-full">
+          <div className="p-0 flex justify-between w-full group">
             <div className="">{title}</div>
-            <div className="flex ">
+            <div className="flex">
               <Button
                 className={
-                  "btn-xs w-6 h-6 p-1 bg-transparent border-none hover:bg-base-300"
+                  "btn-xs w-6 h-6 p-1 bg-transparent border-none hover:bg-base-300 hidden group-hover:flex"
                 }
                 onClick={(e) => {
                   e.stopPropagation();
@@ -24,7 +24,7 @@ const Project = ({ id, onUpdate, onDelete, title }) => {
                 <EditIcon className={"w-6 h-6 hover:text-primary"} />
               </Button>
               <Button
-                className={`btn-xs w-6 h-6 p-1 bg-transparent border-none hover:bg-base-300`}
+                className={`btn-xs w-6 h-6 p-1 bg-transparent border-none hover:bg-base-300 hidden group-hover:flex`}
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
@@ -33,6 +33,9 @@ const Project = ({ id, onUpdate, onDelete, title }) => {
               >
                 <DeleteIcon className={"w-6 hover:text-error"} />
               </Button>
+              <div className="flex justify-between w-full items-center group-hover:hidden">
+                <p className="badge  text-right">{2}</p>
+              </div>
             </div>
           </div>
         </Link>
