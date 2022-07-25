@@ -14,7 +14,7 @@ const Profile = () => {
   let navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
   const [loaded, setLoaded] = useState(false);
-  const [deleted, setDeleted] = useState(true);
+  const [deleted, setDeleted] = useState(false);
 
   const handleLogout = () => {
     navigate("/");
