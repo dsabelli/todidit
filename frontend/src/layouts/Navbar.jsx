@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
 import DiditSearch from "../features/Didits/DiditSearch";
@@ -6,7 +6,15 @@ import ToDidit from "../components/UI/ToDidit";
 import MenuIcon from "../Assets/Icons/MenuIcon";
 
 const Navbar = ({ projects, menuVisible, onMenuVisible }) => {
+  const [avatar, setAvatar] = useState("");
   const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    user &&
+      setAvatar(
+        `https://avatars.dicebear.com/api/initials/${user.username[0]}.svg`
+      );
+  }, []);
 
   const handleLogout = () => {
     window.localStorage.removeItem("loggedIn");
@@ -26,9 +34,7 @@ const Navbar = ({ projects, menuVisible, onMenuVisible }) => {
         <div className="dropdown dropdown-end">
           <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img
-                src={`https://avatars.dicebear.com/api/initials/${user.username[0]}.svg`}
-              />
+              <img src={avatar} />
             </div>
           </label>
           <ul
