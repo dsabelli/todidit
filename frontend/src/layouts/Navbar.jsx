@@ -3,8 +3,9 @@ import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
 import DiditSearch from "../features/Didits/DiditSearch";
 import ToDidit from "../components/UI/ToDidit";
+import MenuIcon from "../Assets/MenuIcon";
 
-const Navbar = ({ projects, notApp }) => {
+const Navbar = ({ projects, menuVisible, onMenuVisible }) => {
   const { user } = useContext(UserContext);
 
   const handleLogout = () => {
@@ -12,18 +13,23 @@ const Navbar = ({ projects, notApp }) => {
   };
   return (
     <nav className="navbar flex justify-between bg-accent">
-      <ToDidit user={user} />
+      <div className="">
+        <MenuIcon
+          onClick={() => onMenuVisible((prevVal) => !prevVal)}
+          className={"text-neutral mt-1.5 md:hidden"}
+        />
+
+        <ToDidit />
+      </div>
       <div>
-        {!notApp && <DiditSearch projects={projects} />}
+        {<DiditSearch projects={projects} />}
         <div className="dropdown dropdown-end">
           <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
-            {user && (
-              <div className="w-10 rounded-full">
-                <img
-                  src={`https://avatars.dicebear.com/api/initials/${user.username[0]}.svg`}
-                />
-              </div>
-            )}
+            <div className="w-10 rounded-full">
+              <img
+                src={`https://avatars.dicebear.com/api/initials/${user.username[0]}.svg`}
+              />
+            </div>
           </label>
           <ul
             tabIndex="0"
