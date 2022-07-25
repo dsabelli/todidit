@@ -32,7 +32,7 @@ const ArchivedProjects = ({ projects }) => {
 
   return (
     <Toggle
-      className={"w-full text-lg opacity-60"}
+      className={"w-full text-lg opacity-60 mt-10"}
       visText={
         <div className="flex items-center gap-2 mb-4">
           <ChevronIconDown classNameDown={"w-5"} /> <p>Archived Projects</p>
