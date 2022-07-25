@@ -31,7 +31,7 @@ const TaskForm = ({
   );
 
   return (
-    <div className="pl-4 mx-auto w-full max-w-2xl">
+    <div className="pl-2 mx-auto w-full max-w-3xl">
       <form onSubmit={onSubmit}>
         <div className="border border-accent rounded-lg mt-2 p-2">
           <div>
