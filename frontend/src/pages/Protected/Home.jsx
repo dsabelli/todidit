@@ -24,6 +24,7 @@ const Home = () => {
   const [projectTitle, setProjectTitle] = useState("");
   const [projectId, setProjectId] = useState("");
   const [systemMessage, setSystemMessage] = useState("");
+  const [menuVisible, setMenuVisible] = useState(true);
   const { setDateFormat } = useContext(DateFormatContext);
   const { user, setUser } = useContext(UserContext);
   const [didits, setDidits] = useState([]);
@@ -90,10 +91,14 @@ const Home = () => {
   return loaded ? (
     <div className="App">
       <DiditContext.Provider value={diditValue}>
-        <Navbar projects={projects} />
+        <Navbar
+          projects={projects}
+          menuVisible={menuVisible}
+          onMenuVisible={setMenuVisible}
+        />
       </DiditContext.Provider>
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
-      <div className="grid grid-cols-6 gap-x-8 h-screen">
+      <div className="grid grid-cols-6 gap-x-8 min-h-screen">
         <div className="col-span-2 min-w-fit max-w-xs hidden md:block ">
           <Menu tasks={allTasks} className=" text-left text-xl py-6 ">
             <ReadAndUpdateProjects
