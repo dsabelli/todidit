@@ -1,11 +1,11 @@
 import ErrorMessage from "./ErrorMessage";
-
+import Error from "../../pages/Unprotected/Error";
 const ErrorFallback = ({ error }) => {
   return (
-    <div role="alert">
-      <p>Something went wrong:</p>
-      <ErrorMessage errorMessage={error.message} />
-    </div>
+    <>
+      <Error error={error} />
+      {/* <ErrorMessage errorMessage={error.message} /> */}
+    </>
   );
 };
 
