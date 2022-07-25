@@ -3,27 +3,31 @@ import Input from "../UI/Input";
 
 const ProjectForm = ({ onSubmit, value, onChange, onClick, submitText }) => {
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <label htmlFor="Title"></label>
-        <Input
-          autoFocus
-          placeholder="project name"
-          id="Title"
-          type="text"
-          value={value}
-          name="Title"
-          onChange={onChange}
-          className="input input-ghost w-full max-w-xs"
-        />
-      </div>
-      <Button
-        className={value ? "btn" : "btn btn-disabled opacity-50"}
-        type="submit"
-        text={submitText}
-      />
-      <Button onClick={onClick} text={"cancel"} />
-    </form>
+    <div className="pl-4">
+      <form onSubmit={onSubmit}>
+        <div className="border border-accent rounded-lg mt-1 px-2">
+          <label htmlFor="Title"></label>
+          <Input
+            autoFocus
+            placeholder="project name"
+            id="Title"
+            type="text"
+            value={value}
+            name="Title"
+            onChange={onChange}
+            className="input p-0 w-full text-base focus:outline-none bg-base-300 "
+          />
+        </div>
+        <div className="flex justify-end gap-2 my-2">
+          <Button className={"btn-xs"} text="cancel" onClick={onClick} />
+          <Button
+            className={`btn-xs ${value ? "" : " btn-disabled opacity-50"}`}
+            type="submit"
+            text={submitText}
+          />
+        </div>
+      </form>
+    </div>
   );
 };
 
