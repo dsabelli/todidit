@@ -14,9 +14,15 @@ const Didit = ({
   // console.log(format(createdOn, dateFormat));
 
   return (
-    <div className="flex flex-col items-start gap-1 mb-5 opacity-60">
-      <div className="text-lg">{title}</div>
-      <div className="text-sm whitespace-pre-line ">{description}</div>
+    <div
+      className={`flex flex-col items-start gap-1 w-full opacity-60 ${
+        description ? "mb-5" : "mb-2"
+      }`}
+    >
+      <div className="text-xl">{title}</div>
+      {description && (
+        <div className="text-sm whitespace-pre-line mb-2 ">{description}</div>
+      )}
       {createdOn && (
         <div className="text-xs">
           Created on: {format(createdOn, dateFormat)}
