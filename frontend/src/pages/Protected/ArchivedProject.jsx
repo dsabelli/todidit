@@ -25,8 +25,11 @@ const ArchivedProject = () => {
     <Didit
       key={didit.id}
       title={didit.title}
+      description={didit.description}
       project={projects.find((project) => project.id === didit.project).title}
       completedOn={parseJSON(didit.completedOn)}
+      createdOn={parseJSON(didit.createdOn)}
+      dueOn={parseJSON(didit.dueDate)}
     />
   ));
   return <div>{diditElements}</div>;
