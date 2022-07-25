@@ -32,8 +32,8 @@ const DiditSearch = ({ projects }) => {
         <Link
           to={`/app/didit/${didit.id}`}
           key={didit.id}
-          title={didit.title}
           onClick={() => setVisible(false)}
+          className="p-1"
         >
           <Didit
             key={didit.id}
@@ -48,19 +48,16 @@ const DiditSearch = ({ projects }) => {
     : null;
 
   return (
-    <div className="flex-none gap-2">
-      <>
-        <DateRange
-          onDiditDateStart={setDiditDateStart}
-          onDiditDateEnd={setDiditDateEnd}
-        />
-      </>
-
-      <div className="form-control ">
+    <div className="flex gap-2">
+      {/* <DateRange
+        onDiditDateStart={setDiditDateStart}
+        onDiditDateEnd={setDiditDateEnd}
+      /> */}
+      <div className="form-control w-64 ">
         <Input
           type="text"
           placeholder="Search Didits..."
-          className="input input-bordered"
+          className="input input-bordered w-full bg-base-100"
           //if not an empty string, get didits with title of value, otherwise
           //clear (fix debonuce issue) blur to setDidits back to blank and focus for next searcg
           onChange={(e) =>
@@ -69,15 +66,26 @@ const DiditSearch = ({ projects }) => {
               : (setVisible(false), (e.target.value = ""), e.target.focus())
           }
           onKeyDown={(e) =>
-            e.key === "Escape"
+            e.key === "Escape" || e.key === "Enter"
               ? ((e.target.value = ""), setVisible(false), e.target.blur())
               : null
           }
           onBlur={(e) => (e.target.value = "")}
         />
 
-        <div className="overflow-y-auto max-h-48 flex flex-col ">
-          <div className={`${visible ? "" : "hidden"}`}>{diditElements}</div>
+        <div
+          className={` ${
+            visible ? "dropdown dropdown-end dropdown-open" : "hidden"
+          }`}
+        >
+          <ul
+            tabIndex="0"
+            className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-fit overflow-y-auto max-h-96"
+          >
+            <li className={`dropdown ${visible ? "" : "hidden"}`}>
+              {diditElements}
+            </li>
+          </ul>
         </div>
       </div>
     </div>

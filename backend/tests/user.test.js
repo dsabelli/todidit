@@ -116,7 +116,7 @@ describe("When a user attempts to change their password", () => {
       .set("Authorization", `bearer ${token}`)
       .expect(200);
   });
-  it("fails to update password if password don't match", async () => {
+  it("fails to update password if passwords don't match", async () => {
     const newPassword = {
       password: "LilyandArno1!",
       confirmPassword: "LilyandArno1@",
@@ -136,7 +136,7 @@ describe("When a user attempts to change their password", () => {
       .put(`/api/users/confirm-reset/abc321`)
       .send(newPassword)
       .set("Authorization", `bearer ${token}`)
-      .expect(500);
+      .expect(403);
   });
 });
 

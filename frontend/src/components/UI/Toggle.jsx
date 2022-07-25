@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Toggle = ({ children, visText, invisText }) => {
+const Toggle = ({ children, visText, invisText, className }) => {
   const [visible, setVisible] = useState(false);
 
   const toggleVisibility = () => {
@@ -8,7 +8,7 @@ const Toggle = ({ children, visText, invisText }) => {
   };
 
   return (
-    <div>
+    <div className={className}>
       <div>
         <button onClick={() => toggleVisibility()}>
           {visible ? visText : invisText}

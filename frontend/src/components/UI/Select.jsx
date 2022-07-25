@@ -1,11 +1,11 @@
 import React from "react";
 
-const Select = ({ defaultValue, children, onChange }) => {
+const Select = ({ defaultValue, children, onChange, className }) => {
   return (
     <select
       onChange={onChange}
       defaultValue={defaultValue}
-      className="select w-full max-w-xs"
+      className={`select select-bordered w-full max-w-md ${className}`}
     >
       <option value={defaultValue} disabled>
         {defaultValue}

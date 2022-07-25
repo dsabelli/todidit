@@ -1,18 +1,12 @@
-import { useContext } from "react";
-import {
-  format,
-  parseJSON,
-  isPast,
-  parseISO,
-  differenceInCalendarDays,
-} from "date-fns";
-import { DateFormatContext } from "../../context/DateFormatContext";
 import Button from "../../components/UI/Button";
 import Checkbox from "../../components/UI/Checkbox";
-import DeleteSvg from "../../Assets/DeleteSvg";
-
+import DeleteIcon from "../../Assets/Icons/DeleteIcon";
+import EditIcon from "../../Assets/Icons/EditIcon";
+import StarIcon from "../../Assets/Icons/StarIcon";
+import DueOn from "./DueOn";
 const Task = ({
   dueDate,
+  completedOn,
   checked,
   id,
   onCheck,
@@ -21,63 +15,78 @@ const Task = ({
   title,
   description,
 }) => {
-  const { dateFormat } = useContext(DateFormatContext);
-  const dateDue = format(parseJSON(dueDate), dateFormat);
-  let difference;
   return (
-    <div className="flex justify-between px-4 ">
-      <div className="flex gap-3 ">
-        <div>
-          <Checkbox
-            checked={checked}
-            onChange={() => onCheck(id)}
-            id="checkbox"
-            name="checkbox"
-          />
-        </div>
-        <div
-          className={`flex flex-col items-start ${
-            checked ? "line-through" : ""
-          }`}
-        >
-          <div className="">{title}</div>
-          <div className="text-xs mb-5 ">{description}</div>
-          <div className="text-xs mb-5 ">
-            {dateDue === format(new Date(), dateFormat) ? (
-              <span className="bg-yellow-500">Today</span>
-            ) : isPast(parseISO(dueDate)) ? (
-              <span className="bg-red-500">
-                Overdue by{" "}
-                {
-                  (difference = differenceInCalendarDays(
-                    new Date(),
-                    parseISO(dueDate)
-                  ))
-                }{" "}
-                {difference === 1 ? "day" : "days"}
-              </span>
-            ) : (
-              dateDue
-            )}
+    <div className="flex p-1 gap-2 justify-center mx-auto max-w-3xl">
+      <Checkbox
+        checked={checked}
+        onChange={() => onCheck(id)}
+        id="checkbox"
+        name="checkbox"
+        className={"px-0.5 py-1.5"}
+      />
+      <div className="flex-col w-full  ">
+        <div className="flex items-center justify-between ">
+          <div className="flex gap-3 items-center">
+            <div
+              className={`text-xl flex flex-col items-start ${
+                checked ? "line-through" : ""
+              }`}
+            >
+              {title}
+            </div>
+          </div>
+          <div className="flex gap-1 ">
+            <Button
+              className={
+                "btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-300"
+              }
+              onClick={() => {
+                onUpdate(id);
+              }}
+            >
+              <StarIcon className={"w-6 h-6 hover:text-warning"} />
+            </Button>
+            <Button
+              className={
+                "btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-300"
+              }
+              onClick={() => {
+                onUpdate(id);
+              }}
+            >
+              <EditIcon className={"w-6 h-6 hover:text-primary"} />
+            </Button>
+            <Button
+              className={`btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-300 ${
+                checked ? "" : "btn-disabled opacity-50"
+              }`}
+              onClick={() => {
+                onDelete();
+              }}
+            >
+              <DeleteIcon className={"w-6 hover:text-error"} />
+            </Button>
           </div>
         </div>
-      </div>
-      <div className="flex gap-4">
-        <Button
-          onClick={() => {
-            onUpdate(id);
-          }}
-          text="edit"
-        />
-        <Button
-          className={`btn btn-square ${
-            checked ? "" : "btn-disabled opacity-50"
-          }`}
-          onClick={() => {
-            onDelete();
-          }}
-          text={<DeleteSvg />}
-        />
+        <div className="text-left">
+          <div
+            className={`text-sm mb-0.5 flex flex-col items-start whitespace-pre-line  ${
+              checked ? "line-through" : ""
+            }`}
+          >
+            {description}
+          </div>
+          <div className="flex justify-between mt-1 pr-1 border-b border-neutral">
+            <DueOn
+              className={`text-xs flex flex-col items-start pb-2 ${
+                checked ? "line-through" : ""
+              }`}
+              completedOn={completedOn}
+              dueDate={dueDate}
+            />
+            <div className="text-xs">{"task project"}</div>
+          </div>
+        </div>
       </div>
     </div>
   );

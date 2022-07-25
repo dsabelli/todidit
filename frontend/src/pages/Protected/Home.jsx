@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, useMemo } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../../layouts/Navbar";
 import Menu from "../../layouts/Menu";
 import ErrorMessage from "../../components/UI/ErrorMessage";
@@ -13,7 +13,7 @@ import ReadAndUpdateProjects from "../../features/Projects/ReadAndUpdateProjects
 import { UserContext } from "../../context/UserContext";
 import { DateFormatContext } from "../../context/DateFormatContext";
 import { DiditContext } from "../../context/DiditContext";
-import { ClockLoader } from "react-spinners";
+import Loader from "../../components/UI/Loader";
 const Home = () => {
   const [loaded, setLoaded] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -24,6 +24,7 @@ const Home = () => {
   const [projectTitle, setProjectTitle] = useState("");
   const [projectId, setProjectId] = useState("");
   const [systemMessage, setSystemMessage] = useState("");
+  const [menuVisible, setMenuVisible] = useState(true);
   const { setDateFormat } = useContext(DateFormatContext);
   const { user, setUser } = useContext(UserContext);
   const [didits, setDidits] = useState([]);
@@ -31,6 +32,11 @@ const Home = () => {
     () => ({ didits, setDidits }),
     [didits, setDidits]
   );
+  let location = useLocation();
+
+  let showAddTask =
+    location.pathname.includes("didit") ||
+    location.pathname.includes("archive");
 
   //Checks if a user's token is stored in local storage
   //If it is, re-login is not required and token is parsed and set for use
@@ -90,35 +96,46 @@ const Home = () => {
   return loaded ? (
     <div className="App">
       <DiditContext.Provider value={diditValue}>
-        <Navbar projects={projects} />
+        <Navbar
+          projects={projects}
+          menuVisible={menuVisible}
+          onMenuVisible={setMenuVisible}
+        />
       </DiditContext.Provider>
       {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
-      <div className="flex">
-        <Menu>
-          <ReadAndUpdateProjects
-            user={user}
-            tasks={tasks}
-            onTasks={setTasks}
-            projects={projects}
-            onProjects={setProjects}
-            projectTitle={projectTitle}
-            onProjectTitle={setProjectTitle}
-            onAddProject={setAddProject}
-            onSystemMessage={setSystemMessage}
-          />
-          <CreateProject
-            user={user}
-            onProjects={setProjects}
-            projectTitle={projectTitle}
-            onProjectTitle={setProjectTitle}
-            addProject={addProject}
-            onAddProject={setAddProject}
-            onSystemMessage={setSystemMessage}
-          />
-          <ArchivedProjects projects={projects} />
-        </Menu>
-        <div>
+      <div className="grid grid-cols-6 gap-x-8 min-h-screen">
+        <div className="col-span-2 min-w-fit max-w-xs hidden md:block ">
+          <Menu tasks={allTasks} className=" text-left text-xl py-6 ">
+            <ReadAndUpdateProjects
+              user={user}
+              tasks={tasks}
+              onTasks={setTasks}
+              projects={projects}
+              onProjects={setProjects}
+              projectTitle={projectTitle}
+              onProjectTitle={setProjectTitle}
+              onAddProject={setAddProject}
+              onSystemMessage={setSystemMessage}
+            />
+            <CreateProject
+              user={user}
+              onProjects={setProjects}
+              projectTitle={projectTitle}
+              onProjectTitle={setProjectTitle}
+              addProject={addProject}
+              onAddProject={setAddProject}
+              onSystemMessage={setSystemMessage}
+            />
+            <ArchivedProjects projects={projects} />
+          </Menu>
+        </div>
+        <div className="col-span-6 md:col-span-4 2xl:col-span-3 pl-12 pr-12 md:pl-4 ">
           <DiditContext.Provider value={diditValue}>
+            <header>
+              <h1 className="text-left text-2xl mt-6 mb-4 max-w-3xl mx-auto">
+                Placeholder
+              </h1>
+            </header>
             <Outlet
               context={[
                 tasks,
@@ -135,23 +152,25 @@ const Home = () => {
               ]}
             />
           </DiditContext.Provider>
-          <CreateTask
-            user={user}
-            addTask={addTask}
-            onAddTask={setAddTask}
-            onTasks={setTasks}
-            onAllTasks={setAllTasks}
-            onSystemMessage={setSystemMessage}
-            projects={projects}
-            projectTitle={projectTitle}
-            projectId={projectId}
-            onProjectId={setProjectId}
-          />
+          {!showAddTask && (
+            <CreateTask
+              user={user}
+              addTask={addTask}
+              onAddTask={setAddTask}
+              onTasks={setTasks}
+              onAllTasks={setAllTasks}
+              onSystemMessage={setSystemMessage}
+              projects={projects}
+              projectTitle={projectTitle}
+              projectId={projectId}
+              onProjectId={setProjectId}
+            />
+          )}
         </div>
       </div>
     </div>
   ) : (
-    <ClockLoader />
+    <Loader />
   );
 };
 

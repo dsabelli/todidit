@@ -1,10 +1,9 @@
-import ErrorSvg from "../../Assets/ErrorSvg";
-
+import ErrorIcon from "../../Assets/Icons/ErrorIcon";
 const ErrorMessage = ({ errorMessage }) => {
   return (
-    <div className="alert alert-error shadow-lg">
+    <div className="alert alert-error text-sm shadow-lg">
       <div>
-        <ErrorSvg />
+        <ErrorIcon className={"w-8"} />
         <span>{errorMessage}</span>
       </div>
     </div>

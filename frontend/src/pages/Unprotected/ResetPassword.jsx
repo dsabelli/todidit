@@ -5,10 +5,10 @@ import { useForm } from "react-hook-form";
 import Button from "../../components/UI/Button";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import { ClockLoader } from "react-spinners";
-
+import ForgotPWSvg from "../../Assets/SVGs/ForgotPWSvg";
 const ResetPassword = () => {
   // let navigate = useNavigate();
-  const [loaded, setLoaded] = useState(true);
+  const [loaded, setLoaded] = useState(false);
   const [reset, setReset] = useState(false);
   const [asyncError, setAsyncError] = useState("");
   const {
@@ -48,40 +48,43 @@ const ResetPassword = () => {
       <div>pw reset, check email</div>
     ) : (
       <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Reset Password</h1>
-            <p className="py-6">
-              Enter your user account's verified email address and we will send
-              you a password reset link.
-            </p>
+        <div className="hero-content flex-col-reverse md:flex-row gap-20 items-center">
+          <div className="flex">
+            <ForgotPWSvg className={" hidden md:block w-96 my-auto mt-10 "} />
           </div>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-              <div className="card-body">
-                <div className="form-control">
-                  {asyncError && <ErrorMessage errorMessage={asyncError} />}
-                  <input
-                    autoFocus
-                    required
-                    type="text"
-                    name="email"
-                    placeholder="enter your email"
-                    className="input input-bordered"
-                    {...register("email")}
-                  />
-                </div>
+          <div>
+            <h1 className="text-5xl font-bold pb-2">Reset Password</h1>
+            <p className="pt-4">
+              Enter the email address associated with your account
+            </p>
+            <p className="pb-4">and we will send you a password reset link.</p>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                <div className="card-body">
+                  <div className="form-control">
+                    {asyncError && <ErrorMessage errorMessage={asyncError} />}
+                    <input
+                      autoFocus
+                      required
+                      type="text"
+                      name="email"
+                      placeholder="enter your email"
+                      className="input input-bordered"
+                      {...register("email")}
+                    />
+                  </div>
 
-                <div className="form-control mt-6">
-                  <Button
-                    type="submit"
-                    text={"Reset"}
-                    className={"btn-primary"}
-                  />
+                  <div className="form-control mt-6">
+                    <Button
+                      type="submit"
+                      text={"Reset"}
+                      className={"btn-primary"}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     )

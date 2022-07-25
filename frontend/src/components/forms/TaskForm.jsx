@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DueDate from "../../features/Tasks/DueDate";
 import Button from "../UI/Button";
+import Dropdown from "../UI/Dropdown";
 import Input from "../UI/Input";
 import Textarea from "../UI/Textarea";
 
@@ -30,59 +31,58 @@ const TaskForm = ({
   );
 
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <label htmlFor="Title"></label>
-        <Input
-          autoFocus
-          placeholder="e.g., style this project better"
-          id="Title"
-          type="text"
-          value={titleValue}
-          name="Title"
-          onChange={onTitleChange}
-          className="input input-ghost w-full max-w-xs"
-        />
-      </div>
-      <div>
-        <label htmlFor="Description"></label>
-        <Textarea
-          id="Description"
-          placeholder="Description"
-          type="text"
-          value={descriptionValue}
-          name="Description"
-          onChange={onDescriptionChange}
-          className="textarea textarea-ghost w-full max-w-xs h-24"
-        />
-      </div>
-      <div>
-        <DueDate dueDate={dueDate} onDueDate={onDueDate} />
-      </div>
-      <div>
-        <div className="dropdown dropdown-hover">
-          <label tabIndex="0" className="btn m-1">
-            {selectedProject || projectTitle || "Select"}
-          </label>
-          <ul
-            tabIndex="0"
-            className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            {projectElements}
-          </ul>
+    <div className="pl-2 mx-auto w-full max-w-3xl">
+      <form onSubmit={onSubmit}>
+        <div className="border border-accent rounded-lg mt-2 p-2">
+          <div>
+            <label htmlFor="Title"></label>
+            <Input
+              autoFocus
+              placeholder="e.g., style this project better"
+              id="Title"
+              type="text"
+              value={titleValue}
+              name="Title"
+              onChange={onTitleChange}
+              className="input   p-0 w-full text-xl focus:outline-none "
+            />
+          </div>
+          <div className="">
+            <label htmlFor="Description"></label>
+            <Textarea
+              id="Description"
+              placeholder="Description"
+              type="text"
+              value={descriptionValue}
+              name="Description"
+              onChange={onDescriptionChange}
+              className="textarea resize-none w-full p-0 min-h-12 leading-4 focus:outline-none"
+            />
+          </div>
+          <div className="flex justify-between mt-2">
+            <DueDate dueDate={dueDate} onDueDate={onDueDate} className="" />
+            <Dropdown
+              className={"dropdown-hover dropdown-end"}
+              text={selectedProject || projectTitle || "Select a project"}
+            >
+              {projectElements}
+            </Dropdown>
+          </div>
         </div>
-      </div>
-      <Button
-        className={
-          (titleValue && projectTitle) || (titleValue && projectId)
-            ? "btn"
-            : "btn btn-disabled opacity-50"
-        }
-        type="submit"
-        text={submitText}
-      />
-      <Button text="cancel" onClick={onClick} />
-    </form>
+        <div className="flex justify-end gap-2 my-2">
+          <Button className={"btn-sm"} text="cancel" onClick={onClick} />
+          <Button
+            className={`btn-sm  ${
+              (titleValue && projectTitle) || (titleValue && projectId)
+                ? ""
+                : "btn-disabled opacity-50"
+            }`}
+            type="submit"
+            text={submitText}
+          />
+        </div>
+      </form>
+    </div>
   );
 };
 

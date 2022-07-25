@@ -1,7 +1,7 @@
 import { useState } from "react";
 import taskService from "../../services/tasks";
 import TaskForm from "../../components/forms/TaskForm";
-import Button from "../../components/UI/Button";
+import AddIcon from "../../Assets/Icons/AddIcon";
 
 const CreateTask = ({
   user,
@@ -86,11 +86,13 @@ const CreateTask = ({
         />
       ) : (
         user && (
-          <Button
+          <div
             onClick={() => showCreateTaskForm()}
-            className="btn mt-10 "
-            text="Add Task"
-          />
+            className="flex gap-1 mx-auto max-w-3xl py-2 pl-0.5  text-base items-center rounded-md hover:bg-base-200 cursor-pointer "
+          >
+            <AddIcon className="w-6 text-secondary" />
+            <p>Add Task</p>
+          </div>
         )
       )}
     </>

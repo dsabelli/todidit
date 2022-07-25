@@ -59,6 +59,11 @@ router.put("/:id", async (request, response) => {
 router.put("/confirm-reset/:token", async (request, response) => {
   const { password, confirmPassword } = request.body;
   const token = request.params.token;
+  const updatedUser = await User.findOne({ vToken: token });
+
+  if (!updatedUser) {
+    return response.status(403).json({ error: "Your reset code has expired." });
+  }
 
   if (!password || !validator.isStrongPassword(password)) {
     return response.status(400).json({
@@ -71,8 +76,6 @@ router.put("/confirm-reset/:token", async (request, response) => {
       error: "Passwords must match",
     });
   }
-
-  const updatedUser = await User.findOne({ vToken: token });
 
   const saltRounds = 10;
   const updatedHash = await bcrypt.hash(password, saltRounds);
