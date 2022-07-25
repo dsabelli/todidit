@@ -53,11 +53,11 @@ const DiditSearch = ({ projects }) => {
         onDiditDateStart={setDiditDateStart}
         onDiditDateEnd={setDiditDateEnd}
       /> */}
-      <div className="form-control ">
+      <div className="form-control w-64 ">
         <Input
           type="text"
           placeholder="Search Didits..."
-          className="input input-bordered"
+          className="input input-bordered w-full"
           //if not an empty string, get didits with title of value, otherwise
           //clear (fix debonuce issue) blur to setDidits back to blank and focus for next searcg
           onChange={(e) =>
@@ -73,8 +73,20 @@ const DiditSearch = ({ projects }) => {
           onBlur={(e) => (e.target.value = "")}
         />
 
-        <div className="overflow-y-auto max-h-48 flex flex-col ">
-          <div className={`${visible ? "" : "hidden"}`}>{diditElements}</div>
+        {/* <div className=" overflow-y-auto max-h-48 flex flex-col "> */}
+        <div
+          className={` ${
+            visible ? "dropdown dropdown-end dropdown-open" : "hidden"
+          }`}
+        >
+          <ul
+            tabIndex="0"
+            className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-fit overflow-y-auto max-h-96"
+          >
+            <li className={`dropdown ${visible ? "" : "hidden"}`}>
+              {diditElements}
+            </li>
+          </ul>
         </div>
       </div>
     </div>
