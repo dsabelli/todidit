@@ -1,7 +1,6 @@
-import { useState } from "react";
 import projectService from "../../services/projects";
 import ProjectForm from "../../components/forms/ProjectForm";
-import Button from "../../components/UI/Button";
+import AddIcon from "../../Assets/AddIcon";
 
 const CreateProject = ({
   user,
@@ -62,11 +61,13 @@ const CreateProject = ({
         />
       ) : (
         user && (
-          <Button
+          <div
             onClick={() => showCreateProjectForm()}
-            className="btn mt-10 "
-            text="Add Project"
-          />
+            className="flex gap-2 py-2 text-base items-center rounded-md hover:bg-base-100 cursor-pointer"
+          >
+            <AddIcon className="w-5 text-primary" />
+            <p className=""> Add Project</p>
+          </div>
         )
       )}
     </>
