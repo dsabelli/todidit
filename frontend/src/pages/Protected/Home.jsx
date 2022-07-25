@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, useMemo } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../../layouts/Navbar";
 import Menu from "../../layouts/Menu";
 import ErrorMessage from "../../components/UI/ErrorMessage";
@@ -32,6 +32,11 @@ const Home = () => {
     () => ({ didits, setDidits }),
     [didits, setDidits]
   );
+  let location = useLocation();
+
+  let showAddTask =
+    location.pathname.includes("didit") ||
+    location.pathname.includes("archive");
 
   //Checks if a user's token is stored in local storage
   //If it is, re-login is not required and token is parsed and set for use
@@ -147,18 +152,20 @@ const Home = () => {
               ]}
             />
           </DiditContext.Provider>
-          <CreateTask
-            user={user}
-            addTask={addTask}
-            onAddTask={setAddTask}
-            onTasks={setTasks}
-            onAllTasks={setAllTasks}
-            onSystemMessage={setSystemMessage}
-            projects={projects}
-            projectTitle={projectTitle}
-            projectId={projectId}
-            onProjectId={setProjectId}
-          />
+          {!showAddTask && (
+            <CreateTask
+              user={user}
+              addTask={addTask}
+              onAddTask={setAddTask}
+              onTasks={setTasks}
+              onAllTasks={setAllTasks}
+              onSystemMessage={setSystemMessage}
+              projects={projects}
+              projectTitle={projectTitle}
+              projectId={projectId}
+              onProjectId={setProjectId}
+            />
+          )}
         </div>
       </div>
     </div>
