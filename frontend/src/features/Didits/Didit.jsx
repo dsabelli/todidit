@@ -16,7 +16,7 @@ const Didit = ({
   return (
     <div className="flex flex-col items-start gap-1 mb-5 opacity-60">
       <div className="text-lg">{title}</div>
-      <div className="text-sm">{description}</div>
+      <div className="text-sm whitespace-pre-line ">{description}</div>
       {createdOn && (
         <div className="text-xs">
           Created on: {format(createdOn, dateFormat)}
