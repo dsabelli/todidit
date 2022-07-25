@@ -16,15 +16,15 @@ const Task = ({
   description,
 }) => {
   return (
-    <div className="flex p-1 gap-2 justify-center">
+    <div className="flex p-1 gap-2 justify-center mx-auto max-w-3xl">
       <Checkbox
         checked={checked}
         onChange={() => onCheck(id)}
         id="checkbox"
         name="checkbox"
-        className={"py-1.5"}
+        className={"px-0.5 py-1.5"}
       />
-      <div className="flex-col w-full max-w-3xl ">
+      <div className="flex-col w-full  ">
         <div className="flex items-center justify-between ">
           <div className="flex gap-3 items-center">
             <div
