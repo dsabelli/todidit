@@ -1,6 +1,6 @@
 import projectService from "../../services/projects";
 import ProjectForm from "../../components/forms/ProjectForm";
-import AddIcon from "../../Assets/AddIcon";
+import AddIcon from "../../Assets/Icons/AddIcon";
 
 const CreateProject = ({
   user,

@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Toggle from "../components/UI/Toggle";
-import StarIcon from "../Assets/StarIcon";
-import TodayIcon from "../Assets/TodayIcon";
-import WeekIcon from "../Assets/WeekIcon";
-import AllIcon from "../Assets/AllIcon";
-import { ChevronIconRight, ChevronIconDown } from "../Assets/ChevronIcons";
+import StarIcon from "../Assets/Icons/StarIcon";
+import TodayIcon from "../Assets/Icons/TodayIcon";
+import WeekIcon from "../Assets/Icons/WeekIcon";
+import AllIcon from "../Assets/Icons/AllIcon";
+import {
+  ChevronIconRight,
+  ChevronIconDown,
+} from "../Assets/Icons/ChevronIcons";
 import { parseJSON } from "date-fns/esm";
 
 const Menu = ({ children, className, tasks }) => {

@@ -8,8 +8,8 @@ import Button from "../../components/UI/Button";
 import { useNavigate } from "react-router-dom";
 import UNavbar from "../../layouts/UNavbar";
 import Hero from "../../components/UI/Hero";
-import RegisterSvg from "../../Assets/RegisterSvg";
-import EmailSvg from "../../Assets/EmailSvg";
+import RegisterSvg from "../../Assets/SVGs/RegisterSvg";
+import EmailSvg from "../../Assets/SVGs/EmailSvg";
 const schema = yup.object().shape({
   username: yup
     .string()

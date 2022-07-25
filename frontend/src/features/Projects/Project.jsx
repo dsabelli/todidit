@@ -1,6 +1,6 @@
 import Button from "../../components/UI/Button";
-import EditIcon from "../../Assets/EditIcon";
-import DeleteIcon from "../../Assets/DeleteIcon";
+import EditIcon from "../../Assets/Icons/EditIcon";
+import DeleteIcon from "../../Assets/Icons/DeleteIcon";
 import { Link } from "react-router-dom";
 
 const Project = ({ id, onUpdate, onDelete, title }) => {

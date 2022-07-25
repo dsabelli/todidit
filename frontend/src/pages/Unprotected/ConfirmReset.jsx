@@ -8,8 +8,8 @@ import Button from "../../components/UI/Button";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import UNavbar from "../../layouts/UNavbar";
 import Hero from "../../components/UI/Hero";
-import ConfirmPWSvg from "../../Assets/ConfirmPWSvg";
-import ConfirmResetSvg from "../../Assets/ConfirmResetSvg";
+import ConfirmPWSvg from "../../Assets/SVGs/ConfirmPWSvg";
+import ConfirmResetSvg from "../../Assets/SVGs/ConfirmResetSvg";
 import { ClockLoader } from "react-spinners";
 const schema = yup.object().shape({
   password: yup

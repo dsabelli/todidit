@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import UNavbar from "../../layouts/UNavbar";
 import Hero from "../../components/UI/Hero";
 import Button from "../../components/UI/Button";
-import VerifiedSvg from "../../Assets/VerifiedSvg";
+import VerifiedSvg from "../../Assets/SVGs/VerifiedSvg";
 import registerService from "../../services/register";
 import { ClockLoader } from "react-spinners";
 const Verified = () => {

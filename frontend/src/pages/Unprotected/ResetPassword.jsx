@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import Button from "../../components/UI/Button";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import { ClockLoader } from "react-spinners";
-import ForgotPWSvg from "../../Assets/ForgotPWSvg";
+import ForgotPWSvg from "../../Assets/SVGs/ForgotPWSvg";
 const ResetPassword = () => {
   // let navigate = useNavigate();
   const [loaded, setLoaded] = useState(true);

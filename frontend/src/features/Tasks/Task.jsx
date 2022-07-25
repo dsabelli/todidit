@@ -1,8 +1,8 @@
 import Button from "../../components/UI/Button";
 import Checkbox from "../../components/UI/Checkbox";
-import DeleteIcon from "../../Assets/DeleteIcon";
-import EditIcon from "../../Assets/EditIcon";
-import StarIcon from "../../Assets/StarIcon";
+import DeleteIcon from "../../Assets/Icons/DeleteIcon";
+import EditIcon from "../../Assets/Icons/EditIcon";
+import StarIcon from "../../Assets/Icons/StarIcon";
 import DueOn from "./DueOn";
 const Task = ({
   dueDate,

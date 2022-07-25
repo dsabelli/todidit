@@ -3,7 +3,7 @@ import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
 import DiditSearch from "../features/Didits/DiditSearch";
 import ToDidit from "../components/UI/ToDidit";
-import MenuIcon from "../Assets/MenuIcon";
+import MenuIcon from "../Assets/Icons/MenuIcon";
 
 const Navbar = ({ projects, menuVisible, onMenuVisible }) => {
   const { user } = useContext(UserContext);

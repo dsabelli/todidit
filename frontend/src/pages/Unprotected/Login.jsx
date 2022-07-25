@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import { UserContext } from "../../context/UserContext";
 import UNavbar from "../../layouts/UNavbar";
-import LoginSvg from "../../Assets/LoginSvg";
+import LoginSvg from "../../Assets/SVGs/LoginSvg";
 const Login = () => {
   let navigate = useNavigate();
   const { setUser } = useContext(UserContext);

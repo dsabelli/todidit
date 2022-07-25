@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../Assets/Logo";
+import Logo from "../../Assets/Icons/Logo";
 
 const ToDidit = ({ user, className }) => {
   let loggedIn = window.localStorage.getItem("loggedIn");

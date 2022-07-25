@@ -1,7 +1,7 @@
 import { useState } from "react";
 import taskService from "../../services/tasks";
 import TaskForm from "../../components/forms/TaskForm";
-import AddIcon from "../../Assets/AddIcon";
+import AddIcon from "../../Assets/Icons/AddIcon";
 
 const CreateTask = ({
   user,

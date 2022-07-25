@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import UNavbar from "../../layouts/UNavbar";
 import Button from "../../components/UI/Button";
 import Hero from "../../components/UI/Hero";
-import HeroSvg from "../../Assets/HeroSvg";
+import HeroSvg from "../../Assets/SVGs/HeroSvg";
 const Landing = () => {
   return (
     <div>

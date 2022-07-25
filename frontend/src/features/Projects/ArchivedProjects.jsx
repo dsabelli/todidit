@@ -3,7 +3,10 @@ import { DateFormatContext } from "../../context/DateFormatContext";
 import { parseJSON, format } from "date-fns";
 import { Link } from "react-router-dom";
 import Toggle from "../../components/UI/Toggle";
-import { ChevronIconDown, ChevronIconRight } from "../../Assets/ChevronIcons";
+import {
+  ChevronIconDown,
+  ChevronIconRight,
+} from "../../Assets/Icons/ChevronIcons";
 
 const ArchivedProjects = ({ projects }) => {
   const { dateFormat } = useContext(DateFormatContext);

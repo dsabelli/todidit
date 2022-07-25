@@ -1,4 +1,4 @@
-import ErrorIcon from "../../Assets/ErrorIcon";
+import ErrorIcon from "../../Assets/Icons/ErrorIcon";
 const ErrorMessage = ({ errorMessage }) => {
   return (
     <div className="alert alert-error text-sm shadow-lg">

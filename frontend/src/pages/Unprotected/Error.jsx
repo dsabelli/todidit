@@ -1,6 +1,6 @@
 import React from "react";
 import Hero from "../../components/UI/Hero";
-import ErrorSvg from "../../Assets/ErrorSvg";
+import ErrorSvg from "../../Assets/SVGs/ErrorSvg";
 const Error = ({ error }) => {
   return (
     <div role="alert">
