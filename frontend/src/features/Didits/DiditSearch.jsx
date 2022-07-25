@@ -32,7 +32,6 @@ const DiditSearch = ({ projects }) => {
         <Link
           to={`/app/didit/${didit.id}`}
           key={didit.id}
-          title={didit.title}
           onClick={() => setVisible(false)}
         >
           <Didit
@@ -73,7 +72,6 @@ const DiditSearch = ({ projects }) => {
           onBlur={(e) => (e.target.value = "")}
         />
 
-        {/* <div className=" overflow-y-auto max-h-48 flex flex-col "> */}
         <div
           className={` ${
             visible ? "dropdown dropdown-end dropdown-open" : "hidden"
