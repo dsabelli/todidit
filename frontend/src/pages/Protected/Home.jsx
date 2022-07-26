@@ -94,7 +94,7 @@ const Home = () => {
   }, [user]);
 
   return loaded ? (
-    <div className="App">
+    <div className="App min-h-screen">
       <DiditContext.Provider value={diditValue}>
         <Navbar
           projects={projects}
