@@ -217,9 +217,9 @@ const Register = ({}) => {
                 Don't forget to check your spam folder!
               </p>
             </div>
-            <div className="max-w-sm flex flex-col">
+            <div className="max-w-sm flex flex-col pr-8">
               <h2 className="text-2xl mb-4">
-                We've logged you in just this time!
+                We've logged you in just this time.
               </h2>
               <Button
                 onClick={() =>
@@ -228,11 +228,9 @@ const Register = ({}) => {
                     password: registeredPassword,
                   })
                 }
-                className={
-                  "btn-wide self-center text-neutral hover:text-white bg-secondary"
-                }
+                className={"text-neutral hover:text-white bg-secondary"}
               >
-                Take Me There!
+                Let's Go!
               </Button>
             </div>
           </div>
