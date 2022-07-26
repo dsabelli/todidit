@@ -66,6 +66,7 @@ const CreateTask = ({
       setTaskDescription("");
       setTaskDueDate(new Date());
       onProjectId("");
+      onProjectTitle("");
       onTasks((prevTasks) => prevTasks.concat(newTask));
       onAllTasks((prevTasks) => prevTasks.concat(newTask));
       showCreateTaskForm();
