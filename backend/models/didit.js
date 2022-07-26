@@ -14,6 +14,9 @@ const schema = mongoose.Schema({
   isEditing: {
     type: Boolean,
   },
+  isImportant: {
+    type: Boolean,
+  },
   dueDate: {
     type: Date,
   },
