@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import registrationService from "../../services/register";
+import loginService from "../../services/login";
+import taskService from "../../services/tasks";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import Button from "../../components/UI/Button";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
 import UNavbar from "../../layouts/UNavbar";
 import Hero from "../../components/UI/Hero";
 import RegisterSvg from "../../Assets/SVGs/RegisterSvg";
@@ -37,8 +40,11 @@ const schema = yup.object().shape({
 
 const Register = ({}) => {
   let navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
   const [registered, setRegistered] = useState(false);
   const [asyncError, setAsyncError] = useState("");
+  const [registeredEmail, setRegisteredEmail] = useState("");
+  const [registeredPassword, setRegisteredPassword] = useState("");
   const {
     register,
     handleSubmit,
@@ -64,8 +70,11 @@ const Register = ({}) => {
         password,
         confirmPassword,
       });
+      setRegisteredEmail(email);
+      setRegisteredPassword(password);
       setRegistered(true);
       setAsyncError("");
+      console.log(registeredEmail, registeredPassword);
     } catch (error) {
       console.log(error);
       const errorMsg = error.response ? error.response.data.error : error;
@@ -76,11 +85,30 @@ const Register = ({}) => {
     }
   };
 
+  const handleLogin = async ({ email, password }) => {
+    try {
+      const user = await loginService.login({ email, password });
+      window.localStorage.setItem("loggedIn", JSON.stringify(user));
+      taskService.setToken(user.token);
+      setUser(user);
+      setRegisteredEmail("");
+      setRegisteredPassword("");
+      navigate("/app/today");
+    } catch (error) {
+      console.log(error);
+      let errorMsg = error.response.data.error || error;
+      setAsyncError(errorMsg);
+      setTimeout(() => {
+        setAsyncError(null);
+      }, 5000);
+    }
+  };
+
   // useEffect(() => {
   //   registered &&
   //     setTimeout(() => {
-  //       navigate("/");
-  //     }, 5000);
+  //       handleLogin({ email, password });
+  //     }, 4000);
   // }, [registered]);
 
   return !registered ? (
@@ -178,13 +206,36 @@ const Register = ({}) => {
       <UNavbar isLanding />
       <Hero
         text={
-          <>
-            <h1 className="text-5xl font-bold">Thank you for registering!</h1>
-            <p className="pt-6 md:text-xl">
-              Please check your email for a verification
-            </p>
-            <p className="pb-6 md:text-xl">link to confirm your account.</p>
-          </>
+          <div className="flex flex-col gap-16">
+            <div>
+              <h1 className="text-5xl font-bold">Thank you for registering!</h1>
+              <p className="pt-6 md:text-xl">
+                Please check your email for a verification
+              </p>
+              <p className="pb-1 md:text-xl">link to confirm your account.</p>
+              <p className="text-xs md:text-sm opacity-70">
+                Don't forget to check your spam folder!
+              </p>
+            </div>
+            <div className="max-w-sm flex flex-col">
+              <h2 className="text-2xl mb-4">
+                We've logged you in just this time!
+              </h2>
+              <Button
+                onClick={() =>
+                  handleLogin({
+                    email: registeredEmail,
+                    password: registeredPassword,
+                  })
+                }
+                className={
+                  "btn-wide self-center text-neutral hover:text-white bg-secondary"
+                }
+              >
+                Take Me There!
+              </Button>
+            </div>
+          </div>
         }
       >
         <EmailSvg className={"hidden md:block w-56"} />

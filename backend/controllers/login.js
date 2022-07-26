@@ -6,7 +6,9 @@ const config = require("../utils/config");
 
 router.post("/", async (request, response) => {
   const { email, password } = request.body;
+
   const user = await User.findOne({ email });
+  console.log(user);
   const passwordCorrect =
     user === null ? false : await bcrypt.compare(password, user.passwordHash);
 
@@ -16,17 +18,30 @@ router.post("/", async (request, response) => {
     });
   }
 
-  if (!user.verified) {
+  if (!user.verified && user.lastLogin === null) {
+    user.lastLogin = Date.now();
+    const userForToken = {
+      username: user.username,
+      id: user._id,
+    };
+    await user.save();
+    const token = jwt.sign(userForToken, config.SECRET);
+
+    return response
+      .status(200)
+      .send({ token, username: user.username, id: user._id });
+  } else if (!user.verified) {
     return response.status(401).json({
       error: "Please verify your email before logging in.",
     });
   }
 
+  user.lastLogin = Date.now();
   const userForToken = {
     username: user.username,
     id: user._id,
   };
-
+  await user.save();
   const token = jwt.sign(userForToken, config.SECRET);
 
   response.status(200).send({ token, username: user.username, id: user._id });

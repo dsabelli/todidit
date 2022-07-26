@@ -29,6 +29,9 @@ const schema = mongoose.Schema({
     type: String,
     unique: true,
   },
+  lastLogin: {
+    type: Date,
+  },
   verified: {
     type: Boolean,
     default: false,

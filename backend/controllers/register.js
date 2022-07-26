@@ -44,6 +44,7 @@ router.post("/", async (request, response) => {
     passwordHash,
     date,
     vToken: token,
+    lastLogin: null,
   });
 
   const savedUser = await user.save();
@@ -60,7 +61,7 @@ router.post("/", async (request, response) => {
     response.status(201).json(savedUser);
   } else
     response.status(500).json({
-      error: "Unable to register createTestAccount, please try again later",
+      error: "Unable to register account, please try again later",
     });
 });
 
