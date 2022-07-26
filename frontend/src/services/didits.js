@@ -28,7 +28,6 @@ const createDidits = async (didit, user) => {
     headers: { Authorization: `bearer ${user.token}` },
   };
   const response = await axios.post(baseUrl, didit, config);
-  console.log(response.data);
   return response.data;
 };
 
