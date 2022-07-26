@@ -70,7 +70,9 @@ const Profile = () => {
               />
             </div>
           </div>
-          <ProfileSvg className={" mx-auto mt-16 w-2/5 hidden md:block"} />
+          <ProfileSvg
+            className={" mx-auto mt-16 w-1/3 max-w-md hidden md:block"}
+          />
         </div>
       </>
     ) : (
