@@ -18,7 +18,9 @@ const Menu = ({ children, className, tasks }) => {
   const todayTasks = tasks.filter(
     (task) => parseJSON(task.dueDate) <= new Date()
   ).length;
-
+  const weekTasks = tasks.filter(
+    (task) => parseJSON(task.dueDate) <= new Date()
+  ).length;
   const importantTasks = tasks.filter((task) => task.isImportant).length;
   return (
     <ul className={`menu pr-1 bg-base-300 h-screen min-h-full  ${className}`}>

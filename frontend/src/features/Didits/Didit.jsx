@@ -11,7 +11,6 @@ const Didit = ({
   project,
 }) => {
   const { dateFormat } = useContext(DateFormatContext);
-  // console.log(format(createdOn, dateFormat));
 
   return (
     <div

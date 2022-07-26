@@ -136,7 +136,6 @@ describe("When a user attemps to get a task", () => {
       .post("/api/tasks")
       .send(newTask)
       .set("Authorization", `bearer ${token}`);
-    console.log(r.body);
 
     taskId = r.body.id;
   });
@@ -222,7 +221,6 @@ describe("When a user attemps to modify a task", () => {
       .post("/api/tasks")
       .send(newTask)
       .set("Authorization", `bearer ${token}`);
-    console.log(r.body);
 
     taskId = r.body.id;
   });
@@ -287,7 +285,6 @@ describe("When a user attemps to delete a task", () => {
       .post("/api/tasks")
       .send(newTask)
       .set("Authorization", `bearer ${token}`);
-    console.log(r.body);
 
     taskId = r.body.id;
   });

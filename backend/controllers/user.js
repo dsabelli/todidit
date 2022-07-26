@@ -12,7 +12,6 @@ router.post("/", async (request, response) => {
 
   const userToGet = await User.findOne({ email });
 
-  console.log(userToGet);
   if (!userToGet) {
     return response.status(404).json({
       error: "user email account not found",
