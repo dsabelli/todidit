@@ -14,21 +14,26 @@ import { parseJSON } from "date-fns/esm";
 const Menu = ({ children, className, tasks }) => {
   //temp, mkake ToggleActive Component
   const [selected, setSelected] = useState(false);
+  const filteredTasks = tasks.filter((task) => !task.isChecked);
+
   //finish task numbers for each
-  const todayTasks = tasks.filter(
+  const todayTasks = filteredTasks.filter(
     (task) => parseJSON(task.dueDate) <= new Date()
   ).length;
-  const weekTasks = tasks.filter(
+  const weekTasks = filteredTasks.filter(
     (task) => parseJSON(task.dueDate) <= new Date()
   ).length;
-  const importantTasks = tasks.filter((task) => task.isImportant).length;
+  const importantTasks = filteredTasks.filter(
+    (task) => task.isImportant
+  ).length;
   return (
     <ul className={`menu pr-1 bg-base-300 h-screen min-h-full  ${className}`}>
       <li className={` ${selected ? "bordered" : "pl-1"}`}>
         <Link to="/app/all">
           <AllIcon className={"w-5"} />
           <div className="flex justify-between w-full items-center">
-            <p>All</p> <p className="badge  text-right">{tasks.length}</p>
+            <p>All</p>
+            <p className="badge  text-right">{filteredTasks.length}</p>
           </div>
         </Link>
       </li>

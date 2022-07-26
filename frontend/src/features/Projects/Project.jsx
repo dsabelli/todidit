@@ -4,7 +4,9 @@ import DeleteIcon from "../../Assets/Icons/DeleteIcon";
 import { Link } from "react-router-dom";
 
 const Project = ({ id, onUpdate, onDelete, title, tasks }) => {
-  const projectTasks = tasks.filter((task) => task.project === id).length;
+  const projectTasks = tasks.filter(
+    (task) => task.project === id && !task.isChecked
+  ).length;
 
   return (
     <ul className="menu text-base pl-3 ">
