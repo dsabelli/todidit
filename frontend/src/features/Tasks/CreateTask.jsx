@@ -2,11 +2,12 @@ import { useState } from "react";
 import taskService from "../../services/tasks";
 import TaskForm from "../../components/forms/TaskForm";
 import AddIcon from "../../Assets/Icons/AddIcon";
-
+import { useParams } from "react-router-dom";
 const CreateTask = ({
   user,
   projects,
   projectTitle,
+  onProjectTitle,
   projectId,
   onProjectId,
   onTasks,
@@ -15,12 +16,19 @@ const CreateTask = ({
   onAddTask,
   onSystemMessage,
 }) => {
+  let params = useParams();
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskDueDate, setTaskDueDate] = useState(new Date());
 
   //function to show create task form
   const showCreateTaskForm = () => {
+    if (params.id) {
+      const taskProject = projects.find((project) => project.id === params.id);
+      onProjectTitle(taskProject.title);
+      onProjectId(taskProject.id);
+    }
+
     setTaskTitle("");
     setTaskDescription("");
     onAddTask((prevVal) => !prevVal);
@@ -33,6 +41,8 @@ const CreateTask = ({
   const hideCreateTaskForm = (e) => {
     e.preventDefault();
     onAddTask((prevVal) => !prevVal);
+    onProjectTitle("");
+    onProjectId("");
     setTaskTitle("");
     setTaskDescription("");
     setTaskDueDate(new Date());

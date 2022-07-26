@@ -162,6 +162,7 @@ const Home = () => {
               onSystemMessage={setSystemMessage}
               projects={projects}
               projectTitle={projectTitle}
+              onProjectTitle={setProjectTitle}
               projectId={projectId}
               onProjectId={setProjectId}
             />
