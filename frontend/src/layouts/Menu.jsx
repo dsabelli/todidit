@@ -18,6 +18,8 @@ const Menu = ({ children, className, tasks }) => {
   const todayTasks = tasks.filter(
     (task) => parseJSON(task.dueDate) <= new Date()
   ).length;
+
+  const importantTasks = tasks.filter((task) => task.isImportant).length;
   return (
     <ul className={`menu pr-1 bg-base-300 h-screen min-h-full  ${className}`}>
       <li className={` ${selected ? "bordered" : "pl-1"}`}>
@@ -45,10 +47,11 @@ const Menu = ({ children, className, tasks }) => {
         </Link>
       </li>
       <li className={`${selected ? "bordered" : "pl-1"}`}>
-        <Link to="/app/today">
+        <Link to="/app/important">
           <StarIcon className={"w-5"} />
           <div className="flex justify-between w-full items-center">
-            <p>Important</p> <p className="badge  text-right">{tasks.length}</p>
+            <p>Important</p>{" "}
+            <p className="badge  text-right">{importantTasks}</p>
           </div>
         </Link>
       </li>

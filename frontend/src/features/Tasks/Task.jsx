@@ -8,9 +8,11 @@ const Task = ({
   dueDate,
   completedOn,
   checked,
+  important,
   id,
   onCheck,
   onUpdate,
+  onImportant,
   onDelete,
   title,
   description,
@@ -41,10 +43,14 @@ const Task = ({
                 "btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-300"
               }
               onClick={() => {
-                onUpdate(id);
+                onImportant(id);
               }}
             >
-              <StarIcon className={"w-6 h-6 hover:text-warning"} />
+              <StarIcon
+                className={`w-6 h-6 hover:text-warning ${
+                  important ? "text-warning" : ""
+                }`}
+              />
             </Button>
             <Button
               className={

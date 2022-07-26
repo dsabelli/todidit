@@ -127,6 +127,37 @@ const ReadAndUpdateTasks = ({
     }
   };
 
+  const handleUpdateImportant = async (id) => {
+    try {
+      const updatedTask = tasks.filter((task) => task.id === id)[0];
+      await taskService.updateTasks({
+        ...updatedTask,
+        isImportant: !updatedTask.isImportant,
+      });
+
+      onTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === id
+            ? {
+                ...task,
+                isImportant: !task.isImportant,
+              }
+            : task
+        )
+      );
+      onAllTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === id ? { ...task, isImportant: !task.isImportant } : task
+        )
+      );
+    } catch (error) {
+      onSystemMessage("System encountered an error");
+      setTimeout(() => {
+        onSystemMessage(null);
+      }, 3000);
+    }
+  };
+
   const taskElements = tasks.map((task) =>
     task.isEditing ? (
       <TaskForm
@@ -150,6 +181,7 @@ const ReadAndUpdateTasks = ({
       <Task
         checked={task.isChecked}
         onCheck={handleUpdateCheck}
+        onImportant={handleUpdateImportant}
         onDelete={() =>
           handleDeleteTask(
             {
@@ -169,6 +201,7 @@ const ReadAndUpdateTasks = ({
         key={task.id}
         id={task.id}
         completedOn={task.completedOn}
+        important={task.isImportant}
       />
     )
   );

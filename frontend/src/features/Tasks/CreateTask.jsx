@@ -49,6 +49,7 @@ const CreateTask = ({
         dueDate: taskDueDate,
         isChecked: false,
         isEditing: false,
+        isImportant: false,
         project: projectId,
       });
       setTaskTitle("");
