@@ -8,6 +8,7 @@ const ReadAndUpdateProjects = ({
   user,
   tasks,
   onTasks,
+  allTasks,
   onAllTasks,
   projects,
   onProjects,
@@ -99,6 +100,7 @@ const ReadAndUpdateProjects = ({
           title={project.title}
           key={project.id}
           id={project.id}
+          tasks={allTasks}
         />
       ) : (
         <ProjectForm

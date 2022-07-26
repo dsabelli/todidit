@@ -3,7 +3,9 @@ import EditIcon from "../../Assets/Icons/EditIcon";
 import DeleteIcon from "../../Assets/Icons/DeleteIcon";
 import { Link } from "react-router-dom";
 
-const Project = ({ id, onUpdate, onDelete, title }) => {
+const Project = ({ id, onUpdate, onDelete, title, tasks }) => {
+  const projectTasks = tasks.filter((task) => task.project === id).length;
+
   return (
     <ul className="menu text-base pl-3 ">
       <li className="">
@@ -34,7 +36,7 @@ const Project = ({ id, onUpdate, onDelete, title }) => {
                 <DeleteIcon className={"w-6 hover:text-error"} />
               </Button>
               <div className="flex justify-between w-full items-center group-hover:hidden">
-                <p className="badge  text-right">{2}</p>
+                <p className="badge  text-right">{projectTasks}</p>
               </div>
             </div>
           </div>

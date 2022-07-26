@@ -110,6 +110,7 @@ const Home = () => {
               user={user}
               tasks={tasks}
               onTasks={setTasks}
+              allTasks={allTasks}
               onAllTasks={setAllTasks}
               projects={projects}
               onProjects={setProjects}
