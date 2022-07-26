@@ -9,7 +9,12 @@ const DueDate = ({ dueDate, onDueDate, className }) => {
 
   return (
     <Dropdown className={className} text={format(dueDate, dateFormat)}>
-      <DatePicker selected={dueDate} onChange={(e) => onDueDate(e)} inline />
+      <DatePicker
+        todayButton="Today"
+        selected={dueDate}
+        onChange={(e) => onDueDate(e)}
+        inline
+      />
     </Dropdown>
   );
 };
