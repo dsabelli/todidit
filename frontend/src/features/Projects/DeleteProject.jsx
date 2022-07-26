@@ -10,7 +10,7 @@ import alertService from "../../services/alerts";
 //before deleting, a didit is created from each task object and posted with helper
 //state and id are passed in as props from ReadandUpdateProjects->Project
 const handleDeleteProject = async (
-  { user, tasks, onTasks, projects, onProjects, onSystemMessage },
+  { user, tasks, onTasks, onAllTasks, projects, onProjects, onSystemMessage },
   id
 ) => {
   const deletedProject = projects.find((project) => project.id === id);
@@ -34,7 +34,9 @@ const handleDeleteProject = async (
         )
       );
       onTasks((prevTasks) => prevTasks.filter((task) => task.project !== id));
-
+      onAllTasks((prevTasks) =>
+        prevTasks.filter((task) => task.project !== id)
+      );
       alertService.success(deletedProject.title);
     } catch (error) {
       onSystemMessage("System encountered an error");
