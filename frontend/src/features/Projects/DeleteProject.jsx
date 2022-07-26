@@ -13,7 +13,7 @@ const handleDeleteProject = async (
   { user, tasks, onTasks, projects, onProjects, onSystemMessage },
   id
 ) => {
-  const deletedProject = projects.filter((project) => project.id === id)[0];
+  const deletedProject = projects.find((project) => project.id === id);
   const alert = await alertService.alert(deletedProject.title);
   if (alert.isConfirmed) {
     try {
