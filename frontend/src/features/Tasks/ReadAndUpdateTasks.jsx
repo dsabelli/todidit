@@ -202,6 +202,8 @@ const ReadAndUpdateTasks = ({
         id={task.id}
         completedOn={task.completedOn}
         important={task.isImportant}
+        project={task.project}
+        projects={projects}
       />
     )
   );

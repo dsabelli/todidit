@@ -4,6 +4,7 @@ import DeleteIcon from "../../Assets/Icons/DeleteIcon";
 import EditIcon from "../../Assets/Icons/EditIcon";
 import StarIcon from "../../Assets/Icons/StarIcon";
 import DueOn from "./DueOn";
+
 const Task = ({
   dueDate,
   completedOn,
@@ -16,6 +17,8 @@ const Task = ({
   onDelete,
   title,
   description,
+  projects,
+  project,
 }) => {
   return (
     <div className="flex p-1 gap-2 justify-center mx-auto max-w-3xl">
@@ -90,7 +93,9 @@ const Task = ({
               completedOn={completedOn}
               dueDate={dueDate}
             />
-            <div className="text-xs">{"task project"}</div>
+            <div className="text-xs">
+              {projects.find((proj) => proj.id === project).title}
+            </div>
           </div>
         </div>
       </div>
