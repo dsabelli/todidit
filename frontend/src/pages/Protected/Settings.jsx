@@ -70,7 +70,7 @@ const Settings = () => {
             </Select>
           </div>
           {/* change to timezone */}
-          <p className="text-lg font-bold">Time Zone</p>
+          {/* <p className="text-lg font-bold">Time Zone</p>
           <div>
             <Select
               className="m-2"
@@ -79,7 +79,7 @@ const Settings = () => {
             >
               {dateOptions}
             </Select>
-          </div>
+          </div> */}
 
           <div className="self-end flex gap-2 mt-4">
             <Link to="/app/today">
