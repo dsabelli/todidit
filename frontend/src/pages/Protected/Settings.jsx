@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, useId } from "react";
+import { SettingsContext } from "../../context/SettingsContext";
 import { DateFormatContext } from "../../context/DateFormatContext";
 import { UserContext } from "../../context/UserContext";
 import taskService from "../../services/tasks";
@@ -11,30 +12,41 @@ import settingsService from "../../services/settings";
 import userService from "../../services/users";
 import SettingsSvg from "../../Assets/SVGs/SettingsSvg";
 
-const Settings = () => {
+const Settings = ({ theme, onTheme }) => {
   const { user, setUser } = useContext(UserContext);
+  const { settings } = useContext(SettingsContext);
   const { dateFormat, setDateFormat } = useContext(DateFormatContext);
   const [loaded, setLoaded] = useState(false);
-  const [selectedDateFormat, setSelectedDateFormat] = useState("");
 
   //function to grab different date format strings.
   const dateFormats = settingsService.getDates();
+  const themes = settingsService.getThemes();
 
-  //function to set selected date in state. User can still cancel change.
-  const handleSelect = (date) => {
-    setSelectedDateFormat(date);
-  };
-
-  //function to update backend and frontend with changed date format
-  const handleUserUpdate = async (selectedDateFormat, user) => {
-    await userService.updateUser({ dateFormat: selectedDateFormat }, user);
-    setDateFormat(selectedDateFormat);
-  };
-
-  //map out date format strings to options to select.
+  //map out settings to options to select.
   const dateOptions = dateFormats.map((date) => (
     <option key={useId()}>{date}</option>
   ));
+
+  const themeOptions = themes.map((theme) => (
+    <option key={useId()}>{theme}</option>
+  ));
+
+  //functions to set selected settings in state. User can still cancel change.
+  const handleSelectDate = (date) => {
+    setDateFormat(date);
+  };
+
+  const handleSelectTheme = (theme) => {
+    onTheme(theme);
+  };
+
+  //function to update backend with changed date format
+  const handleUserUpdate = async (user) => {
+    await userService.updateUser(
+      { settings: { ...settings, dateFormat: dateFormat, theme: theme } },
+      user
+    );
+  };
 
   useEffect(() => {
     const loggedIn = window.localStorage.getItem("loggedIn");
@@ -63,23 +75,23 @@ const Settings = () => {
           <div>
             <Select
               className="m-2"
-              onChange={(e) => handleSelect(e.target.value)}
+              onChange={(e) => handleSelectDate(e.target.value)}
               defaultValue="Select a date format"
             >
               {dateOptions}
             </Select>
           </div>
           {/* change to timezone */}
-          {/* <p className="text-lg font-bold">Time Zone</p>
+          <p className="text-lg font-bold">Themes</p>
           <div>
             <Select
               className="m-2"
-              onChange={(e) => handleSelect(e.target.value)}
-              defaultValue="Select a date format"
+              onChange={(e) => handleSelectTheme(e.target.value)}
+              defaultValue="Select a theme"
             >
-              {dateOptions}
+              {themeOptions}
             </Select>
-          </div> */}
+          </div>
 
           <div className="self-end flex gap-2 mt-4">
             <Link to="/app/today">
@@ -89,7 +101,7 @@ const Settings = () => {
               <Button
                 text="save"
                 className="btn-sm"
-                onClick={() => handleUserUpdate(selectedDateFormat, user)}
+                onClick={() => handleUserUpdate(user)}
               />
             </Link>
           </div>
