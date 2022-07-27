@@ -4,7 +4,7 @@ import { UserContext } from "../../context/UserContext";
 import taskService from "../../services/tasks";
 import { Link } from "react-router-dom";
 import Loader from "../../components/UI/Loader";
-import Navbar from "../../layouts/Navbar";
+import UNavbar from "../../layouts/UNavbar";
 import Button from "../../components/UI/Button";
 import Select from "../../components/UI/Select";
 import dateService from "../../services/dates";
@@ -51,7 +51,7 @@ const Settings = () => {
 
   return loaded ? (
     <>
-      <Navbar noSearch />
+      <UNavbar username={user.username} />
       <div
         className={
           "flex px-10 mt-6 justify-center md:justify-between h-screen "

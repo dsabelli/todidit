@@ -5,7 +5,7 @@ import userService from "../../services/users";
 import taskService from "../../services/tasks";
 import alertService from "../../services/alerts";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../layouts/Navbar";
+import UNavbar from "../../layouts/UNavbar";
 import Loader from "../../components/UI/Loader";
 import ProfileSvg from "../../Assets/SVGs/ProfileSvg";
 import GoodbyeSvg from "../../Assets/SVGs/GoodbyeSvg";
@@ -48,7 +48,7 @@ const Profile = () => {
   return loaded ? (
     !deleted ? (
       <>
-        <Navbar noSearch />
+        <UNavbar protected username={user.username} />
         <div
           className={
             "flex px-10 mt-6 justify-center md:justify-between h-screen "
