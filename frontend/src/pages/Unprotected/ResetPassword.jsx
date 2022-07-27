@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 import userService from "../../services/users";
 import { useForm } from "react-hook-form";
-// import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import ErrorMessage from "../../components/UI/ErrorMessage";
-import { ClockLoader } from "react-spinners";
 import ForgotPWSvg from "../../Assets/SVGs/ForgotPWSvg";
+import Loader from "../../components/UI/Loader";
+import Hero from "../../components/UI/Hero";
+import AlternateEmailSvg from "../../Assets/SVGs/AlternateEmailSvg";
 const ResetPassword = () => {
   // let navigate = useNavigate();
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true);
   const [reset, setReset] = useState(false);
   const [asyncError, setAsyncError] = useState("");
   const {
@@ -45,7 +47,30 @@ const ResetPassword = () => {
 
   return loaded ? (
     reset ? (
-      <div>pw reset, check email</div>
+      <Hero
+        className="gap-16"
+        text={
+          <div className="flex flex-col">
+            <div>
+              <h1 className="text-5xl font-bold">Password Reset</h1>
+              <p className="pt-6 md:text-xl">
+                Please check your email for a verification
+              </p>
+              <p className="pb-1 md:text-xl">link to reset your password.</p>
+              <p className="text-xs md:text-sm opacity-70 mb-4">
+                Don't forget to check your spam folder!
+              </p>
+              <Link to="/">
+                <Button className={"text-neutral btn-wide bg-secondary"}>
+                  Got it.
+                </Button>
+              </Link>
+            </div>
+          </div>
+        }
+      >
+        <AlternateEmailSvg className={"hidden md:block w-56"} />
+      </Hero>
     ) : (
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col-reverse md:flex-row gap-20 items-center">
@@ -89,7 +114,7 @@ const ResetPassword = () => {
       </div>
     )
   ) : (
-    <ClockLoader />
+    <Loader />
   );
 };
 
