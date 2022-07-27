@@ -10,7 +10,7 @@ import UNavbar from "../../layouts/UNavbar";
 import Hero from "../../components/UI/Hero";
 import ConfirmPWSvg from "../../Assets/SVGs/ConfirmPWSvg";
 import ConfirmResetSvg from "../../Assets/SVGs/ConfirmResetSvg";
-import { ClockLoader } from "react-spinners";
+import Loader from "../../components/UI/Loader";
 const schema = yup.object().shape({
   password: yup
     .string()
@@ -160,7 +160,7 @@ const ConfirmReset = ({}) => {
       </>
     )
   ) : (
-    <ClockLoader />
+    <Loader />
   );
 };
 

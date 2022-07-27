@@ -5,7 +5,8 @@ import Hero from "../../components/UI/Hero";
 import Button from "../../components/UI/Button";
 import VerifiedSvg from "../../Assets/SVGs/VerifiedSvg";
 import registerService from "../../services/register";
-import { ClockLoader } from "react-spinners";
+
+import Loader from "../../components/UI/Loader";
 const Verified = () => {
   let params = useParams();
   const [loaded, setLoaded] = useState(false);
@@ -20,7 +21,7 @@ const Verified = () => {
   }, []);
   return loaded ? (
     <>
-      <UNavbar isLanding />
+      <UNavbar />
       {/* Make into a success message! */}
       <p>Your account has been verified!</p>
       {/* Make into a success message! */}
@@ -41,7 +42,7 @@ const Verified = () => {
       </Hero>
     </>
   ) : (
-    <ClockLoader />
+    <Loader />
   );
 };
 
