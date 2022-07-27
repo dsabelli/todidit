@@ -19,10 +19,16 @@ const Menu = ({ children, className, tasks }) => {
   const filteredTasks = tasks.filter((task) => !task.isChecked);
 
   //finish task numbers for each
+  // const todayTasks = filteredTasks.filter(
+  //   (task) =>
+  //     format(parseJSON(task.dueDate), dateFormat) ===
+  //     format(new Date(), dateFormat)
+  // ).length;
   const todayTasks = filteredTasks.filter(
     (task) =>
       format(parseJSON(task.dueDate), dateFormat) ===
-      format(new Date(), dateFormat)
+        format(new Date(), dateFormat) ||
+      new Date().setHours(0, 0, 0, 0) > parseJSON(task.dueDate)
   ).length;
   const weekTasks = filteredTasks.filter((task) =>
     isThisWeek(parseJSON(task.dueDate))
