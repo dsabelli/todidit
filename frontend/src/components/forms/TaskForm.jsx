@@ -39,7 +39,7 @@ const TaskForm = ({
             <Input
               tabIndex="0"
               autoFocus
-              placeholder="e.g., style this project better"
+              placeholder="e.g., task here"
               id="Title"
               type="text"
               value={titleValue}
