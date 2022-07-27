@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, useMemo } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import Navbar from "../../layouts/Navbar";
 import Menu from "../../layouts/Menu";
 import ErrorMessage from "../../components/UI/ErrorMessage";
@@ -14,6 +14,8 @@ import { UserContext } from "../../context/UserContext";
 import { DateFormatContext } from "../../context/DateFormatContext";
 import { DiditContext } from "../../context/DiditContext";
 import Loader from "../../components/UI/Loader";
+import { getHeader } from "../../utils/headers";
+
 const Home = () => {
   const [loaded, setLoaded] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -33,6 +35,7 @@ const Home = () => {
     [didits, setDidits]
   );
   let location = useLocation();
+  let params = useParams();
 
   let showAddTask =
     location.pathname.includes("didit") ||
@@ -133,10 +136,8 @@ const Home = () => {
         </div>
         <div className="col-span-6 md:col-span-4 2xl:col-span-3 pl-12 pr-12 md:pl-4 ">
           <DiditContext.Provider value={diditValue}>
-            <header>
-              <h1 className="text-left text-2xl mt-6 mb-4 max-w-3xl mx-auto">
-                Placeholder
-              </h1>
+            <header className="max-w-3xl mx-auto">
+              {getHeader(location, params, projects)}
             </header>
             <Outlet
               context={[
