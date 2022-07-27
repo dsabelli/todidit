@@ -2,7 +2,7 @@ import React from "react";
 
 const TodayIcon = ({ className }) => {
   return (
-    <div className={` ${className}`}>
+    <div className={`text-neutral ${className}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
