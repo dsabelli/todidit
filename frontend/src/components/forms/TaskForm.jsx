@@ -31,12 +31,13 @@ const TaskForm = ({
   );
 
   return (
-    <div className="pl-2 mx-auto w-full max-w-3xl">
+    <div className="pl-2 mx-auto w-full max-w-3xl mb-40">
       <form autoComplete="off" onSubmit={onSubmit}>
         <div className="border border-accent rounded-lg mt-2 p-2">
           <div>
             <label htmlFor="Title"></label>
             <Input
+              tabIndex="0"
               autoFocus
               placeholder="e.g., style this project better"
               id="Title"
@@ -45,6 +46,13 @@ const TaskForm = ({
               name="Title"
               onChange={onTitleChange}
               className="input   p-0 w-full text-xl focus:outline-none "
+              onKeyDown={(e) =>
+                e.key === "Escape"
+                  ? onClick()
+                  : titleValue && e.key === "Enter"
+                  ? onSubmit(e)
+                  : null
+              }
             />
           </div>
           <div className="">
@@ -57,6 +65,13 @@ const TaskForm = ({
               name="Description"
               onChange={onDescriptionChange}
               className="textarea resize-none w-full p-0 min-h-12 leading-4 focus:outline-none"
+              onKeyDown={(e) =>
+                e.key === "Escape"
+                  ? onClick()
+                  : titleValue && e.key === "Enter"
+                  ? onSubmit(e)
+                  : null
+              }
             />
           </div>
           <div className="flex justify-between mt-2">

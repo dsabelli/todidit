@@ -16,6 +16,13 @@ const ProjectForm = ({ onSubmit, value, onChange, onClick, submitText }) => {
             name="Title"
             onChange={onChange}
             className="input p-0 w-full text-base focus:outline-none bg-base-300 "
+            onKeyDown={(e) =>
+              e.key === "Escape"
+                ? onClick()
+                : value && e.key === "Enter"
+                ? onSubmit(e)
+                : null
+            }
           />
         </div>
         <div className="flex justify-end gap-2 my-2">
