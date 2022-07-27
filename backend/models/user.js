@@ -21,10 +21,18 @@ const schema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  dateFormat: {
-    type: String,
-    default: "MMM-dd-yyyy",
-  },
+  settings: [
+    {
+      dateFormat: {
+        type: String,
+        default: "MMM-dd-yyyy",
+      },
+      theme: {
+        type: String,
+        default: "light",
+      },
+    },
+  ],
   vToken: {
     type: String,
     unique: true,
