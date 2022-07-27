@@ -2,7 +2,7 @@ import React from "react";
 
 const ConfirmResetSvg = ({ className }) => {
   return (
-    <div className={` ${className}`}>
+    <div className={`text-primary ${className}`}>
       <svg
         data-name="Layer 1"
         xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +48,12 @@ const ConfirmResetSvg = ({ className }) => {
           transform="translate(-328.39033 -133.1994)"
           fill="#3f3d56"
         />
-        <circle cx="260.85489" cy="113.24865" r="56.58599" fill="#6c63ff" />
+        <circle
+          cx="260.85489"
+          cy="113.24865"
+          r="56.58599"
+          fill="currentColor"
+        />
         <polygon
           points="432.044 611.601 420.278 611.601 414.679 566.219 432.044 566.219 432.044 611.601"
           fill="#ffb6b6"
@@ -118,7 +123,7 @@ const ConfirmResetSvg = ({ className }) => {
         <path
           d="M571.59773,297.05559a1.33329,1.33329,0,0,1-1.05444.55768l-5.45025.12517a1.33366,1.33366,0,1,1-.06117-2.66662l3.56552-.082-3.5114-9.26539a1.33372,1.33372,0,0,1,2.49431-.94531l4.17956,11.02823a1.33428,1.33428,0,0,1-.14089,1.21782Z"
           transform="translate(-328.39033 -133.1994)"
-          fill="#6c63ff"
+          fill="currentColor"
         />
         <path
           d="M572.29679,299.38408a9.08846,9.08846,0,0,1,7.29959,11.8715l25.5864,19.70946-15.87006,5.46132-21.86426-19.5537a9.13775,9.13775,0,0,1,4.84831-17.48852Z"
