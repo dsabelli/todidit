@@ -17,7 +17,7 @@ const Project = ({ id, onUpdate, onDelete, title, tasks }) => {
             <div className="flex">
               <Button
                 className={
-                  "btn-xs w-6 h-6 p-1 bg-transparent border-none hover:bg-base-300 hidden group-hover:flex"
+                  "btn-xs w-6 h-6 p-1 bg-transparent border-none hover:bg-base-200 hidden group-hover:flex"
                 }
                 onClick={(e) => {
                   e.stopPropagation();
@@ -25,10 +25,10 @@ const Project = ({ id, onUpdate, onDelete, title, tasks }) => {
                   onUpdate(id);
                 }}
               >
-                <EditIcon className={"w-6 h-6 hover:text-primary"} />
+                <EditIcon className={"w-6 h-6 hover:text-info"} />
               </Button>
               <Button
-                className={`btn-xs w-6 h-6 p-1 bg-transparent border-none hover:bg-base-300 hidden group-hover:flex`}
+                className={`btn-xs w-6 h-6 p-1 bg-transparent border-none hover:bg-base-200 hidden group-hover:flex`}
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();

@@ -57,7 +57,7 @@ const DiditSearch = ({ projects }) => {
         <Input
           type="text"
           placeholder="Search Didits..."
-          className="input input-bordered w-full bg-base-100"
+          className="input w-full focus:outline-none bg-base-100"
           //if not an empty string, get didits with title of value, otherwise
           //clear (fix debonuce issue) blur to setDidits back to blank and focus for next searcg
           onChange={(e) =>

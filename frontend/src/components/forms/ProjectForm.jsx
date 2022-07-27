@@ -15,7 +15,7 @@ const ProjectForm = ({ onSubmit, value, onChange, onClick, submitText }) => {
             value={value}
             name="Title"
             onChange={onChange}
-            className="input p-0 w-full text-base focus:outline-none bg-base-300 "
+            className="input p-0 w-full text-base focus:outline-none bg-transparent  "
             onKeyDown={(e) =>
               e.key === "Escape"
                 ? onClick()

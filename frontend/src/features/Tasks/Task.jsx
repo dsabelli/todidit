@@ -43,7 +43,7 @@ const Task = ({
           <div className="flex gap-1 ">
             <Button
               className={
-                "btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-300"
+                "btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-200"
               }
               onClick={() => {
                 onImportant(id);
@@ -57,16 +57,16 @@ const Task = ({
             </Button>
             <Button
               className={
-                "btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-300"
+                "btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-200"
               }
               onClick={() => {
                 onUpdate(id);
               }}
             >
-              <EditIcon className={"w-6 h-6 hover:text-primary"} />
+              <EditIcon className={"w-6 h-6 hover:text-info"} />
             </Button>
             <Button
-              className={`btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-300 ${
+              className={`btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-200 ${
                 checked ? "" : "btn-disabled opacity-50"
               }`}
               onClick={() => {
