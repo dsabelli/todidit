@@ -38,8 +38,7 @@ const CreateTask = ({
   };
 
   //function to hide create task form
-  const hideCreateTaskForm = (e) => {
-    e.preventDefault();
+  const hideCreateTaskForm = () => {
     onAddTask((prevVal) => !prevVal);
     onProjectTitle("");
     onProjectId("");
@@ -100,7 +99,7 @@ const CreateTask = ({
         user && (
           <div
             onClick={() => showCreateTaskForm()}
-            className="flex gap-1 mx-auto max-w-3xl py-2 pl-0.5  text-base items-center rounded-md hover:bg-base-200 cursor-pointer "
+            className="flex gap-1 mx-auto max-w-3xl py-2 pl-0.5 mb-40 text-base items-center rounded-md hover:bg-base-200 cursor-pointer "
           >
             <AddIcon className="w-6 text-secondary" />
             <p>Add Task</p>

@@ -21,8 +21,7 @@ const CreateProject = ({
   };
 
   //function to hide create project form
-  const hideCreateProjectForm = (e) => {
-    e.preventDefault();
+  const hideCreateProjectForm = () => {
     onAddProject((prevVal) => !prevVal);
     onProjectTitle("");
   };
