@@ -29,7 +29,7 @@ const Menu = ({ children, className, tasks }) => {
     (task) => task.isImportant
   ).length;
   return (
-    <ul className={`menu pr-1 bg-base-300 h-screen min-h-full  ${className}`}>
+    <>
       <li className={` ${selected ? "bordered" : "pl-1"}`}>
         <Link to="/app/all">
           <AllIcon className={"w-5"} />
@@ -82,7 +82,7 @@ const Menu = ({ children, className, tasks }) => {
           <div className="">{children}</div>
         </Toggle>
       </div>
-    </ul>
+    </>
   );
 };
 
