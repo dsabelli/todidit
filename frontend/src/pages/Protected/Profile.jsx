@@ -82,7 +82,7 @@ const Profile = () => {
           <p className="text-2xl">
             You are always welcome to join toDidit again!
           </p>
-          <GoodbyeSvg className="w-3/4 self-center" />
+          <GoodbyeSvg className="w-1/2 self-center" />
           <Button className="btn-lg" onClick={() => handleLogout()}>
             Got it
           </Button>
