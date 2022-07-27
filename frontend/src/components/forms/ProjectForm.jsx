@@ -4,7 +4,7 @@ import Input from "../UI/Input";
 const ProjectForm = ({ onSubmit, value, onChange, onClick, submitText }) => {
   return (
     <div className="pl-4">
-      <form onSubmit={onSubmit}>
+      <form autoComplete="off" onSubmit={onSubmit}>
         <div className="border border-accent rounded-lg mt-1 px-2">
           <label htmlFor="Title"></label>
           <Input

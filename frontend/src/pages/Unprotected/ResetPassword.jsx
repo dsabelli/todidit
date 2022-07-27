@@ -58,7 +58,7 @@ const ResetPassword = () => {
               Enter the email address associated with your account
             </p>
             <p className="pb-4">and we will send you a password reset link.</p>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
               <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                 <div className="card-body">
                   <div className="form-control">
