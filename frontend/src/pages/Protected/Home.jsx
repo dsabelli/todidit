@@ -79,7 +79,7 @@ const Home = () => {
     }
   }, [user]);
 
-  //Get a user's tasks. Look into setting a timeout and "loading" screen
+  //Get a user's tasks.
   useEffect(() => {
     try {
       const getTasks = async () => {
@@ -131,7 +131,11 @@ const Home = () => {
           </Menu>
         </div>
         <div className=" ">
-          {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
+          {systemMessage && (
+            <div className="mt-6">
+              <ErrorMessage errorMessage={systemMessage} />
+            </div>
+          )}
           <header className="max-w-3xl mx-auto">
             {getHeader(location, params, projects)}
           </header>
