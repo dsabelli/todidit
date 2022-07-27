@@ -6,7 +6,7 @@ const alert = (title) => {
     text: `Project ${title}`,
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
+    confirmButtonColor: "#009485",
     background: "#000",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes, delete it!",
@@ -16,7 +16,7 @@ const alert = (title) => {
 
 const success = (title) => {
   return Swal.fire({
-    background: "#000",
+    background: "text-primary",
     title: "Deleted!",
     text: `Project ${title} has been deleted.`,
     icon: "success",
@@ -28,7 +28,7 @@ const userAlert = () => {
     title: "Are you sure you want to delete your account?",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
+    confirmButtonColor: "#009485",
     background: "#000",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes, delete it!",
