@@ -13,17 +13,9 @@ import { parseJSON, isThisWeek, format } from "date-fns/esm";
 import { DateFormatContext } from "../context/DateFormatContext";
 
 const Menu = ({ children, className, tasks }) => {
-  //temp, mkake ToggleActive Component
   const { dateFormat } = useContext(DateFormatContext);
   const [selected, setSelected] = useState(false);
   const filteredTasks = tasks.filter((task) => !task.isChecked);
-
-  //finish task numbers for each
-  // const todayTasks = filteredTasks.filter(
-  //   (task) =>
-  //     format(parseJSON(task.dueDate), dateFormat) ===
-  //     format(new Date(), dateFormat)
-  // ).length;
   const todayTasks = filteredTasks.filter(
     (task) =>
       format(parseJSON(task.dueDate), dateFormat) ===
