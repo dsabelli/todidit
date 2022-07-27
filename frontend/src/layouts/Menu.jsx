@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Toggle from "../components/UI/Toggle";
 import StarIcon from "../Assets/Icons/StarIcon";
@@ -9,19 +9,23 @@ import {
   ChevronIconRight,
   ChevronIconDown,
 } from "../Assets/Icons/ChevronIcons";
-import { parseJSON } from "date-fns/esm";
+import { parseJSON, isThisWeek, format } from "date-fns/esm";
+import { DateFormatContext } from "../context/DateFormatContext";
 
 const Menu = ({ children, className, tasks }) => {
   //temp, mkake ToggleActive Component
+  const { dateFormat } = useContext(DateFormatContext);
   const [selected, setSelected] = useState(false);
   const filteredTasks = tasks.filter((task) => !task.isChecked);
 
   //finish task numbers for each
   const todayTasks = filteredTasks.filter(
-    (task) => parseJSON(task.dueDate) <= new Date()
+    (task) =>
+      format(parseJSON(task.dueDate), dateFormat) ===
+      format(new Date(), dateFormat)
   ).length;
-  const weekTasks = filteredTasks.filter(
-    (task) => parseJSON(task.dueDate) <= new Date()
+  const weekTasks = filteredTasks.filter((task) =>
+    isThisWeek(parseJSON(task.dueDate))
   ).length;
   const importantTasks = filteredTasks.filter(
     (task) => task.isImportant
@@ -49,7 +53,7 @@ const Menu = ({ children, className, tasks }) => {
         <Link to="/app/week">
           <WeekIcon className={"w-5"} />
           <div className="flex justify-between w-full items-center">
-            <p>This Week</p> <p className="badge  text-right">{tasks.length}</p>
+            <p>This Week</p> <p className="badge  text-right">{weekTasks}</p>
           </div>
         </Link>
       </li>
