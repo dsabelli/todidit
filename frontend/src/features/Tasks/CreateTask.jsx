@@ -70,7 +70,9 @@ const CreateTask = ({
       onAllTasks((prevTasks) => prevTasks.concat(newTask));
       showCreateTaskForm();
     } catch (error) {
-      onSystemMessage("System encountered an error");
+      onSystemMessage(
+        "System encountered an error. Check your task has a title and project selected."
+      );
       setTimeout(() => {
         onSystemMessage(null);
       }, 3000);
