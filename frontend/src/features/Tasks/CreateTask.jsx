@@ -71,7 +71,9 @@ const CreateTask = ({
       showCreateTaskForm();
     } catch (error) {
       onSystemMessage(
-        "System encountered an error. Check your task has a title and project selected."
+        error.response.status === 403
+          ? "You cannot add tasks to a deleted project"
+          : "System encountered an error. Check your task has a title and project selected."
       );
       setTimeout(() => {
         onSystemMessage(null);
