@@ -16,6 +16,7 @@ const ReadAndUpdateProjects = ({
   onProjectTitle,
   onAddProject,
   onSystemMessage,
+  navigate,
 }) => {
   //function to show task form for editing task inline, populates fields with current data
   //hides the current task being edited
@@ -94,7 +95,8 @@ const ReadAndUpdateProjects = ({
                 onProjects,
                 onSystemMessage,
               },
-              project.id
+              project.id,
+              navigate
             )
           }
           title={project.title}

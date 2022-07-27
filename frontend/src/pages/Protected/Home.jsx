@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, useMemo } from "react";
-import { Outlet, useLocation, useParams } from "react-router-dom";
+import { Outlet, useLocation, useParams, useNavigate } from "react-router-dom";
 import Navbar from "../../layouts/Navbar";
 import Menu from "../../layouts/Menu";
 import ErrorMessage from "../../components/UI/ErrorMessage";
@@ -36,6 +36,7 @@ const Home = () => {
   );
   let location = useLocation();
   let params = useParams();
+  let navigate = useNavigate();
 
   let showAddTask =
     location.pathname.includes("didit") ||
@@ -117,6 +118,7 @@ const Home = () => {
               onProjectTitle={setProjectTitle}
               onAddProject={setAddProject}
               onSystemMessage={setSystemMessage}
+              navigate={navigate}
             />
             <CreateProject
               user={user}

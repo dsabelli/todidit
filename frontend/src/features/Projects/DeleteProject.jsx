@@ -11,7 +11,8 @@ import alertService from "../../services/alerts";
 //state and id are passed in as props from ReadandUpdateProjects->Project
 const handleDeleteProject = async (
   { user, tasks, onTasks, onAllTasks, projects, onProjects, onSystemMessage },
-  id
+  id,
+  navigate
 ) => {
   const deletedProject = projects.find((project) => project.id === id);
   const alert = await alertService.alert(deletedProject.title);
@@ -38,6 +39,7 @@ const handleDeleteProject = async (
         prevTasks.filter((task) => task.project !== id)
       );
       alertService.success(deletedProject.title);
+      navigate("/app/today");
     } catch (error) {
       onSystemMessage("System encountered an error");
       setTimeout(() => {
