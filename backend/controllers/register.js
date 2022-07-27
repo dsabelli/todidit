@@ -7,6 +7,7 @@ const config = require("../utils/config");
 const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(config.SENDGRID_API_KEY);
+const url = "http://localhost:3000/verify";
 
 router.post("/", async (request, response) => {
   const { email, username, password, confirmPassword, date } = request.body;
@@ -49,15 +50,19 @@ router.post("/", async (request, response) => {
 
   const savedUser = await user.save();
   if (savedUser) {
-    await sgMail.send({
+    const msg = {
       to: email,
       from: "noreply@todidit.com",
-      subject: "Please verify your account",
-      html: `<h1>You're nearly there!</h1>
-      <h2>Hi ${username},</h2>
-      <p>To finish setting up your account, verify we've got the correct email for you.</p>
-          <button><a href=http://localhost:3000/verify/${token}>Verify your email</a></button>`,
-    });
+      templateId: "d-9c5be37a921c4c1796c2bf099e7b5178",
+      dynamic_template_data: {
+        subject: "Please verify your account",
+        username: username,
+        url: url,
+        token: token,
+      },
+    };
+
+    await sgMail.send(msg);
     response.status(201).json(savedUser);
   } else
     response.status(500).json({

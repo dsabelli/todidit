@@ -7,6 +7,8 @@ const bcrypt = require("bcrypt");
 // const bcrypt = require("bcrypt");
 sgMail.setApiKey(config.SENDGRID_API_KEY);
 
+const url = "http://localhost:3000/reset-password";
+
 router.post("/", async (request, response) => {
   const { email } = request.body;
 
@@ -19,18 +21,19 @@ router.post("/", async (request, response) => {
   }
   const token = userToGet.vToken;
 
-  await sgMail.send({
+  const msg = {
     to: email,
     from: "noreply@todidit.com",
-    subject: "Reset your toDidit password",
-    html: `<h1>Forgot your password?</h1>
-    <h2>Now worries!</h2>
-    <p>Follow this link to reset your password for the account associated with ${email}</p>
-        <button><a href=http://localhost:3000/reset-password/${token}>Reset your password</a></button>
-        <p>If you did not ask to reset your password, you may ignore this email.</p>
-        <p>Thanks,</p>
-        <p>The toDidit team</p>`,
-  });
+    templateId: "d-05a4a4ce8c8247878948346857ceefcd",
+    dynamic_template_data: {
+      subject: "Please verify your account",
+      email: email,
+      url: url,
+      token: token,
+    },
+  };
+
+  await sgMail.send(msg);
   return response.json(userToGet);
 });
 
