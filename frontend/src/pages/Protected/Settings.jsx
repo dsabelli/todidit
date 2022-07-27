@@ -7,7 +7,7 @@ import Loader from "../../components/UI/Loader";
 import UNavbar from "../../layouts/UNavbar";
 import Button from "../../components/UI/Button";
 import Select from "../../components/UI/Select";
-import dateService from "../../services/dates";
+import settingsService from "../../services/settings";
 import userService from "../../services/users";
 import SettingsSvg from "../../Assets/SVGs/SettingsSvg";
 
@@ -18,7 +18,7 @@ const Settings = () => {
   const [selectedDateFormat, setSelectedDateFormat] = useState("");
 
   //function to grab different date format strings.
-  const dateFormats = dateService.getDates();
+  const dateFormats = settingsService.getDates();
 
   //function to set selected date in state. User can still cancel change.
   const handleSelect = (date) => {
