@@ -11,12 +11,13 @@ import ArchivedProjects from "../../features/Projects/ArchivedProjects";
 import CreateProject from "../../features/Projects/CreateProject";
 import ReadAndUpdateProjects from "../../features/Projects/ReadAndUpdateProjects";
 import { UserContext } from "../../context/UserContext";
+import { SettingsContext } from "../../context/SettingsContext";
 import { DateFormatContext } from "../../context/DateFormatContext";
 import { DiditContext } from "../../context/DiditContext";
 import Loader from "../../components/UI/Loader";
 import { getHeader } from "../../utils/headers";
 
-const Home = () => {
+const Home = ({ onTheme }) => {
   const [loaded, setLoaded] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [allTasks, setAllTasks] = useState([]);
@@ -29,11 +30,13 @@ const Home = () => {
   const [menuVisible, setMenuVisible] = useState(true);
   const { setDateFormat } = useContext(DateFormatContext);
   const { user, setUser } = useContext(UserContext);
+  const { settings, setSettings } = useContext(SettingsContext);
   const [didits, setDidits] = useState([]);
   const diditValue = useMemo(
     () => ({ didits, setDidits }),
     [didits, setDidits]
   );
+
   let location = useLocation();
   let params = useParams();
   let navigate = useNavigate();
@@ -59,10 +62,18 @@ const Home = () => {
   useEffect(() => {
     const getUserSettings = async () => {
       const response = await userService.getUser(user);
-      setDateFormat(response.dateFormat);
+      setSettings(response.settings[0]);
     };
     user && getUserSettings();
   }, [user]);
+
+  useEffect(() => {
+    const setUserSettings = async () => {
+      setDateFormat(settings.dateFormat);
+      onTheme(settings.theme);
+    };
+    setUserSettings();
+  }, [settings]);
 
   //get's a user's projects.
   useEffect(() => {
