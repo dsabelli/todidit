@@ -22,19 +22,22 @@ const Verified = () => {
   return loaded ? (
     <>
       <UNavbar />
-      {/* Make into a success message! */}
-      <p>Your account has been verified!</p>
-      {/* Make into a success message! */}
       <Hero
         text={
           <>
-            <h1 className="text-5xl font-bold mb-12">
+            <h1 className="text-5xl font-bold mb-4">
               Welcome to <span className="text-primary">toDidit!</span>
             </h1>
-
-            <Link to="/login">
-              <Button className="btn-secondary">Login now!</Button>
-            </Link>
+            <p className="md:text-center mb-8">
+              Your account has successfully been verified.
+            </p>
+            <div className="flex w-full justify-center">
+              <Link to="/login">
+                <Button className="md:btn-wide btn-secondary">
+                  Login now!
+                </Button>
+              </Link>
+            </div>
           </>
         }
       >
