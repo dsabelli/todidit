@@ -26,6 +26,11 @@ router.post("/", async (request, response) => {
     (project) => project.id === request.body.project
   );
 
+  if (project.isArchived)
+    return response
+      .status(403)
+      .json({ error: "Cannot add tasks to archived projects" });
+
   const savedTask = await task.save();
 
   user.tasks = user.tasks.concat(savedTask._id);
