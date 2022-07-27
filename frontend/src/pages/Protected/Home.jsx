@@ -97,17 +97,13 @@ const Home = () => {
   }, [user]);
 
   return loaded ? (
-    <div className="App min-h-screen">
-      <DiditContext.Provider value={diditValue}>
-        <Navbar
-          projects={projects}
-          menuVisible={menuVisible}
-          onMenuVisible={setMenuVisible}
-        />
-      </DiditContext.Provider>
-      {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
-      <div className="grid grid-cols-6 gap-x-8 min-h-screen">
-        <div className="col-span-2 min-w-fit max-w-xs hidden md:block ">
+    <DiditContext.Provider value={diditValue}>
+      <Navbar
+        projects={projects}
+        menuVisible={menuVisible}
+        onMenuVisible={setMenuVisible}
+      >
+        <div className="">
           <Menu tasks={allTasks} className=" text-left text-xl py-6 ">
             <ReadAndUpdateProjects
               user={user}
@@ -134,27 +130,27 @@ const Home = () => {
             <ArchivedProjects projects={projects} />
           </Menu>
         </div>
-        <div className="col-span-6 md:col-span-4 2xl:col-span-3 pl-12 pr-12 md:pl-4 ">
-          <DiditContext.Provider value={diditValue}>
-            <header className="max-w-3xl mx-auto">
-              {getHeader(location, params, projects)}
-            </header>
-            <Outlet
-              context={[
-                tasks,
-                setTasks,
-                allTasks,
-                setAllTasks,
-                projects,
-                setAddTask,
-                projectTitle,
-                setProjectTitle,
-                projectId,
-                setProjectId,
-                setSystemMessage,
-              ]}
-            />
-          </DiditContext.Provider>
+        <div className=" ">
+          {systemMessage && <ErrorMessage errorMessage={systemMessage} />}
+          <header className="max-w-3xl mx-auto">
+            {getHeader(location, params, projects)}
+          </header>
+          <Outlet
+            context={[
+              tasks,
+              setTasks,
+              allTasks,
+              setAllTasks,
+              projects,
+              setAddTask,
+              projectTitle,
+              setProjectTitle,
+              projectId,
+              setProjectId,
+              setSystemMessage,
+            ]}
+          />
+
           {!showAddTask && (
             <CreateTask
               user={user}
@@ -171,8 +167,8 @@ const Home = () => {
             />
           )}
         </div>
-      </div>
-    </div>
+      </Navbar>
+    </DiditContext.Provider>
   ) : (
     <Loader />
   );
