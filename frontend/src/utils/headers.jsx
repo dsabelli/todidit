@@ -3,6 +3,7 @@ import AllIcon from "../Assets/Icons/AllIcon";
 import TodayIcon from "../Assets/Icons/TodayIcon";
 import WeekIcon from "../Assets/Icons/WeekIcon";
 import StarIcon from "../Assets/Icons/StarIcon";
+import ArchiveIcon from "../Assets/Icons/ArchiveIcon";
 
 const getHeader = (location, params, projects) => {
   const date = new Date();
@@ -57,6 +58,19 @@ const getHeader = (location, params, projects) => {
         </>
       );
       break;
+    case location.pathname.includes("archived"):
+      header = (
+        <>
+          <div className={classNameDivWrapper}>
+            <ArchiveIcon className="w-6" />
+            <h1 className={classNameH1}>
+              {projects.find((project) => project.id === params.id).title}
+            </h1>
+          </div>
+          <p className={classNameP}></p>
+        </>
+      );
+      break;
     case location.pathname.includes("project"):
       header = (
         <>
@@ -69,6 +83,7 @@ const getHeader = (location, params, projects) => {
         </>
       );
       break;
+
     default:
       header = (
         <>
