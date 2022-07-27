@@ -53,7 +53,7 @@ const DiditSearch = ({ projects }) => {
         onDiditDateStart={setDiditDateStart}
         onDiditDateEnd={setDiditDateEnd}
       /> */}
-      <div className="form-control w-64 ">
+      <div className="form-control w-40 sm:w-64 ">
         <Input
           type="text"
           placeholder="Search Didits..."
