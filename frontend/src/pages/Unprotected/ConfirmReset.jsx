@@ -68,7 +68,7 @@ const ConfirmReset = ({}) => {
     reset &&
       setTimeout(() => {
         setLoaded(false);
-      }, 1000);
+      }, 3000);
     reset &&
       setTimeout(() => {
         navigate("/login");
