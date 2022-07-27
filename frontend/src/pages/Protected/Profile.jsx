@@ -48,7 +48,7 @@ const Profile = () => {
   return loaded ? (
     !deleted ? (
       <>
-        <Navbar />
+        <Navbar noSearch />
         <div
           className={
             "flex px-10 mt-6 justify-center md:justify-between h-screen "

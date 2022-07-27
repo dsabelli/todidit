@@ -5,7 +5,7 @@ import DiditSearch from "../features/Didits/DiditSearch";
 import ToDidit from "../components/UI/ToDidit";
 import MenuIcon from "../Assets/Icons/MenuIcon";
 
-const Navbar = ({ projects, menuVisible, onMenuVisible }) => {
+const Navbar = ({ projects, menuVisible, onMenuVisible, noSearch }) => {
   const [avatar, setAvatar] = useState("");
   const { user } = useContext(UserContext);
 
@@ -30,7 +30,7 @@ const Navbar = ({ projects, menuVisible, onMenuVisible }) => {
         <ToDidit />
       </div>
       <div>
-        {<DiditSearch projects={projects} />}
+        {!noSearch && <DiditSearch projects={projects} />}
         <div className="dropdown dropdown-end">
           <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
