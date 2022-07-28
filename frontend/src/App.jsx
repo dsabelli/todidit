@@ -19,11 +19,13 @@ import Error from "./pages/Unprotected/Error";
 import Verified from "./pages/Unprotected/Verified";
 import ResetPassword from "./pages/Unprotected/ResetPassword";
 import ConfirmReset from "./pages/Unprotected/ConfirmReset";
+import Privacy from "./pages/Unprotected/Privacy";
+import Contact from "./pages/Unprotected/Contact";
+import Terms from "./pages/Unprotected/Terms";
 import { UserContext } from "./context/UserContext";
 import { DateFormatContext } from "./context/DateFormatContext";
 import { SettingsContext } from "./context/SettingsContext";
 import { Theme } from "react-daisyui";
-import "./App.css";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -73,6 +75,9 @@ function App() {
                   <Route path="didit/:id" element={<Didits />} />
                 </Route>
               </Route>
+              <Route path="contact" element={<Contact />} />
+              <Route path="terms-of-service" element={<Terms />} />
+              <Route path="privacy" element={<Privacy />} />
               <Route path="*" element={<Error />} />
             </Routes>
           </DateFormatContext.Provider>

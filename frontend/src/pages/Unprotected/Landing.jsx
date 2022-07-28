@@ -3,6 +3,7 @@ import UNavbar from "../../layouts/UNavbar";
 import Button from "../../components/UI/Button";
 import Hero from "../../components/UI/Hero";
 import HeroSvg from "../../Assets/SVGs/HeroSvg";
+import Footer from "../../components/UI/Footer";
 const Landing = () => {
   return (
     <>
@@ -32,6 +33,7 @@ const Landing = () => {
           <HeroSvg className={" w-80 mt-12 md:mt-0 md:w-1/2"} />
         </Hero>
       </div>
+      <Footer />
     </>
   );
 };

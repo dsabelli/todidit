@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import DiditSearch from "../features/Didits/DiditSearch";
 import ToDidit from "../components/UI/ToDidit";
 import MenuIcon from "../Assets/Icons/MenuIcon";
+import Footer from "../components/UI/Footer";
 
 const Navbar = ({ projects, children }) => {
   const [avatar, setAvatar] = useState("");
@@ -19,9 +20,9 @@ const Navbar = ({ projects, children }) => {
     window.localStorage.removeItem("loggedIn");
   };
   return (
-    <div className="drawer">
+    <div className="drawer ">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col">
+      <div className="drawer-content flex flex-col bg-base-100">
         {/* <!-- Navbar --> */}
         <div className="w-full flex navbar justify-between bg-accent">
           <div className="flex-none md:hidden">
@@ -69,15 +70,15 @@ const Navbar = ({ projects, children }) => {
           </nav>
         </div>
         {/* <!-- Page content here --> */}
-        <div className="grid grid-cols-6 gap-x-8 min-h-screen">
+        <div className=" grid grid-cols-6 gap-x-8 min-h-screen">
           <div className="col-span-2 min-w-fit max-w-xs hidden md:block">
             {" "}
-            <ul className="menu pr-1 bg-base-200 h-screen min-h-full text-left text-xl pt-4">
+            <ul className="menu pr-1 bg-base-300 h-screen min-h-full text-left text-xl pt-4">
               {" "}
               {children[0]}
             </ul>
           </div>
-          <div className="col-span-6 md:col-span-4 2xl:col-span-3 pl-12 pr-12 md:pl-4">
+          <div className=" col-span-6 md:col-span-4 2xl:col-span-3 pl-12 pr-12 md:pl-4">
             {" "}
             {children[1]}
           </div>

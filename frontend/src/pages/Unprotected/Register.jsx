@@ -7,13 +7,15 @@ import loginService from "../../services/login";
 import taskService from "../../services/tasks";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import Button from "../../components/UI/Button";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import UNavbar from "../../layouts/UNavbar";
 import Hero from "../../components/UI/Hero";
 import RegisterSvg from "../../Assets/SVGs/RegisterSvg";
 import EmailSvg from "../../Assets/SVGs/EmailSvg";
 import Loader from "../../components/UI/Loader";
+import Footer from "../../components/UI/Footer";
+
 const schema = yup.object().shape({
   username: yup
     .string()
@@ -198,6 +200,21 @@ const Register = ({}) => {
                         type="submit"
                         className={"btn-primary"}
                       />
+                      <p className="mt-2 text-2xs opacity-60">
+                        By continuing, you agree to toDidit's{" "}
+                        {
+                          <Link className="hover:link" to={"/privacy"}>
+                            Privacy Policy
+                          </Link>
+                        }{" "}
+                        and{" "}
+                        {
+                          <Link className="hover:link" to={"/terms-of-service"}>
+                            Terms of Service
+                          </Link>
+                        }
+                        .
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -205,6 +222,7 @@ const Register = ({}) => {
             </div>
           </div>
         </div>
+        <Footer />
       </>
     ) : (
       <>
@@ -246,6 +264,7 @@ const Register = ({}) => {
         >
           <EmailSvg className={"hidden md:block w-56"} />
         </Hero>
+        <Footer />
       </>
     )
   ) : (

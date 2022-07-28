@@ -8,6 +8,7 @@ import Button from "../../components/UI/Button";
 import { UserContext } from "../../context/UserContext";
 import UNavbar from "../../layouts/UNavbar";
 import LoginSvg from "../../Assets/SVGs/LoginSvg";
+import Footer from "../../components/UI/Footer";
 const Login = () => {
   let navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -99,6 +100,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
