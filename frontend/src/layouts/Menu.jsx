@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import Toggle from "../components/UI/Toggle";
+import ReverseToggle from "../components/UI/ReverseToggle";
 import StarIcon from "../Assets/Icons/StarIcon";
 import TodayIcon from "../Assets/Icons/TodayIcon";
 import WeekIcon from "../Assets/Icons/WeekIcon";
@@ -66,7 +66,7 @@ const Menu = ({ children, className, tasks }) => {
       </li>
 
       <div className="flex gap-3 pl-5 mt-8  ">
-        <Toggle
+        <ReverseToggle
           className={"w-full"}
           visText={
             <div className="flex items-center gap-2 mb-4">
@@ -80,7 +80,7 @@ const Menu = ({ children, className, tasks }) => {
           }
         >
           <div className="">{children}</div>
-        </Toggle>
+        </ReverseToggle>
       </div>
     </>
   );
