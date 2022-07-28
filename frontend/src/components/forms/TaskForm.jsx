@@ -85,9 +85,9 @@ const TaskForm = ({
           </div>
         </div>
         <div className="flex justify-end gap-2 my-2">
-          <Button className={"btn-sm"} text="cancel" onClick={onClick} />
+          <Button className={"btn-sm "} text="cancel" onClick={onClick} />
           <Button
-            className={`btn-sm  ${
+            className={`btn-sm btn-accent ${
               (titleValue && projectTitle) || (titleValue && projectId)
                 ? ""
                 : "btn-disabled opacity-50"

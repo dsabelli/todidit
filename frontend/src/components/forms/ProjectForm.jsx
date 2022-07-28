@@ -28,7 +28,9 @@ const ProjectForm = ({ onSubmit, value, onChange, onClick, submitText }) => {
         <div className="flex justify-end gap-2 my-2">
           <Button className={"btn-xs"} text="cancel" onClick={onClick} />
           <Button
-            className={`btn-xs ${value ? "" : " btn-disabled opacity-50"}`}
+            className={`btn-xs btn-accent ${
+              value ? "" : " btn-disabled opacity-50"
+            }`}
             type="submit"
             text={submitText}
           />
