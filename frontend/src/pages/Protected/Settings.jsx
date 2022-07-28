@@ -100,7 +100,7 @@ const Settings = ({ theme, onTheme }) => {
             <Link to="/app/today">
               <Button
                 text="save"
-                className="btn-sm"
+                className="btn-sm btn-accent text-accent-content"
                 onClick={() => handleUserUpdate(user)}
               />
             </Link>
