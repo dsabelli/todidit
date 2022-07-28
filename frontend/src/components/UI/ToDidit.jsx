@@ -9,13 +9,12 @@ const ToDidit = ({ className }) => {
     <div
       className={`btn btn-ghost hover:bg-transparent p-0 max-w-fit ${className}`}
     >
-      <Link className="flex gap-4" to={loggedIn ? "/app/today" : "/"}>
-        <Logo
-          className="hidden sm:block w-8"
-          themeLines="#FFF"
-          themeCheck="green"
-        />
-        <p className=" normal-case text-xl">toDidit</p>
+      <Link
+        className="flex items-center gap-4"
+        to={loggedIn ? "/app/today" : "/"}
+      >
+        <Logo className="hidden sm:block w-12" />
+        <p className="text-neutral self-end normal-case text-2xl">toDidit</p>
       </Link>
     </div>
   );

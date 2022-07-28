@@ -1,10 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="200 90 300 350"  aria-labelledby="title"
 aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <title>Text Checked</title>
-  <desc>A line styled icon from Orion Icon Library.</desc>
-  <path data-name="layer2"
-  fill="none" stroke="#FFF" stroke-miterlimit="10" stroke-width="4" d="M2 8h60M2 24h60M2 40h24M2 56h24"
-  stroke-linejoin="round" stroke-linecap="round"></path>
-  <path data-name="layer1" fill="none" stroke="#49cf52" stroke-miterlimit="10"
-  stroke-width="4" d="M35 45l8 9 16-16" stroke-linejoin="round" stroke-linecap="round"></path>
+  <title>toDidit</title>
+  <desc>A modified icon from undraw.co.</desc>
+ <circle cx="346.2124" cy="263.14042" r="165.22325" fill="#fff" />
+        <path
+          d="M586.56531,653.69939C423.09348,657.4548,419.509,579.791,419.509,487.41469c0-92.37408,75.153-167.52705,167.52817-167.52705s167.52818,75.153,167.52818,167.52705C754.56531,579.791,678.94051,653.69939,586.56531,653.69939Zm.47182-329.202c-89.834,0-161.40566,73.0972-162.91848,162.91736-1.4071,83.544,87.34448,187.795,162.91846,162.91958,40.5282-44.63489,155.11224-92.70923,162.91852-162.91958C759.88244,398.132,676.87114,324.49734,587.03713,324.49734Z"
+          transform="translate(-240.82477 -224.27489)"
+           fill="#3f3d56"
+          
+        />
+        <path
+          d="M564.49731,573.40632a18.37348,18.37348,0,0,1-14.70157-7.353l-45.07543-60.10157a18.37838,18.37838,0,1,1,29.40612-22.0531l29.48989,39.31686,75.741-113.60995a18.37916,18.37916,0,0,1,30.58477,20.38984L579.79118,565.22166a18.38663,18.38663,0,0,1-14.78233,8.17868C564.83833,573.40333,564.66782,573.40632,564.49731,573.40632Z"
+          transform="translate(-240.82477 -224.27489)"
+          fill="#e2e2e2"
+        />
+        <path
+          d="M616.97678,553.67405a18.37353,18.37353,0,0,1-14.70157-7.353l-45.07543-60.10157a18.37838,18.37838,0,1,1,29.40612-22.0531l29.48989,39.31685,75.741-113.61a18.37915,18.37915,0,1,1,30.58476,20.38984l-90.15086,135.2263a18.38665,18.38665,0,0,1-14.78234,8.17867C617.3178,553.67105,617.14729,553.67405,616.97678,553.67405Z"
+          transform="translate(-240.82477 -224.27489)"
+                    fill="#570df8"
+        />
 </svg>
+ <!-- <svg
+        data-name="Layer 1"
+        width="70"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 64 64"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        
+      </svg> -->
