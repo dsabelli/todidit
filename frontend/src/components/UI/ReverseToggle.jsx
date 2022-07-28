@@ -9,8 +9,8 @@ const ReverseToggle = ({ children, visText, invisText, className }) => {
 
   return (
     <div className={className}>
-      <div>
-        <button onClick={() => toggleVisibility()}>
+      <div className="">
+        <button className="w-full text-left" onClick={() => toggleVisibility()}>
           {visible ? visText : invisText}
         </button>
       </div>

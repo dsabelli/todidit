@@ -10,7 +10,7 @@ const Toggle = ({ children, visText, invisText, className }) => {
   return (
     <div className={className}>
       <div>
-        <button onClick={() => toggleVisibility()}>
+        <button className="w-full text-left" onClick={() => toggleVisibility()}>
           {visible ? visText : invisText}
         </button>
       </div>

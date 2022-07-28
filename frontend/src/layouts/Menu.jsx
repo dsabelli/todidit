@@ -66,12 +66,13 @@ const Menu = ({ children, className, tasks }) => {
         </Link>
       </li>
 
-      <div className="flex gap-3 pl-5 mt-8  ">
+      <div className="flex gap-3 pl-6 mt-8  ">
         <ReverseToggle
-          className={"w-full"}
+          className="w-full"
           visText={
-            <div className="flex items-center gap-2 mb-4">
-              <ChevronIconDown classNameDown={"w-5"} /> <p>Projects</p>
+            <div className="flex items-center gap-2 mb-4 ">
+              <ChevronIconDown classNameDown={"w-5"} />{" "}
+              <p className="w-full">Projects</p>
             </div>
           }
           invisText={
