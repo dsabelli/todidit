@@ -2,7 +2,7 @@ import React from "react";
 
 const MenuIcon = ({ className }) => {
   return (
-    <div className={`text-base-content ${className}`}>
+    <div className={`text-accent-content ${className}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
