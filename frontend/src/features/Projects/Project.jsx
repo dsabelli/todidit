@@ -1,18 +1,20 @@
 import Button from "../../components/UI/Button";
 import EditIcon from "../../Assets/Icons/EditIcon";
 import DeleteIcon from "../../Assets/Icons/DeleteIcon";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Project = ({ id, onUpdate, onDelete, title, tasks }) => {
+  let params = useParams();
+  const pId = params.id;
   const projectTasks = tasks.filter(
     (task) => task.project === id && !task.isChecked
   ).length;
 
   return (
     <ul className="menu text-base pl-3 ">
-      <li className="">
+      <li className={` ${pId === id ? "bordered" : "pl-1"}`}>
         <Link to={`project/${id}`}>
-          <div className="p-0 flex justify-between w-full group">
+          <div className="p-0 flex justify-between w-full group ">
             <div className="">{title}</div>
             <div className="flex">
               <Button

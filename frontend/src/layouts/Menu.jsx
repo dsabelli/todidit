@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 import ReverseToggle from "../components/UI/ReverseToggle";
 import StarIcon from "../Assets/Icons/StarIcon";
 import TodayIcon from "../Assets/Icons/TodayIcon";
@@ -13,8 +13,9 @@ import { parseJSON, isThisWeek, format } from "date-fns/esm";
 import { DateFormatContext } from "../context/DateFormatContext";
 
 const Menu = ({ children, className, tasks }) => {
+  let location = useLocation();
+  const path = location.pathname;
   const { dateFormat } = useContext(DateFormatContext);
-  const [selected, setSelected] = useState(false);
   const filteredTasks = tasks.filter((task) => !task.isChecked);
   const todayTasks = filteredTasks.filter(
     (task) =>
@@ -30,7 +31,7 @@ const Menu = ({ children, className, tasks }) => {
   ).length;
   return (
     <>
-      <li className={` ${selected ? "bordered" : "pl-1"}`}>
+      <li className={` ${path.includes("all") ? "bordered" : "pl-1"}`}>
         <Link to="/app/all">
           <AllIcon className={"w-5"} />
           <div className="flex justify-between w-full items-center">
@@ -39,7 +40,7 @@ const Menu = ({ children, className, tasks }) => {
           </div>
         </Link>
       </li>
-      <li className={`${selected ? "bordered" : "pl-1"}`}>
+      <li className={`${path.includes("today") ? "bordered" : "pl-1"}`}>
         <Link to="/app/today">
           <TodayIcon className={"w-5"} />
           <div className="flex justify-between w-full items-center">
@@ -47,7 +48,7 @@ const Menu = ({ children, className, tasks }) => {
           </div>
         </Link>
       </li>
-      <li className={`${selected ? "bordered" : "pl-1"}`}>
+      <li className={`${path.includes("week") ? "bordered" : "pl-1"}`}>
         <Link to="/app/week">
           <WeekIcon className={"w-5"} />
           <div className="flex justify-between w-full items-center">
@@ -55,7 +56,7 @@ const Menu = ({ children, className, tasks }) => {
           </div>
         </Link>
       </li>
-      <li className={`${selected ? "bordered" : "pl-1"}`}>
+      <li className={`${path.includes("important") ? "bordered" : "pl-1"}`}>
         <Link to="/app/important">
           <StarIcon className={"w-5"} />
           <div className="flex justify-between w-full items-center">
