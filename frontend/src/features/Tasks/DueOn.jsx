@@ -37,7 +37,7 @@ const DueOn = ({ completedOn, dueDate, className }) => {
         day = <span className="text-warning font-bold">Today</span>;
         break;
       case isTomorrow(parsedDueDate):
-        day = <span className="text-orange-600 font-bold">Tomorrow</span>;
+        day = <span className="text-secondary font-bold">Tomorrow</span>;
         break;
       case isPast(parsedDueDate):
         difference = differenceInCalendarDays(new Date(), parsedDueDate);
