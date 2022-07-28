@@ -97,7 +97,7 @@ const ConfirmReset = ({}) => {
     ) : (
       <>
         <UNavbar />
-        <div className="hero min-h-screen bg-base-200">
+        <div className="hero min-h-screen">
           <div className="hero-content flex-col md:flex-row-reverse gap-20">
             <div className="text-center md:text-left">
               <ConfirmPWSvg className={"hidden md:block w-80 mb-20"} />
@@ -124,7 +124,7 @@ const ConfirmReset = ({}) => {
                         name="password"
                         {...register("password")}
                         placeholder="new password"
-                        className="input input-bordered"
+                        className="input input-bordered focus:outline-none"
                       />
                       {errors.password && (
                         <ErrorMessage errorMessage={errors.password?.message} />

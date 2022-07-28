@@ -2,7 +2,7 @@ import React from "react";
 
 const ChevronIconRight = ({ classNameRight }) => {
   return (
-    <div className={`text-neutral ${classNameRight}`}>
+    <div className={`text-base-content ${classNameRight}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -21,7 +21,7 @@ const ChevronIconRight = ({ classNameRight }) => {
 
 const ChevronIconDown = ({ classNameDown }) => {
   return (
-    <div className={`text-neutral ${classNameDown}`}>
+    <div className={`text-base-content ${classNameDown}`}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

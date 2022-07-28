@@ -121,7 +121,7 @@ const Register = ({}) => {
     !registered ? (
       <>
         <UNavbar />
-        <div className="hero md:min-h-screen bg-base-200">
+        <div className="hero md:min-h-screen bg-base-100">
           <div className="hero-content flex-col md:flex-row-reverse gap-20 items-center ">
             <RegisterSvg className={"hidden lg:block w-80"} />
             <div className="">
@@ -139,7 +139,7 @@ const Register = ({}) => {
                         name="email"
                         {...register("email")}
                         placeholder="email"
-                        className="input input-bordered"
+                        className="input input-bordered focus:outline-none"
                       />
                       {errors.email && (
                         <ErrorMessage errorMessage={errors.email?.message} />
@@ -156,7 +156,7 @@ const Register = ({}) => {
                         name="username"
                         {...register("username")}
                         placeholder="username"
-                        className="input input-bordered"
+                        className="input input-bordered focus:outline-none"
                       />
                       {errors.username && (
                         <ErrorMessage errorMessage={errors.username?.message} />
@@ -171,7 +171,7 @@ const Register = ({}) => {
                         name="password"
                         {...register("password")}
                         placeholder="password"
-                        className="input input-bordered"
+                        className="input input-bordered focus:outline-none"
                       />
                       {errors.password && (
                         <ErrorMessage errorMessage={errors.password?.message} />
@@ -186,7 +186,7 @@ const Register = ({}) => {
                         name="confirmPassword"
                         {...register("confirmPassword")}
                         placeholder="confirm password"
-                        className="input input-bordered"
+                        className="input input-bordered focus:outline-none"
                       />
                       {errors.confirmPassword && (
                         <ErrorMessage
@@ -203,13 +203,13 @@ const Register = ({}) => {
                       <p className="mt-2 text-2xs opacity-60">
                         By continuing, you agree to toDidit's{" "}
                         {
-                          <Link className="hover:link" to={"/privacy"}>
+                          <Link className="link" to={"/privacy"}>
                             Privacy Policy
                           </Link>
                         }{" "}
                         and{" "}
                         {
-                          <Link className="hover:link" to={"/terms-of-service"}>
+                          <Link className="link" to={"/terms-of-service"}>
                             Terms of Service
                           </Link>
                         }

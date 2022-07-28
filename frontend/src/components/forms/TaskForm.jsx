@@ -45,7 +45,7 @@ const TaskForm = ({
               value={titleValue}
               name="Title"
               onChange={onTitleChange}
-              className="input   p-0 w-full text-xl focus:outline-none "
+              className="input p-0 w-full text-xl focus:outline-none placeholder-opacity-50"
               onKeyDown={(e) =>
                 e.key === "Escape"
                   ? onClick()
@@ -64,7 +64,7 @@ const TaskForm = ({
               value={descriptionValue}
               name="Description"
               onChange={onDescriptionChange}
-              className="textarea resize-none w-full p-0 min-h-12 leading-4 focus:outline-none"
+              className="textarea resize-none w-full p-0 min-h-12 leading-4 focus:outline-none placeholder-opacity-50"
               onKeyDown={(e) =>
                 e.key === "Escape"
                   ? onClick()
@@ -75,9 +75,13 @@ const TaskForm = ({
             />
           </div>
           <div className="flex justify-between mt-2">
-            <DueDate dueDate={dueDate} onDueDate={onDueDate} className="" />
+            <DueDate
+              dueDate={dueDate}
+              onDueDate={onDueDate}
+              className="font-bold"
+            />
             <Dropdown
-              className={"dropdown-hover dropdown-end"}
+              className={"dropdown-hover dropdown-end font-bold"}
               text={projectTitle || selectedProject || "Select a project"}
             >
               {projectElements}
@@ -87,7 +91,7 @@ const TaskForm = ({
         <div className="flex justify-end gap-2 my-2">
           <Button className={"btn-sm "} text="cancel" onClick={onClick} />
           <Button
-            className={`btn-sm btn-accent ${
+            className={`btn-sm btn-accent text-accent-content ${
               (titleValue && projectTitle) || (titleValue && projectId)
                 ? ""
                 : "btn-disabled opacity-50"

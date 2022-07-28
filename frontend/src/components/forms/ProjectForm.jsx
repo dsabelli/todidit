@@ -9,13 +9,13 @@ const ProjectForm = ({ onSubmit, value, onChange, onClick, submitText }) => {
           <label htmlFor="Title"></label>
           <Input
             autoFocus
-            placeholder="project name"
+            placeholder="Project name..."
             id="Title"
             type="text"
             value={value}
             name="Title"
             onChange={onChange}
-            className="input p-0 w-full text-base focus:outline-none bg-transparent  "
+            className="input p-0 w-full text-base focus:outline-none bg-transparent  placeholder-opacity-50 "
             onKeyDown={(e) =>
               e.key === "Escape"
                 ? onClick()
@@ -28,7 +28,7 @@ const ProjectForm = ({ onSubmit, value, onChange, onClick, submitText }) => {
         <div className="flex justify-end gap-2 my-2">
           <Button className={"btn-xs"} text="cancel" onClick={onClick} />
           <Button
-            className={`btn-xs btn-accent ${
+            className={`btn-xs btn-accent text-accent-content ${
               value ? "" : " btn-disabled opacity-50"
             }`}
             type="submit"

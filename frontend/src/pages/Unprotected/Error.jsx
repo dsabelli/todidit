@@ -5,7 +5,7 @@ const Error = ({ error }) => {
   return (
     <div role="alert">
       <Hero
-        className={"w-screen"}
+        className="w-screen"
         text={
           <div className=" px-20 md:ml-20 md:p-0">
             <h1 className="text-3xl font-bold">{error.message || "Uh oh!"}</h1>

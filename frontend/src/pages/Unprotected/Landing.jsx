@@ -8,8 +8,9 @@ const Landing = () => {
   return (
     <>
       <UNavbar isLanding />
-      <div className="h-screen">
+      <div className="">
         <Hero
+          className="bg-base-100 h-screen"
           text={
             <div className="flex flex-col items-center text-left">
               <div className="w/1-2">

@@ -9,12 +9,12 @@ const UNavbar = ({ isLanding, username }) => {
   };
   return (
     <nav className="navbar bg-neutral flex px-4 justify-between">
-      <ToDidit todiditClass="text-primary-content" />
+      <ToDidit todiditClass="text-neutral-content" />
       <div className={`flex gap-4 ${isLanding ? "" : "hidden"} `}>
         <Link to="/login">
           <Button
             text={"Login"}
-            className="btn-disabled bg-primary-content text-neutral-focus"
+            className="btn-disabled bg-neutral-content text-neutral-focus"
           />
         </Link>
       </div>

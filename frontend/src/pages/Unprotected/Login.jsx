@@ -42,7 +42,7 @@ const Login = () => {
   return (
     <>
       <UNavbar />
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen bg-base-100">
         <div className="hero-content flex-col md:flex-row-reverse items-center gap-20">
           <LoginSvg className={"hidden md:block w-96"} />
           <div>
@@ -61,7 +61,7 @@ const Login = () => {
                       type="text"
                       name="email"
                       placeholder="email"
-                      className="input input-bordered"
+                      className="input input-bordered focus:outline-none"
                       {...register("email")}
                     />
                   </div>
@@ -74,14 +74,14 @@ const Login = () => {
                       type="password"
                       name="password"
                       placeholder="password"
-                      className="input input-bordered"
+                      className="input input-bordered focus:outline-none"
                       {...register("password")}
                     />
 
                     <label className="label">
                       <Link
                         to="/reset-password"
-                        className="label-text-alt link link-hover text-2xs "
+                        className="label-text-alt link link-hover text-2xs"
                       >
                         Forgot password?
                       </Link>
