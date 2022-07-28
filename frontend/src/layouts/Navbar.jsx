@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import DiditSearch from "../features/Didits/DiditSearch";
 import ToDidit from "../components/UI/ToDidit";
 import MenuIcon from "../Assets/Icons/MenuIcon";
-import Footer from "../components/UI/Footer";
+import UserIcon from "../Assets/Icons/UserIcon";
+import SettingsIcon from "../Assets/Icons/SettingsIcon";
+import LogoutIcon from "../Assets/Icons/LogoutIcon";
 
 const Navbar = ({ projects, children }) => {
   const [avatar, setAvatar] = useState("");
@@ -50,18 +52,23 @@ const Navbar = ({ projects, children }) => {
               >
                 <li>
                   <Link to="/profile">
-                    <p className="justify-between">Profile</p>
+                    <UserIcon className="w-5" />
+                    <p className="w-full text-left">Profile</p>
                   </Link>
                 </li>
                 <li>
                   <Link to="/settings">
-                    <p>Settings</p>
+                    <SettingsIcon className="w-5" />
+                    <p className="w-full text-left">Settings</p>
                   </Link>
                 </li>
                 <li>
-                  <Link onClick={() => handleLogout()} to="/">
-                    <p>Logout</p>
-                  </Link>
+                  <form onSubmit={() => handleLogout()}>
+                    <LogoutIcon className="w-5" />
+                    <button className="w-full text-left" type="submit">
+                      Logout
+                    </button>
+                  </form>
                 </li>
               </ul>
             </div>

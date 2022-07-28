@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import UserIcon from "../Assets/Icons/UserIcon";
 import Button from "../components/UI/Button";
 import ToDidit from "../components/UI/ToDidit";
+import LogoutIcon from "../Assets/Icons/LogoutIcon";
+import SettingsIcon from "../Assets/Icons/SettingsIcon";
 
 const UNavbar = ({ isLanding, username }) => {
   const handleLogout = () => {
@@ -33,17 +36,22 @@ const UNavbar = ({ isLanding, username }) => {
           >
             <li>
               <Link to="/profile">
-                <p className="justify-between">Profile</p>
+                <UserIcon className="w-5" />
+                <p className="w-full text-left">Profile</p>
               </Link>
             </li>
             <li>
               <Link to="/settings">
-                <p>Settings</p>
+                <SettingsIcon className="w-5" />
+                <p className="w-full text-left">Settings</p>
               </Link>
             </li>
             <li>
               <form onSubmit={() => handleLogout()}>
-                <button type="submit">Logout</button>
+                <LogoutIcon className="w-5" />
+                <button className="w-full text-left" type="submit">
+                  Logout
+                </button>
               </form>
             </li>
           </ul>
