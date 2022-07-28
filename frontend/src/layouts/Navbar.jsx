@@ -58,9 +58,9 @@ const Navbar = ({ projects, children }) => {
                   </Link>
                 </li>
                 <li>
-                  <form onSubmit={() => handleLogout()}>
-                    <button type="submit">Logout</button>
-                  </form>
+                  <Link onClick={() => handleLogout()} to="/">
+                    <p>Logout</p>
+                  </Link>
                 </li>
               </ul>
             </div>
