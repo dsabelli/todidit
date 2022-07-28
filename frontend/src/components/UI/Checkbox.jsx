@@ -7,7 +7,7 @@ const Checkbox = ({ checked, id, onChange, name, className }) => {
         id={id}
         onChange={onChange}
         name={name}
-        className={`checkbox  checkbox-primary w-4 h-4 `}
+        className={`checkbox checkbox-xs  checkbox-primary  `}
       />
     </div>
   );

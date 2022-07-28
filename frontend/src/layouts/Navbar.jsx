@@ -25,12 +25,15 @@ const Navbar = ({ projects, children }) => {
         {/* <!-- Navbar --> */}
         <div className="w-full flex navbar justify-between bg-accent">
           <div className="flex-none md:hidden">
-            <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
+            <label
+              htmlFor="my-drawer-3"
+              className="btn btn-square btn-ghost p-0"
+            >
               <MenuIcon className="w-6" />
             </label>
           </div>
-          <div className="flex-1 px-2 mx-2">
-            <ToDidit />
+          <div className="flex-1 pr-2 mr-2">
+            <ToDidit todiditClass="text-neutral-content" />
           </div>
           <nav className="flex">
             {<DiditSearch projects={projects} />}

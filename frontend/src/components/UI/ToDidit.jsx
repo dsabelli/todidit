@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../Assets/Icons/Logo";
 
-const ToDidit = ({ className }) => {
+const ToDidit = ({ className, todiditClass }) => {
   let loggedIn = window.localStorage.getItem("loggedIn");
 
   return (
@@ -13,8 +13,10 @@ const ToDidit = ({ className }) => {
         className="flex items-center gap-4"
         to={loggedIn ? "/app/today" : "/"}
       >
-        <Logo className="hidden sm:block w-12" />
-        <p className="text-neutral self-end normal-case text-2xl">toDidit</p>
+        <Logo className={`hidden sm:block w-12`} />
+        <p className={`self-end normal-case text-2xl ${todiditClass}`}>
+          toDidit
+        </p>
       </Link>
     </div>
   );

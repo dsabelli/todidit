@@ -18,7 +18,10 @@ const Landing = () => {
                 </p>
                 <p className="text-2xl pb-6 ">and what you've already done.</p>
                 <Link to="/register">
-                  <Button className="btn-lg btn-primary" text={"Get Started"} />
+                  <Button
+                    className="btn-lg btn-primary  hover:bg-secondary"
+                    text={"Get Started"}
+                  />
                 </Link>
               </div>
             </div>

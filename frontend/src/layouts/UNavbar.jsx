@@ -8,11 +8,14 @@ const UNavbar = ({ isLanding, username }) => {
     window.localStorage.removeItem("loggedIn");
   };
   return (
-    <nav className="navbar bg-accent flex px-4 justify-between">
-      <ToDidit />
+    <nav className="navbar bg-neutral flex px-4 justify-between">
+      <ToDidit todiditClass="text-primary-content" />
       <div className={`flex gap-4 ${isLanding ? "" : "hidden"} `}>
         <Link to="/login">
-          <Button text={"Login"} className="btn-base-content" />
+          <Button
+            text={"Login"}
+            className="btn-disabled bg-primary-content text-neutral-focus"
+          />
         </Link>
       </div>
       {username && (
