@@ -70,13 +70,7 @@ const TaskForm = ({
               name="Description"
               onChange={onDescriptionChange}
               className="textarea resize-none w-full p-0 min-h-12 leading-4 focus:outline-none placeholder-opacity-50"
-              onKeyDown={(e) =>
-                e.key === "Escape"
-                  ? onClick()
-                  : titleValue && e.key === "Enter"
-                  ? onSubmit(e)
-                  : null
-              }
+              onKeyDown={(e) => (e.key === "Escape" ? onClick() : null)}
             />
           </div>
           <div className="flex justify-between mt-2">
