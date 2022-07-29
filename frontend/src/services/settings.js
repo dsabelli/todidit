@@ -3,36 +3,60 @@ const getDates = () => {
   return dates;
 };
 
+//sortBySettings are key values in backend
+//sortByOptions are for visuals for end user
+//their indexes must match!!
+const sortBySettings = ["dueDate", "isImportant", "createdOn", "isChecked"];
+const getSortBySettings = () => sortBySettings;
+
+const sortByOptions = [
+  "Due Date",
+  "Importance",
+  "Created Date",
+  "Completed Date",
+];
+const getSortByOptions = () => sortByOptions;
+
+const orderOptions = ["Ascending", "Descending"];
+const getOrderOptions = () => orderOptions;
+
 const themes = [
-  "light",
-  "dark",
-  "cupcake",
-  "bumblebee",
-  "emerald",
-  "corporate",
-  "synthwave",
-  "retro",
-  "cyberpunk",
-  "valentine",
-  "halloween",
-  "garden",
-  "forest",
-  "aqua",
-  "lofi",
+  "Light",
+  "Dark",
+  "Cupcake",
+  "Bumblebee",
+  "Emerald",
+  "Corporate",
+  "Synthwave",
+  "Retro",
+  "Cyberpunk",
+  "Valentine",
+  "Halloween",
+  "Garden",
+  "Forest",
+  "Aqua",
+  "Lofi",
   "pastel",
-  "fantasy",
-  "wireframe",
-  "black",
-  "luxury",
-  "dracula",
-  "cmyk",
-  "lemonade",
-  "night",
-  "coffee",
-  "winter",
+  "Fantasy",
+  "Wireframe",
+  "Black",
+  "Luxury",
+  "Dracula",
+  "Cmyk",
+  "Lemonade",
+  "Night",
+  "Coffee",
+  "Winter",
 ];
 
 const getThemes = () => {
   return themes;
 };
-export default { getDates, getThemes };
+
+export default {
+  getDates,
+  getThemes,
+  getSortBySettings,
+  getSortByOptions,
+  getOrderOptions,
+};
