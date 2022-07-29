@@ -83,15 +83,15 @@ const TaskForm = ({
             <DueDate
               dueDate={dueDate}
               onDueDate={onDueDate}
-              className={`font-bold dropdown-hover ${
+              className={`font-bold md:dropdown-hover ${
                 projectTaskLength >= 6 ? "dropdown-top" : ""
               }`}
             />
             <Dropdown
-              className={`dropdown-hover dropdown-end  font-bold ${
+              className={`md:dropdown-hover dropdown-end  font-bold ${
                 projectTaskLength >= 6 ? "dropdown-top" : ""
               }`}
-              text={projectTitle || selectedProject || "Select a project"}
+              text={selectedProject || projectTitle || "Select a project"}
             >
               {projectElements}
             </Dropdown>

@@ -31,6 +31,14 @@ const schema = mongoose.Schema({
         type: String,
         default: "light",
       },
+      sortBy: {
+        type: String,
+        default: "due date",
+      },
+      order: {
+        type: String,
+        default: "ascending",
+      },
     },
   ],
   vToken: {
