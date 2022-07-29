@@ -1,13 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { Link } from "react-router-dom";
 import DiditSearch from "../features/Didits/DiditSearch";
 import ToDidit from "../components/UI/ToDidit";
 import MenuIcon from "../Assets/Icons/MenuIcon";
-import UserIcon from "../Assets/Icons/UserIcon";
-import SettingsIcon from "../Assets/Icons/SettingsIcon";
-import LogoutIcon from "../Assets/Icons/LogoutIcon";
-import BugIcon from "../Assets/Icons/BugIcon";
 import UserDropdown from "./UserDropdown";
 
 const Navbar = ({ projects, children }) => {
