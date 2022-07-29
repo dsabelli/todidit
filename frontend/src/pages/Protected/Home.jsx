@@ -16,7 +16,7 @@ import { DateFormatContext } from "../../context/DateFormatContext";
 import { DiditContext } from "../../context/DiditContext";
 import Loader from "../../components/UI/Loader";
 import { getHeader } from "../../utils/headers";
-
+import SortButton from "../../layouts/SortButton";
 const Home = ({ onTheme }) => {
   const [loaded, setLoaded] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -27,7 +27,8 @@ const Home = ({ onTheme }) => {
   const [projectTitle, setProjectTitle] = useState("");
   const [projectId, setProjectId] = useState("");
   const [systemMessage, setSystemMessage] = useState("");
-  const [menuVisible, setMenuVisible] = useState(true);
+  const [sortBy, setSortBy] = useState("");
+  const [order, setOrder] = useState();
   const { setDateFormat } = useContext(DateFormatContext);
   const { user, setUser } = useContext(UserContext);
   const { settings, setSettings } = useContext(SettingsContext);
@@ -41,6 +42,8 @@ const Home = ({ onTheme }) => {
   let params = useParams();
   let navigate = useNavigate();
 
+  //checks if the current page is an archived project or didit
+  //to be used for hiding the create task btn/form and sort btn
   let showAddTask =
     location.pathname.includes("didit") ||
     location.pathname.includes("archive");
@@ -59,6 +62,8 @@ const Home = ({ onTheme }) => {
       }, 1000);
     }
   }, []);
+
+  //Gets the user's settings once user is set.
   useEffect(() => {
     const getUserSettings = async () => {
       const response = await userService.getUser(user);
@@ -67,15 +72,18 @@ const Home = ({ onTheme }) => {
     user && getUserSettings();
   }, [user]);
 
+  //Sets the user's settings into state once the settings are set in state/context.
   useEffect(() => {
     const setUserSettings = async () => {
       setDateFormat(settings.dateFormat);
       onTheme(settings.theme);
+      setSortBy(settings.sortBy);
+      setOrder(settings.order);
     };
     setUserSettings();
   }, [settings]);
 
-  //get's a user's projects.
+  //Gets a user's projects once user is set.
   useEffect(() => {
     try {
       const getProjects = async () => {
@@ -91,7 +99,7 @@ const Home = ({ onTheme }) => {
     }
   }, [user]);
 
-  //Get a user's tasks.
+  //Gets a user's tasks once user is set.
   useEffect(() => {
     try {
       const getTasks = async () => {
@@ -110,13 +118,9 @@ const Home = ({ onTheme }) => {
 
   return loaded ? (
     <DiditContext.Provider value={diditValue}>
-      <Navbar
-        projects={projects}
-        menuVisible={menuVisible}
-        onMenuVisible={setMenuVisible}
-      >
-        <div className="">
-          <Menu tasks={allTasks} className=" text-left text-xl py-6 ">
+      <Navbar projects={projects}>
+        <div>
+          <Menu tasks={allTasks} className="text-left text-xl py-6">
             <ReadAndUpdateProjects
               user={user}
               tasks={tasks}
@@ -143,14 +147,26 @@ const Home = ({ onTheme }) => {
             <ArchivedProjects projects={projects} />
           </Menu>
         </div>
-        <div className="">
+        <div>
           {systemMessage && (
             <div className="mt-6">
               <ErrorMessage errorMessage={systemMessage} />
             </div>
           )}
-          <header className="max-w-3xl mx-auto">
+          <header className="max-w-3xl mx-auto flex justify-between items-center">
             {getHeader(location, params, projects)}
+            {!showAddTask && (
+              <SortButton
+                sortBy={sortBy}
+                onSortBy={setSortBy}
+                order={order}
+                onOrder={setOrder}
+                tasks={tasks}
+                onTasks={setTasks}
+                allTasks={allTasks}
+                onAllTasks={setAllTasks}
+              />
+            )}
           </header>
           <Outlet
             context={[
