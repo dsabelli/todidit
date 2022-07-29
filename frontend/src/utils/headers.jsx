@@ -4,7 +4,7 @@ import TodayIcon from "../Assets/Icons/TodayIcon";
 import WeekIcon from "../Assets/Icons/WeekIcon";
 import StarIcon from "../Assets/Icons/StarIcon";
 import ArchiveIcon from "../Assets/Icons/ArchiveIcon";
-import SortButton from "../layouts/SortButton";
+
 const getHeader = (location, params, projects) => {
   const date = new Date();
   const classNameDivWrapper = "flex gap-2 items-center mt-6 mb-1";
@@ -27,16 +27,13 @@ const getHeader = (location, params, projects) => {
       break;
     case location.pathname.includes("today"):
       header = (
-        <div className="flex justify-between">
-          <div>
-            <div className={classNameDivWrapper}>
-              <TodayIcon className="w-6" />
-              <h1 className={classNameH1}>Today</h1>
-            </div>
-            <p className={classNameP}>{format(date, "EEEE, MMM dd")}</p>
+        <>
+          <div className={classNameDivWrapper}>
+            <TodayIcon className="w-6" />
+            <h1 className={classNameH1}>Today</h1>
           </div>
-          <SortButton />
-        </div>
+          <p className={classNameP}>{format(date, "EEEE, MMM dd")}</p>
+        </>
       );
       break;
     case location.pathname.includes("week"):
@@ -98,6 +95,6 @@ const getHeader = (location, params, projects) => {
         </>
       );
   }
-  return header;
+  return <div>{header}</div>;
 };
 export { getHeader };
