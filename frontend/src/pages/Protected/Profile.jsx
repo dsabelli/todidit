@@ -48,7 +48,7 @@ const Profile = () => {
   return loaded ? (
     !deleted ? (
       <>
-        <UNavbar protected username={user.username} />
+        <UNavbar username={user.username} />
         <div
           className={
             "flex px-10 mt-6 justify-center md:justify-between h-screen "
