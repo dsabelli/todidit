@@ -33,7 +33,7 @@ const schema = mongoose.Schema({
       },
       sortBy: {
         type: String,
-        default: "due date",
+        default: "dueDate",
       },
       order: {
         type: String,
