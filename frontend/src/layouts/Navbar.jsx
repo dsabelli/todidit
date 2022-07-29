@@ -7,6 +7,8 @@ import MenuIcon from "../Assets/Icons/MenuIcon";
 import UserIcon from "../Assets/Icons/UserIcon";
 import SettingsIcon from "../Assets/Icons/SettingsIcon";
 import LogoutIcon from "../Assets/Icons/LogoutIcon";
+import BugIcon from "../Assets/Icons/BugIcon";
+import UserDropdown from "./UserDropdown";
 
 const Navbar = ({ projects, children }) => {
   const [avatar, setAvatar] = useState("");
@@ -18,9 +20,6 @@ const Navbar = ({ projects, children }) => {
       );
   }, []);
 
-  const handleLogout = () => {
-    window.localStorage.removeItem("loggedIn");
-  };
   return (
     <div className="drawer ">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -50,26 +49,7 @@ const Navbar = ({ projects, children }) => {
                 tabIndex="0"
                 className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
               >
-                <li>
-                  <Link to="/profile">
-                    <UserIcon className="w-5" />
-                    <p className="w-full text-left">Profile</p>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/settings">
-                    <SettingsIcon className="w-5" />
-                    <p className="w-full text-left">Settings</p>
-                  </Link>
-                </li>
-                <li>
-                  <form onSubmit={() => handleLogout()}>
-                    <LogoutIcon className="w-5" />
-                    <button className="w-full text-left" type="submit">
-                      Logout
-                    </button>
-                  </form>
-                </li>
+                <UserDropdown />
               </ul>
             </div>
 
@@ -77,15 +57,15 @@ const Navbar = ({ projects, children }) => {
           </nav>
         </div>
         {/* <!-- Page content here --> */}
-        <div className=" grid grid-cols-6 gap-x-8 min-h-screen">
-          <div className="col-span-2 min-w-fit max-w-xs hidden md:block">
+        <div className=" grid grid-cols-6 gap-x-8 min-h-screen ">
+          <div className="col-span-2 min-w-fit max-w-xs hidden h-full md:block">
             {" "}
-            <ul className="menu pr-1 bg-base-300 h-screen min-h-full text-left text-xl pt-4">
+            <ul className="menu pr-1 bg-base-300 h-full text-left text-xl pt-4">
               {" "}
               {children[0]}
             </ul>
           </div>
-          <div className=" col-span-6 md:col-span-4 2xl:col-span-3 pl-12 pr-12 md:pl-4">
+          <div className=" col-span-6 md:col-span-4 2xl:col-span-3 pl-12 pr-12 md:pl-4 pb-60">
             {" "}
             {children[1]}
           </div>
