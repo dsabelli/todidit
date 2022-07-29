@@ -41,7 +41,7 @@ const Settings = ({ theme, onTheme }) => {
   };
 
   //function to update backend with changed date format
-  const handleUserUpdate = async (user) => {
+  const handleUserUpdate = async () => {
     await userService.updateUser(
       { settings: { ...settings, dateFormat: dateFormat, theme: theme } },
       user
@@ -76,7 +76,7 @@ const Settings = ({ theme, onTheme }) => {
             <Select
               className="m-2"
               onChange={(e) => handleSelectDate(e.target.value)}
-              defaultValue="Select a date format"
+              defaultValue={dateFormat}
             >
               {dateOptions}
             </Select>
@@ -86,8 +86,8 @@ const Settings = ({ theme, onTheme }) => {
           <div>
             <Select
               className="m-2"
-              onChange={(e) => handleSelectTheme(e.target.value)}
-              defaultValue="Select a theme"
+              onChange={(e) => handleSelectTheme(e.target.value.toLowerCase())}
+              defaultValue={theme.slice(0, 1).toUpperCase() + theme.slice(1)}
             >
               {themeOptions}
             </Select>
