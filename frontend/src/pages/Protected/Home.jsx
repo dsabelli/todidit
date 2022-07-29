@@ -46,7 +46,8 @@ const Home = ({ onTheme }) => {
   //to be used for hiding the create task btn/form and sort btn
   let showAddTask =
     location.pathname.includes("didit") ||
-    location.pathname.includes("archive");
+    location.pathname.includes("archive") ||
+    location.pathname.includes("completed");
 
   //Checks if a user's token is stored in local storage
   //If it is, re-login is not required and token is parsed and set for use
