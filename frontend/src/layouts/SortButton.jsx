@@ -9,15 +9,19 @@ import Select from "../components/UI/Select";
 import Modal from "../components/UI/Modal";
 import userService from "../services/users";
 import settingService from "../services/settings";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SortButton = ({
   sortBy,
   onSortBy,
   order,
   onOrder,
+  tasks,
   onTasks,
   onAllTasks,
 }) => {
+  let location = useLocation();
+  let navigate = useNavigate();
   const { settings, setSettings } = useContext(SettingsContext);
   const { user } = useContext(UserContext);
 
@@ -35,7 +39,7 @@ const SortButton = ({
   ));
 
   //callback function for sort
-  const compareAb = (a, b) => {
+  const compareAscending = (a, b) => {
     //check if sortBy is boolean (property starts with is, see user model)
     //if it is, reverse sorts, otherwise regular sorts
     let sorted = sortBy.includes("is");
@@ -45,7 +49,7 @@ const SortButton = ({
   };
 
   //opposite of above function for descending order
-  const compareBa = (a, b) => {
+  const compareDescending = (a, b) => {
     let sorted = sortBy.includes("is");
     if (sorted)
       return a[sortBy] > b[sortBy] ? 1 : a[sortBy] < b[sortBy] ? -1 : 0;
@@ -76,13 +80,13 @@ const SortButton = ({
     //of the callback functions below to sort
     onTasks((prevTasks) =>
       order === "ascending"
-        ? prevTasks.sort(compareAb)
-        : prevTasks.sort(compareBa)
+        ? prevTasks.sort(compareAscending)
+        : prevTasks.sort(compareDescending)
     );
     onAllTasks((prevTasks) =>
       order === "ascending"
-        ? prevTasks.sort(compareAb)
-        : prevTasks.sort(compareBa)
+        ? prevTasks.sort(compareAscending)
+        : prevTasks.sort(compareDescending)
     );
     setSettings((prevSettings) => ({
       ...prevSettings,
@@ -91,19 +95,20 @@ const SortButton = ({
     }));
   };
 
-  //sorts tasks on initial pageload
+  //sorts tasks on initial pageload and when tasks change
   useEffect(() => {
     onTasks((prevTasks) =>
       order === "ascending"
-        ? prevTasks.sort(compareAb)
-        : prevTasks.sort(compareBa)
+        ? prevTasks.sort(compareAscending)
+        : prevTasks.sort(compareDescending)
     );
     onAllTasks((prevTasks) =>
       order === "ascending"
-        ? prevTasks.sort(compareAb)
-        : prevTasks.sort(compareBa)
+        ? prevTasks.sort(compareAscending)
+        : prevTasks.sort(compareDescending)
     );
-  }, [settings]);
+    navigate(location.pathname);
+  }, [tasks]);
 
   return (
     <div className="tooltip tooltip-left" data-tip="Sort">

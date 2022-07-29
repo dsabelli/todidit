@@ -19,8 +19,9 @@ const Today = () => {
     setSystemMessage,
   ] = useOutletContext();
   useEffect(() => {
-    setTasks(allTasks);
-  }, []);
+    setTasks(allTasks.filter((task) => !task.isChecked));
+  }, [allTasks]);
+
   useEffect(() => {
     setTasks((prevTasks) =>
       prevTasks.filter(
@@ -29,7 +30,7 @@ const Today = () => {
           new Date().setHours(0, 0, 0, 0) > parseJSON(task.dueDate)
       )
     );
-  }, []);
+  }, [allTasks]);
 
   return (
     <div>

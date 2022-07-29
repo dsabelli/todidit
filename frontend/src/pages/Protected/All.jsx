@@ -19,8 +19,8 @@ const All = () => {
   ] = useOutletContext();
 
   useEffect(() => {
-    setTasks(allTasks);
-  }, []);
+    setTasks(allTasks.filter((task) => !task.isChecked));
+  }, [allTasks]);
 
   return (
     <div>

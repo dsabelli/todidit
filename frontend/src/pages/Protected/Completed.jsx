@@ -23,7 +23,7 @@ const Completed = () => {
   }, []);
   useEffect(() => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.isChecked));
-  }, []);
+  }, [allTasks]);
 
   return (
     <div>

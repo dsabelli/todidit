@@ -20,13 +20,13 @@ const Today = () => {
     setSystemMessage,
   ] = useOutletContext();
   useEffect(() => {
-    setTasks(allTasks);
-  }, [params.id]);
+    setTasks(allTasks.filter((task) => !task.isChecked));
+  }, [params.id, allTasks]);
   useEffect(() => {
     setTasks((prevTasks) =>
       prevTasks.filter((task) => task.project === params.id)
     );
-  }, [params.id]);
+  }, [params.id, allTasks]);
 
   return (
     <div>

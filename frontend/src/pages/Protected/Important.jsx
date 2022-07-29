@@ -19,11 +19,11 @@ const Important = () => {
     setSystemMessage,
   ] = useOutletContext();
   useEffect(() => {
-    setTasks(allTasks);
-  }, []);
+    setTasks(allTasks.filter((task) => !task.isChecked));
+  }, [allTasks]);
   useEffect(() => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.isImportant));
-  }, []);
+  }, [allTasks]);
 
   return (
     <div>

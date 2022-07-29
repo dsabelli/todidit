@@ -20,8 +20,8 @@ const Week = () => {
   ] = useOutletContext();
 
   useEffect(() => {
-    setTasks(allTasks);
-  }, []);
+    setTasks(allTasks.filter((task) => !task.isChecked));
+  }, [allTasks]);
 
   useEffect(() => {
     setTasks((prevTasks) =>
@@ -31,7 +31,7 @@ const Week = () => {
           new Date().setHours(0, 0, 0, 0) > parseJSON(task.dueDate)
       )
     );
-  }, []);
+  }, [allTasks]);
 
   return (
     <div>
