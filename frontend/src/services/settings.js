@@ -36,7 +36,7 @@ const themes = [
   "Forest",
   "Aqua",
   "Lofi",
-  "pastel",
+  "Pastel",
   "Fantasy",
   "Wireframe",
   "Black",

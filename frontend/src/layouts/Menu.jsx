@@ -5,6 +5,7 @@ import StarIcon from "../Assets/Icons/StarIcon";
 import TodayIcon from "../Assets/Icons/TodayIcon";
 import WeekIcon from "../Assets/Icons/WeekIcon";
 import AllIcon from "../Assets/Icons/AllIcon";
+import CheckedIcon from "../Assets/Icons/CheckedIcon";
 import {
   ChevronIconRight,
   ChevronIconDown,
@@ -16,19 +17,25 @@ const Menu = ({ children, className, tasks }) => {
   let location = useLocation();
   const path = location.pathname;
   const { dateFormat } = useContext(DateFormatContext);
+
   const filteredTasks = tasks.filter((task) => !task.isChecked);
+
   const todayTasks = filteredTasks.filter(
     (task) =>
       format(parseJSON(task.dueDate), dateFormat) ===
         format(new Date(), dateFormat) ||
       new Date().setHours(0, 0, 0, 0) > parseJSON(task.dueDate)
   ).length;
+
   const weekTasks = filteredTasks.filter((task) =>
     isThisWeek(parseJSON(task.dueDate))
   ).length;
+
   const importantTasks = filteredTasks.filter(
     (task) => task.isImportant
   ).length;
+
+  const completedTasks = tasks.filter((task) => task.isChecked).length;
   return (
     <>
       <li className={` ${path.includes("all") ? "bordered" : "pl-1"}`}>
@@ -52,7 +59,7 @@ const Menu = ({ children, className, tasks }) => {
         <Link to="/app/week">
           <WeekIcon className={"w-5"} />
           <div className="flex justify-between w-full items-center">
-            <p>This Week</p> <p className="badge  text-right">{weekTasks}</p>
+            <p>This Week</p> <p className="badge text-right">{weekTasks}</p>
           </div>
         </Link>
       </li>
@@ -61,7 +68,16 @@ const Menu = ({ children, className, tasks }) => {
           <StarIcon className={"w-5"} />
           <div className="flex justify-between w-full items-center">
             <p>Important</p>{" "}
-            <p className="badge  text-right">{importantTasks}</p>
+            <p className="badge text-right">{importantTasks}</p>
+          </div>
+        </Link>
+      </li>
+      <li className={`${path.includes("completed") ? "bordered" : "pl-1"}`}>
+        <Link to="/app/completed">
+          <CheckedIcon className={"w-5"} />
+          <div className="flex justify-between w-full items-center">
+            <p>Completed</p>{" "}
+            <p className="badge text-right">{completedTasks}</p>
           </div>
         </Link>
       </li>

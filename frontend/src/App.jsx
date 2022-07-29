@@ -10,6 +10,7 @@ import All from "./pages/Protected/All";
 import Today from "./pages/Protected/Today";
 import Week from "./pages/Protected/Week";
 import Important from "./pages/Protected/Important";
+import Completed from "./pages/Protected/Completed";
 import Project from "./pages/Protected/Project";
 import ArchivedProject from "./pages/Protected/ArchivedProject";
 import Didits from "./pages/Protected/Didits";
@@ -67,6 +68,7 @@ function App() {
                   <Route path="today" element={<Today />} />
                   <Route path="week" element={<Week />} />
                   <Route path="important" element={<Important />} />
+                  <Route path="completed" element={<Completed />} />
                   <Route path="project/:id" element={<Project />} />
                   <Route
                     path="project/archived/:id"
