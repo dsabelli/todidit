@@ -44,7 +44,13 @@ const SortButton = ({
     //if it is, reverse sorts, otherwise regular sorts
     let sorted = sortBy.includes("is");
     if (sorted)
-      return b[sortBy] > a[sortBy] ? 1 : b[sortBy] < a[sortBy] ? -1 : 0;
+      return b[sortBy] > a[sortBy]
+        ? 1
+        : b[sortBy] < a[sortBy]
+        ? -1
+        : a.dueDate > b.dueDate
+        ? 1
+        : -1;
     return a[sortBy] > b[sortBy] ? 1 : a[sortBy] < b[sortBy] ? -1 : 0;
   };
 
@@ -52,7 +58,13 @@ const SortButton = ({
   const compareDescending = (a, b) => {
     let sorted = sortBy.includes("is");
     if (sorted)
-      return a[sortBy] > b[sortBy] ? 1 : a[sortBy] < b[sortBy] ? -1 : 0;
+      return a[sortBy] > b[sortBy]
+        ? 1
+        : a[sortBy] < b[sortBy]
+        ? -1
+        : b.dueDate > a.dueDate
+        ? 1
+        : -1;
     return b[sortBy] > a[sortBy] ? 1 : b[sortBy] < a[sortBy] ? -1 : 0;
   };
 
