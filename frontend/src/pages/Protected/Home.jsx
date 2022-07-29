@@ -143,7 +143,7 @@ const Home = ({ onTheme }) => {
             <ArchivedProjects projects={projects} />
           </Menu>
         </div>
-        <div className=" ">
+        <div className="">
           {systemMessage && (
             <div className="mt-6">
               <ErrorMessage errorMessage={systemMessage} />
@@ -181,6 +181,7 @@ const Home = ({ onTheme }) => {
               onProjectTitle={setProjectTitle}
               projectId={projectId}
               onProjectId={setProjectId}
+              tasks={tasks}
             />
           )}
         </div>
