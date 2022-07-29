@@ -10,6 +10,7 @@ const CreateTask = ({
   onProjectTitle,
   projectId,
   onProjectId,
+  tasks,
   onTasks,
   onAllTasks,
   addTask,
@@ -98,6 +99,7 @@ const CreateTask = ({
           projectId={projectId}
           onProjectId={onProjectId}
           submitText="add"
+          tasks={tasks}
         />
       ) : (
         user && (

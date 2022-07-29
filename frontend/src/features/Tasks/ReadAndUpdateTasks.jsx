@@ -180,6 +180,7 @@ const ReadAndUpdateTasks = ({
         projectId={projectId}
         onProjectId={onProjectId}
         submitText="save"
+        tasks={tasks}
       />
     ) : (
       <Task

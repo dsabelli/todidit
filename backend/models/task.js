@@ -17,6 +17,10 @@ const schema = mongoose.Schema({
   isImportant: {
     type: Boolean,
   },
+  isArchived: {
+    type: Boolean,
+    default: false,
+  },
   dueDate: {
     type: Date,
   },

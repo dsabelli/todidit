@@ -19,9 +19,9 @@ const TaskForm = ({
   onProjectId,
   onClick,
   submitText,
+  tasks,
 }) => {
   const [selectedProject, setSelectedProject] = useState("");
-
   const projectElements = projects.map((project) =>
     !project.isArchived ? (
       <li key={project.id} onClick={() => setSelectedProject(project.title)}>
@@ -29,6 +29,11 @@ const TaskForm = ({
       </li>
     ) : null
   );
+
+  const projectTaskLength = tasks.filter(
+    (task) =>
+      (task.project === projectId && !task.isArchived) || !task.isArchived
+  ).length;
 
   return (
     <div className="pl-2 mx-auto w-full max-w-3xl">
@@ -78,10 +83,14 @@ const TaskForm = ({
             <DueDate
               dueDate={dueDate}
               onDueDate={onDueDate}
-              className="font-bold"
+              className={`font-bold dropdown-hover ${
+                projectTaskLength >= 6 ? "dropdown-top" : ""
+              }`}
             />
             <Dropdown
-              className={"dropdown-hover dropdown-end font-bold"}
+              className={`dropdown-hover dropdown-end  font-bold ${
+                projectTaskLength >= 6 ? "dropdown-top" : ""
+              }`}
               text={projectTitle || selectedProject || "Select a project"}
             >
               {projectElements}
