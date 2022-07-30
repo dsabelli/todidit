@@ -254,7 +254,9 @@ const Register = ({}) => {
                       password: registeredPassword,
                     })
                   }
-                  className={"text-neutral bg-secondary"}
+                  className={
+                    "text-secondary-content bg-secondary hover:bg-secondary-focus"
+                  }
                 >
                   Let's Go!
                 </Button>
