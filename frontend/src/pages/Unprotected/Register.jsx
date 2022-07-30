@@ -82,6 +82,7 @@ const Register = ({}) => {
       setAsyncError("");
       console.log(registeredEmail, registeredPassword);
     } catch (error) {
+      setLoaded(true);
       console.log(error);
       const errorMsg = error.response ? error.response.data.error : error;
       setAsyncError(errorMsg);
