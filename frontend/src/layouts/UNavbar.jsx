@@ -12,7 +12,7 @@ const UNavbar = ({ isLanding, username }) => {
         <Link to="/login">
           <Button
             text={"Login"}
-            className="btn-disabled bg-neutral-content text-neutral-focus"
+            className="bg-neutral-content text-neutral-focus hover:bg-neutral-content"
           />
         </Link>
       </div>
