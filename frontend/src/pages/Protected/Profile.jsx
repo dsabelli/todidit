@@ -4,21 +4,15 @@ import Button from "../../components/UI/Button";
 import userService from "../../services/users";
 import taskService from "../../services/tasks";
 import alertService from "../../services/alerts";
-import { useNavigate } from "react-router-dom";
 import UNavbar from "../../layouts/UNavbar";
 import Loader from "../../components/UI/Loader";
 import ProfileSvg from "../../Assets/SVGs/ProfileSvg";
 import GoodbyeSvg from "../../Assets/SVGs/GoodbyeSvg";
 
 const Profile = () => {
-  let navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
   const [loaded, setLoaded] = useState(false);
   const [deleted, setDeleted] = useState(false);
-
-  const handleLogout = () => {
-    navigate("/");
-  };
 
   const handleDeleteUser = async () => {
     const alert = await alertService.userAlert();
@@ -27,9 +21,6 @@ const Profile = () => {
       alertService.userSuccess();
       setDeleted(true);
       window.localStorage.removeItem("loggedIn");
-      setTimeout(() => {
-        handleLogout();
-      }, 10000);
     }
   };
 
@@ -83,9 +74,7 @@ const Profile = () => {
             You are always welcome to join toDidit again!
           </p>
           <GoodbyeSvg className="w-1/2 self-center" />
-          <Button className="btn-lg" onClick={() => handleLogout()}>
-            Got it
-          </Button>
+          <Button className="btn-lg">Got it</Button>
         </div>
       </div>
     )
