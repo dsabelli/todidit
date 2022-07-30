@@ -46,6 +46,12 @@ router.post("/", async (request, response) => {
     date,
     vToken: token,
     lastLogin: null,
+    settings: {
+      dateFormat: "MMM-dd-yyyy",
+      theme: "light",
+      sortBy: "dueDate",
+      order: "ascending",
+    },
   });
 
   const savedUser = await user.save();
