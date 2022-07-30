@@ -6,6 +6,11 @@ import ReadAndUpdateTasks from "../../features/Tasks/ReadAndUpdateTasks";
 import taskService from "../../services/tasks";
 import diditService from "../../services/didits";
 import alertService from "../../services/alerts";
+import TrashIcon from "../../Assets/Icons/TrashIcon";
+import DeleteAlert from "../../layouts/DeleteAlert";
+import ErrorIcon from "../../Assets/Icons/ErrorIcon";
+import DeleteSvg from "../../Assets/SVGs/DeleteSvg";
+
 const Completed = () => {
   const { user } = useContext(UserContext);
   const [
@@ -29,31 +34,29 @@ const Completed = () => {
   }, [allTasks]);
 
   const handleDeleteCompletedTasks = async () => {
-    const alert = await alertService.alert("Completed Tasks");
+    // const alert = await alertService.alert("Completed Tasks");
 
-    if (alert.isConfirmed) {
-      try {
-        const deletedTasks = tasks.filter((task) => task.isChecked);
-        for (let task of deletedTasks) {
-          task.completedOn ? null : (task.completedOn = new Date());
-          await diditService.createDidits({ ...task }, user);
-          await taskService.deleteTasks(task);
+    try {
+      const deletedTasks = tasks.filter((task) => task.isChecked);
+      for (let task of deletedTasks) {
+        task.completedOn ? null : (task.completedOn = new Date());
+        await diditService.createDidits({ ...task }, user);
+        await taskService.deleteTasks(task);
 
-          setTasks((prevTasks) =>
-            prevTasks.filter((prevTask) => prevTask.id !== task.id)
-          );
-          setAllTasks((prevTasks) =>
-            prevTasks.filter((prevTask) => prevTask.id !== task.id)
-          );
-        }
-        alertService.success("Idiot!");
-      } catch (error) {
-        console.log(error);
-        setSystemMessage("System encountered an error");
-        setTimeout(() => {
-          setSystemMessage(null);
-        }, 3000);
+        setTasks((prevTasks) =>
+          prevTasks.filter((prevTask) => prevTask.id !== task.id)
+        );
+        setAllTasks((prevTasks) =>
+          prevTasks.filter((prevTask) => prevTask.id !== task.id)
+        );
       }
+      // alertService.success("Idiot!");
+    } catch (error) {
+      console.log(error);
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
     }
   };
   return (
@@ -71,7 +74,13 @@ const Completed = () => {
         projectId={projectId}
         onProjectId={setProjectId}
       />
-      <Button onClick={() => handleDeleteCompletedTasks()}>Delete All</Button>
+      <DeleteAlert
+        openButtonClass="btn-error"
+        openButton="Delete"
+        modalTitle="all"
+        modalIcon={<DeleteSvg className="w-36 mx-auto my-8" />}
+        onClick={() => handleDeleteCompletedTasks()}
+      />
     </div>
   );
 };

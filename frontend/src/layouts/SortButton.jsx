@@ -124,11 +124,7 @@ const SortButton = ({
 
   return (
     <div className="tooltip tooltip-left" data-tip="Sort">
-      <Modal
-        className="self-center"
-        openTitle="Sort"
-        title={<SlidersIcon className="w-6 " />}
-      >
+      <Modal openButton={<SlidersIcon className="w-6 " />} modalTitle="Sort">
         <div className="flex flex-col">
           <div className="flex gap-2 mb-2 items-center">
             <GridIcon className="w-5" />

@@ -3,11 +3,13 @@ import { UserContext } from "../../context/UserContext";
 import Button from "../../components/UI/Button";
 import userService from "../../services/users";
 import taskService from "../../services/tasks";
-import alertService from "../../services/alerts";
 import UNavbar from "../../layouts/UNavbar";
 import Loader from "../../components/UI/Loader";
 import ProfileSvg from "../../Assets/SVGs/ProfileSvg";
 import GoodbyeSvg from "../../Assets/SVGs/GoodbyeSvg";
+import DeleteAlert from "../../layouts/DeleteAlert";
+import ErrorIcon from "../../Assets/Icons/ErrorIcon";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
@@ -15,13 +17,11 @@ const Profile = () => {
   const [deleted, setDeleted] = useState(false);
 
   const handleDeleteUser = async () => {
-    const alert = await alertService.userAlert();
-    if (alert.isConfirmed) {
-      await userService.deleteUser(user);
-      alertService.userSuccess();
-      setDeleted(true);
-      window.localStorage.removeItem("loggedIn");
-    }
+    await userService.deleteUser(user);
+
+    setDeleted(true);
+
+    window.localStorage.removeItem("loggedIn");
   };
 
   useEffect(() => {
@@ -54,9 +54,11 @@ const Profile = () => {
               <span className="font-bold">This cannot be undone.</span>
             </p>
             <div className=" flex gap-2 mt-4">
-              <Button
-                className="btn-error"
-                text="Delete Account"
+              <DeleteAlert
+                openButtonClass="btn-error"
+                openButton="Delete Account"
+                modalTitle="your account"
+                modalIcon={<ErrorIcon className="w-24 mx-auto my-8" />}
                 onClick={() => handleDeleteUser()}
               />
             </div>
@@ -74,7 +76,9 @@ const Profile = () => {
             You are always welcome to join toDidit again!
           </p>
           <GoodbyeSvg className="w-1/2 self-center" />
-          <Button className="btn-lg">Got it</Button>
+          <Link to="/">
+            <Button className="btn-lg">Got it</Button>
+          </Link>
         </div>
       </div>
     )
