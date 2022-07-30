@@ -76,7 +76,7 @@ const Settings = ({ theme, onTheme }) => {
             <Select
               className="m-2"
               onChange={(e) => handleSelectDate(e.target.value)}
-              defaultValue={dateFormat}
+              defaultValue={dateFormat || "Select"}
             >
               {dateOptions}
             </Select>
@@ -87,7 +87,9 @@ const Settings = ({ theme, onTheme }) => {
             <Select
               className="m-2"
               onChange={(e) => handleSelectTheme(e.target.value.toLowerCase())}
-              defaultValue={theme.slice(0, 1).toUpperCase() + theme.slice(1)}
+              defaultValue={
+                theme.slice(0, 1).toUpperCase() + theme.slice(1) || "Select"
+              }
             >
               {themeOptions}
             </Select>

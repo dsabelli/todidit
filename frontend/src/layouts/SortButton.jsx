@@ -135,7 +135,9 @@ const SortButton = ({
             <p>Sort by</p>
           </div>
           <Select
-            defaultValue={sortByOptions[sortBySettings.indexOf(sortBy)]}
+            defaultValue={
+              sortByOptions[sortBySettings.indexOf(sortBy)] || "Select"
+            }
             className="text-sm mb-4"
             onChange={(e) => handleSelectSortBy(e.target.value)}
           >
@@ -147,7 +149,9 @@ const SortButton = ({
             <p className="ml-2">Order</p>
           </div>
           <Select
-            defaultValue={order.slice(0, 1).toUpperCase() + order.slice(1)}
+            defaultValue={
+              order.slice(0, 1).toUpperCase() + order.slice(1) || "Select"
+            }
             className="text-sm mb-4"
             onChange={(e) => handleSelectOrder(e.target.value.toLowerCase())}
           >
