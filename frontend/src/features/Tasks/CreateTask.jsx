@@ -84,7 +84,7 @@ const CreateTask = ({
 
   return (
     <>
-      {user && addTask ? (
+      {addTask ? (
         <TaskForm
           onSubmit={(e) => handleCreateTask(e)}
           titleValue={taskTitle}
@@ -102,15 +102,13 @@ const CreateTask = ({
           tasks={tasks}
         />
       ) : (
-        user && (
-          <div
-            onClick={() => showCreateTaskForm()}
-            className="flex gap-1 mx-auto max-w-3xl py-2 pl-0.5 text-base items-center rounded-md hover:bg-base-200 cursor-pointer "
-          >
-            <AddIcon className="w-6 text-secondary" />
-            <p>Add Task</p>
-          </div>
-        )
+        <div
+          onClick={() => showCreateTaskForm()}
+          className="flex gap-1 mx-auto max-w-3xl py-2 pl-0.5 text-base items-center rounded-md hover:bg-base-200 cursor-pointer "
+        >
+          <AddIcon className="w-6 text-secondary" />
+          <p>Add Task</p>
+        </div>
       )}
     </>
   );
