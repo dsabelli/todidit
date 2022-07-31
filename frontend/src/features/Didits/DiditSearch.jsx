@@ -1,31 +1,39 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Didit from "./Didit";
 import DateRange from "./DateRange";
 import Input from "../../components/UI/Input";
 import diditService from "../../services/didits";
-import { debounce } from "lodash";
 import { parseJSON } from "date-fns";
 import { useContext } from "react";
 import { DiditContext } from "../../context/DiditContext";
 import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
+import { useDebounce } from "use-debounce";
+import Dropdown from "../../components/UI/Dropdown";
+import Button from "../../components/UI/Button";
 
 const DiditSearch = ({ projects }) => {
   const { user } = useContext(UserContext);
   const { didits, setDidits } = useContext(DiditContext);
   const [visible, setVisible] = useState(false);
+  const [diditSearch, setDiditSearch] = useState("");
+  const [debouncedDidit] = useDebounce(diditSearch, 200);
   const [diditDateStart, setDiditDateStart] = useState("");
   const [diditDateEnd, setDiditDateEnd] = useState("");
 
-  const getDidits = debounce(async (title) => {
-    const searchedDidits = await diditService.getDidits(
-      title,
-      diditDateStart,
-      diditDateEnd,
-      user
-    );
-    setDidits(searchedDidits);
-  }, 200);
+  useEffect(() => {
+    const getDidits = async () => {
+      const searchedDidits = await diditService.getDidits(
+        diditSearch,
+        diditDateStart,
+        diditDateEnd,
+        user
+      );
+
+      setDidits(searchedDidits);
+    };
+    getDidits();
+  }, [debouncedDidit, diditDateStart, diditDateEnd]);
 
   const diditElements = didits
     ? didits.map((didit) => (
@@ -49,20 +57,16 @@ const DiditSearch = ({ projects }) => {
 
   return (
     <div className="flex gap-2">
-      {/* <DateRange
-        onDiditDateStart={setDiditDateStart}
-        onDiditDateEnd={setDiditDateEnd}
-      /> */}
       <div className="form-control w-40 sm:w-64 ">
         <Input
           type="text"
           placeholder="Search Didits..."
           className="input w-full focus:outline-none text-accent-content bg-accent-focus placeholder-opacity-50 placeholder-accent-content"
           //if not an empty string, get didits with title of value, otherwise
-          //clear (fix debonuce issue) blur to setDidits back to blank and focus for next searcg
+          //clear  blur to setDidits back to blank and focus for next search
           onChange={(e) =>
             e.target.value !== ""
-              ? (getDidits(e.target.value), setVisible(true))
+              ? (setDiditSearch(e.target.value), setVisible(true))
               : (setVisible(false), (e.target.value = ""), e.target.focus())
           }
           onKeyDown={(e) =>
@@ -70,7 +74,7 @@ const DiditSearch = ({ projects }) => {
               ? ((e.target.value = ""), setVisible(false), e.target.blur())
               : null
           }
-          onBlur={(e) => (e.target.value = "")}
+          // onBlur={(e) => (e.target.value = "")}
         />
 
         <div
@@ -88,6 +92,11 @@ const DiditSearch = ({ projects }) => {
           </ul>
         </div>
       </div>
+
+      <DateRange
+        onDiditDateStart={setDiditDateStart}
+        onDiditDateEnd={setDiditDateEnd}
+      />
     </div>
   );
 };
