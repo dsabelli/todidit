@@ -121,7 +121,7 @@ const Register = ({}) => {
     !registered ? (
       <>
         <UNavbar />
-        <div className="hero md:min-h-screen bg-base-100">
+        <div className="md:hero min-h-screen bg-base-100">
           <div className="hero-content flex-col md:flex-row-reverse gap-20 items-center ">
             <RegisterSvg className={"hidden lg:block w-80"} />
             <div className="">

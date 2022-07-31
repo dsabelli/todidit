@@ -30,7 +30,10 @@ const Navbar = ({ projects, children }) => {
             </label>
           </div>
           <div className="flex-1 mb-2 pr-2 mr-2">
-            <ToDidit todiditClass="text-accent-content" />
+            <ToDidit
+              logoClass="hidden sm:block "
+              todiditClass="text-accent-content"
+            />
           </div>
           <div className="flex ">
             {<DiditSearch projects={projects} />}

@@ -42,7 +42,7 @@ const Login = () => {
   return (
     <>
       <UNavbar />
-      <div className="hero min-h-screen bg-base-100">
+      <div className="md:hero min-h-screen bg-base-100">
         <div className="hero-content flex-col md:flex-row-reverse items-center gap-20">
           <LoginSvg className={"hidden md:block w-96"} />
           <div>

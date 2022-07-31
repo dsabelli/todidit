@@ -23,6 +23,7 @@ const Contact = () => {
     <div>
       {user ? <UNavbar username={user.username} /> : <UNavbar />}
       Contact <ContactSvg className="" />
+      <Footer />
     </div>
   );
 };

@@ -11,6 +11,7 @@ import Hero from "../../components/UI/Hero";
 import ConfirmPWSvg from "../../Assets/SVGs/ConfirmPWSvg";
 import ConfirmResetSvg from "../../Assets/SVGs/ConfirmResetSvg";
 import Loader from "../../components/UI/Loader";
+import Footer from "../../components/UI/Footer";
 const schema = yup.object().shape({
   password: yup
     .string()
@@ -97,7 +98,7 @@ const ConfirmReset = ({}) => {
     ) : (
       <>
         <UNavbar />
-        <div className="hero min-h-screen">
+        <div className="md:hero min-h-screen">
           <div className="hero-content flex-col md:flex-row-reverse gap-20">
             <div className="text-center md:text-left">
               <ConfirmPWSvg className={"hidden md:block w-80 mb-20"} />
@@ -157,6 +158,7 @@ const ConfirmReset = ({}) => {
             </div>
           </div>
         </div>
+        <Footer />
       </>
     )
   ) : (
