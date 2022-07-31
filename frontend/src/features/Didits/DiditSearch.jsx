@@ -30,7 +30,7 @@ const DiditSearch = ({ projects }) => {
         user
       );
 
-      setDidits(searchedDidits);
+      debouncedDidit && setDidits(searchedDidits);
     };
     getDidits();
   }, [debouncedDidit, diditDateStart, diditDateEnd]);
@@ -56,8 +56,8 @@ const DiditSearch = ({ projects }) => {
     : null;
 
   return (
-    <div className="flex gap-2 ">
-      <div className={` ${visible ? "flex gap-2" : "hidden"}`}>
+    <div className="flex flex-col gap-2 md:flex-row">
+      <div className={` ${didits.length > 0 ? "block" : "hidden"}`}>
         <DateRange
           diditDateStart={diditDateStart}
           onDiditDateStart={setDiditDateStart}

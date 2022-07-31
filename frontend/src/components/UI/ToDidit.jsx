@@ -13,7 +13,7 @@ const ToDidit = ({ className, todiditClass, logoClass }) => {
         className="flex items-center gap-4"
         to={loggedIn ? "/app/today" : "/"}
       >
-        <Logo className={`w-12`} />
+        <Logo className={`w-12 ${logoClass}`} />
         <p className={`self-end normal-case text-2xl ${todiditClass}`}>
           toDidit
         </p>

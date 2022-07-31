@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { DiditContext } from "../context/DiditContext";
 import DiditSearch from "../features/Didits/DiditSearch";
 import ToDidit from "../components/UI/ToDidit";
 import MenuIcon from "../Assets/Icons/MenuIcon";
@@ -8,19 +9,24 @@ import UserDropdown from "./UserDropdown";
 const Navbar = ({ projects, children }) => {
   const [avatar, setAvatar] = useState("");
   const { user } = useContext(UserContext);
+  const { didits } = useContext(DiditContext);
   useEffect(() => {
     user &&
       setAvatar(
         `https://avatars.dicebear.com/api/initials/${user.username[0]}.svg`
       );
   }, []);
-
+  console.log(didits);
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col bg-base-100">
         {/* <!-- Navbar --> */}
-        <nav className="w-full flex navbar justify-between h-24 bg-accent">
+        <nav
+          className={`w-full flex navbar justify-between bg-accent ${
+            didits.length > 0 ? "py-16" : ""
+          } md:py-4`}
+        >
           <div className="flex-none md:hidden">
             <label
               htmlFor="my-drawer-3"
@@ -31,11 +37,11 @@ const Navbar = ({ projects, children }) => {
           </div>
           <div className="flex-1 mb-2 pr-2 mr-2">
             <ToDidit
-              logoClass="hidden sm:block "
+              logoClass="hidden sm:block"
               todiditClass="text-accent-content"
             />
           </div>
-          <div className="flex ">
+          <div className="flex h-auto">
             {<DiditSearch projects={projects} />}
             <div className="dropdown dropdown-end p-1">
               <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
