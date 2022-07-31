@@ -56,7 +56,15 @@ const DiditSearch = ({ projects }) => {
     : null;
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 ">
+      <div className={` ${visible ? "flex gap-2" : "hidden"}`}>
+        <DateRange
+          diditDateStart={diditDateStart}
+          onDiditDateStart={setDiditDateStart}
+          diditEndDate={diditDateEnd}
+          onDiditDateEnd={setDiditDateEnd}
+        />
+      </div>
       <div className="form-control w-40 sm:w-64 ">
         <Input
           type="text"
@@ -67,11 +75,19 @@ const DiditSearch = ({ projects }) => {
           onChange={(e) =>
             e.target.value !== ""
               ? (setDiditSearch(e.target.value), setVisible(true))
-              : (setVisible(false), (e.target.value = ""), e.target.focus())
+              : (setVisible(false),
+                (e.target.value = ""),
+                e.target.focus(),
+                setDiditDateStart(""),
+                setDiditDateEnd(""))
           }
           onKeyDown={(e) =>
             e.key === "Escape" || e.key === "Enter"
-              ? ((e.target.value = ""), setVisible(false), e.target.blur())
+              ? ((e.target.value = ""),
+                setVisible(false),
+                e.target.blur(),
+                setDiditDateStart(""),
+                setDiditDateEnd(""))
               : null
           }
           // onBlur={(e) => (e.target.value = "")}
@@ -84,7 +100,7 @@ const DiditSearch = ({ projects }) => {
         >
           <ul
             tabIndex="0"
-            className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-fit overflow-y-auto max-h-96"
+            className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-full overflow-y-auto max-h-96"
           >
             <li className={`dropdown ${visible ? "" : "hidden"}`}>
               {diditElements}
@@ -92,11 +108,6 @@ const DiditSearch = ({ projects }) => {
           </ul>
         </div>
       </div>
-
-      <DateRange
-        onDiditDateStart={setDiditDateStart}
-        onDiditDateEnd={setDiditDateEnd}
-      />
     </div>
   );
 };

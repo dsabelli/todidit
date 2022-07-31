@@ -1,36 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import React from "react";
+import { startOfDay, endOfDay } from "date-fns";
 const DateRange = ({ onDiditDateStart, onDiditDateEnd }) => {
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
+
+  useEffect(() => {
+    const getStartDate = () => {
+      startDate
+        ? onDiditDateStart(startOfDay(startDate))
+        : onDiditDateStart("");
+    };
+    getStartDate();
+  }, [startDate]);
+
+  useEffect(() => {
+    const getEndDate = () => {
+      endDate ? onDiditDateEnd(endOfDay(endDate)) : onDiditDateEnd("");
+    };
+    getEndDate();
+  }, [endDate]);
+
   return (
-    <>
+    <div className="w-48">
       <DatePicker
-        selected={startDate}
-        onChange={(date) => (
-          date.setHours(0, 0, 0, 0), setStartDate(date), onDiditDateStart(date)
-        )}
-        selectsStart
+        selectsRange={true}
         startDate={startDate}
         endDate={endDate}
-        className="btn w-28 text-xs"
-        value={startDate ? startDate : "Start Date"}
+        onChange={(update) => setDateRange(update)}
+        className="w-full text-xs btn pl-1"
+        isClearable={true}
+        value={startDate && endDate ? startDate : "Select Dates"}
+        popperPlacement="bottom-end"
       />
-      <DatePicker
-        selected={endDate}
-        onChange={(date) => (
-          date.setHours(19, 59, 59, 59), setEndDate(date), onDiditDateEnd(date)
-        )}
-        selectsEnd
-        startDate={startDate}
-        endDate={endDate}
-        minDate={startDate}
-        className="btn w-28 text-xs"
-        value={endDate ? endDate : "End Date"}
-      />
-    </>
+    </div>
   );
 };
+
 export default DateRange;
