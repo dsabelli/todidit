@@ -74,14 +74,18 @@ const Completed = () => {
         projectId={projectId}
         onProjectId={setProjectId}
       />
-      <DeleteAlert
-        modalId="Completed"
-        openButtonClass="btn-error"
-        openButton="Delete"
-        modalTitle="all"
-        modalIcon={<DeleteSvg className="w-36 mx-auto my-8" />}
-        onClick={() => handleDeleteCompletedTasks()}
-      />
+      <div className="mt-4 flex justify-end">
+        {tasks.length > 0 && (
+          <DeleteAlert
+            modalId="Completed"
+            openButtonClass="hover:text-error"
+            openButton={<TrashIcon className="w-6" />}
+            modalTitle="all"
+            modalIcon={<DeleteSvg className="w-36 mx-auto my-8" />}
+            onClick={() => handleDeleteCompletedTasks()}
+          />
+        )}
+      </div>
     </div>
   );
 };
