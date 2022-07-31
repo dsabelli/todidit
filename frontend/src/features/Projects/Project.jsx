@@ -34,7 +34,7 @@ const Project = ({ id, onUpdate, onDelete, title, tasks }) => {
               <EditIcon className={"w-6 h-6 hover:text-info"} />
             </Button>
             <DeleteAlert
-              modalId="Project"
+              modalId={id}
               openButton={<DeleteIcon className="w-6 hover:text-error" />}
               openButtonClass="btn-xs w-6 h-6 p-1 bg-transparent border-none hover:bg-base-200 hidden group-hover:flex"
               modalTitle={`project ${title}`}
