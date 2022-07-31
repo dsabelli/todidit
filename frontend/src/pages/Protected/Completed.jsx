@@ -68,7 +68,7 @@ const Completed = () => {
         projectId={projectId}
         onProjectId={setProjectId}
       />
-      <div className="mt-4 flex justify-end">
+      <div className="mt-4 flex justify-end mx-auto max-w-3xl">
         {tasks.length > 0 && (
           <DeleteAlert
             modalId="Completed"
