@@ -1,14 +1,21 @@
+import { useRef, useEffect } from "react";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 
 const ProjectForm = ({ onSubmit, value, onChange, onClick, submitText }) => {
+  const projectInput = useRef(null);
+
+  useEffect(() => {
+    if (projectInput.current) projectInput.current.focus();
+  }, []);
+
   return (
     <div className="pl-4">
       <form autoComplete="off" onSubmit={onSubmit}>
         <div className="border border-accent rounded-lg mt-1 px-2">
-          <label htmlFor="Title"></label>
+          <label ref={projectInput} htmlFor="Title"></label>
           <Input
-            autoFocus
+            tabIndex="0"
             placeholder="Project name..."
             id="Title"
             type="text"
