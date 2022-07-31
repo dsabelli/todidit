@@ -9,11 +9,7 @@ const Dropdown = ({ text, onClick, className, children }) => {
       >
         {text || children}
       </label>
-      <ul
-        onClick={(e) => e.target.blur()}
-        tabIndex="0"
-        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-      >
+      <ul className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
         {children}
       </ul>
     </div>
