@@ -80,7 +80,6 @@ const Register = ({}) => {
       setLoaded(true);
       setRegistered(true);
       setAsyncError("");
-      console.log(registeredEmail, registeredPassword);
     } catch (error) {
       setLoaded(true);
       console.log(error);
