@@ -21,7 +21,7 @@ const DeleteAlert = ({
       <div className="flex flex-col mt-4">
         <div className="flex gap-2 justify-center">
           <label
-            htmlFor="my-modal-4"
+            htmlFor={`my-modal-${modalId}`}
             className="btn w-20 btn-bg-neutral hover:bg-neutral text-neutral-content modal-button"
           >
             Cancel
@@ -29,7 +29,7 @@ const DeleteAlert = ({
 
           <label
             onClick={onClick}
-            htmlFor="my-modal-4"
+            htmlFor={`my-modal-${modalId}`}
             className="btn w-20 btn-success text-bg-base-100 modal-button"
           >
             Yes
