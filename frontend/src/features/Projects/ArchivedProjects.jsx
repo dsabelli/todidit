@@ -18,20 +18,30 @@ const ArchivedProjects = ({ projects }) => {
       archivedOn: format(parseJSON(project.archivedOn), dateFormat),
     }));
 
-  const projectElements = formattedProjects.map((project) => (
-    <li key={project.id}>
-      <Link
-        className="p-0"
-        to={`/app/project/archived/${project.id}`}
-        id={project.id}
-      >
-        <div className="">
-          <p className="text-sm">{project.title}</p>
-          <p className="text-2xs">Archived: {project.archivedOn}</p>
-        </div>
-      </Link>
-    </li>
-  ));
+  const sortProjects = (a, b) => {
+    return a.archivedOn > b.archivedOn
+      ? 1
+      : a.archivedOn < b.archivedOn
+      ? -1
+      : 0;
+  };
+
+  const projectElements = formattedProjects
+    .sort(sortProjects)
+    .map((project) => (
+      <li key={project.id}>
+        <Link
+          className="p-0"
+          to={`/app/project/archived/${project.id}`}
+          id={project.id}
+        >
+          <div className="">
+            <p className="text-sm">{project.title}</p>
+            <p className="text-2xs">Archived: {project.archivedOn}</p>
+          </div>
+        </Link>
+      </li>
+    ));
 
   return (
     <Toggle
