@@ -32,11 +32,9 @@ const DiditSearch = ({ projects }) => {
     };
     getDidits();
   }, [debouncedDidit, diditDateStart, diditDateEnd]);
-  console.log(didits);
 
   const filterSelected = (id) => {
     setDidits((prevDidits) => prevDidits.filter((didit) => didit.id === id));
-    console.log(didits);
   };
 
   const diditElements = didits
