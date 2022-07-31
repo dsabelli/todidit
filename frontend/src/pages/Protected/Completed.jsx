@@ -1,14 +1,11 @@
 import { useEffect, useContext } from "react";
 import { useOutletContext } from "react-router-dom";
-import Button from "../../components/UI/Button";
 import { UserContext } from "../../context/UserContext";
 import ReadAndUpdateTasks from "../../features/Tasks/ReadAndUpdateTasks";
 import taskService from "../../services/tasks";
 import diditService from "../../services/didits";
-import alertService from "../../services/alerts";
 import TrashIcon from "../../Assets/Icons/TrashIcon";
 import DeleteAlert from "../../layouts/DeleteAlert";
-import ErrorIcon from "../../Assets/Icons/ErrorIcon";
 import DeleteSvg from "../../Assets/SVGs/DeleteSvg";
 
 const Completed = () => {
@@ -34,8 +31,6 @@ const Completed = () => {
   }, [allTasks]);
 
   const handleDeleteCompletedTasks = async () => {
-    // const alert = await alertService.alert("Completed Tasks");
-
     try {
       const deletedTasks = tasks.filter((task) => task.isChecked);
       for (let task of deletedTasks) {
@@ -50,7 +45,6 @@ const Completed = () => {
           prevTasks.filter((prevTask) => prevTask.id !== task.id)
         );
       }
-      // alertService.success("Idiot!");
     } catch (error) {
       console.log(error);
       setSystemMessage("System encountered an error");

@@ -28,7 +28,6 @@
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
     "react-spinners": "^0.13.3",
-    "sweetalert2": "^11.4.20",
     "vite-plugin-svgr": "^2.2.1",
     "yup": "^0.32.11"
   },
