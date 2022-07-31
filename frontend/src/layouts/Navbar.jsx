@@ -16,11 +16,11 @@ const Navbar = ({ projects, children }) => {
   }, []);
 
   return (
-    <div className="drawer ">
+    <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col bg-base-100">
         {/* <!-- Navbar --> */}
-        <div className="w-full flex navbar justify-between bg-accent">
+        <nav className="w-full flex navbar justify-between h-24 bg-accent">
           <div className="flex-none md:hidden">
             <label
               htmlFor="my-drawer-3"
@@ -29,12 +29,12 @@ const Navbar = ({ projects, children }) => {
               <MenuIcon className="w-6" />
             </label>
           </div>
-          <div className="flex-1 pr-2 mr-2">
+          <div className="flex-1 mb-2 pr-2 mr-2">
             <ToDidit todiditClass="text-accent-content" />
           </div>
-          <nav className="flex">
+          <div className="flex ">
             {<DiditSearch projects={projects} />}
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end p-1">
               <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
                   <img src={avatar} />
@@ -49,8 +49,8 @@ const Navbar = ({ projects, children }) => {
             </div>
 
             {/* <!-- Navbar menu content here --> */}
-          </nav>
-        </div>
+          </div>
+        </nav>
         {/* <!-- Page content here --> */}
         <div className=" grid grid-cols-6 gap-x-8 min-h-screen ">
           <div className="col-span-2 min-w-fit max-w-xs hidden h-full md:block">
