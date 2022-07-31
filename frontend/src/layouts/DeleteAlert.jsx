@@ -7,9 +7,11 @@ const DeleteAlert = ({
   modalTitle,
   modalIcon,
   openButtonClass,
+  modalId,
 }) => {
   return (
     <Modal
+      modalId={modalId}
       className="self-center"
       modalIcon={modalIcon}
       modalTitle={`Are you sure you want to delete ${modalTitle}?`}

@@ -122,9 +122,15 @@ const SortButton = ({
     navigate(location.pathname);
   }, [tasks]);
 
+  //id for modal
+  const sort = "SortButton";
   return (
     <div className="tooltip tooltip-left" data-tip="Sort">
-      <Modal openButton={<SlidersIcon className="w-6 " />} modalTitle="Sort">
+      <Modal
+        modalId={sort}
+        openButton={<SlidersIcon className="w-6" />}
+        modalTitle="Sort"
+      >
         <div className="flex flex-col">
           <div className="flex gap-2 mb-2 items-center">
             <GridIcon className="w-5" />
@@ -155,14 +161,14 @@ const SortButton = ({
           </Select>
           <div className="flex gap-2 justify-end">
             <label
-              htmlFor="my-modal-4"
-              className="btn btn-sm btn-bg-neutral text-neutral-content modal-button "
+              htmlFor={`my-modal-${sort}`}
+              className="btn btn-sm btn-bg-neutral text-neutral-content modal-button"
             >
               Cancel
             </label>
 
             <label
-              htmlFor="my-modal-4"
+              htmlFor={`my-modal-${sort}`}
               className="btn btn-accent text-accent-content btn-sm modal-button"
               onClick={() => handleUserUpdate()}
             >

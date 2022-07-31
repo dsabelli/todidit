@@ -75,6 +75,7 @@ const Completed = () => {
         onProjectId={setProjectId}
       />
       <DeleteAlert
+        modalId="Completed"
         openButtonClass="btn-error"
         openButton="Delete"
         modalTitle="all"

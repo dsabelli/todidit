@@ -55,6 +55,7 @@ const Profile = () => {
             </p>
             <div className=" flex gap-2 mt-4">
               <DeleteAlert
+                modalId="Profile"
                 openButtonClass="btn-error"
                 openButton="Delete Account"
                 modalTitle="your account"
@@ -63,9 +64,7 @@ const Profile = () => {
               />
             </div>
           </div>
-          <ProfileSvg
-            className={" mx-auto mt-16 w-1/3 max-w-md hidden md:block"}
-          />
+          <ProfileSvg className="mx-auto mt-16 w-1/3 max-w-md hidden md:block" />
         </div>
       </>
     ) : (
