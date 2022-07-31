@@ -6,7 +6,7 @@ import ToDidit from "../components/UI/ToDidit";
 
 const UNavbar = ({ isLanding, username }) => {
   return (
-    <nav className="navbar bg-neutral flex px-4 justify-between">
+    <nav className="navbar bg-neutral flex px-4 justify-between h-16">
       <ToDidit todiditClass="text-neutral-content" />
       <div className={`flex gap-4 ${isLanding ? "" : "hidden"} `}>
         <Link to="/login">
@@ -17,7 +17,7 @@ const UNavbar = ({ isLanding, username }) => {
         </Link>
       </div>
       {username && (
-        <div className="dropdown dropdown-end">
+        <div className="dropdown dropdown-end p-1">
           <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
               <img
