@@ -9,8 +9,6 @@ import { DiditContext } from "../../context/DiditContext";
 import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 import { useDebounce } from "use-debounce";
-import Dropdown from "../../components/UI/Dropdown";
-import Button from "../../components/UI/Button";
 
 const DiditSearch = ({ projects }) => {
   const { user } = useContext(UserContext);
@@ -34,13 +32,21 @@ const DiditSearch = ({ projects }) => {
     };
     getDidits();
   }, [debouncedDidit, diditDateStart, diditDateEnd]);
+  console.log(didits);
+
+  const filterSelected = (id) => {
+    setDidits((prevDidits) => prevDidits.filter((didit) => didit.id === id));
+    console.log(didits);
+  };
 
   const diditElements = didits
     ? didits.map((didit) => (
         <Link
           to={`/app/didit/${didit.id}`}
           key={didit.id}
-          onClick={() => setVisible(false)}
+          onClick={(e) => (
+            setVisible(false), filterSelected(didit.id), e.target.blur()
+          )}
           className="p-1"
         >
           <Didit
@@ -57,7 +63,7 @@ const DiditSearch = ({ projects }) => {
 
   return (
     <div className="flex flex-col gap-2 md:flex-row">
-      <div className={` ${didits.length > 0 ? "block" : "hidden"}`}>
+      <div className={` ${didits.length > 1 ? "block" : "hidden"}`}>
         <DateRange
           diditDateStart={diditDateStart}
           onDiditDateStart={setDiditDateStart}
@@ -87,10 +93,11 @@ const DiditSearch = ({ projects }) => {
                 setVisible(false),
                 e.target.blur(),
                 setDiditDateStart(""),
-                setDiditDateEnd(""))
+                setDiditDateEnd(""),
+                setDidits([]))
               : null
           }
-          // onBlur={(e) => (e.target.value = "")}
+          onBlur={(e) => (e.target.value = "")}
         />
 
         <div

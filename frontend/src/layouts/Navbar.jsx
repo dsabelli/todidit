@@ -16,7 +16,7 @@ const Navbar = ({ projects, children }) => {
         `https://avatars.dicebear.com/api/initials/${user.username[0]}.svg`
       );
   }, []);
-  console.log(didits);
+
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -24,7 +24,7 @@ const Navbar = ({ projects, children }) => {
         {/* <!-- Navbar --> */}
         <nav
           className={`w-full flex navbar justify-between bg-accent ${
-            didits.length > 0 ? "py-16" : ""
+            didits.length > 1 ? "py-16" : ""
           } md:py-4`}
         >
           <div className="flex-none md:hidden">
