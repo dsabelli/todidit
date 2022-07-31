@@ -19,7 +19,7 @@ router.get("/", async (request, response) => {
         { user: request.user.id },
         { title: { $regex: request.query.title, $options: "i" || "" } },
         {
-          createdOn: {
+          completedOn: {
             $gte: request.query.dateA || new Date(1970),
             $lt: request.query.dateB || new Date(),
           },
