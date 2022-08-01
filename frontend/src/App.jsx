@@ -39,7 +39,7 @@ function App() {
   );
   const dateHours = getHours(new Date());
   const [theme, setTheme] = useState(
-    dateHours > 7 && dateHours < 17 ? "light" : "dark"
+    dateHours > 6 && dateHours < 18 ? "light" : "dark"
   );
 
   const [settings, setSettings] = useState({});
