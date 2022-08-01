@@ -7,6 +7,7 @@ const DateRange = ({ onDiditDateStart, onDiditDateEnd }) => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
 
+  //update state via props and useEffect when selecting from datepicker
   useEffect(() => {
     const getStartDate = () => {
       startDate
@@ -24,13 +25,13 @@ const DateRange = ({ onDiditDateStart, onDiditDateEnd }) => {
   }, [endDate]);
 
   return (
-    <div className="w-48">
+    <div className="w-44 md:48 ">
       <DatePicker
         selectsRange={true}
         startDate={startDate}
         endDate={endDate}
         onChange={(update) => setDateRange(update)}
-        className="w-full text-xs btn pl-1"
+        className="w-full text-2xs md:text-xs btn pl-1"
         isClearable={true}
         value={startDate && endDate ? startDate : "Select Dates"}
         popperPlacement="bottom-end"

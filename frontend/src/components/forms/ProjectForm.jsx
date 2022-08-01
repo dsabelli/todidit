@@ -4,7 +4,7 @@ import Input from "../UI/Input";
 
 const ProjectForm = ({ onSubmit, value, onChange, onClick, submitText }) => {
   const projectInput = useRef(null);
-
+  //fix for focusing input
   useEffect(() => {
     if (projectInput.current) projectInput.current.focus();
   }, []);
