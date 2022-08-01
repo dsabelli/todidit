@@ -19,6 +19,8 @@ const DiditSearch = ({ projects }) => {
   const [diditDateStart, setDiditDateStart] = useState("");
   const [diditDateEnd, setDiditDateEnd] = useState("");
 
+  //api call with state and debounced string query state.
+  //queries on change of date or debounced string.
   useEffect(() => {
     const getDidits = async () => {
       const searchedDidits = await diditService.getDidits(
@@ -33,17 +35,20 @@ const DiditSearch = ({ projects }) => {
     getDidits();
   }, [debouncedDidit, diditDateStart, diditDateEnd]);
 
+  //function to filter the selected id from the dropdown
   const filterSelected = (id) => {
     setDidits((prevDidits) => prevDidits.filter((didit) => didit.id === id));
   };
 
+  //if there are didits, map with a link using their id.
+  //when clicked, hide dropdown, filter didit array to the selected didit, reset the search.
   const diditElements = didits
     ? didits.map((didit) => (
         <Link
           to={`/app/didit/${didit.id}`}
           key={didit.id}
-          onClick={(e) => (
-            setVisible(false), filterSelected(didit.id), e.target.blur()
+          onClick={() => (
+            setVisible(false), filterSelected(didit.id), setDiditSearch("")
           )}
           className="p-1"
         >
@@ -61,10 +66,9 @@ const DiditSearch = ({ projects }) => {
 
   return (
     <div className="flex flex-col gap-2 md:flex-row">
+      {/* only show date range when searching didits */}
       <div
-        className={` ${
-          diditDateStart && didits.length > 1 ? "block" : "hidden"
-        }`}
+        className={` ${diditSearch || didits.length > 1 ? "block" : "hidden"}`}
       >
         <DateRange
           diditDateStart={diditDateStart}
@@ -75,31 +79,34 @@ const DiditSearch = ({ projects }) => {
       </div>
       <div className="form-control w-40 sm:w-64 ">
         <Input
+          value={diditSearch || ""}
           type="text"
           placeholder="Search Didits..."
           className="input w-full focus:outline-none text-accent-content bg-accent-focus placeholder-opacity-50 placeholder-accent-content"
-          //if not an empty string, get didits with title of value, otherwise
-          //clear  blur to setDidits back to blank and focus for next search
+          // if not an empty string, get didits with title of value,
+          // otherwise clear everything and focus input for next search
           onChange={(e) =>
             e.target.value !== ""
               ? (setDiditSearch(e.target.value), setVisible(true))
               : (setVisible(false),
-                (e.target.value = ""),
-                e.target.focus(),
+                setDidits([]),
+                setDiditSearch(""),
                 setDiditDateStart(""),
-                setDiditDateEnd(""))
+                setDiditDateEnd(""),
+                e.target.focus())
           }
+          //on escape or enter keypress, clear everything
           onKeyDown={(e) =>
             e.key === "Escape" || e.key === "Enter"
               ? ((e.target.value = ""),
                 setVisible(false),
                 e.target.blur(),
+                setDiditSearch(""),
                 setDiditDateStart(""),
                 setDiditDateEnd(""),
                 setDidits([]))
               : null
           }
-          onBlur={(e) => (e.target.value = "")}
         />
 
         <div
