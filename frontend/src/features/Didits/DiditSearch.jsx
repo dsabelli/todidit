@@ -77,7 +77,7 @@ const DiditSearch = ({ projects }) => {
           onDiditDateEnd={setDiditDateEnd}
         />
       </div>
-      <div className="form-control w-40 sm:w-64 ">
+      <div className="form-control w-44 sm:w-64 ">
         <Input
           value={diditSearch || ""}
           type="text"
