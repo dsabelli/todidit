@@ -14,13 +14,12 @@ const Didit = ({
 
   return (
     <div
-      className={`flex flex-col items-start gap-1 w-full opacity-60 ${
-        description ? "mb-5" : "mb-2"
+      className={`flex flex-col items-start gap-1 w-full opacity-60 mb-10
       }`}
     >
-      <div className="text-xl">{title}</div>
+      <div className="text-xl mb-1">{title}</div>
       {description && (
-        <div className="text-sm whitespace-pre-line mb-2 ">{description}</div>
+        <div className="text-sm whitespace-pre-line">{description}</div>
       )}
       {createdOn && (
         <div className="text-xs">
