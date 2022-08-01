@@ -25,10 +25,8 @@ const Week = () => {
 
   useEffect(() => {
     setTasks((prevTasks) =>
-      prevTasks.filter(
-        (task) =>
-          isThisWeek(parseJSON(task.dueDate), { weekStartsOn: 1 }) ||
-          new Date().setHours(0, 0, 0, 0) > parseJSON(task.dueDate)
+      prevTasks.filter((task) =>
+        isThisWeek(parseJSON(task.dueDate), { weekStartsOn: 1 })
       )
     );
   }, [allTasks]);
