@@ -95,7 +95,16 @@ const getHeader = (location, params, projects) => {
         </>
       );
       break;
-
+    case location.pathname.includes("didit"):
+      header = (
+        <>
+          <div className={classNameDivWrapper}>
+            <h1 className={classNameH1}>Didit Archive</h1>
+          </div>
+          <p className={classNameP}></p>
+        </>
+      );
+      break;
     default:
       header = (
         <>
