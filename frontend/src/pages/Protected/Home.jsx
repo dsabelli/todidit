@@ -66,22 +66,36 @@ const Home = ({ onTheme }) => {
 
   //Gets the user's settings once user is set.
   useEffect(() => {
-    const getUserSettings = async () => {
-      const response = await userService.getUser(user);
-      setSettings(response.settings[0]);
-    };
-    user && getUserSettings();
+    try {
+      const getUserSettings = async () => {
+        const response = await userService.getUser(user);
+        setSettings(response.settings[0]);
+      };
+      user && getUserSettings();
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
+    }
   }, [user]);
 
   //Sets the user's settings into state once the settings are set in state/context.
   useEffect(() => {
-    const setUserSettings = async () => {
-      setDateFormat(settings.dateFormat);
-      onTheme(settings.theme);
-      setSortBy(settings.sortBy);
-      setOrder(settings.order);
-    };
-    setUserSettings();
+    try {
+      const setUserSettings = async () => {
+        setDateFormat(settings.dateFormat);
+        onTheme(settings.theme);
+        setSortBy(settings.sortBy);
+        setOrder(settings.order);
+      };
+      setUserSettings();
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
+    }
   }, [settings]);
 
   //Gets a user's projects once user is set.
