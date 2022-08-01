@@ -12,9 +12,9 @@ const ArchivedProjects = ({ projects }) => {
   const { dateFormat } = useContext(DateFormatContext);
 
   const sortProjects = (a, b) => {
-    return a.archivedOn > b.archivedOn
+    return a.archivedOn < b.archivedOn
       ? 1
-      : a.archivedOn < b.archivedOn
+      : a.archivedOn > b.archivedOn
       ? -1
       : 0;
   };
@@ -57,7 +57,7 @@ const ArchivedProjects = ({ projects }) => {
       }
     >
       <ul className="menu flex flex-col max-h-80 overflow-y-auto pl-7   ">
-        {projectElements.reverse()}
+        {projectElements}
       </ul>
     </Toggle>
   );
