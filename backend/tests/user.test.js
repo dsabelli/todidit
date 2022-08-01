@@ -20,6 +20,12 @@ describe("When attempting to get a user's settings", () => {
       passwordHash,
       verified: true,
       vToken: "abc123",
+      settings: {
+        dateFormat: "MMM-dd-yyyy",
+        theme: "light",
+        sortBy: "dueDate",
+        order: "ascending",
+      },
     });
 
     await user.save();
@@ -38,7 +44,8 @@ describe("When attempting to get a user's settings", () => {
       .get(`/api/users/${userId}`)
       .set("Authorization", `bearer ${token}`)
       .expect(200);
-    expect(res.body.dateFormat).toBe("MMM-dd-yyyy");
+
+    expect(res.body.settings[0].dateFormat).toBe("MMM-dd-yyyy");
   });
 });
 
@@ -55,6 +62,12 @@ describe("When a user attempts to change their settings", () => {
       passwordHash,
       verified: true,
       vToken: "abc123",
+      settings: {
+        dateFormat: "MMM-dd-yyyy",
+        theme: "light",
+        sortBy: "dueDate",
+        order: "ascending",
+      },
     });
 
     await user.save();
@@ -69,13 +82,13 @@ describe("When a user attempts to change their settings", () => {
     userId = response.body.id;
   });
   it("succeeds to change dateFormat setting", async () => {
-    const newDateFormat = { dateFormat: "dd-MMM-yyyy" };
+    const newDateFormat = { settings: { dateFormat: "dd-MMM-yyyy" } };
     const res = await api
       .put(`/api/users/${userId}`)
       .send(newDateFormat)
       .set("Authorization", `bearer ${token}`)
       .expect(200);
-    expect(res.body.dateFormat).toBe("dd-MMM-yyyy");
+    expect(res.body.settings[0].dateFormat).toBe("dd-MMM-yyyy");
   });
 });
 
@@ -93,6 +106,12 @@ describe("When a user attempts to change their password", () => {
       passwordHash,
       verified: true,
       vToken: "abc123",
+      settings: {
+        dateFormat: "MMM-dd-yyyy",
+        theme: "light",
+        sortBy: "dueDate",
+        order: "ascending",
+      },
     });
 
     await user.save();
@@ -153,6 +172,12 @@ describe("When a user attempts to delete their account", () => {
       passwordHash,
       verified: true,
       vToken: "abc123",
+      settings: {
+        dateFormat: "MMM-dd-yyyy",
+        theme: "light",
+        sortBy: "dueDate",
+        order: "ascending",
+      },
     });
 
     await user.save();
