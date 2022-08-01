@@ -9,7 +9,6 @@ import ProfileSvg from "../../Assets/SVGs/ProfileSvg";
 import GoodbyeSvg from "../../Assets/SVGs/GoodbyeSvg";
 import DeleteAlert from "../../layouts/DeleteAlert";
 import ErrorIcon from "../../Assets/Icons/ErrorIcon";
-import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
@@ -18,9 +17,10 @@ const Profile = () => {
 
   const handleDeleteUser = async () => {
     await userService.deleteUser(user);
-
     setDeleted(true);
+  };
 
+  const handleLogout = () => {
     window.localStorage.removeItem("loggedIn");
   };
 
@@ -75,9 +75,11 @@ const Profile = () => {
             You are always welcome to join toDidit again!
           </p>
           <GoodbyeSvg className="w-1/2 self-center" />
-          <Link to="/">
-            <Button className="btn-lg">Got it</Button>
-          </Link>
+          <form onSubmit={() => handleLogout()}>
+            <Button className="w-full text-left" type="submit">
+              Got it
+            </Button>
+          </form>
         </div>
       </div>
     )
