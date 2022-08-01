@@ -27,6 +27,7 @@ import { UserContext } from "./context/UserContext";
 import { DateFormatContext } from "./context/DateFormatContext";
 import { SettingsContext } from "./context/SettingsContext";
 import { Theme } from "react-daisyui";
+import { getHours } from "date-fns";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -36,7 +37,10 @@ function App() {
     () => ({ dateFormat, setDateFormat }),
     [dateFormat, setDateFormat]
   );
-  const [theme, setTheme] = useState("light");
+  const dateHours = getHours(new Date());
+  const [theme, setTheme] = useState(
+    dateHours > 7 && dateHours < 17 ? "light" : "dark"
+  );
 
   const [settings, setSettings] = useState({});
   const settingsValue = useMemo(
