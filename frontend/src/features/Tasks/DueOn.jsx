@@ -37,7 +37,7 @@ const DueOn = ({ completedOn, dueDate, className }) => {
         day = <span className="text-warning font-bold">Today</span>;
         break;
       case isTomorrow(parsedDueDate):
-        day = <span className="text-secondary font-bold">Tomorrow</span>;
+        day = <span className="text-secondary-focus font-bold">Tomorrow</span>;
         break;
       case isPast(parsedDueDate):
         difference = differenceInCalendarDays(new Date(), parsedDueDate);
@@ -49,23 +49,23 @@ const DueOn = ({ completedOn, dueDate, className }) => {
         break;
       case isThisWeek(parsedDueDate, { weekStartsOn: 1 }) &&
         isMonday(parsedDueDate):
-        day = <span className="text-primary font-bold">Monday</span>;
+        day = <span className="text-accent-focus font-bold">Monday</span>;
         break;
       case isThisWeek(parsedDueDate, { weekStartsOn: 1 }) &&
         isTuesday(parsedDueDate):
-        day = <span className="text-primary font-bold">Tueday</span>;
+        day = <span className="text-accent-focus font-bold">Tueday</span>;
         break;
       case isThisWeek(parsedDueDate, { weekStartsOn: 1 }) &&
         isWednesday(parsedDueDate):
-        day = <span className="text-primary font-bold">Wednesday</span>;
+        day = <span className="text-accent-focus font-bold">Wednesday</span>;
         break;
       case isThisWeek(parsedDueDate, { weekStartsOn: 1 }) &&
         isThursday(parsedDueDate):
-        day = <span className="text-primary font-bold">Thursday</span>;
+        day = <span className="text-accent-focus font-bold">Thursday</span>;
         break;
       case isThisWeek(parsedDueDate, { weekStartsOn: 1 }) &&
         isFriday(parsedDueDate):
-        day = <span className="text-primary font-bold">Friday</span>;
+        day = <span className="text-accent-focus font-bold">Friday</span>;
         break;
 
       default:
