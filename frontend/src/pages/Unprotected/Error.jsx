@@ -1,22 +1,39 @@
 import React from "react";
 import Hero from "../../components/UI/Hero";
 import ErrorSvg from "../../Assets/SVGs/ErrorSvg";
+import { useNavigate } from "react-router-dom";
+import Button from "../../components/UI/Button";
 const Error = ({ error }) => {
+  let navigate = useNavigate();
+  console.log(error);
   return (
-    <div role="alert">
+    <div role="alert" className="h-screen">
       <Hero
         className="w-screen"
         text={
           <div className=" px-20 md:ml-20 md:p-0">
-            <h1 className="text-3xl font-bold">{error.message || "Uh oh!"}</h1>
-            {!error && <p className="pt-6 ">Something went wrong.</p>}
-            {!error && (
-              <p className="pb-6 ">Please go back or try again later.</p>
-            )}
+            <h1 className="text-5xl font-bold">Uh oh!</h1>
+            <p className="mt-6 text-xl">Something went wrong.</p>
+            <p className="mb-10 text-xl">
+              Please{" "}
+              <a
+                onClick={() => (navigate("/contact"), window.location.reload())}
+                className="link hover:text-info"
+              >
+                contact us
+              </a>{" "}
+              or try again later.
+            </p>
+            <Button
+              onClick={() => (navigate("/app/today"), window.location.reload())}
+              className="btn-wide"
+            >
+              Go back.
+            </Button>
           </div>
         }
       >
-        <ErrorSvg className={"text-error w-1/3 md:w-1/2"} />
+        <ErrorSvg className={"hidden md:block text-error w-1/3 md:w-1/2"} />
       </Hero>
     </div>
   );
