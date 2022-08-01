@@ -58,7 +58,7 @@ const DiditSearch = ({ projects }) => {
         </Link>
       ))
     : null;
-  console.log(diditDateStart);
+
   return (
     <div className="flex flex-col gap-2 md:flex-row">
       <div
