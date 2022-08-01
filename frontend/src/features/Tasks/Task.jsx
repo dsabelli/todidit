@@ -67,7 +67,7 @@ const Task = ({
             </Button>
             <Button
               className={`btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-200 ${
-                checked ? "" : "btn-disabled opacity-50"
+                checked ? "" : "hidden"
               }`}
               onClick={() => {
                 onDelete();
