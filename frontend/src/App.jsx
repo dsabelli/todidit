@@ -29,11 +29,12 @@ import { SettingsContext } from "./context/SettingsContext";
 import { Theme } from "react-daisyui";
 import { getHours } from "date-fns";
 import NotFound from "./pages/Unprotected/NotFound";
+import { ErrorBoundary } from "react-error-boundary";
 
 function App() {
   const [user, setUser] = useState(null);
   const userValue = useMemo(() => ({ user, setUser }), [user, setUser]);
-  const [dateFormat, setDateFormat] = useState("MM-dd-yyyy");
+  const [dateFormat, setDateFormat] = useState("MMM-dd-yyyy");
   const dateFormatValue = useMemo(
     () => ({ dateFormat, setDateFormat }),
     [dateFormat, setDateFormat]
@@ -51,45 +52,53 @@ function App() {
 
   return (
     <Theme dataTheme={theme}>
-      <UserContext.Provider value={userValue}>
-        <SettingsContext.Provider value={settingsValue}>
-          <DateFormatContext.Provider value={dateFormatValue}>
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="register" element={<Register />} />
-              <Route path="login" element={<Login />} />
-              <Route path="reset-password" element={<ResetPassword />} />
-              <Route path="reset-password/:token" element={<ConfirmReset />} />
-              <Route path="verify/:token" element={<Verified />} />
-              <Route element={<ProtectedRoutes />}>
-                <Route path="profile" element={<Profile />} />
+      <ErrorBoundary
+        FallbackComponent={Error}
+        onError={(error, errorInfo) => console.log({ error, errorInfo })}
+      >
+        <UserContext.Provider value={userValue}>
+          <SettingsContext.Provider value={settingsValue}>
+            <DateFormatContext.Provider value={dateFormatValue}>
+              <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="register" element={<Register />} />
+                <Route path="login" element={<Login />} />
+                <Route path="reset-password" element={<ResetPassword />} />
                 <Route
-                  path="settings"
-                  element={<Settings theme={theme} onTheme={setTheme} />}
+                  path="reset-password/:token"
+                  element={<ConfirmReset />}
                 />
-                <Route path="/app" element={<Home onTheme={setTheme} />}>
-                  <Route index element={<div>There's nothing here!</div>} />
-                  <Route path="all" element={<All />} />
-                  <Route path="today" element={<Today />} />
-                  <Route path="week" element={<Week />} />
-                  <Route path="important" element={<Important />} />
-                  <Route path="completed" element={<Completed />} />
-                  <Route path="project/:id" element={<Project />} />
+                <Route path="verify/:token" element={<Verified />} />
+                <Route element={<ProtectedRoutes />}>
+                  <Route path="profile" element={<Profile />} />
                   <Route
-                    path="project/archived/:id"
-                    element={<ArchivedProject />}
+                    path="settings"
+                    element={<Settings theme={theme} onTheme={setTheme} />}
                   />
-                  <Route path="didit/:id" element={<Didits />} />
+                  <Route path="/app" element={<Home onTheme={setTheme} />}>
+                    <Route index element={<div>There's nothing here!</div>} />
+                    <Route path="all" element={<All />} />
+                    <Route path="today" element={<Today />} />
+                    <Route path="week" element={<Week />} />
+                    <Route path="important" element={<Important />} />
+                    <Route path="completed" element={<Completed />} />
+                    <Route path="project/:id" element={<Project />} />
+                    <Route
+                      path="project/archived/:id"
+                      element={<ArchivedProject />}
+                    />
+                    <Route path="didit/:id" element={<Didits />} />
+                  </Route>
                 </Route>
-              </Route>
-              <Route path="contact" element={<Contact />} />
-              <Route path="terms-of-service" element={<Terms />} />
-              <Route path="privacy" element={<Privacy />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </DateFormatContext.Provider>
-        </SettingsContext.Provider>
-      </UserContext.Provider>
+                <Route path="contact" element={<Contact />} />
+                <Route path="terms-of-service" element={<Terms />} />
+                <Route path="privacy" element={<Privacy />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </DateFormatContext.Provider>
+          </SettingsContext.Provider>
+        </UserContext.Provider>
+      </ErrorBoundary>
     </Theme>
   );
 }
