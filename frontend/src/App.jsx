@@ -28,6 +28,7 @@ import { DateFormatContext } from "./context/DateFormatContext";
 import { SettingsContext } from "./context/SettingsContext";
 import { Theme } from "react-daisyui";
 import { getHours } from "date-fns";
+import NotFound from "./pages/Unprotected/NotFound";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -84,7 +85,7 @@ function App() {
               <Route path="contact" element={<Contact />} />
               <Route path="terms-of-service" element={<Terms />} />
               <Route path="privacy" element={<Privacy />} />
-              <Route path="*" element={<Error />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </DateFormatContext.Provider>
         </SettingsContext.Provider>
