@@ -11,13 +11,6 @@ import {
 const ArchivedProjects = ({ projects }) => {
   const { dateFormat } = useContext(DateFormatContext);
 
-  const formattedProjects = projects
-    .filter((project) => project.isArchived)
-    .map((project) => ({
-      ...project,
-      archivedOn: format(parseJSON(project.archivedOn), dateFormat),
-    }));
-
   const sortProjects = (a, b) => {
     return a.archivedOn > b.archivedOn
       ? 1
@@ -26,22 +19,28 @@ const ArchivedProjects = ({ projects }) => {
       : 0;
   };
 
-  const projectElements = formattedProjects
+  const formattedProjects = projects
+    .filter((project) => project.isArchived)
     .sort(sortProjects)
-    .map((project) => (
-      <li key={project.id}>
-        <Link
-          className="p-0"
-          to={`/app/project/archived/${project.id}`}
-          id={project.id}
-        >
-          <div className="">
-            <p className="text-sm">{project.title}</p>
-            <p className="text-2xs">Archived: {project.archivedOn}</p>
-          </div>
-        </Link>
-      </li>
-    ));
+    .map((project) => ({
+      ...project,
+      archivedOn: format(parseJSON(project.archivedOn), dateFormat),
+    }));
+
+  const projectElements = formattedProjects.map((project) => (
+    <li key={project.id}>
+      <Link
+        className="p-0"
+        to={`/app/project/archived/${project.id}`}
+        id={project.id}
+      >
+        <div className="">
+          <p className="text-sm">{project.title}</p>
+          <p className="text-2xs">Archived: {project.archivedOn}</p>
+        </div>
+      </Link>
+    </li>
+  ));
 
   return (
     <Toggle
