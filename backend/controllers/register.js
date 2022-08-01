@@ -2,6 +2,8 @@ const bcrypt = require("bcrypt");
 const validator = require("validator");
 const router = require("express").Router();
 const User = require("../models/user");
+const Project = require("../models/project");
+const Task = require("../models/task");
 const jwt = require("jsonwebtoken");
 const config = require("../utils/config");
 const sgMail = require("@sendgrid/mail");
@@ -53,6 +55,67 @@ router.post("/", async (request, response) => {
       order: "ascending",
     },
   });
+
+  const project = new Project({
+    title: "My First Project",
+    user: user.id,
+  });
+
+  const task1 = new Task({
+    title: "Add your first task",
+    dueDate: new Date(),
+    isImportant: true,
+    project: project.id,
+    user: user.id,
+  });
+  const task2 = new Task({
+    title: "Create a new project",
+    dueDate: new Date(),
+    project: project.id,
+    user: user.id,
+  });
+  const task3 = new Task({
+    title: "Try a new theme",
+    description:
+      "You can find themes in your account settings by clicking your avatar",
+    dueDate: new Date(),
+    project: project.id,
+    user: user.id,
+  });
+  const task4 = new Task({
+    title:
+      "Complete a task, delete it, then use the Didit search to view it again",
+    description:
+      "You can use the Didit search in the navigation bar above to find tasks you've completed.",
+    dueDate: new Date(),
+    project: project.id,
+    user: user.id,
+  });
+  const task5 = new Task({
+    title: "Completed Task",
+    description: "Delete me!",
+    dueDate: new Date(),
+    isChecked: true,
+    completedOn: new Date(),
+    project: project.id,
+    user: user.id,
+  });
+
+  const savedProject = await project.save();
+  const savedTask1 = await task1.save();
+  const savedTask2 = await task2.save();
+  const savedTask3 = await task3.save();
+  const savedTask4 = await task4.save();
+  const savedTask5 = await task5.save();
+
+  user.projects = user.projects.concat(savedProject._id);
+  user.tasks = user.tasks.concat([
+    savedTask1._id,
+    savedTask2._id,
+    savedTask3._id,
+    savedTask4._id,
+    savedTask5._id,
+  ]);
 
   const savedUser = await user.save();
   if (savedUser) {
