@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -13,8 +13,9 @@ import UNavbar from "../../layouts/UNavbar";
 import Hero from "../../components/UI/Hero";
 import RegisterSvg from "../../Assets/SVGs/RegisterSvg";
 import EmailSvg from "../../Assets/SVGs/EmailSvg";
-import Loader from "../../components/UI/Loader";
 import Footer from "../../components/UI/Footer";
+import ReCAPTCHA from "react-google-recaptcha";
+import Error from "./Error";
 
 const schema = yup.object().shape({
   username: yup
@@ -47,8 +48,11 @@ const Register = ({}) => {
   const [loaded, setLoaded] = useState(true);
   const [registered, setRegistered] = useState(false);
   const [asyncError, setAsyncError] = useState("");
+  const [recaptchaError, setRecaptchaError] = useState(false);
   const [registeredEmail, setRegisteredEmail] = useState("");
   const [registeredPassword, setRegisteredPassword] = useState("");
+  const recaptchaRef = useRef();
+
   const {
     register,
     handleSubmit,
@@ -67,28 +71,35 @@ const Register = ({}) => {
     password,
     confirmPassword,
   }) => {
+    const recaptchaToken = await recaptchaRef.current.executeAsync();
+
     setLoaded(false);
-    try {
-      await registrationService.register({
-        email,
-        username,
-        password,
-        confirmPassword,
-      });
-      setRegisteredEmail(email);
-      setRegisteredPassword(password);
-      setLoaded(true);
-      setRegistered(true);
-      setAsyncError("");
-    } catch (error) {
-      setLoaded(true);
-      console.log(error);
-      const errorMsg = error.response ? error.response.data.error : error;
-      setAsyncError(errorMsg);
-      setTimeout(() => {
-        setAsyncError(null);
-      }, 5000);
+    if (recaptchaToken) {
+      try {
+        console.log(recaptchaToken);
+        await registrationService.register({
+          email,
+          username,
+          password,
+          confirmPassword,
+        });
+        setRegisteredEmail(email);
+        setRegisteredPassword(password);
+        setLoaded(true);
+        setRegistered(true);
+        setAsyncError("");
+        recaptchaRef.current.reset();
+      } catch (error) {
+        setLoaded(true);
+        console.log(error);
+        const errorMsg = error.response ? error.response.data.error : error;
+        setAsyncError(errorMsg);
+        setTimeout(() => {
+          setAsyncError(null);
+        }, 5000);
+      }
     }
+    setRecaptchaError(true);
   };
 
   const handleLogin = async ({ email, password }) => {
@@ -110,17 +121,52 @@ const Register = ({}) => {
     }
   };
 
-  // useEffect(() => {
-  //   registered &&
-  //     setTimeout(() => {
-  //       handleLogin({ email, password });
-  //     }, 4000);
-  // }, [registered]);
-
-  return loaded ? (
-    !registered ? (
-      <>
-        <UNavbar />
+  return (
+    <>
+      <UNavbar />
+      {registered && loaded ? (
+        <Hero
+          className="gap-16"
+          text={
+            <div className="flex flex-col gap-16">
+              <div>
+                <h1 className="text-5xl font-bold">
+                  Thank you for registering!
+                </h1>
+                <p className="pt-6 md:text-xl">
+                  Please check your email for a verification
+                </p>
+                <p className="pb-1 md:text-xl">link to confirm your account.</p>
+                <p className="text-xs md:text-sm opacity-70">
+                  Don't forget to check your spam folder!
+                </p>
+              </div>
+              <div className="max-w-sm flex flex-col pr-8">
+                <h2 className="text-2xl mb-4">
+                  We've logged you in just this time.
+                </h2>
+                <Button
+                  onClick={() =>
+                    handleLogin({
+                      email: registeredEmail,
+                      password: registeredPassword,
+                    })
+                  }
+                  className={
+                    "text-secondary-content bg-secondary hover:bg-secondary-focus"
+                  }
+                >
+                  Let's Go!
+                </Button>
+              </div>
+            </div>
+          }
+        >
+          <EmailSvg className={"hidden md:block w-56"} />
+        </Hero>
+      ) : recaptchaError ? (
+        <Error />
+      ) : (
         <div className="md:hero min-h-screen bg-base-100">
           <div className="hero-content flex-col md:flex-row-reverse gap-20 items-center ">
             <RegisterSvg className={"hidden lg:block w-80"} />
@@ -195,10 +241,16 @@ const Register = ({}) => {
                       )}
                     </div>
                     <div className="form-control mt-6">
+                      <ReCAPTCHA
+                        sitekey="6LfAqkAhAAAAACLvao7muPoeR2NrmoAHNgcQO1Px"
+                        ref={recaptchaRef}
+                        size="invisible"
+                      />
+
                       <Button
                         text={"Register"}
                         type="submit"
-                        className={"btn-primary"}
+                        className={`btn-primary ${loaded ? "" : "loading"}`}
                       />
                       <p className="mt-2 text-2xs opacity-60">
                         By continuing, you agree to toDidit's{" "}
@@ -222,55 +274,9 @@ const Register = ({}) => {
             </div>
           </div>
         </div>
-        <Footer />
-      </>
-    ) : (
-      <>
-        <UNavbar />
-        <Hero
-          className="gap-16"
-          text={
-            <div className="flex flex-col gap-16">
-              <div>
-                <h1 className="text-5xl font-bold">
-                  Thank you for registering!
-                </h1>
-                <p className="pt-6 md:text-xl">
-                  Please check your email for a verification
-                </p>
-                <p className="pb-1 md:text-xl">link to confirm your account.</p>
-                <p className="text-xs md:text-sm opacity-70">
-                  Don't forget to check your spam folder!
-                </p>
-              </div>
-              <div className="max-w-sm flex flex-col pr-8">
-                <h2 className="text-2xl mb-4">
-                  We've logged you in just this time.
-                </h2>
-                <Button
-                  onClick={() =>
-                    handleLogin({
-                      email: registeredEmail,
-                      password: registeredPassword,
-                    })
-                  }
-                  className={
-                    "text-secondary-content bg-secondary hover:bg-secondary-focus"
-                  }
-                >
-                  Let's Go!
-                </Button>
-              </div>
-            </div>
-          }
-        >
-          <EmailSvg className={"hidden md:block w-56"} />
-        </Hero>
-        <Footer />
-      </>
-    )
-  ) : (
-    <Loader />
+      )}
+      <Footer />
+    </>
   );
 };
 
