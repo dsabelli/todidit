@@ -1,6 +1,6 @@
 import React from "react";
 
-const HeroSvg = ({ className }) => {
+const LandingSvg = ({ className }) => {
   return (
     <div className={`text-primary ${className}`}>
       <svg
@@ -113,4 +113,4 @@ const HeroSvg = ({ className }) => {
   );
 };
 
-export default HeroSvg;
+export default LandingSvg;
