@@ -76,6 +76,7 @@ const Register = ({}) => {
     password,
     confirmPassword,
   }) => {
+    captchaRef.current.resetCaptcha();
     setLoaded(false);
     if (captchaToken) {
       try {
