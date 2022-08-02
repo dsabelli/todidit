@@ -17,6 +17,12 @@ const Footer = () => {
             <Link className="hover:link" to={"/terms-of-service"}>
               Terms
             </Link>
+          }{" "}
+          |{" "}
+          {
+            <Link className="hover:link" to={"/contact"}>
+              Contact
+            </Link>
           }
         </p>
       </div>
