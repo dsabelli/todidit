@@ -14,7 +14,7 @@ import Hero from "../../components/UI/Hero";
 import RegisterSvg from "../../Assets/SVGs/RegisterSvg";
 import EmailSvg from "../../Assets/SVGs/EmailSvg";
 import Footer from "../../components/UI/Footer";
-import ReCAPTCHA from "react-google-recaptcha";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import Error from "./Error";
 
 const schema = yup.object().shape({
@@ -43,17 +43,18 @@ const schema = yup.object().shape({
 });
 
 const Register = ({}) => {
-  const recaptcha_API = import.meta.env.VITE_RECAPTCHA_SITE_API_KEY_TEST;
+  const captcha_API = import.meta.env.VITE_HCAPTCHA_SITE_API_KEY_TEST;
 
   let navigate = useNavigate();
   const { setUser } = useContext(UserContext);
   const [loaded, setLoaded] = useState(true);
   const [registered, setRegistered] = useState(false);
   const [asyncError, setAsyncError] = useState("");
-  const [recaptchaError, setRecaptchaError] = useState(false);
+  const [captchaError, setCaptchaError] = useState(false);
   const [registeredEmail, setRegisteredEmail] = useState("");
   const [registeredPassword, setRegisteredPassword] = useState("");
-  const recaptchaRef = useRef();
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const captchaRef = useRef();
 
   const {
     register,
@@ -64,8 +65,10 @@ const Register = ({}) => {
     mode: "onTouched",
   });
 
-  const onSubmit = ({ username, email, password, confirmPassword }) =>
-    handleRegistration({ username, email, password, confirmPassword });
+  const onSubmit = ({ username, email, password, confirmPassword }) => (
+    captchaRef.current.execute(),
+    handleRegistration({ username, email, password, confirmPassword })
+  );
 
   const handleRegistration = async ({
     email,
@@ -73,12 +76,10 @@ const Register = ({}) => {
     password,
     confirmPassword,
   }) => {
-    const recaptchaToken = await recaptchaRef.current.executeAsync();
-
     setLoaded(false);
-    if (recaptchaToken) {
+    if (captchaToken) {
       try {
-        console.log(recaptchaToken);
+        console.log(captchaToken);
         await registrationService.register({
           email,
           username,
@@ -90,7 +91,6 @@ const Register = ({}) => {
         setLoaded(true);
         setRegistered(true);
         setAsyncError("");
-        recaptchaRef.current.reset();
       } catch (error) {
         setLoaded(true);
         console.log(error);
@@ -101,7 +101,7 @@ const Register = ({}) => {
         }, 5000);
       }
     }
-    setRecaptchaError(true);
+    setCaptchaError(true);
   };
 
   const handleLogin = async ({ email, password }) => {
@@ -166,7 +166,7 @@ const Register = ({}) => {
         >
           <EmailSvg className={"hidden md:block w-56"} />
         </Hero>
-      ) : recaptchaError ? (
+      ) : captchaError ? (
         <Error />
       ) : (
         <div className="md:hero min-h-screen bg-base-100">
@@ -243,12 +243,13 @@ const Register = ({}) => {
                       )}
                     </div>
                     <div className="form-control mt-6">
-                      <ReCAPTCHA
-                        sitekey={recaptcha_API}
-                        ref={recaptchaRef}
-                        size="invisible"
-                      />
-
+                      <div className="mb-4">
+                        <HCaptcha
+                          sitekey={captcha_API}
+                          onVerify={setCaptchaToken}
+                          ref={captchaRef}
+                        />
+                      </div>
                       <Button
                         text={"Register"}
                         type="submit"
