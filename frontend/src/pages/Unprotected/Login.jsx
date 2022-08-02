@@ -12,7 +12,8 @@ import Footer from "../../components/UI/Footer";
 const Login = () => {
   let navigate = useNavigate();
   const { setUser } = useContext(UserContext);
-  const [asyncError, setAsyncError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loaded, setLoaded] = useState(true);
 
   const {
     register,
@@ -23,18 +24,23 @@ const Login = () => {
 
   //function for handling user login
   const handleLogin = async ({ email, password }) => {
+    setLoaded(false);
     try {
       const user = await loginService.login({ email, password });
-      window.localStorage.setItem("loggedIn", JSON.stringify(user));
-      taskService.setToken(user.token);
-      setUser(user);
-      navigate("/app/today");
+      if (user) {
+        setLoaded(true);
+        window.localStorage.setItem("loggedIn", JSON.stringify(user));
+        taskService.setToken(user.token);
+        setUser(user);
+        navigate("/app/today");
+      }
     } catch (error) {
+      setLoaded(true);
       console.log(error);
       let errorMsg = error.response.data.error || error;
-      setAsyncError(errorMsg);
+      setErrorMessage(errorMsg);
       setTimeout(() => {
-        setAsyncError(null);
+        setErrorMessage(null);
       }, 5000);
     }
   };
@@ -51,7 +57,9 @@ const Login = () => {
               <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                 <div className="card-body">
                   <div className="form-control">
-                    {asyncError && <ErrorMessage errorMessage={asyncError} />}
+                    {errorMessage && (
+                      <ErrorMessage errorMessage={errorMessage} />
+                    )}
                     <label className="label">
                       <span className="label-text">Email</span>
                     </label>
@@ -91,7 +99,7 @@ const Login = () => {
                     <Button
                       type="submit"
                       text={"Login"}
-                      className={"btn-primary"}
+                      className={`btn-primary ${loaded ? "" : "loading"}`}
                     />
                   </div>
                 </div>
