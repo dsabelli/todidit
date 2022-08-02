@@ -9,10 +9,14 @@ import emailjs from "@emailjs/browser";
 import EmailSvg from "../../Assets/SVGs/EmailSvg";
 import Hero from "../../components/UI/Hero";
 import { Link } from "react-router-dom";
+import Error from "./Error";
 
 const Contact = () => {
+  const emailJs_API = import.meta.env.VITE_EMAIL_JS_SITE_API_KEY;
+
   const { user, setUser } = useContext(UserContext);
   const [emailSent, setEmailSent] = useState(false);
+  const [emailError, setEmailError] = useState(false);
   const [loaded, setLoaded] = useState(true);
 
   const form = useRef();
@@ -25,11 +29,12 @@ const Contact = () => {
         "service_mmlaf1r",
         "template_79xcu8k",
         form.current,
-        "jzW08tXATahZEmECf"
+        "emailJs_API"
       );
       if (response) setLoaded(true), setEmailSent(true);
     } catch (error) {
       setLoaded(true);
+      setEmailError(true);
       console.log(error);
     }
   };
@@ -74,6 +79,8 @@ const Contact = () => {
         >
           <EmailSvg className={"hidden md:block w-56"} />
         </Hero>
+      ) : emailError ? (
+        <Error />
       ) : (
         <div className="md:hero min-h-screen bg-base-100">
           <div className="hero-content flex-col md:flex-row-reverse items-center gap-20">

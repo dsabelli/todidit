@@ -43,6 +43,8 @@ const schema = yup.object().shape({
 });
 
 const Register = ({}) => {
+  const recaptcha_API = import.meta.env.VITE_RECAPTCHA_SITE_API_KEY_TEST;
+
   let navigate = useNavigate();
   const { setUser } = useContext(UserContext);
   const [loaded, setLoaded] = useState(true);
@@ -242,7 +244,7 @@ const Register = ({}) => {
                     </div>
                     <div className="form-control mt-6">
                       <ReCAPTCHA
-                        sitekey="6LfAqkAhAAAAACLvao7muPoeR2NrmoAHNgcQO1Px"
+                        sitekey={recaptcha_API}
                         ref={recaptchaRef}
                         size="invisible"
                       />
