@@ -68,15 +68,15 @@ const Profile = () => {
         </div>
       </>
     ) : (
-      <div className="p-8 h-screen flex justify-center items-center">
-        <div className="flex flex-col gap-4 items-center">
-          <h1 className="text-6xl">Sorry to see you go.</h1>
-          <p className="text-2xl">
+      <div className="py-8 md:p-0">
+        <div className="h-screen flex flex-col gap-4 md:justify-center items-center">
+          <h1 className="text-5xl md:text-6xl">Sorry to see you go.</h1>
+          <p className="text-lg md:text-2xl">
             You are always welcome to join toDidit again!
           </p>
-          <GoodbyeSvg className="w-1/2 self-center" />
+          <GoodbyeSvg className="w-80 md:w-96 my-4" />
           <form onSubmit={() => handleLogout()}>
-            <Button className="w-full text-left" type="submit">
+            <Button className="text-left btn-wide" type="submit">
               Got it
             </Button>
           </form>
