@@ -43,7 +43,7 @@ const schema = yup.object().shape({
 });
 
 const Register = ({}) => {
-  const captcha_API = import.meta.env.VITE_HCAPTCHA_SITE_API_KEY_TEST;
+  const captcha_API = import.meta.env.VITE_HCAPTCHA_SITE_API_KEY;
 
   let navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -172,7 +172,7 @@ const Register = ({}) => {
       ) : (
         <div className="md:hero min-h-screen bg-base-100">
           <div className="hero-content flex-col md:flex-row-reverse gap-20 items-center ">
-            <RegisterSvg className={"hidden lg:block w-80"} />
+            <RegisterSvg className={"hidden lg:block w-96"} />
             <div className="">
               <h1 className="text-5xl font-bold pb-4">Register now!</h1>
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -180,7 +180,7 @@ const Register = ({}) => {
                   <div className="card-body">
                     <div className="form-control">
                       <label htmlFor="email" className="label">
-                        <span className="label-text">Email</span>
+                        <span className="label-text text-lg">Email</span>
                       </label>
                       <input
                         autoFocus
@@ -197,7 +197,7 @@ const Register = ({}) => {
                     </div>
                     <div className="form-control">
                       <label htmlFor="username" className="label">
-                        <span className="label-text">Username</span>
+                        <span className="label-text text-lg">Username</span>
                       </label>
                       <input
                         required
@@ -213,7 +213,7 @@ const Register = ({}) => {
                     </div>
                     <div className="form-control">
                       <label htmlFor="password" className="label">
-                        <span className="label-text">Password</span>
+                        <span className="label-text text-lg">Password</span>
                       </label>
                       <input
                         type="password"
@@ -227,8 +227,10 @@ const Register = ({}) => {
                       )}
                     </div>
                     <div className="form-control">
-                      <label htmlFor="confirmPassword" className="label">
-                        <span className="label-text">Confirm Password</span>
+                      <label htmlFor="confirmPassword " className="label">
+                        <span className="label-text text-lg">
+                          Confirm Password
+                        </span>
                       </label>
                       <input
                         type="password"

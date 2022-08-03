@@ -61,7 +61,7 @@ const Login = () => {
                       <ErrorMessage errorMessage={errorMessage} />
                     )}
                     <label className="label">
-                      <span className="label-text">Email</span>
+                      <span className="label-text text-lg">Email</span>
                     </label>
                     <input
                       autoFocus
@@ -75,7 +75,7 @@ const Login = () => {
                   </div>
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text">Password</span>
+                      <span className="label-text text-lg">Password</span>
                     </label>
                     <input
                       required

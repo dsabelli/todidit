@@ -92,7 +92,7 @@ const Contact = () => {
                   <div className="card-body">
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text">Email</span>
+                        <span className="label-text text-lg">Email</span>
                       </label>
                       <input
                         autoFocus
@@ -105,7 +105,7 @@ const Contact = () => {
                     </div>
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text">Subject</span>
+                        <span className="label-text text-lg">Subject</span>
                       </label>
                       <input
                         required
@@ -117,7 +117,7 @@ const Contact = () => {
                     </div>
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text">Description</span>
+                        <span className="label-text text-lg">Description</span>
                       </label>
                       <textarea
                         required
