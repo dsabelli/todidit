@@ -12,6 +12,7 @@ import {
 } from "../Assets/Icons/ChevronIcons";
 import { parseJSON, isThisWeek, format } from "date-fns/esm";
 import { DateFormatContext } from "../context/DateFormatContext";
+import TimeMachineSearch from "../features/Didits/TimeMachineSearch";
 
 const Menu = ({ children, className, tasks }) => {
   let location = useLocation();
@@ -81,7 +82,9 @@ const Menu = ({ children, className, tasks }) => {
           </div>
         </Link>
       </li>
-
+      <div>
+        <TimeMachineSearch />
+      </div>
       <div className="flex gap-3 pl-5 mt-8  ">
         <ReverseToggle
           className="w-full"
