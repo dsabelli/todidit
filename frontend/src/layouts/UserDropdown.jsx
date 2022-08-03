@@ -1,13 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UserIcon from "../Assets/Icons/UserIcon";
 import LogoutIcon from "../Assets/Icons/LogoutIcon";
 import SettingsIcon from "../Assets/Icons/SettingsIcon";
 import BugIcon from "../Assets/Icons/BugIcon";
 
 const UserDropdown = () => {
+  let navigate = useNavigate();
   const handleLogout = () => {
+    navigate("/");
     window.localStorage.removeItem("loggedIn");
+    window.location.reload();
   };
   return (
     <>
