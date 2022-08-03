@@ -30,6 +30,7 @@ import { Theme } from "react-daisyui";
 import { getHours } from "date-fns";
 import NotFound from "./pages/Unprotected/NotFound";
 import { ErrorBoundary } from "react-error-boundary";
+import TimeMachine from "./pages/Protected/TimeMachine";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -88,6 +89,10 @@ function App() {
                       element={<ArchivedProject />}
                     />
                     <Route path="didit/:id" element={<Didits />} />
+                    <Route
+                      path="time-machine/:date"
+                      element={<TimeMachine />}
+                    />
                   </Route>
                 </Route>
                 <Route path="contact" element={<Contact />} />
