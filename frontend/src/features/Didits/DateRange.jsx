@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import React from "react";
 import { startOfDay, endOfDay } from "date-fns";
 const DateRange = ({ onDiditDateStart, onDiditDateEnd }) => {
   const [dateRange, setDateRange] = useState([null, null]);
