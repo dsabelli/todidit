@@ -1,13 +1,20 @@
 import axios from "axios";
 const baseUrl = "/api/didits";
 
-const getDidits = async (diditTitle, diditDateStart, diditDateEnd, user) => {
+const getDidits = async (
+  diditTitle,
+  completedOnStart,
+  completedOnEnd,
+  user,
+  createdOn
+) => {
   const config = {
     headers: { Authorization: `bearer ${user.token}` },
     params: {
       title: diditTitle,
-      dateA: diditDateStart,
-      dateB: diditDateEnd,
+      dateA: completedOnStart,
+      dateB: completedOnEnd,
+      dateC: createdOn,
     },
   };
   const response = await axios.get(baseUrl, config);
