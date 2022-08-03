@@ -1,5 +1,8 @@
 const router = require("express").Router();
 const Didit = require("../models/didit");
+const parseJSON = require("date-fns/parseJSON");
+const startOfDay = require("date-fns/startOfDay");
+const endOfDay = require("date-fns/endOfDay");
 
 router.get("/", async (request, response) => {
   if (!request.user) {
@@ -11,6 +14,16 @@ router.get("/", async (request, response) => {
   } else if (request.query.project) {
     const didits = await Didit.find({
       $and: [{ user: request.user.id }, { project: request.query.project }],
+    });
+    response.json(didits);
+  } else if (request.query.dateC) {
+    console.log(startOfDay(parseJSON(request.query.dateC)));
+    const didits = await Didit.find({
+      $and: [
+        { user: request.user.id },
+        { createdOn: { $lte: endOfDay(parseJSON(request.query.dateC)) } },
+        { completedOn: { $gte: startOfDay(parseJSON(request.query.dateC)) } },
+      ],
     });
     response.json(didits);
   } else if (request.query) {
