@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, parseJSON } from "date-fns";
 import AllIcon from "../Assets/Icons/AllIcon";
 import TodayIcon from "../Assets/Icons/TodayIcon";
 import WeekIcon from "../Assets/Icons/WeekIcon";
@@ -102,6 +102,18 @@ const getHeader = (location, params, projects) => {
             <h1 className={classNameH1}>Didit Archive</h1>
           </div>
           <p className={classNameP}></p>
+        </>
+      );
+      break;
+    case location.pathname.includes("time"):
+      header = (
+        <>
+          <div className={classNameDivWrapper}>
+            <h1 className={classNameH1}>Time Machine</h1>
+          </div>
+          <p className={classNameP}>
+            {format(parseJSON(params.date), "EEEE, MMM dd")}
+          </p>
         </>
       );
       break;
