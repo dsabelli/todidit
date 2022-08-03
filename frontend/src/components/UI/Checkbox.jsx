@@ -1,4 +1,4 @@
-const Checkbox = ({ checked, id, onChange, name, className }) => {
+const Checkbox = ({ checked, id, onChange, name, className, disabled }) => {
   return (
     <div className={` ${className}`}>
       <input
@@ -8,6 +8,7 @@ const Checkbox = ({ checked, id, onChange, name, className }) => {
         onChange={onChange}
         name={name}
         className={`checkbox checkbox-xs  checkbox-primary  `}
+        disabled={disabled}
       />
     </div>
   );
