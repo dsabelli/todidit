@@ -19,6 +19,8 @@ const Task = ({
   description,
   projects,
   project,
+  disabled,
+  hidden,
 }) => {
   return (
     <div className="flex p-1 gap-2 justify-center mx-auto max-w-3xl">
@@ -27,7 +29,8 @@ const Task = ({
         onChange={() => onCheck(id)}
         id="checkbox"
         name="checkbox"
-        className={"px-0.5 py-1.5"}
+        className={`px-0.5 py-1.5 `}
+        disabled={disabled}
       />
       <div className="flex-col w-full  ">
         <div className="flex items-center justify-between ">
@@ -42,9 +45,9 @@ const Task = ({
           </div>
           <div className="flex gap-1 ">
             <Button
-              className={
-                "btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-200"
-              }
+              className={`btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-200 ${
+                disabled ? "btn-disabled" : ""
+              }`}
               onClick={() => {
                 onImportant(id);
               }}
@@ -56,9 +59,9 @@ const Task = ({
               />
             </Button>
             <Button
-              className={
-                "btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-200"
-              }
+              className={`btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-200 ${
+                hidden ? "hidden" : ""
+              }`}
               onClick={() => {
                 onUpdate(id);
               }}
@@ -67,7 +70,7 @@ const Task = ({
             </Button>
             <Button
               className={`btn-xs w-7 h-7 p-1 bg-transparent border-none hover:bg-base-200 ${
-                checked ? "" : "hidden"
+                hidden ? "hidden" : !checked ? "hidden" : ""
               }`}
               onClick={() => {
                 onDelete();
