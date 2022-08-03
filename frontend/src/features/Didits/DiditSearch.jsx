@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Didit from "./Didit";
 import DateRange from "./DateRange";
 import Input from "../../components/UI/Input";
 import diditService from "../../services/didits";
 import { parseJSON } from "date-fns";
-import { useContext } from "react";
 import { DiditContext } from "../../context/DiditContext";
 import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
@@ -71,9 +70,7 @@ const DiditSearch = ({ projects }) => {
         className={` ${diditSearch || didits.length > 1 ? "block" : "hidden"}`}
       >
         <DateRange
-          diditDateStart={diditDateStart}
           onDiditDateStart={setDiditDateStart}
-          diditEndDate={diditDateEnd}
           onDiditDateEnd={setDiditDateEnd}
         />
       </div>
