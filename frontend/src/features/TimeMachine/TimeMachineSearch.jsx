@@ -21,7 +21,8 @@ const TimeMachineSearch = ({}) => {
         ".",
         startOfDay(timeMachineDate),
         endOfDay(timeMachineDate),
-        user
+        user,
+        endOfDay(timeMachineDate)
       );
 
       timeMachineDate && setTimeMachineTasks(searchedDidits);
@@ -30,18 +31,15 @@ const TimeMachineSearch = ({}) => {
   }, [timeMachineDate]);
 
   return (
-    <div className="w-44  ">
-      <DatePicker
-        maxDate={subDays(new Date(), 1)}
-        value="Select"
-        onChange={(date) => (
-          setTimeMachineDate(date),
-          navigate(`/app/time-machine/${date.toISOString()}`)
-        )}
-        className="w-full text-2xs md:text-xs btn pl-1"
-        popperPlacement="bottom-end"
-      />
-    </div>
+    <DatePicker
+      maxDate={subDays(new Date(), 1)}
+      inline
+      className="bg-inherit cursor-pointer"
+      onChange={(date) => (
+        setTimeMachineDate(date),
+        navigate(`/app/time-machine/${date.toISOString()}`)
+      )}
+    />
   );
 };
 
