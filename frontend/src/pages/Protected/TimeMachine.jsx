@@ -17,6 +17,7 @@ const TimeMachine = () => {
       ? -1
       : 0;
   };
+
   useEffect(() => {
     setTasks(
       allTasks.filter(
@@ -85,13 +86,7 @@ const TimeMachine = () => {
           )
       : null;
 
-  return (
-    <div className="opacity-60">
-      {taskEls.concat(timeMachineEls)}
-      {/* {taskEls}
-      {timeMachineEls} */}
-    </div>
-  );
+  return <div className="opacity-60 ">{taskEls.concat(timeMachineEls)}</div>;
 };
 
 export default TimeMachine;
