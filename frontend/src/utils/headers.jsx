@@ -5,6 +5,7 @@ import WeekIcon from "../Assets/Icons/WeekIcon";
 import StarIcon from "../Assets/Icons/StarIcon";
 import ArchiveIcon from "../Assets/Icons/ArchiveIcon";
 import CheckedIcon from "../Assets/Icons/CheckedIcon";
+import TimeMachineIcon from "../Assets/Icons/TimeMachineIcon";
 
 const getHeader = (location, params, projects) => {
   const date = new Date();
@@ -109,6 +110,7 @@ const getHeader = (location, params, projects) => {
       header = (
         <>
           <div className={classNameDivWrapper}>
+            <TimeMachineIcon className="w-6" />
             <h1 className={classNameH1}>Time Machine</h1>
           </div>
           <p className={classNameP}>
