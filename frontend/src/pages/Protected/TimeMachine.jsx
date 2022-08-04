@@ -31,44 +31,52 @@ const TimeMachine = () => {
   }, [timeMachineTasks]);
 
   //sort function to filter combinedTasks array
-  const sortTasks = (a, b) => {};
+  const sortTasks = (a, b) => {
+    return (parseJSON(a.dueDate) < parseJSON(b.dueDate) &&
+      !isSameDay(parseJSON(a.completedOn), parsedParamDate)) ||
+      isSameDay(parseJSON(b.completedOn), parsedParamDate)
+      ? -1
+      : 1;
+  };
 
   //map through combined, sorted array. If the task was completed on the "past" day,
   // set checked to true and completedOn to the completed on date
   //if not, set checked to false and completedOn to null
-  const Els = combinedTasks.map((task) =>
-    isSameDay(parseJSON(task.completedOn), parsedParamDate) ? (
-      <Task
-        disabled="disabled"
-        hidden="hidden"
-        checked={true}
-        title={task.title}
-        description={task.description}
-        dueDate={task.dueDate}
-        key={task.id}
-        id={task.id}
-        completedOn={task.completedOn}
-        important={task.isImportant}
-        project={task.project}
-        projects={projects}
-      />
-    ) : (
-      <Task
-        disabled="disabled"
-        hidden="hidden"
-        checked={false}
-        title={task.title}
-        description={task.description}
-        dueDate={task.dueDate}
-        key={task.id}
-        id={task.id}
-        completedOn={null}
-        important={task.isImportant}
-        project={task.project}
-        projects={projects}
-      />
-    )
-  );
+  const Els = combinedTasks
+    .sort(sortTasks)
+    .map((task) =>
+      isSameDay(parseJSON(task.completedOn), parsedParamDate) ? (
+        <Task
+          disabled="disabled"
+          hidden="hidden"
+          checked={true}
+          title={task.title}
+          description={task.description}
+          dueDate={task.dueDate}
+          key={task.id}
+          id={task.id}
+          completedOn={task.completedOn}
+          important={task.isImportant}
+          project={task.project}
+          projects={projects}
+        />
+      ) : (
+        <Task
+          disabled="disabled"
+          hidden="hidden"
+          checked={false}
+          title={task.title}
+          description={task.description}
+          dueDate={task.dueDate}
+          key={task.id}
+          id={task.id}
+          completedOn={null}
+          important={task.isImportant}
+          project={task.project}
+          projects={projects}
+        />
+      )
+    );
 
   return <div className="opacity-60">{Els}</div>;
 };
