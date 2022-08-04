@@ -48,6 +48,7 @@ const Settings = ({ theme, onTheme }) => {
     );
   };
 
+  //check localStorage for token between unnested routes
   useEffect(() => {
     const loggedIn = window.localStorage.getItem("loggedIn");
     if (loggedIn) {

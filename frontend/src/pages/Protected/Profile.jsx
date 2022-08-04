@@ -24,6 +24,7 @@ const Profile = () => {
     window.localStorage.removeItem("loggedIn");
   };
 
+  //check localStorage for token between unnested routes
   useEffect(() => {
     const loggedIn = window.localStorage.getItem("loggedIn");
     if (loggedIn) {

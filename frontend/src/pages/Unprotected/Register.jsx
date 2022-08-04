@@ -43,7 +43,7 @@ const schema = yup.object().shape({
 });
 
 const Register = ({}) => {
-  const captcha_API = import.meta.env.VITE_HCAPTCHA_SITE_API_KEY;
+  const captcha_API = import.meta.env.VITE_HCAPTCHA_SITE_API_KEY_TEST;
 
   let navigate = useNavigate();
   const { setUser } = useContext(UserContext);

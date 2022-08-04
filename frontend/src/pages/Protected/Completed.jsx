@@ -30,6 +30,8 @@ const Completed = () => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.isChecked));
   }, [allTasks]);
 
+  //function to delete all tasks that are completed and create didits
+  //update frontend view
   const handleDeleteCompletedTasks = async () => {
     try {
       const deletedTasks = tasks.filter((task) => task.isChecked);

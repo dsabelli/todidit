@@ -65,6 +65,7 @@ const ConfirmReset = ({}) => {
     }
   };
 
+  //take user to the login screen after password is reset
   useEffect(() => {
     reset &&
       setTimeout(() => {

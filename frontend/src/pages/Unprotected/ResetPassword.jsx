@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import userService from "../../services/users";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import ForgotPWSvg from "../../Assets/SVGs/ForgotPWSvg";
@@ -10,7 +10,6 @@ import Hero from "../../components/UI/Hero";
 import AlternateEmailSvg from "../../Assets/SVGs/AlternateEmailSvg";
 import Footer from "../../components/UI/Footer";
 const ResetPassword = () => {
-  // let navigate = useNavigate();
   const [loaded, setLoaded] = useState(true);
   const [reset, setReset] = useState(false);
   const [asyncError, setAsyncError] = useState("");
@@ -21,7 +20,6 @@ const ResetPassword = () => {
   } = useForm();
   const onSubmit = ({ email }) => handleReset({ email });
 
-  //function for handling user login
   const handleReset = async ({ email }) => {
     setLoaded(false);
     try {
@@ -38,13 +36,6 @@ const ResetPassword = () => {
       }, 5000);
     }
   };
-
-  // useEffect(() => {
-  //   reset &&
-  //     setTimeout(() => {
-  //       navigate("/");
-  //     }, 5000);
-  // }, [reset]);
 
   return loaded ? (
     reset ? (

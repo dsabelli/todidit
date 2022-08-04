@@ -21,6 +21,7 @@ const Contact = () => {
 
   const form = useRef();
 
+  //function to send the form info to support@todidit.com
   const sendEmail = async (e) => {
     setLoaded(false);
     e.preventDefault();
@@ -29,7 +30,7 @@ const Contact = () => {
         "service_mmlaf1r",
         "template_79xcu8k",
         form.current,
-        "emailJs_API"
+        emailJs_API
       );
       if (response) setLoaded(true), setEmailSent(true);
     } catch (error) {
@@ -39,6 +40,7 @@ const Contact = () => {
     }
   };
 
+  //if user is accessing contact form while logged in, get token from localStorage
   useEffect(() => {
     const loggedIn = window.localStorage.getItem("loggedIn");
     if (loggedIn) {

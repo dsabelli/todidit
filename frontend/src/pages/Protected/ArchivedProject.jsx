@@ -10,6 +10,8 @@ const ArchivedProject = () => {
   const [didits, setDidits] = useState([]);
   const [tasks, setTasks, allTasks, setAllTasks, projects] = useOutletContext();
 
+  //When the archived project link in the menu bar is clicked, take the id from params
+  //and use it in api request. Set didits array from response
   useEffect(() => {
     const getArchivedProject = async () => {
       const archivedProject = await diditService.getArchivedProject(

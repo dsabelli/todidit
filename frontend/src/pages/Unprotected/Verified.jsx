@@ -5,12 +5,13 @@ import Hero from "../../components/UI/Hero";
 import Button from "../../components/UI/Button";
 import VerifiedSvg from "../../Assets/SVGs/VerifiedSvg";
 import registerService from "../../services/register";
-
 import Loader from "../../components/UI/Loader";
 import Footer from "../../components/UI/Footer";
+
 const Verified = () => {
   let params = useParams();
   const [loaded, setLoaded] = useState(false);
+
   const verify = async () => {
     try {
       await registerService.verifyEmail(params.token);
