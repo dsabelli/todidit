@@ -9,21 +9,25 @@ const Terms = () => {
     <div className="py-8 px-16 mx-auto">
       <h1 className="font-bold text-4xl text-center mb-4">TERMS OF SERVICE</h1>
       <p>Last updated: 08/02/2022</p>
-      <Section className="flex flex-col gap-4 my-4">
+      <Section>
         <HTwo className="text-2xl font-bold">
           1. <span className="underline">Introduction</span>
         </HTwo>
         <P>
-          Welcome to todidit.com (“Company”, “we”, “our”, “us”)! As you have
-          just clicked our Terms of Service, please pause, grab a cup of coffee
-          and carefully read the following pages. It will take you approximately
-          20 minutes.
+          Welcome to 
+          <span className="font-bold">
+            todidit.com (“Company”, “we”, “our”, “us”)
+          </span>
+          ! As you have just clicked our Terms of Service, please pause, grab a
+          cup of coffee and carefully read the following pages. It will take you
+          approximately 20 minutes.
         </P>
         <P>
-          These Terms of Service (“Terms”, “Terms of Service”) govern your use
-          of our web pages located at http://www.todidit.com and our mobile
-          application toDidit (together or individually “Service”) operated
-          by todidit.com.
+          These Terms of Service
+          <span className="font-bold"> (“Terms”, “Terms of Service”)</span>{" "}
+          govern your use of our web pages located at http://www.todidit.com and
+          our mobile application toDidit (together or individually{" "}
+          <span className="font-bold">“Service”</span>) operated by todidit.com.
         </P>
         <P>
           Our Privacy Policy also governs your use of our Service and explains
@@ -32,9 +36,10 @@ const Terms = () => {
           http://www.todidit.com/privacy.
         </P>
         <P>
-          Your agreement with us includes these Terms and our Privacy
-          Policy (“Agreements”). You acknowledge that you have read and
-          understood Agreements, and agree to be bound of them.
+          Your agreement with us includes these Terms and our Privacy Policy (
+          <span className="font-bold">“Agreements”</span>). You acknowledge that
+          you have read and understood Agreements, and agree to be bound of
+          them.
         </P>
         <P>
           If you do not agree with (or cannot comply with) Agreements, then you
@@ -73,9 +78,9 @@ const Terms = () => {
         <P>
           Our Service allows you to post, link, store, share and otherwise make
           available certain information, text, graphics, videos, or other
-          material (“Content”). You are responsible for Content that you post on
-          or through Service, including its legality, reliability, and
-          appropriateness.
+          material (<span className="font-bold">“Content”</span>). You are
+          responsible for Content that you post on or through Service, including
+          its legality, reliability, and appropriateness.
         </P>
         <P>
           By posting Content on or through Service, You represent and warrant
@@ -112,7 +117,7 @@ const Terms = () => {
           You may use Service only for lawful purposes and in accordance with
           Terms. You agree not to use Service:
         </P>
-        <ol className="pl-12 flex flex-col gap-4 list-decimal">
+        <ol className="pl-20 flex flex-col gap-4 list-decimal">
           <li>
             In any way that violates any applicable national or international
             law or regulation.
@@ -144,7 +149,7 @@ const Terms = () => {
           </li>
         </ol>
         <P>Additionally, you agree not to:</P>
-        <ol className="pl-12 flex flex-col gap-4 list-decimal">
+        <ol className="pl-20 flex flex-col gap-4 list-decimal">
           <li>
             Use Service in any manner that could disable, overburden, damage, or
             impair Service or interfere with any other party’s use of Service,
@@ -203,39 +208,89 @@ const Terms = () => {
         <P>
           For more information on the privacy practices of Google, please visit
           the Google Privacy Terms web page:
-          https://policies.google.com/privacy?hl=en
+          <a
+            target="_blank"
+            className="link text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            href="https://policies.google.com/privacy?hl=en"
+          >
+            {" "}
+            https://policies.google.com/privacy?hl=en
+          </a>
         </P>
         <P>
           We also encourage you to review the Google's policy for safeguarding
-          your data: https://support.google.com/analytics/answer/6004245.
+          your data:{" "}
+          <a
+            target="_blank"
+            className="link text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            href="https://support.google.com/analytics/answer/6004245"
+          >
+            https://support.google.com/analytics/answer/6004245.
+          </a>
         </P>
         <HThree>Piwik / Matomo</HThree>
         <P>
           Piwik or Matomo is a web analytics service. You can visit their
-          Privacy Policy page here: https://matomo.org/privacy-policy
+          Privacy Policy page here:{" "}
+          <a
+            target="_blank"
+            className="link text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            href="https://matomo.org/privacy-policy"
+          >
+            https://matomo.org/privacy-policy
+          </a>
         </P>
         <HThree>Clicky</HThree>
         <P>
           Clicky is a web analytics service. Read the Privacy Policy for Clicky
-          here: https://clicky.com/terms
+          here:
+          <a
+            target="_blank"
+            className="link text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            href=" https://clicky.com/terms"
+          >
+             https://clicky.com/terms
+          </a>
         </P>
         <HThree>Cloudflare analytics</HThree>
         <P>
           Cloudflare analytics is a web analytics service operated by Cloudflare
           Inc. Read the Privacy Policy here:
-          https://www.cloudflare.com/privacypolicy/
+          <a
+            target="_blank"
+            className="link text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            href="https://www.cloudflare.com/privacypolicy/"
+          >
+            {" "}
+            https://www.cloudflare.com/privacypolicy/
+          </a>
         </P>
         <HThree>Mixpanel</HThree>
         <P>Mixpanel is provided by Mixpanel Inc.</P>
         <P>
           You can prevent Mixpanel from using your information for analytics
           purposes by opting-out. To opt-out of Mixpanel service, please visit
-          this page: https://mixpanel.com/optout/
+          this page:
+          <a
+            target="_blank"
+            className="link text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            href="https://mixpanel.com/optout/"
+          >
+            {" "}
+            https://mixpanel.com/optout/
+          </a>
         </P>
         <P>
           For more information on what type of information Mixpanel collects,
           please visit the Terms of Use page of Mixpanel:
-          https://mixpanel.com/terms/
+          <a
+            target="_blank"
+            className="link text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            href="https://mixpanel.com/terms/"
+          >
+            {" "}
+            https://mixpanel.com/terms/
+          </a>
         </P>
       </Section>
       <Section>
@@ -305,20 +360,20 @@ const Terms = () => {
         <P>
           You may provide us directly at support@todidit.com with information
           and feedback concerning errors, suggestions for improvements, ideas,
-          problems, complaints, and other matters related to our Service
-          (“Feedback”). You acknowledge and agree that: (i) you shall not
-          retain, acquire or assert any intellectual property right or other
-          right, title or interest in or to the Feedback; (ii) Company may have
-          development ideas similar to the Feedback; (iii) Feedback does not
-          contain confidential information or proprietary information from you
-          or any third party; and (iv) Company is not under any obligation of
-          confidentiality with respect to the Feedback. In the event the
-          transfer of the ownership to the Feedback is not possible due to
-          applicable mandatory laws, you grant Company and its affiliates an
-          exclusive, transferable, irrevocable, free-of-charge, sub-licensable,
-          unlimited and perpetual right to use (including copy, modify, create
-          derivative works, publish, distribute and commercialize) Feedback in
-          any manner and for any purpose.
+          problems, complaints, and other matters related to our Service (
+          <span className="font-bold">“Feedback”</span>). You acknowledge and
+          agree that: (i) you shall not retain, acquire or assert any
+          intellectual property right or other right, title or interest in or to
+          the Feedback; (ii) Company may have development ideas similar to the
+          Feedback; (iii) Feedback does not contain confidential information or
+          proprietary information from you or any third party; and (iv) Company
+          is not under any obligation of confidentiality with respect to the
+          Feedback. In the event the transfer of the ownership to the Feedback
+          is not possible due to applicable mandatory laws, you grant Company
+          and its affiliates an exclusive, transferable, irrevocable,
+          free-of-charge, sub-licensable, unlimited and perpetual right to use
+          (including copy, modify, create derivative works, publish, distribute
+          and commercialize) Feedback in any manner and for any purpose.
         </P>
       </Section>
       <Section>
