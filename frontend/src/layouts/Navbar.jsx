@@ -22,11 +22,7 @@ const Navbar = ({ projects, children }) => {
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col bg-base-100">
         {/* <!-- Navbar --> */}
-        <nav
-          className={`w-full flex navbar justify-between bg-accent ${
-            didits.length > 1 ? "py-16" : ""
-          } md:py-4`}
-        >
+        <nav className={`w-full  navbar  bg-accent `}>
           <div className="flex-none md:hidden">
             <label
               htmlFor="my-drawer-3"
@@ -35,7 +31,11 @@ const Navbar = ({ projects, children }) => {
               <MenuIcon className="w-6" />
             </label>
           </div>
-          <div className="flex-1 mb-2 pr-2 mr-2">
+          <div
+            className={`flex-1 sm:pb-2 pr-2 mr-2 ${
+              didits.length > 1 ? "hidden md:flex" : ""
+            }`}
+          >
             <ToDidit
               logoClass="hidden sm:block"
               todiditClass="text-accent-content"

@@ -34,14 +34,14 @@ const DateRange = ({ onDiditDateStart, onDiditDateEnd }) => {
   }, [endDate]);
 
   return (
-    <div className="w-44 md:48">
+    <div className="w-40 md:w-48">
       <DatePicker
         wrapperClassName=""
         selectsRange={true}
         startDate={startDate}
         endDate={endDate}
         onChange={(update) => setDateRange(update)}
-        className="w-full text-2xs md:text-xs btn pl-1"
+        className="w-full text-xs md:text-sm btn pl-1"
         isClearable={true}
         value={
           startDate && endDate

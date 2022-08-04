@@ -64,7 +64,7 @@ const DiditSearch = ({ projects }) => {
     : null;
 
   return (
-    <div className="flex flex-col gap-2 md:flex-row">
+    <div className="flex gap-2 flex-row">
       {/* only show date range when searching didits */}
       <div
         className={` ${diditSearch || didits.length > 1 ? "block" : "hidden"}`}
@@ -74,7 +74,7 @@ const DiditSearch = ({ projects }) => {
           onDiditDateEnd={setDiditDateEnd}
         />
       </div>
-      <div className="form-control w-44 sm:w-64 ">
+      <div className="form-control w-48 sm:w-64 ">
         <Input
           value={diditSearch || ""}
           type="text"
