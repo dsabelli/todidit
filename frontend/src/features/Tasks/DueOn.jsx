@@ -58,7 +58,7 @@ const DueOn = ({ completedOn, dueDate, className }) => {
           </span>
         );
         break;
-      case timeMachineDate < parsedDueDate:
+      case timeMachineDate && timeMachineDate < parsedDueDate:
         day = formatedDate;
         break;
       case isPast(parsedDueDate):
