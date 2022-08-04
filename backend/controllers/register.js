@@ -4,9 +4,11 @@ const router = require("express").Router();
 const User = require("../models/user");
 const Project = require("../models/project");
 const Task = require("../models/task");
+const Didit = require("../models/didit");
 const jwt = require("jsonwebtoken");
 const config = require("../utils/config");
 const sgMail = require("@sendgrid/mail");
+const subDays = require("date-fns/subDays");
 
 sgMail.setApiKey(config.SENDGRID_API_KEY);
 const url = "http://localhost:3000/verify";
@@ -92,11 +94,29 @@ router.post("/", async (request, response) => {
     user: user.id,
   });
   const task5 = new Task({
+    title: "Check out the Time Machine in the Menu bar",
+    description:
+      "You can use the Time Machine to go back in time and see the tasks you were working on, and the tasks you completed for a particular day.",
+    dueDate: new Date(),
+    project: project.id,
+    user: user.id,
+  });
+  const task6 = new Task({
     title: "Completed Task",
     description: "Delete me!",
     dueDate: new Date(),
     isChecked: true,
     completedOn: new Date(),
+    project: project.id,
+    user: user.id,
+  });
+  const didit1 = new Didit({
+    title: "Task from the Past",
+    description: "Use the Time Machine!",
+    createdOn: subDays(new Date(), 2),
+    dueDate: subDays(new Date(), 1),
+    isChecked: true,
+    completedOn: subDays(new Date(), 1),
     project: project.id,
     user: user.id,
   });
@@ -107,6 +127,8 @@ router.post("/", async (request, response) => {
   const savedTask3 = await task3.save();
   const savedTask4 = await task4.save();
   const savedTask5 = await task5.save();
+  const savedTask6 = await task6.save();
+  const savedDidit1 = await didit1.save();
 
   user.projects = user.projects.concat(savedProject._id);
   user.tasks = user.tasks.concat([
@@ -115,7 +137,9 @@ router.post("/", async (request, response) => {
     savedTask3._id,
     savedTask4._id,
     savedTask5._id,
+    savedTask6._id,
   ]);
+  user.didits = user.didits.concat(savedDidit1._id);
 
   const savedUser = await user.save();
   if (savedUser) {
