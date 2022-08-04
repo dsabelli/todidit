@@ -18,7 +18,7 @@ const Navbar = ({ projects, children }) => {
   }, []);
 
   return (
-    <div className="drawer">
+    <div className="drawer h-screen">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col bg-base-100">
         {/* <!-- Navbar --> */}
@@ -61,7 +61,7 @@ const Navbar = ({ projects, children }) => {
           </div>
         </nav>
         {/* <!-- Page content here --> */}
-        <div className=" grid grid-cols-6 gap-x-8 min-h-screen ">
+        <div className=" grid grid-cols-6 gap-x-8 h-full">
           <div className="col-span-2 min-w-fit max-w-xs hidden h-full md:block">
             {" "}
             <ul className="menu pr-1 bg-base-300 h-full text-left text-xl pt-4">
