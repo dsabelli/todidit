@@ -17,7 +17,6 @@ router.get("/", async (request, response) => {
     });
     response.json(didits);
   } else if (request.query.dateC) {
-    console.log(startOfDay(parseJSON(request.query.dateC)));
     const didits = await Didit.find({
       $and: [
         { user: request.user.id },
