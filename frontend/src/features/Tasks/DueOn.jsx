@@ -11,10 +11,14 @@ import {
   isThursday,
   isFriday,
   isThisWeek,
+  addDays,
 } from "date-fns";
 import { DateFormatContext } from "../../context/DateFormatContext";
+import { useParams } from "react-router-dom";
 
 const DueOn = ({ completedOn, dueDate, className }) => {
+  let params = useParams();
+  const timeMachineDate = params.date ? parseJSON(params.date) : "";
   const { dateFormat } = useContext(DateFormatContext);
   const parsedDueDate = parseJSON(dueDate);
   const formatedDate = format(parsedDueDate, dateFormat);
@@ -31,13 +35,31 @@ const DueOn = ({ completedOn, dueDate, className }) => {
           </span>
         );
         break;
-      case format(parsedDueDate, dateFormat) === format(new Date(), dateFormat)
+      case format(parsedDueDate, dateFormat) ===
+      format(params.date ? timeMachineDate : new Date(), dateFormat)
         ? true
         : false:
         day = <span className="text-warning font-bold">Today</span>;
         break;
-      case isTomorrow(parsedDueDate):
+      case format(parsedDueDate, dateFormat) ===
+      format(
+        params.date ? addDays(timeMachineDate, 1) : addDays(new Date(), 1),
+        dateFormat
+      )
+        ? true
+        : false:
         day = <span className="text-secondary-focus font-bold">Tomorrow</span>;
+        break;
+      case timeMachineDate > parsedDueDate:
+        difference = differenceInCalendarDays(timeMachineDate, parsedDueDate);
+        day = (
+          <span className="text-error font-bold">
+            Overdue by {difference} {difference === 1 ? "day" : "days"}
+          </span>
+        );
+        break;
+      case timeMachineDate < parsedDueDate:
+        day = formatedDate;
         break;
       case isPast(parsedDueDate):
         difference = differenceInCalendarDays(new Date(), parsedDueDate);
