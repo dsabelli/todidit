@@ -20,6 +20,18 @@ const getDidits = async (
   const response = await axios.get(baseUrl, config);
   return response.data;
 };
+
+const getTimeMachineTasks = async (createdOn, user) => {
+  const config = {
+    headers: { Authorization: `bearer ${user.token}` },
+    params: {
+      dateC: createdOn,
+    },
+  };
+  const response = await axios.get(baseUrl, config);
+  return response.data;
+};
+
 const getArchivedProject = async (id, user) => {
   const config = {
     headers: { Authorization: `bearer ${user.token}` },
@@ -38,4 +50,9 @@ const createDidits = async (didit, user) => {
   return response.data;
 };
 
-export default { getDidits, createDidits, getArchivedProject };
+export default {
+  getDidits,
+  createDidits,
+  getArchivedProject,
+  getTimeMachineTasks,
+};

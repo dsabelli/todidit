@@ -17,12 +17,9 @@ const TimeMachineSearch = ({}) => {
   //queries on change of date or debounced string.
   useEffect(() => {
     const getDidits = async () => {
-      const searchedDidits = await diditService.getDidits(
-        ".",
-        startOfDay(timeMachineDate),
+      const searchedDidits = await diditService.getTimeMachineTasks(
         endOfDay(timeMachineDate),
-        user,
-        endOfDay(timeMachineDate)
+        user
       );
 
       timeMachineDate && setTimeMachineTasks(searchedDidits);
