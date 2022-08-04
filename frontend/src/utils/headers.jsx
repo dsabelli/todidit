@@ -114,7 +114,7 @@ const getHeader = (location, params, projects) => {
             <h1 className={classNameH1}>Time Machine</h1>
           </div>
           <p className={classNameP}>
-            {format(parseJSON(params.date), "EEEE, MMM dd")}
+            {format(parseJSON(params.date), "EEEE, MMM dd yyyy")}
           </p>
         </>
       );
