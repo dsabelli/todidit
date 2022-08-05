@@ -54,7 +54,9 @@ const Home = ({ onTheme }) => {
     location.pathname.includes("didit") ||
     location.pathname.includes("archive") ||
     location.pathname.includes("completed") ||
-    location.pathname.includes("time");
+    location.pathname.includes("time") ||
+    location.pathname === "/app" ||
+    location.pathname === "/app/";
 
   //Checks if a user's token is stored in local storage
   //If it is, re-login is not required and token is parsed and set for use
@@ -64,10 +66,11 @@ const Home = ({ onTheme }) => {
       const user = JSON.parse(loggedIn);
       taskService.setToken(user.token);
       setUser(user);
-      // setLoaded(true);
-      setTimeout(() => {
-        setLoaded(true);
-      }, 1000);
+      user &&
+        settings &&
+        setTimeout(() => {
+          setLoaded(true);
+        }, 500);
     }
   }, []);
 
