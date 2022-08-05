@@ -2,7 +2,7 @@ import React from "react";
 
 const Logo = ({ className }) => {
   return (
-    <div className={`text-base-content-focus ${className}`}>
+    <div className={`text-base-content ${className}`}>
       <svg
         data-name="Layer 1"
         width="70"
