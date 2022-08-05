@@ -123,10 +123,8 @@ const getHeader = (location, params, projects) => {
       header = (
         <>
           <div className={classNameDivWrapper}>
-            <TodayIcon className="w-6" />
-            <h1 className={classNameH1}>Today</h1>
+            <h1 className={classNameH1}>Try a route from the menu!</h1>
           </div>
-          <p className={classNameP}>{format(date, "EEEE, MMM dd")}</p>
         </>
       );
   }
