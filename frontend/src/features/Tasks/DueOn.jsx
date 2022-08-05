@@ -10,6 +10,8 @@ import {
   isWednesday,
   isThursday,
   isFriday,
+  isSaturday,
+  isSunday,
   isThisWeek,
   addDays,
 } from "date-fns";
@@ -84,6 +86,14 @@ const DueOn = ({ completedOn, dueDate, className }) => {
       case isThisWeek(parsedDueDate, { weekStartsOn: 1 }) &&
         isThursday(parsedDueDate):
         day = <span className="text-accent-focus font-bold">Thursday</span>;
+        break;
+      case isThisWeek(parsedDueDate, { weekStartsOn: 1 }) &&
+        isSaturday(parsedDueDate):
+        day = <span className="text-accent-focus font-bold">Saturday</span>;
+        break;
+      case isThisWeek(parsedDueDate, { weekStartsOn: 1 }) &&
+        isSunday(parsedDueDate):
+        day = <span className="text-accent-focus font-bold">Sunday</span>;
         break;
       case isThisWeek(parsedDueDate, { weekStartsOn: 1 }) &&
         isFriday(parsedDueDate):
