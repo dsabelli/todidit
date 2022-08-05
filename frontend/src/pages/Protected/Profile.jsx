@@ -43,17 +43,18 @@ const Profile = () => {
         <UNavbar username={user.username} />
         <div
           className={
-            "flex px-10 mt-6 justify-center md:justify-between h-screen "
+            "flex flex-col md:flex-row px-10 mt-6 md:justify-center h-screen "
           }
         >
           <div className="max-w-md md:w-1/2 flex flex-col">
             <h1 className="text-4xl font-bold mb-5">Account Profile</h1>
-            <p className="text-lg font-bold">Delete Account</p>
-            <p className="text-xs ">
-              This will immediately delete all of your data, including tasks,
-              projects and didits.{" "}
-              <span className="font-bold">This cannot be undone.</span>
+            <p className="text-xl font-bold">Delete Account</p>
+            <p className="text-sm mt-2">
+              This will immediately delete all of your data,
+              <br /> including tasks, projects and didits.
             </p>
+            <p className="font-bold text-sm">This cannot be undone.</p>
+
             <div className=" flex gap-2 mt-4">
               <DeleteAlert
                 modalId="Profile"
@@ -65,11 +66,11 @@ const Profile = () => {
               />
             </div>
           </div>
-          <ProfileSvg className="mx-auto mt-16 w-1/3 max-w-md hidden md:block" />
+          <ProfileSvg className="mt-10 w-64 md:m-0 md:w-96" />
         </div>
       </>
     ) : (
-      <div className="py-8 md:p-0">
+      <div className="p-8 md:p-0">
         <div className="h-screen flex flex-col gap-4 md:justify-center items-center">
           <h1 className="text-5xl md:text-6xl">Sorry to see you go.</h1>
           <p className="text-lg md:text-2xl">
