@@ -62,7 +62,7 @@ const CreateProject = ({
         user && (
           <div
             onClick={() => showCreateProjectForm()}
-            className="flex gap-2 py-2 text-base items-center rounded-md hover:bg-base-100 cursor-pointer"
+            className="flex gap-2 mt-4 py-2 text-base items-center rounded-md hover:bg-base-100 cursor-pointer"
           >
             <AddIcon className="w-5 text-primary" />
             <p className=""> Add Project</p>
