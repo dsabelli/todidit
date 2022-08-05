@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import Task from "../../features/Tasks/Task";
-import { isToday, parseJSON, isSameDay } from "date-fns";
+import { isToday, parseJSON, isSameDay, isBefore } from "date-fns";
 
 import { TimeMachineContext } from "../../context/TimeMachineContext";
 const TimeMachine = () => {
@@ -17,7 +17,8 @@ const TimeMachine = () => {
     setTasks(
       allTasks.filter(
         (task) =>
-          !isToday(parseJSON(task.createdOn)) ||
+          isSameDay(parseJSON(task.createdOn), parsedParamDate) ||
+          isBefore(parseJSON(task.createdOn), parsedParamDate) ||
           isSameDay(parseJSON(task.completedOn), parsedParamDate)
       )
     );
