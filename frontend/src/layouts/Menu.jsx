@@ -15,6 +15,7 @@ import { DateFormatContext } from "../context/DateFormatContext";
 import TimeMachineSearch from "../features/TimeMachine/TimeMachineSearch";
 import TimeMachineIcon from "../Assets/Icons/TimeMachineIcon";
 import Dropdown from "../components/UI/Dropdown";
+import TimeMachineAnimation from "../Assets/Icons/TimeMachineAnimation";
 
 const Menu = ({ children, className, tasks }) => {
   let location = useLocation();
@@ -87,10 +88,11 @@ const Menu = ({ children, className, tasks }) => {
 
       <li className={`mt-4 ${path.includes("time") ? "bordered" : "pl-1"}`}>
         <div className="flex items-center">
-          <TimeMachineIcon className="w-5" />
+          <TimeMachineIcon className="w-7" />
           <Dropdown className="w-full" textClass="text-xl" text="Time Machine">
             <TimeMachineSearch />
           </Dropdown>
+          {path.includes("time") && <TimeMachineAnimation />}
         </div>
       </li>
 

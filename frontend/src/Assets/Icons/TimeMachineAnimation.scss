@@ -1,0 +1,60 @@
+.loader-circles {
+  $loader-size: 6px;
+  $loader-color: #ffffff;
+  $loader-speed: 12;
+
+  position: relative;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  transform: rotate(45deg);
+  width: calc($loader-size * 5);
+  height: calc($loader-size * 5);
+
+  .circle {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-color: transparent;
+    border: calc($loader-size/3) solid $loader-color;
+    border-radius: 50%;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+    text-align: center;
+
+    &:nth-child(even) {
+      border-color: currentColor;
+      border-bottom-color: transparent;
+      border-right-color: transparent;
+    }
+
+    &:nth-child(odd) {
+      border-color: currentColor;
+      border-bottom-color: transparent;
+      border-right-color: transparent;
+    }
+
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        width: calc(($loader-size * $i) / 2);
+        height: calc(($loader-size * $i) / 2);
+        animation: rotate-circle linear infinite;
+        animation-duration: calc($loader-speed/$i * 0.8s);
+      }
+    }
+  }
+
+  @for $i from 0 through 9 {
+    @keyframes rotate-circle {
+      100% {
+        transform: rotate(-360deg);
+      }
+    }
+  }
+}
