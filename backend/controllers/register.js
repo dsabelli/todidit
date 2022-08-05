@@ -73,6 +73,7 @@ router.post("/", async (request, response) => {
   const task2 = new Task({
     title: "Create a new project",
     dueDate: new Date(),
+    isImportant: false,
     project: project.id,
     user: user.id,
   });
@@ -81,6 +82,7 @@ router.post("/", async (request, response) => {
     description:
       "You can find themes in your account settings by clicking your avatar",
     dueDate: new Date(),
+    isImportant: false,
     project: project.id,
     user: user.id,
   });
@@ -90,6 +92,7 @@ router.post("/", async (request, response) => {
     description:
       "You can use the Didit search in the navigation bar above to find tasks you've completed.",
     dueDate: new Date(),
+    isImportant: false,
     project: project.id,
     user: user.id,
   });
@@ -98,6 +101,7 @@ router.post("/", async (request, response) => {
     description:
       "You can use the Time Machine to go back in time and see the tasks you were working on, and the tasks you completed for a particular day.",
     dueDate: new Date(),
+    isImportant: false,
     project: project.id,
     user: user.id,
   });
@@ -105,6 +109,7 @@ router.post("/", async (request, response) => {
     title: "Completed Task",
     description: "Delete me!",
     dueDate: new Date(),
+    isImportant: false,
     isChecked: true,
     completedOn: new Date(),
     project: project.id,
