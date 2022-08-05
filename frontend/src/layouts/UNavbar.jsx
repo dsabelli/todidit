@@ -7,7 +7,7 @@ import ToDidit from "../components/UI/ToDidit";
 const UNavbar = ({ isLanding, username }) => {
   return (
     <nav className="navbar bg-neutral flex px-4 justify-between h-16">
-      <ToDidit todiditClass="text-neutral-content" />
+      <ToDidit className="pb-2" todiditClass="text-neutral-content" />
       <div className={`flex gap-4 ${isLanding ? "" : "hidden"} `}>
         <Link to="/login">
           <Button
