@@ -4,7 +4,7 @@ const config = require("../utils/config");
 const sgMail = require("@sendgrid/mail");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
-// const bcrypt = require("bcrypt");
+
 sgMail.setApiKey(config.SENDGRID_API_KEY);
 
 const url = "http://localhost:3000/reset-password";
@@ -26,7 +26,7 @@ router.post("/", async (request, response) => {
     from: "noreply@todidit.com",
     templateId: "d-05a4a4ce8c8247878948346857ceefcd",
     dynamic_template_data: {
-      subject: "Please verify your account",
+      subject: "Reset Your toDidit Password",
       email: email,
       url: url,
       token: token,
