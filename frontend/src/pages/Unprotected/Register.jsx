@@ -80,7 +80,6 @@ const Register = ({}) => {
     setLoaded(false);
     if (captchaToken) {
       try {
-        console.log(captchaToken);
         await registrationService.register({
           email,
           username,
@@ -102,7 +101,11 @@ const Register = ({}) => {
         }, 5000);
       }
     }
-    setCaptchaError(true);
+    setLoaded(true);
+    setAsyncError("Please complete the captcha challenge");
+    setTimeout(() => {
+      setAsyncError(null);
+    }, 5000);
   };
 
   const handleLogin = async ({ email, password }) => {
@@ -131,9 +134,9 @@ const Register = ({}) => {
         <Hero
           className="gap-16"
           text={
-            <div className="flex flex-col gap-16">
+            <div className="flex flex-col gap-6">
               <div>
-                <h1 className="text-5xl font-bold">
+                <h1 className="text-4xl md:text-5xl font-bold">
                   Thank you for registering!
                 </h1>
                 <p className="pt-6 md:text-xl">
@@ -144,8 +147,8 @@ const Register = ({}) => {
                   Don't forget to check your spam folder!
                 </p>
               </div>
-              <div className="max-w-sm flex flex-col pr-8">
-                <h2 className="text-2xl mb-4">
+              <div className="max-w-sm flex flex-col pr-8 ">
+                <h2 className="text-lg md:text-2xl mb-4">
                   We've logged you in just this time.
                 </h2>
                 <Button
@@ -156,7 +159,7 @@ const Register = ({}) => {
                     })
                   }
                   className={
-                    "text-secondary-content bg-secondary hover:bg-secondary-focus"
+                    "text-secondary-content bg-secondary hover:bg-secondary-focus "
                   }
                 >
                   Let's Go!
@@ -167,14 +170,13 @@ const Register = ({}) => {
         >
           <EmailSvg className={"hidden md:block w-56"} />
         </Hero>
-      ) : captchaError ? (
-        <Error />
       ) : (
         <div className="md:hero min-h-screen bg-base-100">
           <div className="hero-content flex-col md:flex-row-reverse gap-20 items-center ">
             <RegisterSvg className={"hidden lg:block w-96"} />
             <div className="">
               <h1 className="text-5xl font-bold pb-4">Register now!</h1>
+              {asyncError && <ErrorMessage errorMessage={asyncError} />}
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                   <div className="card-body">
@@ -193,7 +195,6 @@ const Register = ({}) => {
                       {errors.email && (
                         <ErrorMessage errorMessage={errors.email?.message} />
                       )}
-                      {asyncError && <ErrorMessage errorMessage={asyncError} />}
                     </div>
                     <div className="form-control">
                       <label htmlFor="username" className="label">
