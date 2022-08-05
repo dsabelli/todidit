@@ -21,7 +21,7 @@ const connectDB = async () => {
     await mongoose.connect(config.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      family: 4,
+      // family: 4,
     });
     logger.info("connected to MongoDB");
   } catch (error) {
@@ -30,7 +30,7 @@ const connectDB = async () => {
 };
 connectDB();
 
-app.use(cors());
+app.use(cors({ origin: "https://www.todidit.com" }));
 app.use(express.static("build"));
 app.use(express.json());
 
