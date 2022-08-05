@@ -31,6 +31,7 @@ import { getHours } from "date-fns";
 import NotFound from "./pages/Unprotected/NotFound";
 import { ErrorBoundary } from "react-error-boundary";
 import TimeMachine from "./pages/Protected/TimeMachine";
+import IndexRouteSvg from "./Assets/SVGs/IndexRouteSvg";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -77,7 +78,14 @@ function App() {
                     element={<Settings theme={theme} onTheme={setTheme} />}
                   />
                   <Route path="/app" element={<Home onTheme={setTheme} />}>
-                    <Route index element={<div>There's nothing here!</div>} />
+                    <Route
+                      index
+                      element={
+                        <div className="mt-8">
+                          <IndexRouteSvg />
+                        </div>
+                      }
+                    />
                     <Route path="all" element={<All />} />
                     <Route path="today" element={<Today />} />
                     <Route path="week" element={<Week />} />
