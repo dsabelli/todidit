@@ -25,7 +25,12 @@ const TaskForm = ({
   const projectElements = projects.map((project) =>
     !project.isArchived ? (
       <li key={project.id} onClick={() => setSelectedProject(project.title)}>
-        <a onClick={() => onProjectId(project.id)}>{project.title}</a>
+        <button
+          className="text-left"
+          onClick={(e) => (onProjectId(project.id), e.preventDefault())}
+        >
+          {project.title}
+        </button>
       </li>
     ) : null
   );
@@ -82,7 +87,7 @@ const TaskForm = ({
               }`}
             />
             <Dropdown
-              className={`md:dropdown-hover dropdown-end  font-bold ${
+              className={`md:dropdown-hover dropdown-end font-bold ${
                 projectTaskLength >= 6 ? "dropdown-top" : ""
               }`}
               text={selectedProject || projectTitle || "Select a project"}
