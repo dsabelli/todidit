@@ -5,9 +5,12 @@ import DiditSearch from "../features/Didits/DiditSearch";
 import ToDidit from "../components/UI/ToDidit";
 import MenuIcon from "../Assets/Icons/MenuIcon";
 import UserDropdown from "./UserDropdown";
+import { useDebounce } from "use-debounce";
 
 const Navbar = ({ projects, children }) => {
   const [avatar, setAvatar] = useState("");
+  const [width, setWidth] = useState(window.innerWidth);
+  const [debouncedWidth] = useDebounce(width, 500);
   const { user } = useContext(UserContext);
   const { didits } = useContext(DiditContext);
   useEffect(() => {
@@ -16,6 +19,15 @@ const Navbar = ({ projects, children }) => {
         `https://avatars.dicebear.com/api/initials/${user.username[0]}.svg`
       );
   }, []);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleWindowResize);
+    handleWindowResize();
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, [debouncedWidth]);
 
   return (
     <div className="drawer h-screen">
@@ -65,7 +77,7 @@ const Navbar = ({ projects, children }) => {
             {" "}
             <ul className="menu pr-1 bg-base-300 h-full text-left text-xl pt-4">
               {" "}
-              {children[0]}
+              {width > 768 && children[0]}
             </ul>
           </div>
           <div className=" col-span-6 md:col-span-4 2xl:col-span-3 pl-12 pr-12 md:pl-4 pb-60">
@@ -78,7 +90,7 @@ const Navbar = ({ projects, children }) => {
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
         <ul className="menu p-4 overflow-y-auto w-80 bg-base-100">
           {/* <!-- Sidebar content here --> */}
-          {children[0]}
+          {width <= 768 && children[0]}
         </ul>
       </div>
     </div>
