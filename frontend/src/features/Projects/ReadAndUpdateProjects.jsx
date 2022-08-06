@@ -118,7 +118,7 @@ const ReadAndUpdateProjects = ({
     ) : null
   );
 
-  return <>{projectElements}</>;
+  return <ul className="menu text-base pl-3 ">{projectElements}</ul>;
 };
 
 export default ReadAndUpdateProjects;
