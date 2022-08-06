@@ -36,16 +36,18 @@ const Completed = () => {
     try {
       const deletedTasks = tasks.filter((task) => task.isChecked);
       for (let task of deletedTasks) {
-        task.completedOn ? null : (task.completedOn = new Date());
-        await diditService.createDidits({ ...task }, user);
-        await taskService.deleteTasks(task);
-
         setTasks((prevTasks) =>
           prevTasks.filter((prevTask) => prevTask.id !== task.id)
         );
         setAllTasks((prevTasks) =>
           prevTasks.filter((prevTask) => prevTask.id !== task.id)
         );
+      }
+
+      for (let task of deletedTasks) {
+        task.completedOn ? null : (task.completedOn = new Date());
+        await diditService.createDidits({ ...task }, user);
+        await taskService.deleteTasks(task);
       }
     } catch (error) {
       console.log(error);
