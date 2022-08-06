@@ -17,6 +17,7 @@ import TimeMachineIcon from "../Assets/Icons/TimeMachineIcon";
 import Dropdown from "../components/UI/Dropdown";
 import TimeMachineAnimation from "../Assets/Icons/TimeMachineAnimation";
 import DiditSearch from "../features/Didits/DiditSearch";
+import Modal from "../components/UI/Modal";
 
 const Menu = ({ children, className, tasks, projects }) => {
   let location = useLocation();
