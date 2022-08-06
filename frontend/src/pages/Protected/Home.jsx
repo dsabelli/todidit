@@ -18,6 +18,7 @@ import { TimeMachineContext } from "../../context/TimeMachineContext";
 import Loader from "../../components/UI/Loader";
 import { getHeader } from "../../utils/headers";
 import SortButton from "../../layouts/SortButton";
+
 const Home = ({ onTheme }) => {
   const [loaded, setLoaded] = useState(false);
   const [tasks, setTasks] = useState([]);
@@ -146,7 +147,11 @@ const Home = ({ onTheme }) => {
       <TimeMachineContext.Provider value={timeMachineValue}>
         <Navbar projects={projects}>
           <div>
-            <Menu tasks={allTasks} className="text-left text-xl py-6">
+            <Menu
+              tasks={allTasks}
+              projects={projects}
+              className="text-left text-xl py-6"
+            >
               <ReadAndUpdateProjects
                 user={user}
                 tasks={tasks}
