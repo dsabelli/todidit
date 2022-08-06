@@ -31,18 +31,17 @@ const Navbar = ({ projects, children }) => {
               <MenuIcon className="w-6" />
             </label>
           </div>
-          <div
-            className={`flex-1 sm:pb-2 pr-2 mr-2 ${
-              didits.length > 1 ? "hidden md:flex" : ""
-            }`}
-          >
-            <ToDidit
-              logoClass="hidden sm:block"
-              todiditClass="text-accent-content"
-            />
+          <div className={`flex-1 pb-2 pr-2 mr-2`}>
+            <ToDidit logoClass="" todiditClass="text-accent-content" />
           </div>
           <div className="flex h-auto">
-            {<DiditSearch projects={projects} />}
+            {
+              <DiditSearch
+                projects={projects}
+                popperPlacement="bottom-end"
+                className="hidden md:flex"
+              />
+            }
             <div className="dropdown dropdown-end p-1">
               <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">

@@ -16,8 +16,9 @@ import TimeMachineSearch from "../features/TimeMachine/TimeMachineSearch";
 import TimeMachineIcon from "../Assets/Icons/TimeMachineIcon";
 import Dropdown from "../components/UI/Dropdown";
 import TimeMachineAnimation from "../Assets/Icons/TimeMachineAnimation";
+import DiditSearch from "../features/Didits/DiditSearch";
 
-const Menu = ({ children, className, tasks }) => {
+const Menu = ({ children, className, tasks, projects }) => {
   let location = useLocation();
   const path = location.pathname;
   const { dateFormat } = useContext(DateFormatContext);
@@ -32,7 +33,7 @@ const Menu = ({ children, className, tasks }) => {
   ).length;
 
   const weekTasks = filteredTasks.filter((task) =>
-    isThisWeek(parseJSON(task.dueDate))
+    isThisWeek(parseJSON(task.dueDate), { weekStartsOn: 1 })
   ).length;
 
   const importantTasks = filteredTasks.filter(
@@ -88,13 +89,23 @@ const Menu = ({ children, className, tasks }) => {
 
       <li className={`mt-4 ${path.includes("time") ? "bordered" : "pl-1"}`}>
         <div className="flex items-center">
-          <TimeMachineIcon className="w-7" />
-          <Dropdown className="w-full" textClass="text-xl" text="Time Machine">
+          <TimeMachineIcon className="w-6" />
+          <Dropdown
+            className="w-full"
+            textClass="text-base md:text-xl"
+            text="Time Machine"
+          >
             <TimeMachineSearch />
           </Dropdown>
           {path.includes("time") && <TimeMachineAnimation />}
         </div>
       </li>
+
+      <DiditSearch
+        projects={projects}
+        className="mt-4 ml-6 flex-col md:hidden"
+        popperPlacement="top"
+      />
 
       <div className="flex gap-3 pl-5 mt-8 ">
         <ReverseToggle

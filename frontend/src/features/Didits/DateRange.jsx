@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { startOfDay, endOfDay, format } from "date-fns";
 import { DateFormatContext } from "../../context/DateFormatContext";
 
-const DateRange = ({ onDiditDateStart, onDiditDateEnd }) => {
+const DateRange = ({ onDiditDateStart, onDiditDateEnd, popperPlacement }) => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const { dateFormat } = useContext(DateFormatContext);
@@ -34,7 +34,7 @@ const DateRange = ({ onDiditDateStart, onDiditDateEnd }) => {
   }, [endDate]);
 
   return (
-    <div className="w-40 md:w-48">
+    <div className=" md:w-48">
       <DatePicker
         wrapperClassName=""
         selectsRange={true}
@@ -51,7 +51,7 @@ const DateRange = ({ onDiditDateStart, onDiditDateEnd }) => {
               )}`
             : "Select Dates"
         }
-        popperPlacement="bottom-end"
+        popperPlacement={popperPlacement}
       />
     </div>
   );

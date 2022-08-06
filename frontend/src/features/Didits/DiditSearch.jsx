@@ -9,7 +9,7 @@ import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 
-const DiditSearch = ({ projects }) => {
+const DiditSearch = ({ projects, className, popperPlacement }) => {
   const { user } = useContext(UserContext);
   const { didits, setDidits } = useContext(DiditContext);
   const [visible, setVisible] = useState(false);
@@ -64,22 +64,23 @@ const DiditSearch = ({ projects }) => {
     : null;
 
   return (
-    <div className="flex gap-2 flex-row">
+    <div className={`flex gap-2 flex-row ${className}`}>
       {/* only show date range when searching didits */}
       <div
         className={` ${diditSearch || didits.length > 1 ? "block" : "hidden"}`}
       >
         <DateRange
+          popperPlacement={popperPlacement}
           onDiditDateStart={setDiditDateStart}
           onDiditDateEnd={setDiditDateEnd}
         />
       </div>
-      <div className="form-control w-48 sm:w-64 ">
+      <div className="form-control w-full sm:w-64 ">
         <Input
           value={diditSearch || ""}
           type="text"
           placeholder="Search Didits..."
-          className="input w-full focus:outline-none text-accent-content bg-accent-focus placeholder-opacity-50 placeholder-accent-content"
+          className="input w-full bg-base-200 focus:outline-none md:text-accent-content md:bg-accent-focus placeholder-opacity-50 placeholder-accent-content"
           // if not an empty string, get didits with title of value,
           // otherwise clear everything and focus input for next search
           onChange={(e) =>
@@ -113,7 +114,7 @@ const DiditSearch = ({ projects }) => {
         >
           <ul
             tabIndex="0"
-            className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-full overflow-y-auto max-h-96"
+            className="dropdown-content menu p-2 shadow bg-base-200 rounded-box w-full overflow-y-auto max-h-80 md:max-h-96"
           >
             <li className={`dropdown ${visible ? "" : "hidden"}`}>
               {diditElements}
