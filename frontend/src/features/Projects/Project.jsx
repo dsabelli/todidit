@@ -2,7 +2,6 @@ import Button from "../../components/UI/Button";
 import EditIcon from "../../Assets/Icons/EditIcon";
 import DeleteIcon from "../../Assets/Icons/DeleteIcon";
 import { Link, useParams } from "react-router-dom";
-import Modal from "../../components/UI/Modal";
 import ErrorIcon from "../../Assets/Icons/ErrorIcon";
 import DeleteAlert from "../../layouts/DeleteAlert";
 
