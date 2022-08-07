@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "/api/users";
+const baseUrl = "https://todidit.herokuapp.com/api/users";
 
 const resetPassword = async (email) => {
   const response = await axios.post(baseUrl, email);

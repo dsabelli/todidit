@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "/api/didits";
+const baseUrl = "https://todidit.herokuapp.com/api/didits";
 
 const getDidits = async (
   diditTitle,
