@@ -1,5 +1,8 @@
 const router = require("express").Router();
 const User = require("../models/user");
+const Task = require("../models/task");
+const Didit = require("../models/didit");
+const Project = require("../models/project");
 const config = require("../utils/config");
 const sgMail = require("@sendgrid/mail");
 const validator = require("validator");
@@ -101,6 +104,9 @@ router.delete("/:id", async (request, response) => {
     });
   }
 
+  await Task.deleteMany({ user: request.params.id });
+  await Didit.deleteMany({ user: request.params.id });
+  await Project.deleteMany({ user: request.params.id });
   await User.findByIdAndRemove(request.params.id);
 
   response.status(204).end();
