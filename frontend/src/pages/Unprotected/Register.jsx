@@ -15,7 +15,6 @@ import RegisterSvg from "../../Assets/SVGs/RegisterSvg";
 import EmailSvg from "../../Assets/SVGs/EmailSvg";
 import Footer from "../../components/UI/Footer";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
-import Error from "./Error";
 
 const schema = yup.object().shape({
   username: yup
@@ -43,7 +42,7 @@ const schema = yup.object().shape({
 });
 
 const Register = ({}) => {
-  const captcha_API = import.meta.env.VITE_HCAPTCHA_SITE_API_KEY_TEST;
+  const captcha_API = import.meta.env.VITE_HCAPTCHA_SITE_API_KEY;
 
   let navigate = useNavigate();
   const { setUser } = useContext(UserContext);
