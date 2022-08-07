@@ -42,7 +42,7 @@ const schema = yup.object().shape({
 });
 
 const Register = ({}) => {
-  const captcha_API = import.meta.env.VITE_HCAPTCHA_SITE_API_KEY;
+  // const captcha_API = import.meta.env.VITE_HCAPTCHA_SITE_API_KEY;
 
   let navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -52,8 +52,8 @@ const Register = ({}) => {
   const [captchaError, setCaptchaError] = useState(false);
   const [registeredEmail, setRegisteredEmail] = useState("");
   const [registeredPassword, setRegisteredPassword] = useState("");
-  const [captchaToken, setCaptchaToken] = useState(null);
-  const captchaRef = useRef();
+  // const [captchaToken, setCaptchaToken] = useState(null);
+  // const captchaRef = useRef();
 
   const {
     register,
@@ -64,10 +64,9 @@ const Register = ({}) => {
     mode: "onTouched",
   });
 
-  const onSubmit = ({ username, email, password, confirmPassword }) => (
-    captchaRef.current.execute(),
-    handleRegistration({ username, email, password, confirmPassword })
-  );
+  const onSubmit = ({ username, email, password, confirmPassword }) =>
+    // captchaRef.current.execute(),
+    handleRegistration({ username, email, password, confirmPassword });
 
   const handleRegistration = async ({
     email,
@@ -75,36 +74,37 @@ const Register = ({}) => {
     password,
     confirmPassword,
   }) => {
-    captchaRef.current.resetCaptcha();
     setLoaded(false);
-    if (captchaToken) {
-      try {
-        await registrationService.register({
-          email,
-          username,
-          password,
-          confirmPassword,
-        });
-        setRegisteredEmail(email);
-        setRegisteredPassword(password);
-        setLoaded(true);
-        setRegistered(true);
-        setAsyncError("");
-      } catch (error) {
-        setLoaded(true);
-        console.log(error);
-        const errorMsg = error.response ? error.response.data.error : error;
-        setAsyncError(errorMsg);
-        setTimeout(() => {
-          setAsyncError(null);
-        }, 5000);
-      }
+    try {
+      await registrationService.register({
+        email,
+        username,
+        password,
+        confirmPassword,
+      });
+      setRegisteredEmail(email);
+      setRegisteredPassword(password);
+      setLoaded(true);
+      setRegistered(true);
+      setAsyncError("");
+    } catch (error) {
+      setLoaded(true);
+      console.log(error);
+      const errorMsg = error.response ? error.response.data.error : error;
+      setAsyncError(errorMsg);
+      setTimeout(() => {
+        setAsyncError(null);
+      }, 5000);
     }
-    setLoaded(true);
-    setAsyncError("Please complete the captcha challenge");
-    setTimeout(() => {
-      setAsyncError(null);
-    }, 5000);
+    // captchaRef.current.resetCaptcha();
+    // if (captchaToken) {
+
+    // }
+    // setLoaded(true);
+    // setAsyncError("Please complete the captcha challenge");
+    // setTimeout(() => {
+    //   setAsyncError(null);
+    // }, 5000);
   };
 
   const handleLogin = async ({ email, password }) => {
@@ -246,13 +246,13 @@ const Register = ({}) => {
                       )}
                     </div>
                     <div className="form-control mt-6">
-                      <div className="mb-4">
+                      {/* <div className="mb-4">
                         <HCaptcha
                           sitekey={captcha_API}
                           onVerify={setCaptchaToken}
                           ref={captchaRef}
                         />
-                      </div>
+                      </div> */}
                       <Button
                         text={"Register"}
                         type="submit"
