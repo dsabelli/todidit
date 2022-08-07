@@ -11,7 +11,7 @@ const sgMail = require("@sendgrid/mail");
 const subDays = require("date-fns/subDays");
 
 sgMail.setApiKey(config.SENDGRID_API_KEY);
-const url = "http://localhost:3000/verify";
+const url = "http://todidit.com/verify";
 
 router.post("/", async (request, response) => {
   const { email, username, password, confirmPassword, date } = request.body;

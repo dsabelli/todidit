@@ -10,7 +10,7 @@ const bcrypt = require("bcrypt");
 
 sgMail.setApiKey(config.SENDGRID_API_KEY);
 
-const url = "http://localhost:3000/reset-password";
+const url = "http://todidit.com/reset-password";
 
 router.post("/", async (request, response) => {
   const { email } = request.body;
