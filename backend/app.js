@@ -1,4 +1,4 @@
-const config = require("./utils/config");
+const { MONGODB_URI } = require("./utils/config");
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -14,11 +14,11 @@ const userRouter = require("./controllers/user");
 const { errorHandler, userExtractor } = require("./utils/middleware");
 const logger = require("./utils/logger");
 
-logger.info("connecting to", config.MONGODB_URI);
+logger.info("connecting to", MONGODB_URI);
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(config.MONGODB_URI, {
+    await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       // family: 4,
@@ -30,7 +30,7 @@ const connectDB = async () => {
 };
 connectDB();
 
-app.use(cors({ origin: "https://www.todidit.com" }));
+app.use(cors());
 app.use(express.static("build"));
 app.use(express.json());
 
