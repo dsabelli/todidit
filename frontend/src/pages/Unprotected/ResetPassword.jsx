@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import ForgotPWSvg from "../../Assets/SVGs/ForgotPWSvg";
-
 import Hero from "../../components/UI/Hero";
 import AlternateEmailSvg from "../../Assets/SVGs/AlternateEmailSvg";
 import Footer from "../../components/UI/Footer";
+
 const ResetPassword = () => {
   const [loaded, setLoaded] = useState(true);
   const [reset, setReset] = useState(false);
@@ -43,12 +43,12 @@ const ResetPassword = () => {
         className="gap-16"
         text={
           <div className="flex flex-col">
-            <div>
+            <div className="w-full max-w-sm px-4">
               <h1 className="text-5xl font-bold">Password Reset</h1>
-              <p className="pt-6 md:text-xl">
-                Please check your email for a verification
+              <p className="pt-6 pb-1 md:text-xl">
+                Please check your email for a verification link to reset your
+                password.
               </p>
-              <p className="pb-1 md:text-xl">link to reset your password.</p>
               <p className="text-xs md:text-sm opacity-70 mb-4">
                 Don't forget to check your spam folder!
               </p>
@@ -65,23 +65,21 @@ const ResetPassword = () => {
           </div>
         }
       >
-        <AlternateEmailSvg className={"hidden md:block w-56"} />
+        <AlternateEmailSvg className={"w-full max-w-sm md:max-w-md pl-4"} />
       </Hero>
       <Footer />
     </>
   ) : (
     <>
       <div className="md:hero min-h-screen">
-        <div className="hero-content flex-col-reverse md:flex-row gap-20 items-center">
-          <div className="flex">
-            <ForgotPWSvg className={" hidden md:block w-96 my-auto mt-10 "} />
-          </div>
-          <div>
+        <div className="hero-content w-full flex-col md:flex-row-reverse gap-20 items-center ">
+          <div className="w-full max-w-sm px-4">
             <h1 className="text-5xl font-bold pb-2">Reset Password</h1>
-            <p className="pt-4">
-              Enter the email address associated with your account
+            <p className="py-4 md:text-lg">
+              Enter the email address associated with your account and we will
+              send you a password reset link.
             </p>
-            <p className="pb-4">and we will send you a password reset link.</p>
+
             <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
               <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                 <div className="card-body">
@@ -109,6 +107,7 @@ const ResetPassword = () => {
               </div>
             </form>
           </div>
+          <ForgotPWSvg className="w-full max-w-sm md:max-w-lg" />
         </div>
       </div>
       <Footer />

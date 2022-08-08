@@ -31,7 +31,9 @@ const Landing = () => {
           </div>
         }
       >
-        <LandingSvg className={" w-80 mt-12 md:mt-0 md:w-1/2"} />
+        <LandingSvg
+          className={"w-full md:w-1/2 max-w-md md:max-w-full mt-12 md:mt-0 "}
+        />
       </Hero>
 
       <Footer />

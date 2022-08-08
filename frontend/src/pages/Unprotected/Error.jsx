@@ -33,7 +33,11 @@ const Error = ({ error }) => {
           </div>
         }
       >
-        <ErrorSvg className={"hidden md:block text-error w-1/3 md:w-1/2"} />
+        <ErrorSvg
+          className={
+            "w-full md:w-1/2 max-w-xs md:max-w-md mt-12 md:mt-0 text-error"
+          }
+        />
       </Hero>
     </div>
   );

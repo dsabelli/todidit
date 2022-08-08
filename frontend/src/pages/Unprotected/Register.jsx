@@ -15,6 +15,7 @@ import RegisterSvg from "../../Assets/SVGs/RegisterSvg";
 import EmailSvg from "../../Assets/SVGs/EmailSvg";
 import Footer from "../../components/UI/Footer";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
+import AlternateRegisterSvg from "../../Assets/SVGs/AlternateRegisterSvg";
 
 const schema = yup.object().shape({
   username: yup
@@ -33,7 +34,7 @@ const schema = yup.object().shape({
     .trim()
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,16}$/, {
       message:
-        "Must include 8-16 characters with a mix of letters, numbers & symbols.",
+        "Must include 8-16 characters with a mix of letters, numbers and symbols.",
     })
     .required(),
   confirmPassword: yup
@@ -131,23 +132,22 @@ const Register = ({}) => {
       <UNavbar />
       {registered && loaded ? (
         <Hero
-          className="gap-16"
           text={
-            <div className="flex flex-col gap-6">
-              <div>
+            <div className="flex flex-col">
+              <div className="w-full max-w-sm px-4">
                 <h1 className="text-4xl md:text-5xl font-bold">
                   Thank you for registering!
                 </h1>
-                <p className="pt-6 md:text-xl">
-                  Please check your email for a verification
+                <p className="pt-6 pb-1 md:text-xl">
+                  Please check your email for a verification link to confirm
+                  your account.
                 </p>
-                <p className="pb-1 md:text-xl">link to confirm your account.</p>
+
                 <p className="text-xs md:text-sm opacity-70">
                   Don't forget to check your spam folder!
                 </p>
-              </div>
-              <div className="max-w-sm flex flex-col pr-8 ">
-                <h2 className="text-lg md:text-2xl mb-4">
+
+                <h2 className="text-xl md:text-2xl font-bold md:mt-8 my-4">
                   We've logged you in just this time.
                 </h2>
                 <Button
@@ -158,7 +158,7 @@ const Register = ({}) => {
                     })
                   }
                   className={
-                    "text-secondary-content bg-secondary hover:bg-secondary-focus "
+                    "text-secondary-content bg-secondary hover:bg-secondary-focus text-lg w-full"
                   }
                 >
                   Let's Go!
@@ -167,24 +167,24 @@ const Register = ({}) => {
             </div>
           }
         >
-          <EmailSvg className={"hidden md:block w-56"} />
+          <EmailSvg className="w-full max-w-xs px-12 md:px-4 mt-4 md:mt-0 md:self-end" />
         </Hero>
       ) : (
         <div className="md:hero min-h-screen bg-base-100">
-          <div className="hero-content flex-col md:flex-row-reverse gap-20 items-center ">
-            <RegisterSvg className={"hidden lg:block w-96"} />
-            <div className="">
-              <h1 className="text-5xl font-bold pb-4">Register now!</h1>
+          <div className="hero-content w-full flex-col md:flex-row items-center ">
+            <div className="w-full max-w-sm px-4">
+              <h1 className="text-4xl md:text-5xl font-bold pb-4">
+                Register now!
+              </h1>
               {asyncError && <ErrorMessage errorMessage={asyncError} />}
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                   <div className="card-body">
                     <div className="form-control">
                       <label htmlFor="email" className="label">
-                        <span className="label-text text-lg">Email</span>
+                        <span className="label-text md:text-lg">Email</span>
                       </label>
                       <input
-                        autoFocus
                         type="text"
                         name="email"
                         {...register("email")}
@@ -197,7 +197,7 @@ const Register = ({}) => {
                     </div>
                     <div className="form-control">
                       <label htmlFor="username" className="label">
-                        <span className="label-text text-lg">Username</span>
+                        <span className="label-text md:text-lg">Username</span>
                       </label>
                       <input
                         required
@@ -213,7 +213,7 @@ const Register = ({}) => {
                     </div>
                     <div className="form-control">
                       <label htmlFor="password" className="label">
-                        <span className="label-text text-lg">Password</span>
+                        <span className="label-text md:text-lg">Password</span>
                       </label>
                       <input
                         type="password"
@@ -228,7 +228,7 @@ const Register = ({}) => {
                     </div>
                     <div className="form-control">
                       <label htmlFor="confirmPassword " className="label">
-                        <span className="label-text text-lg">
+                        <span className="label-text md:text-lg">
                           Confirm Password
                         </span>
                       </label>
@@ -245,7 +245,7 @@ const Register = ({}) => {
                         />
                       )}
                     </div>
-                    <div className="form-control mt-6">
+                    <div className="form-control mt-2">
                       {/* <div className="mb-4">
                         <HCaptcha
                           sitekey={captcha_API}
@@ -278,6 +278,8 @@ const Register = ({}) => {
                 </div>
               </form>
             </div>
+            <RegisterSvg className="w-full hidden md:block md:max-w-md md:mt-12" />
+            <AlternateRegisterSvg className="w-full max-w-xs  md:hidden px-12" />
           </div>
         </div>
       )}

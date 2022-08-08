@@ -33,16 +33,18 @@ const Verified = () => {
       <Hero
         text={
           <>
-            <h1 className="text-5xl font-bold mb-4">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">
               Welcome to{" "}
-              <span className="text-6xl block mt-2 text-primary">toDidit!</span>
+              <span className="text-6xl md:text-7xl block mt-2 text-primary">
+                toDidit!
+              </span>
             </h1>
-            <p className="md:text-center text-lg mb-8">
-              Your account has successfully been verified.
+            <p className="text-lg md:text-xl mb-8">
+              Your account has successfully <br /> been verified.
             </p>
             <div className="flex w-full justify-start">
               <Link to="/login">
-                <Button className="md:btn-wide mb-4 md:mb-0 btn-secondary">
+                <Button className="md:btn-wide mb-4 md:mb-0 md:text-lg btn-secondary">
                   Login now!
                 </Button>
               </Link>
@@ -50,7 +52,7 @@ const Verified = () => {
           </>
         }
       >
-        <VerifiedSvg className={"pr-10 w-72"} />
+        <VerifiedSvg className={"w-full md:w-1/2 max-w-xs pr-10"} />
       </Hero>
       <Footer />
     </>

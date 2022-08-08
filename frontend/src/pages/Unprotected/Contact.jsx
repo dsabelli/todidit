@@ -55,18 +55,14 @@ const Contact = () => {
       {user ? <UNavbar username={user.username} /> : <UNavbar />}
       {emailSent && loaded ? (
         <Hero
-          className="gap-16"
           text={
-            <div className="flex flex-col gap-4">
-              <div>
-                <h1 className="text-5xl font-bold">Email Received!</h1>
-                <p className="pt-6 md:text-xl">
-                  Thank you for getting in touch.
-                </p>
-                <p className="pb-1 md:text-xl">
-                  Our support team will reach out as soon as possible.
-                </p>
-              </div>
+            <div className="w-full max-w-sm px-4">
+              <h1 className="text-5xl font-bold">Email Received!</h1>
+              <p className="pt-6 md:text-xl">Thank you for getting in touch.</p>
+              <p className="pb-6 md:text-xl">
+                Our support team will reach out as soon as possible.
+              </p>
+
               <Link to="/app/today">
                 <Button
                   className={
@@ -79,17 +75,18 @@ const Contact = () => {
             </div>
           }
         >
-          <EmailSvg className={"hidden md:block w-56"} />
+          <EmailSvg className="w-full max-w-xs px-12 md:p-10" />
         </Hero>
       ) : emailError ? (
         <Error />
       ) : (
         <div className="md:hero min-h-screen bg-base-100">
-          <div className="hero-content flex-col md:flex-row-reverse items-center gap-20">
-            <ContactSvg className={"hidden md:block w-80 lg:w-96"} />{" "}
-            <div>
-              <h1 className="text-5xl font-bold pb-4">Get in touch</h1>
-              <form ref={form} className="w-80 lg:w-96" onSubmit={sendEmail}>
+          <div className="hero-content w-full flex-col md:flex-row items-center">
+            <div className="w-full max-w-sm px-4">
+              <h1 className="text-4xl md:text-5xl font-bold pb-4">
+                Get in touch
+              </h1>
+              <form ref={form} onSubmit={sendEmail}>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                   <div className="card-body">
                     <div className="form-control">
@@ -126,7 +123,7 @@ const Contact = () => {
                         type="text"
                         name="description"
                         placeholder="description"
-                        className="textarea input-bordered resize-none w-full p-4 h-32 border leading-4 focus:outline-none px-2"
+                        className="textarea input-bordered resize-none w-full p-4 h-20 md:h-32 border leading-4 focus:outline-none px-2"
                       ></textarea>
                     </div>
 
@@ -141,6 +138,7 @@ const Contact = () => {
                 </div>
               </form>
             </div>
+            <ContactSvg className="w-full max-w-xs md:max-w-lg pl-4" />
           </div>
         </div>
       )}

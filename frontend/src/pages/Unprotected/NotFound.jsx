@@ -24,7 +24,9 @@ const NotFound = () => {
           </div>
         }
       >
-        <NotFoundSvg className={"hidden md:block w-1/3 md:w-1/2"} />
+        <NotFoundSvg
+          className={"w-full md:w-1/2 max-w-xs md:max-w-md mt-12 md:mt-0"}
+        />
       </Hero>
     </div>
   );

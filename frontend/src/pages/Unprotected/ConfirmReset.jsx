@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import userService from "../../services/users";
 import ErrorMessage from "../../components/UI/ErrorMessage";
 import Button from "../../components/UI/Button";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import UNavbar from "../../layouts/UNavbar";
 import Hero from "../../components/UI/Hero";
 import ConfirmPWSvg from "../../Assets/SVGs/ConfirmPWSvg";
@@ -27,7 +27,6 @@ const schema = yup.object().shape({
 });
 
 const ConfirmReset = ({}) => {
-  let navigate = useNavigate();
   let params = useParams();
   const [loaded, setLoaded] = useState(true);
   const [reset, setReset] = useState(false);
@@ -65,48 +64,37 @@ const ConfirmReset = ({}) => {
     }
   };
 
-  //take user to the login screen after password is reset
-  useEffect(() => {
-    reset &&
-      setTimeout(() => {
-        setLoaded(false);
-      }, 3000);
-    reset &&
-      setTimeout(() => {
-        navigate("/login");
-      }, 3000);
-  }, [reset]);
-
   return reset && loaded ? (
     <>
       <UNavbar isLanding />
       <Hero
-        className={"gap-20 items-stretch"}
+        className="items-stretch"
         text={
-          <>
-            <h1 className="text-4xl font-bold ">
-              Password reset
-              <br /> confirmed!
+          <div className="w-full max-w-sm px-4">
+            <h1 className="text-4xl md:text-5xl font-bold ">
+              Password reset confirmed!
             </h1>
-            <p className="mt-4 text-lg">Taking you to the login page...</p>
-          </>
+            <div className="flex w-full justify-start mt-12">
+              <Link to="/login">
+                <Button className="md:btn-wide mb-4 md:mb-0 md:text-lg btn-secondary">
+                  Go to login
+                </Button>
+              </Link>
+            </div>
+          </div>
         }
       >
-        <ConfirmResetSvg className="hidden md:block w-64" />
+        <ConfirmResetSvg className="w-full max-w-xs pl-4" />
       </Hero>
     </>
   ) : (
     <>
       <UNavbar />
       <div className="md:hero min-h-screen">
-        <div className="hero-content flex-col md:flex-row-reverse gap-20">
-          <div className="text-center md:text-left">
-            <ConfirmPWSvg className={"hidden md:block w-80 mb-20"} />
-          </div>
-          <div className="mb-40">
-            <h1 className="text-5xl font-bold pb-4">
-              Confirm New
-              <br /> Password
+        <div className="hero-content flex-col md:flex-row">
+          <div className="w-full max-w-sm px-4">
+            <h1 className="text-4xl md:text-5xl font-bold pb-4">
+              Confirm New Password
             </h1>
             {asyncError && (
               <p className="text-xs pb-2">
@@ -156,6 +144,7 @@ const ConfirmReset = ({}) => {
               </div>
             </form>
           </div>
+          <ConfirmPWSvg className="w-full max-w-xs pl-4" />
         </div>
       </div>
       <Footer />

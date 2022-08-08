@@ -67,7 +67,7 @@ const Settings = ({ theme, onTheme }) => {
       <UNavbar username={user.username} />
       <div
         className={
-          "flex px-10 mt-6 justify-center md:justify-between h-screen "
+          "flex flex-col md:flex-row px-10 mt-6 md:justify-between h-screen "
         }
       >
         <div className="max-w-md md:w-1/2 flex flex-col">
@@ -109,7 +109,9 @@ const Settings = ({ theme, onTheme }) => {
             </Link>
           </div>
         </div>
-        <SettingsSvg className={" mx-auto mt-16 w-2/5 hidden md:block"} />
+        <SettingsSvg
+          className={" md:mx-auto mt-16 pl-4 md:pl-0 max-w-md md:w-2/5 "}
+        />
       </div>
     </>
   ) : (

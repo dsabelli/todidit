@@ -80,7 +80,7 @@ const Navbar = ({ projects, children }) => {
               {width > 768 && children[0]}
             </ul>
           </div>
-          <div className=" col-span-6 md:col-span-4 2xl:col-span-3 pl-12 pr-12 md:pl-4 pb-60">
+          <div className=" col-span-6 md:col-span-4 2xl:col-span-3 pl-4 pr-4 md:pr-12 pb-60">
             {" "}
             {children[1]}
           </div>

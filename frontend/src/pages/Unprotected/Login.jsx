@@ -49,12 +49,11 @@ const Login = () => {
     <>
       <UNavbar />
       <div className="md:hero min-h-screen bg-base-100">
-        <div className="hero-content flex-col md:flex-row-reverse items-center gap-20">
-          <LoginSvg className={"hidden md:block w-96"} />
-          <div>
+        <div className="hero-content w-full flex-col md:flex-row md:justify-center items-center md:gap-20">
+          <div className="w-full max-w-sm px-4">
             <h1 className="text-5xl font-bold pb-4">Login now!</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+              <div className="card flex-shrink-0 w-full max-w-md shadow-2xl bg-base-100">
                 <div className="card-body">
                   <div className="form-control">
                     {errorMessage && (
@@ -106,6 +105,7 @@ const Login = () => {
               </div>
             </form>
           </div>
+          <LoginSvg className={"w-full max-w-sm md:max-w-lg mt-12"} />
         </div>
       </div>
       <Footer />
