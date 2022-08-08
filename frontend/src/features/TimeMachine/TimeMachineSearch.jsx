@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import DatePicker from "react-datepicker";
-import { startOfDay, endOfDay, subDays } from "date-fns";
+import { startOfDay } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import diditService from "../../services/didits";
 import { TimeMachineContext } from "../../context/TimeMachineContext";
@@ -29,7 +29,7 @@ const TimeMachineSearch = ({}) => {
 
   return (
     <DatePicker
-      maxDate={subDays(new Date(), 1)}
+      maxDate={new Date()}
       inline
       className="bg-inherit cursor-pointer"
       onChange={(date) => (
