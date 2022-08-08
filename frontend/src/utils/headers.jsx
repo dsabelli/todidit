@@ -1,4 +1,4 @@
-import { format, parseJSON } from "date-fns";
+import { format, parseJSON, startOfWeek } from "date-fns";
 import AllIcon from "../Assets/Icons/AllIcon";
 import TodayIcon from "../Assets/Icons/TodayIcon";
 import WeekIcon from "../Assets/Icons/WeekIcon";
@@ -45,7 +45,9 @@ const getHeader = (location, params, projects) => {
             <WeekIcon className="w-6" />
             <h1 className={classNameH1}>The Week of</h1>
           </div>
-          <p className={classNameP}>{format(date, "MMM dd, yyyy")}</p>
+          <p className={classNameP}>
+            {format(startOfWeek(date, { weekStartsOn: 1 }), "MMM dd, yyyy")}
+          </p>
         </>
       );
       break;
