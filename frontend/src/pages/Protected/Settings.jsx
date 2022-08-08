@@ -89,7 +89,8 @@ const Settings = ({ theme, onTheme }) => {
               className="m-2"
               onChange={(e) => handleSelectTheme(e.target.value.toLowerCase())}
               defaultValue={
-                theme.slice(0, 1).toUpperCase() + theme.slice(1) || "Select"
+                (theme && theme.slice(0, 1).toUpperCase() + theme.slice(1)) ||
+                "Select"
               }
             >
               {themeOptions}
