@@ -18,7 +18,7 @@ const TimeMachineSearch = ({}) => {
   useEffect(() => {
     const getDidits = async () => {
       const searchedDidits = await diditService.getTimeMachineTasks(
-        endOfDay(timeMachineDate),
+        startOfDay(timeMachineDate),
         user
       );
 
