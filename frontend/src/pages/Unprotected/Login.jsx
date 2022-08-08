@@ -26,7 +26,10 @@ const Login = () => {
   const handleLogin = async ({ email, password }) => {
     setLoaded(false);
     try {
-      const user = await loginService.login({ email, password });
+      const user = await loginService.login({
+        email: email.trim().toLowerCase(),
+        password,
+      });
       if (user) {
         setLoaded(true);
         window.localStorage.setItem("loggedIn", JSON.stringify(user));

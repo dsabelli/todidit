@@ -28,7 +28,7 @@ const schema = yup.object().shape({
       excludeEmptyString: true,
     })
     .required(),
-  email: yup.string().trim().email().required(),
+  email: yup.string().trim().lowercase().email().required(),
   password: yup
     .string()
     .trim()
@@ -78,8 +78,8 @@ const Register = ({}) => {
     setLoaded(false);
     try {
       await registrationService.register({
-        email,
-        username,
+        email: email.trim().toLowerCase(),
+        username: username.trim(),
         password,
         confirmPassword,
       });
