@@ -19,13 +19,15 @@ const ArchivedProjects = ({ projects }) => {
       : 0;
   };
 
-  const formattedProjects = projects
-    .filter((project) => project.isArchived)
-    .sort(sortProjects)
-    .map((project) => ({
-      ...project,
-      archivedOn: format(parseJSON(project.archivedOn), dateFormat),
-    }));
+  const formattedProjects =
+    projects.length > 0 &&
+    projects
+      .filter((project) => project.isArchived)
+      .sort(sortProjects)
+      .map((project) => ({
+        ...project,
+        archivedOn: format(parseJSON(project.archivedOn), dateFormat),
+      }));
 
   const projectElements = formattedProjects.map((project) => (
     <li key={project.id}>

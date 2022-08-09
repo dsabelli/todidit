@@ -79,44 +79,46 @@ const ReadAndUpdateProjects = ({
       }, 3000);
     }
   };
-  const projectElements = projects.map((project) =>
-    !project.isArchived ? (
-      !project.isEditing ? (
-        <Project
-          onUpdate={showUpdateProjectForm}
-          onDelete={() =>
-            handleDeleteProject(
-              {
-                user,
-                tasks,
-                onTasks,
-                onAllTasks,
-                projects,
-                onProjects,
-                onSystemMessage,
-              },
-              project.id,
-              navigate
-            )
-          }
-          title={project.title}
-          key={project.id}
-          id={project.id}
-          tasks={allTasks}
-        />
-      ) : (
-        <ProjectForm
-          onSubmit={(e) => handleUpdateProject(e, project.id)}
-          onChange={(e) => onProjectTitle(e.target.value)}
-          onClick={hideUpdateProjectForm}
-          value={projectTitle}
-          id={project.id}
-          key={project.id}
-          submitText="save"
-        />
-      )
-    ) : null
-  );
+  const projectElements =
+    projects.length > 0 &&
+    projects.map((project) =>
+      !project.isArchived ? (
+        !project.isEditing ? (
+          <Project
+            onUpdate={showUpdateProjectForm}
+            onDelete={() =>
+              handleDeleteProject(
+                {
+                  user,
+                  tasks,
+                  onTasks,
+                  onAllTasks,
+                  projects,
+                  onProjects,
+                  onSystemMessage,
+                },
+                project.id,
+                navigate
+              )
+            }
+            title={project.title}
+            key={project.id}
+            id={project.id}
+            tasks={allTasks}
+          />
+        ) : (
+          <ProjectForm
+            onSubmit={(e) => handleUpdateProject(e, project.id)}
+            onChange={(e) => onProjectTitle(e.target.value)}
+            onClick={hideUpdateProjectForm}
+            value={projectTitle}
+            id={project.id}
+            key={project.id}
+            submitText="save"
+          />
+        )
+      ) : null
+    );
 
   return <ul className="menu text-base pl-3 ">{projectElements}</ul>;
 };

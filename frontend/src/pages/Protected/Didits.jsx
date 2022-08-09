@@ -10,19 +10,23 @@ const Didits = () => {
   //not sure why I need all context before projects
   const [tasks, setTasks, allTasks, setAllTasks, projects] = useOutletContext();
   let params = useParams();
-  const diditEl = didits.map((didit) =>
-    didit.id === params.id ? (
-      <Didit
-        key={didit.id}
-        title={didit.title}
-        description={didit.description}
-        project={projects.find((project) => project.id === didit.project).title}
-        completedOn={parseJSON(didit.completedOn)}
-        createdOn={parseJSON(didit.createdOn)}
-        dueOn={parseJSON(didit.dueDate)}
-      />
-    ) : null
-  );
+  const diditEl =
+    didits.length > 0 &&
+    didits.map((didit) =>
+      didit.id === params.id ? (
+        <Didit
+          key={didit.id}
+          title={didit.title}
+          description={didit.description}
+          project={
+            projects.find((project) => project.id === didit.project).title
+          }
+          completedOn={parseJSON(didit.completedOn)}
+          createdOn={parseJSON(didit.createdOn)}
+          dueOn={parseJSON(didit.dueDate)}
+        />
+      ) : null
+    );
   return <div>{diditEl}</div>;
 };
 

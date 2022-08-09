@@ -162,56 +162,58 @@ const ReadAndUpdateTasks = ({
     }
   };
 
-  const taskElements = tasks.map((task) =>
-    task.isEditing ? (
-      <TaskForm
-        key={task.id}
-        id={task.id}
-        titleValue={taskTitle}
-        descriptionValue={taskDescription || task.description}
-        dueDate={taskDueDate}
-        onSubmit={(e) => handleUpdateTask(e, task.id)}
-        onTitleChange={(e) => setTaskTitle(e.target.value)}
-        onDescriptionChange={(e) => setTaskDescription(e.target.value)}
-        onDueDate={setTaskDueDate}
-        onClick={hideUpdateTaskForm}
-        projects={projects}
-        projectTitle={projectTitle}
-        projectId={projectId}
-        onProjectId={onProjectId}
-        submitText="save"
-        tasks={tasks}
-      />
-    ) : (
-      <Task
-        checked={task.isChecked}
-        onCheck={handleUpdateCheck}
-        onImportant={handleUpdateImportant}
-        onDelete={() =>
-          handleDeleteTask(
-            {
-              tasks,
-              onTasks,
-              onAllTasks,
-              onSystemMessage,
-              user,
-            },
-            task.id
-          )
-        }
-        onUpdate={showUpdateTaskForm}
-        title={task.title}
-        description={task.description}
-        dueDate={task.dueDate}
-        key={task.id}
-        id={task.id}
-        completedOn={task.completedOn}
-        important={task.isImportant}
-        project={task.project}
-        projects={projects}
-      />
-    )
-  );
+  const taskElements =
+    tasks.length > 0 &&
+    tasks.map((task) =>
+      task.isEditing ? (
+        <TaskForm
+          key={task.id}
+          id={task.id}
+          titleValue={taskTitle}
+          descriptionValue={taskDescription || task.description}
+          dueDate={taskDueDate}
+          onSubmit={(e) => handleUpdateTask(e, task.id)}
+          onTitleChange={(e) => setTaskTitle(e.target.value)}
+          onDescriptionChange={(e) => setTaskDescription(e.target.value)}
+          onDueDate={setTaskDueDate}
+          onClick={hideUpdateTaskForm}
+          projects={projects}
+          projectTitle={projectTitle}
+          projectId={projectId}
+          onProjectId={onProjectId}
+          submitText="save"
+          tasks={tasks}
+        />
+      ) : (
+        <Task
+          checked={task.isChecked}
+          onCheck={handleUpdateCheck}
+          onImportant={handleUpdateImportant}
+          onDelete={() =>
+            handleDeleteTask(
+              {
+                tasks,
+                onTasks,
+                onAllTasks,
+                onSystemMessage,
+                user,
+              },
+              task.id
+            )
+          }
+          onUpdate={showUpdateTaskForm}
+          title={task.title}
+          description={task.description}
+          dueDate={task.dueDate}
+          key={task.id}
+          id={task.id}
+          completedOn={task.completedOn}
+          important={task.isImportant}
+          project={task.project}
+          projects={projects}
+        />
+      )
+    );
   return <>{taskElements}</>;
 };
 

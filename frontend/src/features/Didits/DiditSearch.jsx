@@ -41,27 +41,27 @@ const DiditSearch = ({ projects, className, popperPlacement }) => {
 
   //if there are didits, map with a link using their id.
   //when clicked, hide dropdown, filter didit array to the selected didit, reset the search.
-  const diditElements = didits
-    ? didits.map((didit) => (
-        <Link
-          to={`/app/didit/${didit.id}`}
+  const diditElements =
+    didits.length > 0 &&
+    didits.map((didit) => (
+      <Link
+        to={`/app/didit/${didit.id}`}
+        key={didit.id}
+        onClick={() => (
+          setVisible(false), filterSelected(didit.id), setDiditSearch("")
+        )}
+        className="p-1"
+      >
+        <Didit
           key={didit.id}
-          onClick={() => (
-            setVisible(false), filterSelected(didit.id), setDiditSearch("")
-          )}
-          className="p-1"
-        >
-          <Didit
-            key={didit.id}
-            title={didit.title}
-            project={
-              projects.find((project) => project.id === didit.project).title
-            }
-            completedOn={parseJSON(didit.completedOn)}
-          />
-        </Link>
-      ))
-    : null;
+          title={didit.title}
+          project={
+            projects.find((project) => project.id === didit.project).title
+          }
+          completedOn={parseJSON(didit.completedOn)}
+        />
+      </Link>
+    ));
 
   return (
     <div className={`flex gap-2 flex-row ${className}`}>

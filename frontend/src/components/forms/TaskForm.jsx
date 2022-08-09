@@ -22,18 +22,20 @@ const TaskForm = ({
   tasks,
 }) => {
   const [selectedProject, setSelectedProject] = useState("");
-  const projectElements = projects.map((project) =>
-    !project.isArchived ? (
-      <li key={project.id} onClick={() => setSelectedProject(project.title)}>
-        <button
-          className="text-left"
-          onClick={(e) => (onProjectId(project.id), e.preventDefault())}
-        >
-          {project.title}
-        </button>
-      </li>
-    ) : null
-  );
+  const projectElements =
+    projects.length > 0 &&
+    projects.map((project) =>
+      !project.isArchived ? (
+        <li key={project.id} onClick={() => setSelectedProject(project.title)}>
+          <button
+            className="text-left"
+            onClick={(e) => (onProjectId(project.id), e.preventDefault())}
+          >
+            {project.title}
+          </button>
+        </li>
+      ) : null
+    );
 
   const projectTaskLength = tasks.filter(
     (task) =>
