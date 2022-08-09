@@ -67,11 +67,6 @@ const Home = ({ onTheme }) => {
       const user = JSON.parse(loggedIn);
       taskService.setToken(user.token);
       setUser(user);
-      user &&
-        settings &&
-        setTimeout(() => {
-          setLoaded(true);
-        }, 500);
     }
   }, []);
 
@@ -132,6 +127,9 @@ const Home = ({ onTheme }) => {
         const response = await taskService.getTasks(user);
         setTasks(response);
         setAllTasks(response);
+        setTimeout(() => {
+          setLoaded(true);
+        }, 500);
       };
       user && getTasks();
     } catch (error) {
