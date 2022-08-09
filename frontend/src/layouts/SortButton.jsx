@@ -152,8 +152,9 @@ const SortButton = ({
           </div>
           <Select
             defaultValue={
-              (order && order.slice(0, 1).toUpperCase() + order.slice(1)) ||
-              "Select"
+              order
+                ? order.slice(0, 1).toUpperCase() + order.slice(1)
+                : "Select"
             }
             className="text-sm mb-4"
             onChange={(e) => handleSelectOrder(e.target.value.toLowerCase())}
