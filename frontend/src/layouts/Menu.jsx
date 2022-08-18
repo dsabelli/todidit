@@ -7,6 +7,7 @@ import {
   ChevronIconDown,
   ChevronIconRight,
 } from "../Assets/Icons/ChevronIcons";
+import NotesIcon from "../Assets/Icons/NotesIcon";
 import StarIcon from "../Assets/Icons/StarIcon";
 import TimeMachineAnimation from "../Assets/Icons/TimeMachineAnimation";
 import TimeMachineIcon from "../Assets/Icons/TimeMachineIcon";
@@ -89,7 +90,7 @@ const Menu = ({ children, className, tasks, projects, notes }) => {
       </li>
       <li className={`${path.includes("notes") ? "bordered" : "pl-1"}`}>
         <Link to="/app/notes">
-          <CheckedIcon className={"w-5"} />
+          <NotesIcon className={"w-5"} />
           <div className="flex justify-between w-full items-center">
             <p>Notes</p> <p className="badge text-right">{notes.length}</p>
           </div>

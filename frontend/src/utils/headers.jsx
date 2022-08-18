@@ -2,6 +2,7 @@ import { format, parseJSON, startOfWeek } from "date-fns";
 import AllIcon from "../Assets/Icons/AllIcon";
 import ArchiveIcon from "../Assets/Icons/ArchiveIcon";
 import CheckedIcon from "../Assets/Icons/CheckedIcon";
+import NotesIcon from "../Assets/Icons/NotesIcon";
 import StarIcon from "../Assets/Icons/StarIcon";
 import TimeMachineIcon from "../Assets/Icons/TimeMachineIcon";
 import TodayIcon from "../Assets/Icons/TodayIcon";
@@ -77,7 +78,7 @@ const getHeader = (location, params, projects) => {
       header = (
         <>
           <div className={classNameDivWrapper}>
-            <CheckedIcon className="w-6" />
+            <NotesIcon className="w-6" />
             <h1 className={classNameH1}>Notes</h1>
           </div>
           <p className={classNameP}></p>
