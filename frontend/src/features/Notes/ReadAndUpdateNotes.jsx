@@ -4,15 +4,9 @@ import noteService from "../../services/notes";
 import Note from "./Note";
 const ReadAndUpdateNotes = ({
   user,
-  projects,
-  projectTitle,
-  onProjectTitle,
-  projectId,
-  onProjectId,
   notes,
   onNotes,
-  onAllNotes,
-  onAddNote,
+  onAddTask,
   onSystemMessage,
 }) => {
   const [noteTitle, setNoteTitle] = useState("");
@@ -21,7 +15,7 @@ const ReadAndUpdateNotes = ({
   //function to show note form for editing note inline, populates fields with current data
   //hides the current note being edited
   const showUpdateNoteForm = (id) => {
-    onAddNote(false);
+    onAddTask(false);
     setNoteTitle(notes.filter((note) => note.id === id)[0].title);
     setNoteDescription(notes.filter((note) => note.id === id)[0].description);
     onNotes((prevNotes) =>
@@ -60,9 +54,7 @@ const ReadAndUpdateNotes = ({
       onNotes((prevNotes) =>
         prevNotes.map((note) => (note.id === id ? { ...updatedNote } : note))
       );
-      onAllNotes((prevNotes) =>
-        prevNotes.map((note) => (note.id === id ? { ...updatedNote } : note))
-      );
+
       setNoteTitle("");
       setNoteDescription("");
     } catch (error) {
@@ -95,14 +87,11 @@ const ReadAndUpdateNotes = ({
       ) : (
         <Note
           checked={note.isChecked}
-          onCheck={handleUpdateCheck}
-          onImportant={handleUpdateImportant}
           onUpdate={showUpdateNoteForm}
           title={note.title}
           description={note.description}
           key={note.id}
           id={note.id}
-          completedOn={note.completedOn}
         />
       )
     );
