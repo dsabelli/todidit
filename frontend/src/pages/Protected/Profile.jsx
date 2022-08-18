@@ -1,16 +1,16 @@
-import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../../context/UserContext";
-import Button from "../../components/UI/Button";
-import userService from "../../services/users";
-import taskService from "../../services/tasks";
-import UNavbar from "../../layouts/UNavbar";
-import Loader from "../../components/UI/Loader";
-import ProfileSvg from "../../Assets/SVGs/ProfileSvg";
-import GoodbyeSvg from "../../Assets/SVGs/GoodbyeSvg";
-import DeleteAlert from "../../layouts/DeleteAlert";
+import { useContext, useEffect, useState } from "react";
 import ErrorIcon from "../../Assets/Icons/ErrorIcon";
-import Hero from "../../components/UI/Hero";
+import GoodbyeSvg from "../../Assets/SVGs/GoodbyeSvg";
+import ProfileSvg from "../../Assets/SVGs/ProfileSvg";
+import Button from "../../components/UI/Button";
 import ErrorMessage from "../../components/UI/ErrorMessage";
+import Hero from "../../components/UI/Hero";
+import Loader from "../../components/UI/Loader";
+import { UserContext } from "../../context/UserContext";
+import DeleteAlert from "../../layouts/DeleteAlert";
+import UNavbar from "../../layouts/UNavbar";
+import taskService from "../../services/tasks";
+import userService from "../../services/users";
 
 const Profile = () => {
   const { user, setUser } = useContext(UserContext);
@@ -77,7 +77,7 @@ const Profile = () => {
               />
             </div>
           </div>
-          <ProfileSvg className="mt-10 max-w-xs md:max-w-sm md:m-0" />
+          <ProfileSvg className="mt-10 max-w-xs md:w-2/5 md:max-w-sm md:m-0" />
         </div>
       </>
     ) : (
