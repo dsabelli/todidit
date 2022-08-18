@@ -1,11 +1,11 @@
 import { format, parseJSON, startOfWeek } from "date-fns";
 import AllIcon from "../Assets/Icons/AllIcon";
-import TodayIcon from "../Assets/Icons/TodayIcon";
-import WeekIcon from "../Assets/Icons/WeekIcon";
-import StarIcon from "../Assets/Icons/StarIcon";
 import ArchiveIcon from "../Assets/Icons/ArchiveIcon";
 import CheckedIcon from "../Assets/Icons/CheckedIcon";
+import StarIcon from "../Assets/Icons/StarIcon";
 import TimeMachineIcon from "../Assets/Icons/TimeMachineIcon";
+import TodayIcon from "../Assets/Icons/TodayIcon";
+import WeekIcon from "../Assets/Icons/WeekIcon";
 
 const getHeader = (location, params, projects) => {
   const date = new Date();
@@ -68,6 +68,17 @@ const getHeader = (location, params, projects) => {
           <div className={classNameDivWrapper}>
             <CheckedIcon className="w-6" />
             <h1 className={classNameH1}>Completed</h1>
+          </div>
+          <p className={classNameP}></p>
+        </>
+      );
+      break;
+    case location.pathname.includes("notes"):
+      header = (
+        <>
+          <div className={classNameDivWrapper}>
+            <CheckedIcon className="w-6" />
+            <h1 className={classNameH1}>Notes</h1>
           </div>
           <p className={classNameP}></p>
         </>

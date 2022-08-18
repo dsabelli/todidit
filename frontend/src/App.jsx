@@ -1,37 +1,38 @@
-import { useState, useMemo } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useMemo, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 
-import Landing from "./pages/Unprotected/Landing";
-import ProtectedRoutes from "./pages/ProtectedRoutes";
-import Register from "./pages/Unprotected/Register";
-import Login from "./pages/Unprotected/Login";
-import Home from "./pages/Protected/Home";
-import All from "./pages/Protected/All";
-import Today from "./pages/Protected/Today";
-import Week from "./pages/Protected/Week";
-import Important from "./pages/Protected/Important";
-import Completed from "./pages/Protected/Completed";
-import Project from "./pages/Protected/Project";
-import ArchivedProject from "./pages/Protected/ArchivedProject";
-import Didits from "./pages/Protected/Didits";
-import Profile from "./pages/Protected/Profile";
-import Settings from "./pages/Protected/Settings";
-import Error from "./pages/Unprotected/Error";
-import Verified from "./pages/Unprotected/Verified";
-import ResetPassword from "./pages/Unprotected/ResetPassword";
-import ConfirmReset from "./pages/Unprotected/ConfirmReset";
-import Privacy from "./pages/Unprotected/Privacy";
-import Contact from "./pages/Unprotected/Contact";
-import Terms from "./pages/Unprotected/Terms";
-import { UserContext } from "./context/UserContext";
+import { getHours } from "date-fns";
+import { Theme } from "react-daisyui";
+import { ErrorBoundary } from "react-error-boundary";
+import IndexRouteSvg from "./Assets/SVGs/IndexRouteSvg";
 import { DateFormatContext } from "./context/DateFormatContext";
 import { SettingsContext } from "./context/SettingsContext";
-import { Theme } from "react-daisyui";
-import { getHours } from "date-fns";
-import NotFound from "./pages/Unprotected/NotFound";
-import { ErrorBoundary } from "react-error-boundary";
+import { UserContext } from "./context/UserContext";
+import All from "./pages/Protected/All";
+import ArchivedProject from "./pages/Protected/ArchivedProject";
+import Completed from "./pages/Protected/Completed";
+import Didits from "./pages/Protected/Didits";
+import Home from "./pages/Protected/Home";
+import Important from "./pages/Protected/Important";
+import Notes from "./pages/Protected/Notes";
+import Profile from "./pages/Protected/Profile";
+import Project from "./pages/Protected/Project";
+import Settings from "./pages/Protected/Settings";
 import TimeMachine from "./pages/Protected/TimeMachine";
-import IndexRouteSvg from "./Assets/SVGs/IndexRouteSvg";
+import Today from "./pages/Protected/Today";
+import Week from "./pages/Protected/Week";
+import ProtectedRoutes from "./pages/ProtectedRoutes";
+import ConfirmReset from "./pages/Unprotected/ConfirmReset";
+import Contact from "./pages/Unprotected/Contact";
+import Error from "./pages/Unprotected/Error";
+import Landing from "./pages/Unprotected/Landing";
+import Login from "./pages/Unprotected/Login";
+import NotFound from "./pages/Unprotected/NotFound";
+import Privacy from "./pages/Unprotected/Privacy";
+import Register from "./pages/Unprotected/Register";
+import ResetPassword from "./pages/Unprotected/ResetPassword";
+import Terms from "./pages/Unprotected/Terms";
+import Verified from "./pages/Unprotected/Verified";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -91,6 +92,7 @@ function App() {
                     <Route path="week" element={<Week />} />
                     <Route path="important" element={<Important />} />
                     <Route path="completed" element={<Completed />} />
+                    <Route path="notes" element={<Notes />} />
                     <Route path="project/:id" element={<Project />} />
                     <Route
                       path="project/archived/:id"

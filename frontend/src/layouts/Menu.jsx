@@ -1,25 +1,24 @@
+import { format, isThisWeek, parseJSON } from "date-fns/esm";
 import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
-import ReverseToggle from "../components/UI/ReverseToggle";
-import StarIcon from "../Assets/Icons/StarIcon";
-import TodayIcon from "../Assets/Icons/TodayIcon";
-import WeekIcon from "../Assets/Icons/WeekIcon";
 import AllIcon from "../Assets/Icons/AllIcon";
 import CheckedIcon from "../Assets/Icons/CheckedIcon";
 import {
-  ChevronIconRight,
   ChevronIconDown,
+  ChevronIconRight,
 } from "../Assets/Icons/ChevronIcons";
-import { parseJSON, isThisWeek, format } from "date-fns/esm";
-import { DateFormatContext } from "../context/DateFormatContext";
-import TimeMachineSearch from "../features/TimeMachine/TimeMachineSearch";
-import TimeMachineIcon from "../Assets/Icons/TimeMachineIcon";
-import Dropdown from "../components/UI/Dropdown";
+import StarIcon from "../Assets/Icons/StarIcon";
 import TimeMachineAnimation from "../Assets/Icons/TimeMachineAnimation";
+import TimeMachineIcon from "../Assets/Icons/TimeMachineIcon";
+import TodayIcon from "../Assets/Icons/TodayIcon";
+import WeekIcon from "../Assets/Icons/WeekIcon";
+import Dropdown from "../components/UI/Dropdown";
+import ReverseToggle from "../components/UI/ReverseToggle";
+import { DateFormatContext } from "../context/DateFormatContext";
 import DiditSearch from "../features/Didits/DiditSearch";
-import Modal from "../components/UI/Modal";
+import TimeMachineSearch from "../features/TimeMachine/TimeMachineSearch";
 
-const Menu = ({ children, className, tasks, projects }) => {
+const Menu = ({ children, className, tasks, projects, notes }) => {
   let location = useLocation();
   const path = location.pathname;
   const { dateFormat } = useContext(DateFormatContext);
@@ -42,6 +41,7 @@ const Menu = ({ children, className, tasks, projects }) => {
   ).length;
 
   const completedTasks = tasks.filter((task) => task.isChecked).length;
+
   return (
     <>
       <li className={` ${path.includes("all") ? "bordered" : "pl-1"}`}>
@@ -84,6 +84,14 @@ const Menu = ({ children, className, tasks, projects }) => {
           <div className="flex justify-between w-full items-center">
             <p>Completed</p>{" "}
             <p className="badge text-right">{completedTasks}</p>
+          </div>
+        </Link>
+      </li>
+      <li className={`${path.includes("notes") ? "bordered" : "pl-1"}`}>
+        <Link to="/app/notes">
+          <CheckedIcon className={"w-5"} />
+          <div className="flex justify-between w-full items-center">
+            <p>Notes</p> <p className="badge text-right">{notes.length}</p>
           </div>
         </Link>
       </li>
