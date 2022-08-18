@@ -64,6 +64,12 @@ const schema = mongoose.Schema({
       ref: "Task",
     },
   ],
+  notes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Note",
+    },
+  ],
   didits: [
     {
       type: mongoose.Schema.Types.ObjectId,
