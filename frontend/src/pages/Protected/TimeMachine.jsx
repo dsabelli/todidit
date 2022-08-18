@@ -1,15 +1,20 @@
-import { useState, useEffect, useContext } from "react";
+import { isBefore, isSameDay, parseJSON } from "date-fns";
+import { useContext, useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
+import Note from "../../features/Notes/Note";
 import Task from "../../features/Tasks/Task";
-import { isToday, parseJSON, isSameDay, isBefore } from "date-fns";
+import noteService from "../../services/notes";
 
 import { TimeMachineContext } from "../../context/TimeMachineContext";
+import { UserContext } from "../../context/UserContext";
 const TimeMachine = () => {
   let params = useParams();
   const parsedParamDate = parseJSON(params.date);
+  const { user } = useContext(UserContext);
   const { timeMachineTasks } = useContext(TimeMachineContext);
   const [tasks, setTasks, allTasks, setAllTasks, projects] = useOutletContext();
   const [combinedTasks, setCombinedTasks] = useState([]);
+  const [notes, setNotes] = useState([]);
 
   //filter out current tasks if the created date is before the "past" date
   //or if the task was completed today but not yet deleted
@@ -39,6 +44,18 @@ const TimeMachine = () => {
       ? -1
       : 1;
   };
+
+  //get archived notes for the selected day
+  useEffect(() => {
+    const getNotes = async () => {
+      const response = await noteService.getTimeMachineNotes(
+        parsedParamDate,
+        user
+      );
+      setNotes(response);
+    };
+    getNotes();
+  }, [params.date]);
 
   //map through combined, sorted array. If the task was completed on the "past" day,
   // set checked to true and completedOn to the completed on date
@@ -80,8 +97,24 @@ const TimeMachine = () => {
           />
         )
       );
-
-  return <div className="opacity-60">{Els}</div>;
+  const NoteEls =
+    notes.length > 0 &&
+    notes.map((note) => (
+      <Note
+        key={note.id}
+        id={note.id}
+        title={note.title}
+        description={note.description}
+        createdOn={note.createdOn}
+        hidden
+      />
+    ));
+  return (
+    <div className="opacity-60">
+      {Els}
+      {NoteEls || ""}
+    </div>
+  );
 };
 
 export default TimeMachine;

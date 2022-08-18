@@ -1,23 +1,25 @@
-import { useState, useEffect, useContext, useMemo } from "react";
-import { Outlet, useLocation, useParams, useNavigate } from "react-router-dom";
-import Navbar from "../../layouts/Navbar";
-import Menu from "../../layouts/Menu";
+import { useContext, useEffect, useMemo, useState } from "react";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import ErrorMessage from "../../components/UI/ErrorMessage";
-import projectService from "../../services/projects";
-import userService from "../../services/users";
-import taskService from "../../services/tasks";
-import CreateTask from "../../features/Tasks/CreateTask";
+import Loader from "../../components/UI/Loader";
+import { DateFormatContext } from "../../context/DateFormatContext";
+import { DiditContext } from "../../context/DiditContext";
+import { SettingsContext } from "../../context/SettingsContext";
+import { TimeMachineContext } from "../../context/TimeMachineContext";
+import { UserContext } from "../../context/UserContext";
+import CreateNote from "../../features/Notes/CreateNote";
 import ArchivedProjects from "../../features/Projects/ArchivedProjects";
 import CreateProject from "../../features/Projects/CreateProject";
 import ReadAndUpdateProjects from "../../features/Projects/ReadAndUpdateProjects";
-import { UserContext } from "../../context/UserContext";
-import { SettingsContext } from "../../context/SettingsContext";
-import { DateFormatContext } from "../../context/DateFormatContext";
-import { DiditContext } from "../../context/DiditContext";
-import { TimeMachineContext } from "../../context/TimeMachineContext";
-import Loader from "../../components/UI/Loader";
-import { getHeader } from "../../utils/headers";
+import CreateTask from "../../features/Tasks/CreateTask";
+import Menu from "../../layouts/Menu";
+import Navbar from "../../layouts/Navbar";
 import SortButton from "../../layouts/SortButton";
+import noteService from "../../services/notes";
+import projectService from "../../services/projects";
+import taskService from "../../services/tasks";
+import userService from "../../services/users";
+import { getHeader } from "../../utils/headers";
 
 const Home = ({ onTheme }) => {
   const [loaded, setLoaded] = useState(false);
@@ -28,6 +30,7 @@ const Home = ({ onTheme }) => {
   const [addProject, setAddProject] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
   const [projectId, setProjectId] = useState("");
+  const [notes, setNotes] = useState(["new note"]);
   const [systemMessage, setSystemMessage] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [order, setOrder] = useState();
@@ -57,7 +60,8 @@ const Home = ({ onTheme }) => {
     location.pathname.includes("completed") ||
     location.pathname.includes("time") ||
     location.pathname === "/app" ||
-    location.pathname === "/app/";
+    location.pathname === "/app/" ||
+    location.pathname.includes("/notes");
 
   //Checks if a user's token is stored in local storage
   //If it is, re-login is not required and token is parsed and set for use
@@ -120,6 +124,22 @@ const Home = ({ onTheme }) => {
     }
   }, [user]);
 
+  //Gets a user's notes once user is set.
+  useEffect(() => {
+    try {
+      const getNotes = async () => {
+        const response = await noteService.getNotes(user);
+        setNotes(response);
+      };
+      user && getNotes();
+    } catch (error) {
+      setSystemMessage("System encountered an error");
+      setTimeout(() => {
+        setSystemMessage(null);
+      }, 3000);
+    }
+  }, [user]);
+
   //Gets a user's tasks once user is set.
   useEffect(() => {
     try {
@@ -148,6 +168,7 @@ const Home = ({ onTheme }) => {
             <Menu
               tasks={allTasks}
               projects={projects}
+              notes={notes}
               className="text-left text-xl py-6"
             >
               <ReadAndUpdateProjects
@@ -210,6 +231,8 @@ const Home = ({ onTheme }) => {
                 projectId,
                 setProjectId,
                 setSystemMessage,
+                notes,
+                setNotes,
               ]}
             />
 
@@ -227,6 +250,16 @@ const Home = ({ onTheme }) => {
                 projectId={projectId}
                 onProjectId={setProjectId}
                 tasks={tasks}
+              />
+            )}
+            {location.pathname.includes("/notes") && (
+              <CreateNote
+                user={user}
+                notes={notes}
+                onNotes={setNotes}
+                addTask={addTask}
+                onAddTask={setAddTask}
+                onSystemMessage={setSystemMessage}
               />
             )}
           </div>
