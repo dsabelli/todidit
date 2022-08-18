@@ -15,6 +15,7 @@ const getTimeMachineNotes = async (createdOn, user) => {
     headers: { Authorization: `bearer ${user.token}` },
     params: {
       dateC: createdOn,
+      id: user.id,
     },
   };
   const response = await axios.get(baseUrl, config);
@@ -22,7 +23,6 @@ const getTimeMachineNotes = async (createdOn, user) => {
 };
 
 const createNotes = async (note, user) => {
-  console.log(note, user);
   const config = {
     headers: { Authorization: `bearer ${user.token}` },
   };
@@ -30,9 +30,9 @@ const createNotes = async (note, user) => {
   return response.data;
 };
 
-const updateNotes = async (note) => {
+const updateNotes = async (note, user) => {
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: `bearer ${user.token}` },
   };
   const response = await axios.put(`${baseUrl}/${note.id}`, note, config);
   return response.data;

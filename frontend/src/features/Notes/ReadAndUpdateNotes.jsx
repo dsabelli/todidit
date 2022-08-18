@@ -44,12 +44,15 @@ const ReadAndUpdateNotes = ({
       e.preventDefault();
       const notetoUpdate = notes.filter((note) => note.id === id)[0];
 
-      const updatedNote = await noteService.updateNotes({
-        ...notetoUpdate,
-        title: noteTitle,
-        description: noteDescription,
-        isEditing: false,
-      });
+      const updatedNote = await noteService.updateNotes(
+        {
+          ...notetoUpdate,
+          title: noteTitle,
+          description: noteDescription,
+          isEditing: false,
+        },
+        user
+      );
 
       onNotes((prevNotes) =>
         prevNotes.map((note) => (note.id === id ? { ...updatedNote } : note))
@@ -65,8 +68,28 @@ const ReadAndUpdateNotes = ({
     }
   };
 
-  //function to update if a note has been completed
-  //sets completedOn date and updates UI to show strikethrough note
+  const handleArchiveNote = async (id) => {
+    try {
+      const notetoUpdate = notes.filter((note) => note.id === id)[0];
+
+      await noteService.updateNotes(
+        {
+          ...notetoUpdate,
+          isArchived: true,
+          completedOn: new Date(),
+        },
+        user
+      );
+
+      onNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+    } catch (error) {
+      onSystemMessage("System encountered an error");
+      console.log(error);
+      setTimeout(() => {
+        onSystemMessage(null);
+      }, 3000);
+    }
+  };
 
   const noteElements =
     notes.length > 0 &&
@@ -88,10 +111,12 @@ const ReadAndUpdateNotes = ({
         <Note
           checked={note.isChecked}
           onUpdate={showUpdateNoteForm}
+          onDelete={handleArchiveNote}
           title={note.title}
           description={note.description}
           key={note.id}
           id={note.id}
+          createdOn={note.createdOn}
         />
       )
     );

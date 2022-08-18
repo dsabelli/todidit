@@ -231,6 +231,8 @@ const Home = ({ onTheme }) => {
                 projectId,
                 setProjectId,
                 setSystemMessage,
+                notes,
+                setNotes,
               ]}
             />
 
