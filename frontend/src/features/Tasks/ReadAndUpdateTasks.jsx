@@ -170,7 +170,7 @@ const ReadAndUpdateTasks = ({
           key={task.id}
           id={task.id}
           titleValue={taskTitle}
-          descriptionValue={taskDescription || task.description}
+          descriptionValue={taskDescription}
           dueDate={taskDueDate}
           onSubmit={(e) => handleUpdateTask(e, task.id)}
           onTitleChange={(e) => setTaskTitle(e.target.value)}
