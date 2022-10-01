@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://todidit-backend.fly.dev/api/didits";
+const baseUrl = "https://todidit.onrender.com/api/didits";
 
 const getDidits = async (
   diditTitle,

@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://todidit-backend.fly.dev/api/users";
+const baseUrl = "https://todidit.onrender.com/api/users";
 
 const resetPassword = async (email) => {
   const response = await axios.post(baseUrl, email);
