@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://todidit.herokuapp.com/api/notes";
+const baseUrl = "https://todidit-backend.fly.dev/api/notes";
 
 const getNotes = async (user) => {
   const config = {

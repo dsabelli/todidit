@@ -2,7 +2,7 @@ import axios from "axios";
 
 const login = async (credentials) => {
   const response = await axios.post(
-    "https://todidit.herokuapp.com/api/login",
+    "https://todidit-backend.fly.dev/api/login",
     credentials
   );
   return response.data;
