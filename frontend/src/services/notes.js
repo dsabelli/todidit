@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://todidit.onrender.com/api/notes";
+const baseUrl = "https://todidit-production.up.railway.app/api/notes";
 
 const getNotes = async (user) => {
   const config = {
