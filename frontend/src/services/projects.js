@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://todidit.herokuapp.com//api/projects";
+const baseUrl = "https://todidit-production.up.railway.app/api/projects";
 
 const getProjects = async (user) => {
   const config = {
