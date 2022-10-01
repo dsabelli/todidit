@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://todidit-production.up.railway.app/api/tasks";
+const baseUrl = "https://todidit.herokuapp.com//api/tasks";
 let token = null;
 
 const setToken = (newToken) => {
