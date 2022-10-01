@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "https://todidit-backend.fly.dev/api/tasks";
+const baseUrl = "https://todidit.herokuapp.com/api/tasks";
 let token = null;
 
 const setToken = (newToken) => {
