@@ -22,6 +22,7 @@ const Profile = () => {
     try {
       await userService.deleteUser(user);
       window.localStorage.removeItem("loggedIn");
+      window.sessionStorage.removeItem("loggedIn");
       setDeleted(true);
     } catch (error) {
       setLoaded(true);

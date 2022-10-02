@@ -66,7 +66,11 @@ const Home = ({ onTheme }) => {
   //Checks if a user's token is stored in local storage
   //If it is, re-login is not required and token is parsed and set for use
   useEffect(() => {
-    const loggedIn = window.localStorage.getItem("loggedIn");
+    let loggedIn = null;
+    if (window.localStorage.getItem("loggedIn"))
+      loggedIn = window.localStorage.getItem("loggedIn");
+    else if (window.sessionStorage.getItem("loggedIn"))
+      loggedIn = window.sessionStorage.getItem("loggedIn");
     if (loggedIn) {
       const user = JSON.parse(loggedIn);
       taskService.setToken(user.token);

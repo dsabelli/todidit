@@ -4,7 +4,9 @@ import { UserContext } from "../context/UserContext";
 
 const ProtectedRoutes = () => {
   const { user } = useContext(UserContext);
-  return user || window.localStorage.getItem("loggedIn") ? (
+  return user ||
+    window.localStorage.getItem("loggedIn") ||
+    window.sessionStorage.getItem("loggedIn") ? (
     <Outlet />
   ) : (
     <Navigate to="/" />

@@ -42,7 +42,11 @@ const Contact = () => {
 
   //if user is accessing contact form while logged in, get token from localStorage
   useEffect(() => {
-    const loggedIn = window.localStorage.getItem("loggedIn");
+    let loggedIn = null;
+    if (window.localStorage.getItem("loggedIn"))
+      loggedIn = window.localStorage.getItem("loggedIn");
+    else if (window.sessionStorage.getItem("loggedIn"))
+      loggedIn = window.sessionStorage.getItem("loggedIn");
     if (loggedIn) {
       const user = JSON.parse(loggedIn);
       taskService.setToken(user.token);

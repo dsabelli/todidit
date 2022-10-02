@@ -10,6 +10,7 @@ const UserDropdown = () => {
   const handleLogout = () => {
     navigate("/");
     window.localStorage.removeItem("loggedIn");
+    window.sessionStorage.removeItem("loggedIn");
     window.location.reload();
   };
   return (
