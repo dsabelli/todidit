@@ -84,7 +84,7 @@ const ConfirmReset = ({}) => {
           </div>
         }
       >
-        <ConfirmResetSvg className="w-full max-w-xs pl-4" />
+        <ConfirmResetSvg className="w-full max-w-xs md:max-w-lg pl-4" />
       </Hero>
     </>
   ) : (
@@ -92,7 +92,7 @@ const ConfirmReset = ({}) => {
       <UNavbar />
       <div className="md:hero min-h-screen">
         <div className="hero-content flex-col md:flex-row">
-          <div className="w-full max-w-sm px-4">
+          <div className="w-full max-w-sm md:max-w-lg px-4">
             <h1 className="text-4xl md:text-5xl font-bold pb-4">
               Confirm New Password
             </h1>
@@ -144,7 +144,7 @@ const ConfirmReset = ({}) => {
               </div>
             </form>
           </div>
-          <ConfirmPWSvg className="w-full max-w-xs pl-4" />
+          <ConfirmPWSvg className="w-full max-w-xs md:max-w-lg pl-4" />
         </div>
       </div>
       <Footer />
