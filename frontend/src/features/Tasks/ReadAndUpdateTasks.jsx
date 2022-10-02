@@ -92,8 +92,19 @@ const ReadAndUpdateTasks = ({
   //function to update if a task has been completed
   //sets completedOn date and updates UI to show strikethrough task
   const handleUpdateCheck = async (id) => {
+    const currentDate = new Date();
+    onTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id
+          ? {
+              ...task,
+              isChecked: !task.isChecked,
+              completedOn: !task.isChecked ? currentDate : null,
+            }
+          : task
+      )
+    );
     try {
-      const currentDate = new Date();
       const updatedTask = tasks.filter((task) => task.id === id)[0];
       await taskService.updateTasks({
         ...updatedTask,
@@ -101,17 +112,6 @@ const ReadAndUpdateTasks = ({
         completedOn: !updatedTask.isChecked ? currentDate : null,
       });
 
-      onTasks((prevTasks) =>
-        prevTasks.map((task) =>
-          task.id === id
-            ? {
-                ...task,
-                isChecked: !task.isChecked,
-                completedOn: !task.isChecked ? currentDate : null,
-              }
-            : task
-        )
-      );
       onAllTasks((prevTasks) =>
         prevTasks.map((task) =>
           task.id === id
