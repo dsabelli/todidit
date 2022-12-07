@@ -46,7 +46,7 @@ const UNavbar = ({ isLanding, username }) => {
   };
 
   return (
-    <nav className="navbar bg-neutral flex px-4 justify-between h-16">
+    <nav className="navbar bg-neutral flex px-4 pl-0 md:pl-4 justify-between h-16 gap-4">
       <ToDidit className="pb-2" todiditClass="text-neutral-content" />
       <div className={`flex gap-4 ${isLanding ? "" : "hidden"} `}>
         <form ref={form} onSubmit={(e) => sendEmail(e)}>
