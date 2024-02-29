@@ -70,7 +70,7 @@ const UNavbar = ({ isLanding, username }) => {
           <label tabIndex="0" className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
               <img
-                src={`https://avatars.dicebear.com/api/initials/${username[0]}.svg`}
+                src={`https://api.dicebear.com/7.x/initials/svg?seed=${username}`}
               />
             </div>
           </label>

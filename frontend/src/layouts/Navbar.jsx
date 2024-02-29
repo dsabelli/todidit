@@ -16,7 +16,7 @@ const Navbar = ({ projects, children }) => {
   useEffect(() => {
     user &&
       setAvatar(
-        `https://avatars.dicebear.com/api/initials/${user.username[0]}.svg`
+        `https://api.dicebear.com/7.x/initials/svg?seed=${user.username}`
       );
   }, []);
 
